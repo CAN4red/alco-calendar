@@ -1,6 +1,8 @@
 package com.example.alcocalendar.ui.model
 
 import android.annotation.SuppressLint
+import android.os.Build
+import androidx.annotation.RequiresApi
 import com.example.alcocalendar.ui.calendar.month.getWeekday
 import kotlinx.collections.immutable.toImmutableList
 import java.time.LocalDate
@@ -91,4 +93,18 @@ fun Month.getMonthName(): String {
         Month.NOVEMBER -> "November"
         Month.DECEMBER -> "December"
     }
+}
+
+// Month.of(i) gets the Month with ordinal = (i - 1) !!!
+
+@RequiresApi(Build.VERSION_CODES.O)
+fun Month.getNextMonth(): Month {
+    if (this == Month.DECEMBER) return Month.of(1)
+    return Month.of(this.ordinal + 2)
+}
+
+@RequiresApi(Build.VERSION_CODES.O)
+fun Month.getPreviousMonth(): Month {
+    if (this == Month.JANUARY) return Month.of(12)
+    return Month.of(this.ordinal)
 }

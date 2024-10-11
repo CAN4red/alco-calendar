@@ -22,6 +22,7 @@ import java.time.format.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.alcocalendar.ui.model.DrinkingSessionModel
+import com.example.alcocalendar.ui.model.structure.CalendarEvent
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Locale
@@ -37,7 +38,7 @@ private fun LocalDate.formatToStringDay(): String {
 fun DateCell(
     session: DrinkingSessionModel,
     signal: Boolean,
-    onClick: () -> Unit,
+    onEvent: (CalendarEvent) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val day = session.date.formatToStringDay()
@@ -51,7 +52,7 @@ fun DateCell(
                 color = lightColorScheme().secondaryContainer
             )
             .clip(RoundedCornerShape(CornerSize(8.dp)))
-            .clickable(onClick = onClick)
+            .clickable(onClick = { onEvent(CalendarEvent.OnDateClick) })
     ) {
         if (signal) {
             Box(
@@ -155,7 +156,7 @@ fun DateCellPreview() {
     DateCell(
         session = DrinkingSessionModel(LocalDate.now()),
         signal = false,
-        onClick = { }
+        onEvent = { }
     )
 }
 

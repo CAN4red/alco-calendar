@@ -3,48 +3,50 @@ package com.example.alcocalendar.ui.calendar.month
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
-import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.alcocalendar.ui.model.DrinkingSessionModel
-import com.example.alcocalendar.ui.model.structure.CalendarModelAdapter
+import com.example.alcocalendar.ui.model.structure.CalendarEvent
+import com.example.alcocalendar.ui.model.structure.CalendarState
+import com.example.alcocalendar.ui.model.structure.IndexConverter
 
 @Composable
 fun MonthPager(
+    calendarState: CalendarState,
     pagerState: PagerState,
     startFromSunday: Boolean,
-    onClick: (DrinkingSessionModel) -> Unit,
-    modifier: Modifier = Modifier
+    onEvent: (CalendarEvent) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
-    val calendarProvider by remember { mutableStateOf(CalendarModelAdapter) }
+    var currentMonthIndex by remember { mutableIntStateOf(pagerState.currentPage) }
 
     HorizontalPager(
         state = pagerState,
         modifier = modifier
     ) { monthIndex ->
+
         MonthGrid(
-            monthModel = calendarProvider.getMonthModel(monthIndex),
-            onClick = onClick,
+            monthModel = calendarState.getMonthByIndex(monthIndex),
+            onEvent = onEvent,
             startFromSunday = startFromSunday,
             modifier = Modifier.fillMaxHeight()
         )
-    }
-}
 
-@Preview
-@Composable
-fun MonthPagerPreview() {
-    val pagerState = rememberPagerState(
-        initialPage = CalendarModelAdapter.getMonthIndex(),
-        pageCount = { CalendarModelAdapter.monthsCount }
-    )
-    MonthPager(
-        pagerState = pagerState,
-        startFromSunday = false,
-        onClick = {}
-    )
+        LaunchedEffect(monthIndex) {
+            when {
+                (monthIndex > currentMonthIndex) -> currentMonthIndex = monthIndex - 1
+                (monthIndex < currentMonthIndex) -> currentMonthIndex = monthIndex + 1
+            }
+
+            val currentYear = calendarState.getMonthByIndex(currentMonthIndex).year
+            val currentYearIndex = IndexConverter.getYearIndex(currentYear)
+
+            onEvent(CalendarEvent.ChangeMonth(currentMonthIndex))
+            onEvent(CalendarEvent.ChangeYear(currentYearIndex))
+        }
+    }
 }

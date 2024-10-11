@@ -9,10 +9,14 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.alcocalendar.ui.calendar.month.MonthLayout
 import com.example.alcocalendar.ui.calendar.year.YearLayout
+import com.example.alcocalendar.ui.model.structure.CalendarEvent
+import com.example.alcocalendar.ui.model.structure.CalendarState
 import com.example.alcocalendar.ui.navigation.CalendarScreen
 
 @Composable
 fun AlcoCalendarApp(
+    calendarState: CalendarState,
+    onEvent: (CalendarEvent) -> Unit,
     navController: NavHostController = rememberNavController(),
     @SuppressLint("ModifierParameter") modifier: Modifier = Modifier,
 ) {
@@ -23,17 +27,19 @@ fun AlcoCalendarApp(
     ) {
         composable(route = CalendarScreen.MonthView.name) {
             MonthLayout(
-                onClick = {},
-                onTitleClick = { navController.navigate(CalendarScreen.YearView.name) },
+                calendarState = calendarState,
+                onEvent = onEvent,
+                navigateToYear = { navController.navigate(CalendarScreen.YearView.name) },
                 startFromSunday = false,
                 modifier = modifier
             )
         }
         composable(route = CalendarScreen.YearView.name) {
             YearLayout(
+                calendarState = calendarState,
+                onEvent = onEvent,
+                navigateToYear = { navController.navigate(CalendarScreen.MonthView.name) },
                 startFromSunday = false,
-                onMonthClick = { navController.navigate(CalendarScreen.MonthView.name) },
-                onTitleClick = { navController.navigate(CalendarScreen.MonthView.name) },
                 modifier = modifier,
             )
         }

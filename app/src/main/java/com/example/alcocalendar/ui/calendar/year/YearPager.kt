@@ -1,50 +1,58 @@
 package com.example.alcocalendar.ui.calendar.year
 
-import android.annotation.SuppressLint
-import androidx.compose.foundation.ExperimentalFoundationApi
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
-import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.alcocalendar.ui.model.structure.CalendarModelAdapter
+import com.example.alcocalendar.ui.model.structure.CalendarEvent
+import com.example.alcocalendar.ui.model.structure.CalendarState
+import com.example.alcocalendar.ui.model.structure.IndexConverter
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun YearPager(
+    calendarState: CalendarState,
     pagerState: PagerState,
-    onMonthClick: () -> Unit,
+    navigateToMonth: () -> Unit,
+    onEvent: (CalendarEvent) -> Unit,
     startFromSunday: Boolean,
     modifier: Modifier = Modifier
 ) {
-    val calendarProvider by remember { mutableStateOf(CalendarModelAdapter) }
+    var currentYearIndex by remember { mutableIntStateOf(pagerState.currentPage) }
 
     HorizontalPager(
         state = pagerState,
         modifier = modifier
     ) { yearIndex ->
-        val yearModel = remember(yearIndex) { calendarProvider.getYearModel(yearIndex) }
         YearGrid(
-            yearModel = yearModel,
-            onMonthClick = onMonthClick,
+            yearModel = calendarState.getYearByIndex(yearIndex),
+            onEvent = onEvent,
+            navigateToMonth = navigateToMonth,
             startFromSunday = startFromSunday,
             modifier = Modifier.fillMaxSize()
         )
+
+        LaunchedEffect(yearIndex) {
+            when {
+                (yearIndex > currentYearIndex) -> currentYearIndex = yearIndex - 1
+                (yearIndex < currentYearIndex) -> currentYearIndex = yearIndex + 1
+            }
+
+            val monthIndex = calendarState.currentMonthIndex
+            val currentYear = calendarState.getYearByIndex(currentYearIndex).year
+            val currentMonth = calendarState.getMonthByIndex(monthIndex).month
+            val currentMonthIndex = IndexConverter.getMonthIndex(currentYear, currentMonth)
+
+            onEvent(CalendarEvent.ChangeYear(currentYearIndex))
+            onEvent(CalendarEvent.ChangeMonth(currentMonthIndex))
+        }
     }
-}
-
-@SuppressLint("NewApi")
-@Preview
-@Composable
-fun YearPagerPreview() {
-    val pagerState = rememberPagerState(
-        initialPage = CalendarModelAdapter.initialYear,
-        pageCount = { CalendarModelAdapter.yearsCount }
-    )
-
-    YearPager(pagerState = pagerState, onMonthClick = {}, startFromSunday = false)
 }

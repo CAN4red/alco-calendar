@@ -18,6 +18,7 @@ import com.example.alcocalendar.ui.calendar.EmptyCell
 import com.example.alcocalendar.ui.calendar.WeekdayCell
 import com.example.alcocalendar.ui.model.DrinkingSessionModel
 import com.example.alcocalendar.ui.model.MonthModel
+import com.example.alcocalendar.ui.model.structure.CalendarEvent
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 import java.time.LocalDate
@@ -29,7 +30,7 @@ import java.util.Locale
 @Composable
 fun MonthGrid(
     monthModel: MonthModel,
-    onClick: (DrinkingSessionModel) -> Unit,
+    onEvent: (CalendarEvent) -> Unit,
     startFromSunday: Boolean,
     modifier: Modifier = Modifier,
 ) {
@@ -65,7 +66,7 @@ fun MonthGrid(
                         DateCell(
                             session = session,
                             signal = false,
-                            onClick = { onClick(session) },
+                            onEvent = onEvent,
                             modifier = Modifier.fillMaxWidth()
                         )
                     }
@@ -101,7 +102,7 @@ fun LocalDate.getWeekday(): String {
 fun MonthGridPreview() {
     MonthGrid(
         monthModel = MonthModel(2024, Month.AUGUST),
-        onClick = {},
+        onEvent = {},
         startFromSunday = false,
         modifier = Modifier.background(color = Color.White)
     )

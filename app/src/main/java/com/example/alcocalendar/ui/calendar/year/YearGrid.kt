@@ -1,6 +1,8 @@
 package com.example.alcocalendar.ui.calendar.year
 
 import android.annotation.SuppressLint
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -22,13 +24,16 @@ import com.example.alcocalendar.ui.calendar.EmptyCell
 import com.example.alcocalendar.ui.calendar.SmallDateCell
 import com.example.alcocalendar.ui.model.MonthModel
 import com.example.alcocalendar.ui.model.YearModel
-import com.example.alcocalendar.ui.model.structure.CalendarModelAdapter
+import com.example.alcocalendar.ui.model.structure.CalendarEvent
+import com.example.alcocalendar.ui.model.structure.IndexConverter
 import java.time.Month
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun YearGrid(
     yearModel: YearModel,
-    onMonthClick: () -> Unit,
+    onEvent: (CalendarEvent) -> Unit,
+    navigateToMonth: () -> Unit,
     startFromSunday: Boolean,
     modifier: Modifier = Modifier,
 ) {
@@ -49,13 +54,13 @@ fun YearGrid(
                         end = 8.dp
                     )
                     .clickable(onClick = {
-                        CalendarModelAdapter.updateCalendarState(
-                            year = monthModel.year,
-                            month = monthModel.month
+                        val monthIndex = IndexConverter.getMonthIndex(
+                            monthModel.year,
+                            monthModel.month
                         )
-                        onMonthClick()
-                    }
-                    )
+                        onEvent(CalendarEvent.ChangeMonth(monthIndex))
+                        navigateToMonth()
+                    })
             )
         }
     }
@@ -69,7 +74,7 @@ fun NonDetailedMonthLayout(
     startFromSunday: Boolean,
     modifier: Modifier = Modifier,
 ) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Text(text = monthModel.name)
 
         NonDetailedMonthGrid(
@@ -123,12 +128,12 @@ fun NonDetailedMonthGrid(
     }
 }
 
-@SuppressLint("NewApi")
-@Composable
-@Preview
-fun YearGridPreview() {
-    YearGrid(yearModel = YearModel(2024), onMonthClick = {}, startFromSunday = false)
-}
+//@SuppressLint("NewApi")
+//@Composable
+//@Preview
+//fun YearGridPreview() {
+//    YearGrid(yearModel = YearModel(2024), onMonthClick = {}, startFromSunday = false)
+//}
 
 @SuppressLint("NewApi")
 @Composable
