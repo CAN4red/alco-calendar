@@ -1,6 +1,7 @@
 package com.example.alcocalendar.ui.calendar.year
 
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.pager.HorizontalPager
@@ -26,8 +27,6 @@ fun YearPager(
     startFromSunday: Boolean,
     modifier: Modifier = Modifier
 ) {
-    var currentYearIndex by remember { mutableIntStateOf(pagerState.currentPage) }
-
     HorizontalPager(
         state = pagerState,
         modifier = modifier
@@ -40,18 +39,15 @@ fun YearPager(
             modifier = Modifier.fillMaxSize()
         )
 
-        LaunchedEffect(yearIndex) {
-            when {
-                (yearIndex > currentYearIndex) -> currentYearIndex = yearIndex - 1
-                (yearIndex < currentYearIndex) -> currentYearIndex = yearIndex + 1
-            }
-
+        LaunchedEffect(pagerState.currentPage) {
             val monthIndex = calendarState.currentMonthIndex
-            val currentYear = calendarState.getYearByIndex(currentYearIndex).year
+
+            val currentYear = calendarState.getYearByIndex(pagerState.currentPage).year
             val currentMonth = calendarState.getMonthByIndex(monthIndex).month
+
             val currentMonthIndex = IndexConverter.getMonthIndex(currentYear, currentMonth)
 
-            onEvent(CalendarEvent.ChangeYear(currentYearIndex))
+            onEvent(CalendarEvent.ChangeYear(pagerState.currentPage))
             onEvent(CalendarEvent.ChangeMonth(currentMonthIndex))
         }
     }

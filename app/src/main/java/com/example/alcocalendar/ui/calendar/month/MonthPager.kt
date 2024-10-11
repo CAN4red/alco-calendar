@@ -22,8 +22,6 @@ fun MonthPager(
     onEvent: (CalendarEvent) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    var currentMonthIndex by remember { mutableIntStateOf(pagerState.currentPage) }
-
     HorizontalPager(
         state = pagerState,
         modifier = modifier
@@ -36,16 +34,11 @@ fun MonthPager(
             modifier = Modifier.fillMaxHeight()
         )
 
-        LaunchedEffect(monthIndex) {
-            when {
-                (monthIndex > currentMonthIndex) -> currentMonthIndex = monthIndex - 1
-                (monthIndex < currentMonthIndex) -> currentMonthIndex = monthIndex + 1
-            }
-
-            val currentYear = calendarState.getMonthByIndex(currentMonthIndex).year
+        LaunchedEffect(pagerState.currentPage) {
+            val currentYear = calendarState.getMonthByIndex(pagerState.currentPage).year
             val currentYearIndex = IndexConverter.getYearIndex(currentYear)
 
-            onEvent(CalendarEvent.ChangeMonth(currentMonthIndex))
+            onEvent(CalendarEvent.ChangeMonth(pagerState.currentPage))
             onEvent(CalendarEvent.ChangeYear(currentYearIndex))
         }
     }

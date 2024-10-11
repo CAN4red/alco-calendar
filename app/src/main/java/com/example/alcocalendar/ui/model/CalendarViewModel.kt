@@ -14,7 +14,6 @@ import java.time.Month
 
 @RequiresApi(Build.VERSION_CODES.O)
 class CalendarViewModel() : ViewModel() {
-    private val initialDate = LocalDate.now()
 
     private val calendarMap =
         (CalendarState.FIRST_YEAR..CalendarState.LAST_YEAR)
@@ -23,11 +22,7 @@ class CalendarViewModel() : ViewModel() {
             .toImmutableMap()
 
     private val _state: MutableStateFlow<CalendarState> = MutableStateFlow(
-        CalendarState(
-            calendarMap = calendarMap,
-            currentMonth = initialDate.month,
-            currentYear = initialDate.year
-        )
+        CalendarState(calendarMap = calendarMap,)
     )
     val state: StateFlow<CalendarState> get() = _state
 
