@@ -23,6 +23,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.alcocalendar.model.DrinkingSessionModel
 import com.example.alcocalendar.viewmodel.CalendarEvent
+import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Locale
@@ -111,8 +112,6 @@ fun WeekdayCell(
 ) {
     val text = getDayOfWeekAbbreviation(
         day = weekday,
-        month = LocalDate.now().monthValue,
-        year = LocalDate.now().year,
         language = "en"
     )
 
@@ -133,12 +132,9 @@ fun WeekdayCell(
 @SuppressLint("NewApi")
 fun getDayOfWeekAbbreviation(
     day: Int,
-    month: Int,
-    year: Int,
     language: String,
 ): String {
-    val date = LocalDate.of(year, month, day)
-    val dayOfWeek = date.dayOfWeek
+    val dayOfWeek = DayOfWeek.of(day)
 
     val locale = when (language.lowercase()) {
         "ru" -> Locale("ru", "RU")

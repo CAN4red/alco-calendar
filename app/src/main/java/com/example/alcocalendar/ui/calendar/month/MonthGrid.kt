@@ -39,8 +39,11 @@ fun MonthGrid(
         modifier = modifier
     ) {
         Row(modifier = Modifier.fillMaxWidth()) {
-            getWeekDays(startFromSunday = startFromSunday).forEach {
-                WeekdayCell(weekday = it, modifier = Modifier.weight(1f))
+            getWeekDays(startFromSunday = startFromSunday).forEach { weekday ->
+                WeekdayCell(
+                    weekday = weekday,
+                    modifier = Modifier.weight(1f)
+                )
             }
         }
 
@@ -100,9 +103,9 @@ fun DatesGrid(
 fun getWeekDays(startFromSunday: Boolean): ImmutableList<Int> {
     val days = (1..7).toList()
     return (if (startFromSunday)
-        days
+        days.drop(1) + days.take(1)
     else
-        days.drop(1) + days.take(1)).toImmutableList()
+        days).toImmutableList()
 }
 
 @SuppressLint("NewApi")

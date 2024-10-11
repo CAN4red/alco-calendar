@@ -52,7 +52,7 @@ data class CalendarState(
 
     companion object {
         const val FIRST_YEAR: Int = 2000
-        const val LAST_YEAR: Int = 2030
+        const val LAST_YEAR: Int = 2200
         const val MONTHS_NUMBER: Int = 12
     }
 }
