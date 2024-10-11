@@ -1,6 +1,8 @@
 package com.example.alcocalendar.ui.calendar.month
 
 import android.annotation.SuppressLint
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -16,9 +18,8 @@ import androidx.compose.ui.unit.dp
 import com.example.alcocalendar.ui.calendar.DateCell
 import com.example.alcocalendar.ui.calendar.EmptyCell
 import com.example.alcocalendar.ui.calendar.WeekdayCell
-import com.example.alcocalendar.ui.model.DrinkingSessionModel
-import com.example.alcocalendar.ui.model.MonthModel
-import com.example.alcocalendar.ui.model.structure.CalendarEvent
+import com.example.alcocalendar.model.MonthModel
+import com.example.alcocalendar.viewmodel.CalendarEvent
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 import java.time.LocalDate
@@ -45,36 +46,51 @@ fun MonthGrid(
 
         Spacer(modifier = Modifier.size(8.dp))
 
-        monthModel.changeLayoutForSundays(startFromSunday)
-        val monthMatrix = monthModel.monthMatrix
+        DatesGrid(
+            monthModel = monthModel,
+            startFromSunday = startFromSunday,
+            onEvent = onEvent
+        )
 
-        Row(modifier = Modifier.fillMaxWidth()) {
-            monthMatrix.forEach { sessions ->
-                Column(
-                    verticalArrangement = Arrangement.Top,
-                    modifier = Modifier.weight(1f)
+    }
+}
+
+@RequiresApi(Build.VERSION_CODES.O)
+@Composable
+fun DatesGrid(
+    monthModel: MonthModel,
+    startFromSunday: Boolean,
+    onEvent: (CalendarEvent) -> Unit,
+) {
+    monthModel.changeLayoutForSundays(startFromSunday)
+    val monthMatrix = monthModel.monthMatrix
+
+    Row(modifier = Modifier.fillMaxWidth()) {
+        monthMatrix.forEach { sessions ->
+            Column(
+                verticalArrangement = Arrangement.Top,
+                modifier = Modifier.weight(1f)
+            ) {
+                // Adding empty cells at the start of the month
+                if (monthMatrix.indexOf(sessions) + 1 < sessions[0].date.dayOfMonth &&
+                    sessions[0].date.dayOfMonth != 1
                 ) {
-                    // Adding empty cells at the start of the month
-                    if (monthMatrix.indexOf(sessions) + 1 < sessions[0].date.dayOfMonth &&
-                        sessions[0].date.dayOfMonth != 1
-                    ) {
-                        EmptyCell(modifier = Modifier.fillMaxWidth())
-                    }
+                    EmptyCell(modifier = Modifier.fillMaxWidth())
+                }
 
-                    // Generating the dates
-                    sessions.forEach { session ->
-                        DateCell(
-                            session = session,
-                            signal = false,
-                            onEvent = onEvent,
-                            modifier = Modifier.fillMaxWidth()
-                        )
-                    }
+                // Generating the dates
+                sessions.forEach { session ->
+                    DateCell(
+                        session = session,
+                        signal = false,
+                        onEvent = onEvent,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
 
-                    // Adding empty cells at the end of the month
-                    if (monthMatrix[0].last().date.dayOfMonth - sessions.last().date.dayOfMonth >= 1) {
-                        EmptyCell(modifier = Modifier.fillMaxWidth())
-                    }
+                // Adding empty cells at the end of the month
+                if (monthMatrix[0].last().date.dayOfMonth - sessions.last().date.dayOfMonth >= 1) {
+                    EmptyCell(modifier = Modifier.fillMaxWidth())
                 }
             }
         }

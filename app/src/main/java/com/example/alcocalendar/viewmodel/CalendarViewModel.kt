@@ -1,20 +1,16 @@
-package com.example.alcocalendar.ui.model
+package com.example.alcocalendar.viewmodel
 
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModel
-import com.example.alcocalendar.ui.model.structure.CalendarEvent
-import com.example.alcocalendar.ui.model.structure.CalendarState
+import com.example.alcocalendar.model.YearModel
 import kotlinx.collections.immutable.toImmutableMap
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
-import java.time.LocalDate
-import java.time.Month
 
 @RequiresApi(Build.VERSION_CODES.O)
 class CalendarViewModel() : ViewModel() {
-
     private val calendarMap =
         (CalendarState.FIRST_YEAR..CalendarState.LAST_YEAR)
             .toList()

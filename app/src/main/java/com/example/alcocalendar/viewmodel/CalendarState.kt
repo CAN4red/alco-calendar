@@ -1,11 +1,10 @@
-package com.example.alcocalendar.ui.model.structure
+package com.example.alcocalendar.viewmodel
 
 import android.annotation.SuppressLint
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
-import com.example.alcocalendar.ui.model.MonthModel
-import com.example.alcocalendar.ui.model.YearModel
+import com.example.alcocalendar.model.MonthModel
+import com.example.alcocalendar.model.YearModel
 import kotlinx.collections.immutable.ImmutableMap
 import java.time.LocalDate
 import java.time.Month

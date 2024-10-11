@@ -22,10 +22,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.alcocalendar.ui.calendar.EmptyCell
 import com.example.alcocalendar.ui.calendar.SmallDateCell
-import com.example.alcocalendar.ui.model.MonthModel
-import com.example.alcocalendar.ui.model.YearModel
-import com.example.alcocalendar.ui.model.structure.CalendarEvent
-import com.example.alcocalendar.ui.model.structure.IndexConverter
+import com.example.alcocalendar.model.MonthModel
+import com.example.alcocalendar.model.YearModel
+import com.example.alcocalendar.viewmodel.CalendarEvent
+import com.example.alcocalendar.viewmodel.IndexConverter
 import java.time.Month
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -127,13 +127,6 @@ fun NonDetailedMonthGrid(
         }
     }
 }
-
-//@SuppressLint("NewApi")
-//@Composable
-//@Preview
-//fun YearGridPreview() {
-//    YearGrid(yearModel = YearModel(2024), onMonthClick = {}, startFromSunday = false)
-//}
 
 @SuppressLint("NewApi")
 @Composable

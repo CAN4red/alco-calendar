@@ -23,8 +23,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.alcocalendar.ui.model.structure.CalendarEvent
-import com.example.alcocalendar.ui.model.structure.CalendarState
+import com.example.alcocalendar.viewmodel.CalendarEvent
+import com.example.alcocalendar.viewmodel.CalendarState
 import kotlinx.coroutines.launch
 
 @SuppressLint("NewApi")
@@ -131,15 +131,3 @@ fun NavigationButton(
         )
     }
 }
-
-
-//@Preview
-//@Composable
-//@RequiresApi(Build.VERSION_CODES.O)
-//fun MonthLayoutPreview() {
-//    MonthLayout(
-//        onClick = {},
-//        onTitleClick = {},
-//        startFromSunday = false
-//    )
-//}

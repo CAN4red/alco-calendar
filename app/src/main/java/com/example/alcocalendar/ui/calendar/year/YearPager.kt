@@ -1,21 +1,16 @@
 package com.example.alcocalendar.ui.calendar.year
 
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import com.example.alcocalendar.ui.model.structure.CalendarEvent
-import com.example.alcocalendar.ui.model.structure.CalendarState
-import com.example.alcocalendar.ui.model.structure.IndexConverter
+import com.example.alcocalendar.viewmodel.CalendarEvent
+import com.example.alcocalendar.viewmodel.CalendarState
+import com.example.alcocalendar.viewmodel.IndexConverter
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable

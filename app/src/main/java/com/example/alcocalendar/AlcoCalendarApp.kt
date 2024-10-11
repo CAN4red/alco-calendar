@@ -9,8 +9,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.alcocalendar.ui.calendar.month.MonthLayout
 import com.example.alcocalendar.ui.calendar.year.YearLayout
-import com.example.alcocalendar.ui.model.structure.CalendarEvent
-import com.example.alcocalendar.ui.model.structure.CalendarState
+import com.example.alcocalendar.viewmodel.CalendarEvent
+import com.example.alcocalendar.viewmodel.CalendarState
 import com.example.alcocalendar.ui.navigation.CalendarScreen
 
 @Composable

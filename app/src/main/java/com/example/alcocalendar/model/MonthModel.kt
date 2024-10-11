@@ -1,14 +1,13 @@
-package com.example.alcocalendar.ui.model
+package com.example.alcocalendar.model
 
 import android.annotation.SuppressLint
-import android.os.Build
-import androidx.annotation.RequiresApi
+import com.example.alcocalendar.ui.calendar.Weekdays
 import com.example.alcocalendar.ui.calendar.month.getWeekday
 import kotlinx.collections.immutable.toImmutableList
 import java.time.LocalDate
 import java.time.Month
 
-class MonthModel(
+data class MonthModel(
     val name: String,
     val year: Int,
     val month: Month,
@@ -27,10 +26,6 @@ class MonthModel(
 
     fun getDay(date: Int): DrinkingSessionModel {
         return dates[date - 1]
-    }
-
-    override fun toString(): String {
-        return "$name $year"
     }
 
     // Gets a matrix like [Column number = Weekday number] with Empty Drinking Sessions
@@ -93,18 +88,4 @@ fun Month.getMonthName(): String {
         Month.NOVEMBER -> "November"
         Month.DECEMBER -> "December"
     }
-}
-
-// Month.of(i) gets the Month with ordinal = (i - 1) !!!
-
-@RequiresApi(Build.VERSION_CODES.O)
-fun Month.getNextMonth(): Month {
-    if (this == Month.DECEMBER) return Month.of(1)
-    return Month.of(this.ordinal + 2)
-}
-
-@RequiresApi(Build.VERSION_CODES.O)
-fun Month.getPreviousMonth(): Month {
-    if (this == Month.JANUARY) return Month.of(12)
-    return Month.of(this.ordinal)
 }

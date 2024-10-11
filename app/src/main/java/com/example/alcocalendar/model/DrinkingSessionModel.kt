@@ -1,4 +1,4 @@
-package com.example.alcocalendar.ui.model
+package com.example.alcocalendar.model
 
 import java.time.LocalDate
 

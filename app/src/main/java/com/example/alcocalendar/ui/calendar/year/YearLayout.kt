@@ -7,8 +7,8 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.example.alcocalendar.ui.calendar.month.CalendarNavigationBar
-import com.example.alcocalendar.ui.model.structure.CalendarEvent
-import com.example.alcocalendar.ui.model.structure.CalendarState
+import com.example.alcocalendar.viewmodel.CalendarEvent
+import com.example.alcocalendar.viewmodel.CalendarState
 
 @SuppressLint("NewApi")
 @Composable

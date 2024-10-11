@@ -1,4 +1,4 @@
-package com.example.alcocalendar.ui.model
+package com.example.alcocalendar.ui.calendar
 
 enum class Weekdays(val index: Int) {
     MONDAY(1),

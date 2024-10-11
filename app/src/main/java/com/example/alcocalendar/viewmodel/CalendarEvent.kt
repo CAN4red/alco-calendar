@@ -1,4 +1,4 @@
-package com.example.alcocalendar.ui.model.structure
+package com.example.alcocalendar.viewmodel
 
 sealed interface CalendarEvent {
     data object OnDateClick : CalendarEvent

@@ -1,4 +1,4 @@
-package com.example.alcocalendar.ui.model
+package com.example.alcocalendar.model
 
 import android.annotation.SuppressLint
 import java.time.Month
