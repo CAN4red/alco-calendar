@@ -4,24 +4,22 @@ import android.annotation.SuppressLint
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.alcocalendar.ui.calendar.DateCell
-import com.example.alcocalendar.ui.calendar.EmptyCell
 import com.example.alcocalendar.ui.calendar.WeekdayCell
 import com.example.alcocalendar.model.MonthModel
+import com.example.alcocalendar.ui.calendar.DateCell
+import com.example.alcocalendar.ui.calendar.EmptyCell
 import com.example.alcocalendar.viewmodel.CalendarEvent
-import kotlinx.collections.immutable.ImmutableList
-import kotlinx.collections.immutable.toImmutableList
+import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.Month
 import java.time.format.DateTimeFormatter
@@ -38,21 +36,11 @@ fun MonthGrid(
     Column(
         modifier = modifier
     ) {
-        Row(modifier = Modifier.fillMaxWidth()) {
-            getWeekDays(startFromSunday = startFromSunday).forEach { weekday ->
-                WeekdayCell(
-                    weekday = weekday,
-                    modifier = Modifier.weight(1f)
-                )
-            }
-        }
-
-        Spacer(modifier = Modifier.size(8.dp))
-
         DatesGrid(
             monthModel = monthModel,
             startFromSunday = startFromSunday,
-            onEvent = onEvent
+            onEvent = onEvent,
+            modifier = Modifier.fillMaxWidth()
         )
 
     }
@@ -64,54 +52,60 @@ fun DatesGrid(
     monthModel: MonthModel,
     startFromSunday: Boolean,
     onEvent: (CalendarEvent) -> Unit,
+    modifier: Modifier = Modifier
 ) {
-    monthModel.changeLayoutForSundays(startFromSunday)
-    val monthMatrix = monthModel.monthMatrix
+    val daysOfWeek = monthModel.sessions.groupBy { it.date.dayOfWeek }
+    val orderedDaysOfWeek = orderDaysOfWeek(daysOfWeek.keys.toList(), startFromSunday)
+    val firstDayIndex = getFirstDayIndex(monthModel.sessions.first().date, startFromSunday)
 
-    Row(modifier = Modifier.fillMaxWidth()) {
-        monthMatrix.forEach { sessions ->
-            Column(
-                verticalArrangement = Arrangement.Top,
-                modifier = Modifier.weight(1f)
-            ) {
-                // Adding empty cells at the start of the month
-                if (monthMatrix.indexOf(sessions) + 1 < sessions[0].date.dayOfMonth &&
-                    sessions[0].date.dayOfMonth != 1
-                ) {
-                    EmptyCell(modifier = Modifier.fillMaxWidth())
+    Row(
+        modifier = modifier
+    ) {
+        orderedDaysOfWeek.forEach { dayOfWeek ->
+            Column(modifier = Modifier.weight(1f)) {
+                WeekdayCell(dayOfWeek = dayOfWeek)
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                val dayOfWeekIndex = orderedDaysOfWeek.indexOf(
+                    daysOfWeek[dayOfWeek]?.first()?.date?.dayOfWeek
+                )
+                if (dayOfWeekIndex < firstDayIndex) {
+                    EmptyCell()
                 }
 
-                // Generating the dates
-                sessions.forEach { session ->
-                    DateCell(
-                        session = session,
-                        signal = false,
-                        onEvent = onEvent,
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                }
-
-                // Adding empty cells at the end of the month
-                if (monthMatrix[0].last().date.dayOfMonth - sessions.last().date.dayOfMonth >= 1) {
-                    EmptyCell(modifier = Modifier.fillMaxWidth())
+                daysOfWeek[dayOfWeek]?.forEach { session ->
+                    DateCell(session = session, onEvent = onEvent)
                 }
             }
         }
     }
 }
-
-fun getWeekDays(startFromSunday: Boolean): ImmutableList<Int> {
-    val days = (1..7).toList()
-    return (if (startFromSunday)
-        days.drop(1) + days.take(1)
-    else
-        days).toImmutableList()
-}
-
 @SuppressLint("NewApi")
 fun LocalDate.getWeekday(): String {
     val formatter = DateTimeFormatter.ofPattern("EEEE", Locale.ENGLISH)
     return this.format(formatter).trim()
+}
+
+fun orderDaysOfWeek(
+    daysOfWeek: List<DayOfWeek>,
+    startFromSunday: Boolean
+): List<DayOfWeek> {
+    val orderedDays = daysOfWeek.sorted()
+    return if (startFromSunday) {
+        listOf(orderedDays.last()) + orderedDays.dropLast(1)
+    } else {
+        orderedDays
+    }
+}
+
+@RequiresApi(Build.VERSION_CODES.O)
+fun getFirstDayIndex(firstDay: LocalDate, startFromSunday: Boolean): Int {
+    var index = firstDay.dayOfWeek.value - 1
+    if (startFromSunday) {
+        index = (index + 1) % 7
+    }
+    return index
 }
 
 

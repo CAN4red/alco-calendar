@@ -18,7 +18,10 @@ class CalendarViewModel() : ViewModel() {
             .toImmutableMap()
 
     private val _state: MutableStateFlow<CalendarState> = MutableStateFlow(
-        CalendarState(calendarMap = calendarMap,)
+        CalendarState(
+            calendarMap = calendarMap,
+            startFromSunday = false,
+        )
     )
     val state: StateFlow<CalendarState> get() = _state
 

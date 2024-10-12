@@ -14,7 +14,6 @@ import com.example.alcocalendar.viewmodel.IndexConverter
 fun MonthPager(
     calendarState: CalendarState,
     pagerState: PagerState,
-    startFromSunday: Boolean,
     onEvent: (CalendarEvent) -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -26,7 +25,7 @@ fun MonthPager(
         MonthGrid(
             monthModel = calendarState.getMonthByIndex(monthIndex),
             onEvent = onEvent,
-            startFromSunday = startFromSunday,
+            startFromSunday = calendarState.startFromSunday,
             modifier = Modifier.fillMaxHeight()
         )
 

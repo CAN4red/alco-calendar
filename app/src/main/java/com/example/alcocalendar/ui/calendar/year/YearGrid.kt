@@ -75,7 +75,7 @@ fun NonDetailedMonthLayout(
     modifier: Modifier = Modifier,
 ) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Text(text = monthModel.name)
+        Text(text = monthModel.month.name)
 
         NonDetailedMonthGrid(
             monthModel = monthModel,

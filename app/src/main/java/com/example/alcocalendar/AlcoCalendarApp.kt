@@ -30,7 +30,6 @@ fun AlcoCalendarApp(
                 calendarState = calendarState,
                 onEvent = onEvent,
                 navigateToYear = { navController.navigate(CalendarScreen.YearView.name) },
-                startFromSunday = false,
                 modifier = modifier
             )
         }
@@ -39,7 +38,6 @@ fun AlcoCalendarApp(
                 calendarState = calendarState,
                 onEvent = onEvent,
                 navigateToYear = { navController.navigate(CalendarScreen.MonthView.name) },
-                startFromSunday = false,
                 modifier = modifier,
             )
         }

@@ -38,7 +38,6 @@ private fun LocalDate.formatToStringDay(): String {
 @Composable
 fun DateCell(
     session: DrinkingSessionModel,
-    signal: Boolean,
     onEvent: (CalendarEvent) -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -55,17 +54,6 @@ fun DateCell(
             .clip(RoundedCornerShape(CornerSize(8.dp)))
             .clickable(onClick = { onEvent(CalendarEvent.OnDateClick) })
     ) {
-        if (signal) {
-            Box(
-                modifier = Modifier
-                    .aspectRatio(1f)
-                    .padding(8.dp)
-                    .background(
-                        shape = CircleShape,
-                        color = lightColorScheme().tertiaryContainer.copy(alpha = 0.7f)
-                    )
-            )
-        }
         Text(
             text = day,
             color = lightColorScheme().onSecondaryContainer,
@@ -107,11 +95,11 @@ fun EmptyCell(modifier: Modifier = Modifier) {
 @SuppressLint("NewApi")
 @Composable
 fun WeekdayCell(
-    weekday: Int,
+    dayOfWeek: DayOfWeek,
     modifier: Modifier = Modifier,
 ) {
     val text = getDayOfWeekAbbreviation(
-        day = weekday,
+        dayOfWeek = dayOfWeek,
         language = "en"
     )
 
@@ -131,11 +119,9 @@ fun WeekdayCell(
 
 @SuppressLint("NewApi")
 fun getDayOfWeekAbbreviation(
-    day: Int,
+    dayOfWeek: DayOfWeek,
     language: String,
 ): String {
-    val dayOfWeek = DayOfWeek.of(day)
-
     val locale = when (language.lowercase()) {
         "ru" -> Locale("ru", "RU")
         "en" -> Locale("en", "US")
@@ -151,7 +137,6 @@ fun getDayOfWeekAbbreviation(
 fun DateCellPreview() {
     DateCell(
         session = DrinkingSessionModel(LocalDate.now()),
-        signal = false,
         onEvent = { }
     )
 }
@@ -160,7 +145,7 @@ fun DateCellPreview() {
 @Preview
 @Composable
 fun WeekdayCellPreview() {
-    WeekdayCell(weekday = 2)
+    WeekdayCell(dayOfWeek = DayOfWeek.of(1))
 }
 
 @SuppressLint("NewApi")

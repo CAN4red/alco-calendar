@@ -12,6 +12,7 @@ import java.time.Month
 @SuppressLint("NewApi")
 data class CalendarState(
     val calendarMap: ImmutableMap<Int, YearModel>,
+    val startFromSunday: Boolean,
     val currentMonthIndex: Int = IndexConverter.getMonthIndex(
         LocalDate.now().year,
         LocalDate.now().month

@@ -19,7 +19,6 @@ fun YearPager(
     pagerState: PagerState,
     navigateToMonth: () -> Unit,
     onEvent: (CalendarEvent) -> Unit,
-    startFromSunday: Boolean,
     modifier: Modifier = Modifier
 ) {
     HorizontalPager(
@@ -30,7 +29,7 @@ fun YearPager(
             yearModel = calendarState.getYearByIndex(yearIndex),
             onEvent = onEvent,
             navigateToMonth = navigateToMonth,
-            startFromSunday = startFromSunday,
+            startFromSunday = calendarState.startFromSunday,
             modifier = Modifier.fillMaxSize()
         )
 
