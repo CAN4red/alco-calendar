@@ -24,6 +24,7 @@ import com.example.alcocalendar.ui.calendar.EmptyCell
 import com.example.alcocalendar.ui.calendar.SmallDateCell
 import com.example.alcocalendar.model.MonthModel
 import com.example.alcocalendar.model.YearModel
+import com.example.alcocalendar.ui.calendar.month.DatesGrid
 import com.example.alcocalendar.viewmodel.CalendarEvent
 import com.example.alcocalendar.viewmodel.IndexConverter
 import java.time.Month
@@ -77,60 +78,13 @@ fun NonDetailedMonthLayout(
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Text(text = monthModel.month.name)
 
-        NonDetailedMonthGrid(
+        DatesGrid(
             monthModel = monthModel,
             startFromSunday = startFromSunday,
-            modifier = modifier,
+            dateCell = { session ->
+                SmallDateCell(session = session,)
+            },
+            modifier = modifier
         )
     }
-}
-
-
-@SuppressLint("NewApi")
-@Composable
-fun NonDetailedMonthGrid(
-    monthModel: MonthModel,
-    startFromSunday: Boolean,
-    modifier: Modifier = Modifier,
-) {
-    val monthMatrix = remember(monthModel) { monthModel.monthMatrix }
-
-    Row(
-        modifier = modifier
-            .fillMaxWidth()
-    ) {
-        monthMatrix.forEach { sessions ->
-            Column(
-                verticalArrangement = Arrangement.Top,
-                modifier = Modifier.weight(1f)
-            ) {
-                // Adding empty cells at the start of the month
-                if (monthMatrix.indexOf(sessions) + 1 < sessions[0].date.dayOfMonth &&
-                    sessions[0].date.dayOfMonth != 1
-                ) {
-                    EmptyCell(modifier = Modifier.fillMaxWidth())
-                }
-
-                // Generating the dates
-                sessions.forEach { session ->
-                    SmallDateCell(
-                        session = session,
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                }
-
-                // Adding empty cells at the end of the month
-                if (monthMatrix[0].last().date.dayOfMonth - sessions.last().date.dayOfMonth >= 1) {
-                    EmptyCell(modifier = Modifier.fillMaxWidth())
-                }
-            }
-        }
-    }
-}
-
-@SuppressLint("NewApi")
-@Composable
-@Preview
-fun NonDetailedMonthGridPreview() {
-    NonDetailedMonthGrid(MonthModel(2024, Month.AUGUST), startFromSunday = false)
 }

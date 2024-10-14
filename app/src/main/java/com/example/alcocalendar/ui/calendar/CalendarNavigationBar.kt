@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.launch
 
 @Composable
-fun NavigationBar(
+fun CalendarNavigationBar(
     titleString: String,
     onTitleClick: () -> Unit,
     enabledPrev: Boolean,

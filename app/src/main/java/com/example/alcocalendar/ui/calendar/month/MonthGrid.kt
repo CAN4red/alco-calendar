@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.alcocalendar.model.DrinkingSessionModel
 import com.example.alcocalendar.ui.calendar.WeekdayCell
 import com.example.alcocalendar.model.MonthModel
 import com.example.alcocalendar.ui.calendar.DateCell
@@ -39,7 +40,7 @@ fun MonthGrid(
         DatesGrid(
             monthModel = monthModel,
             startFromSunday = startFromSunday,
-            onEvent = onEvent,
+            dateCell = { session -> DateCell(session = session, onEvent = onEvent) },
             modifier = Modifier.fillMaxWidth()
         )
 
@@ -51,7 +52,7 @@ fun MonthGrid(
 fun DatesGrid(
     monthModel: MonthModel,
     startFromSunday: Boolean,
-    onEvent: (CalendarEvent) -> Unit,
+    dateCell: @Composable (session: DrinkingSessionModel) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val daysOfWeek = monthModel.sessions.groupBy { it.date.dayOfWeek }
@@ -75,12 +76,13 @@ fun DatesGrid(
                 }
 
                 daysOfWeek[dayOfWeek]?.forEach { session ->
-                    DateCell(session = session, onEvent = onEvent)
+                    dateCell(session)
                 }
             }
         }
     }
 }
+
 @SuppressLint("NewApi")
 fun LocalDate.getWeekday(): String {
     val formatter = DateTimeFormatter.ofPattern("EEEE", Locale.ENGLISH)

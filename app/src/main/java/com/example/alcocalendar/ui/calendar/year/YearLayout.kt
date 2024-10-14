@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.example.alcocalendar.ui.calendar.NavigationBar
+import com.example.alcocalendar.ui.calendar.CalendarNavigationBar
 import com.example.alcocalendar.viewmodel.CalendarEvent
 import com.example.alcocalendar.viewmodel.CalendarState
 
@@ -28,7 +28,7 @@ fun YearLayout(
     Column(
         modifier = modifier,
     ) {
-        NavigationBar(
+        CalendarNavigationBar(
             onTitleClick = navigateToYear,
             titleString = titleString,
             enabledPrev = calendarState.hasPrevYear(),
