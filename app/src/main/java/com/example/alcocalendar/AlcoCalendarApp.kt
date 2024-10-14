@@ -13,6 +13,7 @@ import com.example.alcocalendar.viewmodel.CalendarEvent
 import com.example.alcocalendar.viewmodel.CalendarState
 import com.example.alcocalendar.ui.navigation.CalendarScreen
 
+
 @Composable
 fun AlcoCalendarApp(
     calendarState: CalendarState,

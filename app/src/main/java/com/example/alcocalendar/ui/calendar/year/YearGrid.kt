@@ -4,30 +4,24 @@ import android.annotation.SuppressLint
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.alcocalendar.ui.calendar.EmptyCell
 import com.example.alcocalendar.ui.calendar.SmallDateCell
 import com.example.alcocalendar.model.MonthModel
 import com.example.alcocalendar.model.YearModel
-import com.example.alcocalendar.ui.calendar.month.DatesGrid
+import com.example.alcocalendar.ui.calendar.DatesGrid
 import com.example.alcocalendar.viewmodel.CalendarEvent
 import com.example.alcocalendar.viewmodel.IndexConverter
-import java.time.Month
+
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -48,12 +42,8 @@ fun YearGrid(
                 monthModel = monthModel,
                 startFromSunday = startFromSunday,
                 modifier = Modifier
-                    .padding(
-                        top = 8.dp,
-                        bottom = 16.dp,
-                        start = 8.dp,
-                        end = 8.dp
-                    )
+                    .padding(8.dp)
+                    .padding(bottom = 16.dp)
                     .clickable(onClick = {
                         val monthIndex = IndexConverter.getMonthIndex(
                             monthModel.year,
@@ -62,6 +52,7 @@ fun YearGrid(
                         onEvent(CalendarEvent.ChangeMonth(monthIndex))
                         navigateToMonth()
                     })
+
             )
         }
     }
@@ -81,8 +72,9 @@ fun NonDetailedMonthLayout(
         DatesGrid(
             monthModel = monthModel,
             startFromSunday = startFromSunday,
+            showDaysOfWeek = false,
             dateCell = { session ->
-                SmallDateCell(session = session,)
+                SmallDateCell(session = session)
             },
             modifier = modifier
         )

@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 
+
 @RequiresApi(Build.VERSION_CODES.O)
 class CalendarViewModel() : ViewModel() {
     private val calendarMap =

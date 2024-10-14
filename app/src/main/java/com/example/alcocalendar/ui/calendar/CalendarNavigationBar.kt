@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.launch
 
+
 @Composable
 fun CalendarNavigationBar(
     titleString: String,
@@ -64,6 +65,7 @@ fun CalendarNavigationBar(
         )
     }
 }
+
 
 @Composable
 fun NavigationButton(

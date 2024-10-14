@@ -3,6 +3,7 @@ package com.example.alcocalendar.model
 import android.annotation.SuppressLint
 import java.time.Month
 
+
 class YearModel(
     val year: Int,
     val months: Map<Month, MonthModel>,
@@ -18,6 +19,7 @@ class YearModel(
         return months[month] ?: throw IllegalArgumentException("Invalid month: $month")
     }
 }
+
 
 @SuppressLint("NewApi")
 fun getAllMonths(): List<Month> {

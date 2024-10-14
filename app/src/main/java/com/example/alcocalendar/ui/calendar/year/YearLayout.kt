@@ -10,6 +10,7 @@ import com.example.alcocalendar.ui.calendar.CalendarNavigationBar
 import com.example.alcocalendar.viewmodel.CalendarEvent
 import com.example.alcocalendar.viewmodel.CalendarState
 
+
 @SuppressLint("NewApi")
 @Composable
 fun YearLayout(

@@ -28,11 +28,6 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
-@SuppressLint("NewApi")
-private fun LocalDate.formatToStringDay(): String {
-    val formatter = DateTimeFormatter.ofPattern("d", Locale.getDefault())
-    return this.format(formatter)
-}
 
 @SuppressLint("NewApi")
 @Composable
@@ -62,6 +57,14 @@ fun DateCell(
     }
 }
 
+
+@SuppressLint("NewApi")
+private fun LocalDate.formatToStringDay(): String {
+    val formatter = DateTimeFormatter.ofPattern("d", Locale.getDefault())
+    return this.format(formatter)
+}
+
+
 @Composable
 fun SmallDateCell(
     session: DrinkingSessionModel,
@@ -79,6 +82,7 @@ fun SmallDateCell(
     )
 }
 
+
 @Composable
 fun EmptyCell(modifier: Modifier = Modifier) {
     Box(
@@ -91,6 +95,7 @@ fun EmptyCell(modifier: Modifier = Modifier) {
             .clip(RectangleShape)
     ) {}
 }
+
 
 @SuppressLint("NewApi")
 @Composable
@@ -117,6 +122,7 @@ fun WeekdayCell(
     }
 }
 
+
 @SuppressLint("NewApi")
 fun getDayOfWeekAbbreviation(
     dayOfWeek: DayOfWeek,
@@ -131,6 +137,7 @@ fun getDayOfWeekAbbreviation(
     return dayOfWeek.getDisplayName(TextStyle.SHORT, locale).uppercase()
 }
 
+
 @SuppressLint("NewApi")
 @Preview
 @Composable
@@ -141,12 +148,14 @@ fun DateCellPreview() {
     )
 }
 
+
 @SuppressLint("NewApi")
 @Preview
 @Composable
 fun WeekdayCellPreview() {
     WeekdayCell(dayOfWeek = DayOfWeek.of(1))
 }
+
 
 @SuppressLint("NewApi")
 @Preview
