@@ -35,7 +35,6 @@ fun DatesGrid(
             Column(modifier = Modifier.weight(1f)) {
                 if (showDaysOfWeek) {
                     WeekdayCell(dayOfWeek = dayOfWeek)
-
                     Spacer(modifier = Modifier.height(8.dp))
                 }
 

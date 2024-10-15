@@ -1,8 +1,8 @@
-import kotlin.coroutines.coroutineContext
-
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.google.devtools.ksp)
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
@@ -78,7 +78,7 @@ dependencies {
 
     // ViewModel
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
-    
+
     // Coroutines
     implementation(libs.androidx.core.ktx)
     implementation(libs.kotlinx.coroutines.core)
@@ -86,4 +86,9 @@ dependencies {
 
     // Navigation
     implementation(libs.androidx.navigation.compose)
+
+    // Room
+    implementation(libs.androidx.room.runtime)
+    ksp(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
 }

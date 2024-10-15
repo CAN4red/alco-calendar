@@ -1,27 +1,28 @@
 [versions]
 agp = "8.5.2"
-appcompatV7 = "28.0.0"
-kotlin = "1.9.20"
+kotlin = "2.0.0"
+ksp = "2.0.21-1.0.25"
 coreKtx = "1.13.1"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 kotlinxCollectionsImmutable = "0.3.5"
-lifecycleRuntimeKtx = "2.8.5"
+lifecycleRuntimeKtx = "2.8.6"
 activityCompose = "1.9.2"
-composeBom = "2024.09.01"
+composeBom = "2024.09.03"
 accompanist = "0.34.0"
 androidx-core = "1.10.0"
-lifecycle-viewmodel-ktx = "2.8.5"
-kotlinx-coroutines-core = "1.6.4"
-kotlinx-coroutines-android = "1.7.3"
-materialIconsExtended = "1.7.1"
-navigation = "2.8.0"
+lifecycle-viewmodel-ktx = "2.8.6"
+kotlinx-coroutines-core = "1.8.1"
+kotlinx-coroutines-android = "1.8.1"
+navigation = "2.8.2"
+roomRuntime = "2.6.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
-androidx-material-icons-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "materialIconsExtended" }
-appcompat-v7 = { module = "com.android.support:appcompat-v7", version.ref = "appcompatV7" }
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomRuntime" }
+androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomRuntime" }
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -46,4 +47,5 @@ androidx-navigation-compose = { module = "androidx.navigation:navigation-compose
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-
+google-devtools-ksp = {id = "com.google.devtools.ksp", version.ref = "ksp"}
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
