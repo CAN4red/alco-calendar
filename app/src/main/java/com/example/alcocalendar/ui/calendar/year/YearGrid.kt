@@ -21,6 +21,7 @@ import com.example.alcocalendar.model.YearModel
 import com.example.alcocalendar.ui.calendar.DatesGrid
 import com.example.alcocalendar.viewmodel.CalendarEvent
 import com.example.alcocalendar.viewmodel.IndexConverter
+import java.time.Month
 
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -37,7 +38,8 @@ fun YearGrid(
         modifier = modifier.padding(horizontal = 4.dp),
         contentPadding = PaddingValues(0.dp)
     ) {
-        items(items = yearModel.months.values.toList()) { monthModel ->
+        items(items = Month.entries) { month ->
+            val monthModel = yearModel.getMonthModel(month)
             NonDetailedMonthLayout(
                 monthModel = monthModel,
                 startFromSunday = startFromSunday,
