@@ -9,7 +9,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.alcocalendar.model.DrinkingSessionModel
+import com.example.alcocalendar.db.entities.DrinkingSessionModel
 import com.example.alcocalendar.model.MonthModel
 import java.time.DayOfWeek
 import java.time.LocalDate

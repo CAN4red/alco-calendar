@@ -1,6 +1,7 @@
 package com.example.alcocalendar.model
 
 import android.annotation.SuppressLint
+import com.example.alcocalendar.db.entities.DrinkingSessionModel
 import kotlinx.collections.immutable.toImmutableList
 import java.time.LocalDate
 import java.time.Month

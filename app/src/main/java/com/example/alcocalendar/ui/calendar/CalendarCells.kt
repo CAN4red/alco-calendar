@@ -21,7 +21,7 @@ import androidx.compose.ui.graphics.RectangleShape
 import java.time.format.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.alcocalendar.model.DrinkingSessionModel
+import com.example.alcocalendar.db.entities.DrinkingSessionModel
 import com.example.alcocalendar.viewmodel.CalendarEvent
 import java.time.DayOfWeek
 import java.time.LocalDate
