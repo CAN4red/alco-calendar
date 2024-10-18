@@ -21,7 +21,7 @@ import androidx.compose.ui.graphics.RectangleShape
 import java.time.format.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.alcocalendar.db.entities.DrinkingSessionModel
+import com.example.alcocalendar.db.entities.DrinkingSession
 import com.example.alcocalendar.viewmodel.CalendarEvent
 import java.time.DayOfWeek
 import java.time.LocalDate
@@ -32,7 +32,7 @@ import java.util.Locale
 @SuppressLint("NewApi")
 @Composable
 fun DateCell(
-    session: DrinkingSessionModel,
+    session: DrinkingSession,
     onEvent: (CalendarEvent) -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -67,7 +67,7 @@ private fun LocalDate.formatToStringDay(): String {
 
 @Composable
 fun SmallDateCell(
-    session: DrinkingSessionModel,
+    session: DrinkingSession,
     modifier: Modifier = Modifier,
 ) {
     Box(
@@ -143,7 +143,7 @@ fun getDayOfWeekAbbreviation(
 @Composable
 fun DateCellPreview() {
     DateCell(
-        session = DrinkingSessionModel(LocalDate.now()),
+        session = DrinkingSession(LocalDate.now()),
         onEvent = { }
     )
 }
@@ -161,5 +161,5 @@ fun WeekdayCellPreview() {
 @Preview
 @Composable
 fun SmallDateCellPreview() {
-    SmallDateCell(session = DrinkingSessionModel(LocalDate.now()))
+    SmallDateCell(session = DrinkingSession(LocalDate.now()))
 }

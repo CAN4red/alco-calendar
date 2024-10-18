@@ -1,7 +1,7 @@
 package com.example.alcocalendar.model
 
 import android.annotation.SuppressLint
-import com.example.alcocalendar.db.entities.DrinkingSessionModel
+import com.example.alcocalendar.db.entities.DrinkingSession
 import kotlinx.collections.immutable.toImmutableList
 import java.time.LocalDate
 import java.time.Month
@@ -10,7 +10,7 @@ import java.time.Month
 data class MonthModel(
     val year: Int,
     val month: Month,
-    val sessions: List<DrinkingSessionModel>,
+    val sessions: List<DrinkingSession>,
 ) {
     @SuppressLint("NewApi")
     constructor(year: Int, month: Month) : this(
@@ -19,7 +19,7 @@ data class MonthModel(
         sessions = generateEmptySessions(year, month),
     )
 
-    fun getDay(date: Int): DrinkingSessionModel {
+    fun getDay(date: Int): DrinkingSession {
         return sessions[date - 1]
     }
 }
@@ -38,9 +38,9 @@ private fun Int.isLeapYear(): Boolean {
 
 
 @SuppressLint("NewApi")
-private fun generateEmptySessions(year: Int, month: Month): List<DrinkingSessionModel> {
+private fun generateEmptySessions(year: Int, month: Month): List<DrinkingSession> {
     val lastDayOfMonth = getLastDayOfMonth(year, month).dayOfMonth
     return (1..lastDayOfMonth).map { day ->
-        DrinkingSessionModel(LocalDate.of(year, month, day))
+        DrinkingSession(LocalDate.of(year, month, day))
     }.toImmutableList()
 }

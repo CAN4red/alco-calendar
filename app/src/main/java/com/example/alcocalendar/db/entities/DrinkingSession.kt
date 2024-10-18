@@ -10,7 +10,7 @@ import com.example.alcocalendar.db.entities.intakes.WineIntake
 import java.time.LocalDate
 
 @Entity(tableName = "drinking_sessions")
-data class DrinkingSessionModel(
+data class DrinkingSession(
     @PrimaryKey val date: LocalDate,
     @Embedded val beerIntake: BeerIntake = BeerIntake(),
     @Embedded val spiritsIntake: SpiritsIntake = SpiritsIntake(),
