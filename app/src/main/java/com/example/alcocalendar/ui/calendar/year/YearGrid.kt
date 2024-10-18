@@ -19,8 +19,8 @@ import com.example.alcocalendar.ui.calendar.SmallDateCell
 import com.example.alcocalendar.model.MonthModel
 import com.example.alcocalendar.model.YearModel
 import com.example.alcocalendar.ui.calendar.DatesGrid
-import com.example.alcocalendar.viewmodel.CalendarEvent
-import com.example.alcocalendar.viewmodel.IndexConverter
+import com.example.alcocalendar.viewmodel.events.CalendarEvent
+import com.example.alcocalendar.viewmodel.states.IndexConverter
 import java.time.Month
 
 
@@ -28,7 +28,7 @@ import java.time.Month
 @Composable
 fun YearGrid(
     yearModel: YearModel,
-    onEvent: (CalendarEvent) -> Unit,
+    onCalendarEvent: (CalendarEvent) -> Unit,
     navigateToMonth: () -> Unit,
     startFromSunday: Boolean,
     modifier: Modifier = Modifier,
@@ -51,7 +51,7 @@ fun YearGrid(
                             monthModel.year,
                             monthModel.month
                         )
-                        onEvent(CalendarEvent.ChangeMonth(monthIndex))
+                        onCalendarEvent(CalendarEvent.ChangeMonth(monthIndex))
                         navigateToMonth()
                     })
 

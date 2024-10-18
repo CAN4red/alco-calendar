@@ -13,7 +13,7 @@ import java.time.LocalDate
 data class DrinkingSession(
     @PrimaryKey val date: LocalDate,
     @Embedded val beerIntake: BeerIntake = BeerIntake(),
-    @Embedded val spiritsIntake: SpiritsIntake = SpiritsIntake(),
     @Embedded val wineIntake: WineIntake = WineIntake(),
+    @Embedded val spiritsIntake: SpiritsIntake = SpiritsIntake(),
     @Embedded val otherIntake: OtherIntake = OtherIntake(),
 )

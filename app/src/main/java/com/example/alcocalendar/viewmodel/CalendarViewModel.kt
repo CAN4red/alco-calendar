@@ -3,11 +3,22 @@ package com.example.alcocalendar.viewmodel
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModel
+import com.example.alcocalendar.db.entities.DrinkingSession
+import com.example.alcocalendar.db.entities.intakes.Beer
+import com.example.alcocalendar.db.entities.intakes.Cider
+import com.example.alcocalendar.db.entities.intakes.Dark
+import com.example.alcocalendar.db.entities.intakes.El
+import com.example.alcocalendar.db.entities.intakes.Light
+import com.example.alcocalendar.db.entities.intakes.Unfiltered
 import com.example.alcocalendar.model.YearModel
+import com.example.alcocalendar.viewmodel.events.CalendarEvent
+import com.example.alcocalendar.viewmodel.events.SessionFillingEvent
+import com.example.alcocalendar.viewmodel.states.CalendarState
 import kotlinx.collections.immutable.toImmutableMap
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
+import java.time.LocalDate
 
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -18,18 +29,23 @@ class CalendarViewModel() : ViewModel() {
             .associateWith { year -> YearModel(year) }
             .toImmutableMap()
 
-    private val _state: MutableStateFlow<CalendarState> = MutableStateFlow(
+    private val _calendarState: MutableStateFlow<CalendarState> = MutableStateFlow(
         CalendarState(
             calendarMap = calendarMap,
             startFromSunday = false,
         )
     )
-    val state: StateFlow<CalendarState> get() = _state
+    val calendarState: StateFlow<CalendarState> get() = _calendarState
 
-    fun onEvent(event: CalendarEvent) {
+    private val _fillingSessionState: MutableStateFlow<DrinkingSession> = MutableStateFlow(
+        DrinkingSession(date = LocalDate.now())
+    )
+    val fillingSessionState: StateFlow<DrinkingSession> get() = _fillingSessionState
+
+    fun onCalendarEvent(event: CalendarEvent) {
         when (event) {
             is CalendarEvent.ChangeMonth -> {
-                _state.update { currentState ->
+                _calendarState.update { currentState ->
                     currentState.copy(
                         currentMonthIndex = event.monthIndex,
                     )
@@ -37,7 +53,7 @@ class CalendarViewModel() : ViewModel() {
             }
 
             is CalendarEvent.ChangeYear -> {
-                _state.update { currentState ->
+                _calendarState.update { currentState ->
                     currentState.copy(
                         currentYearIndex = event.yearIndex,
                     )
@@ -46,6 +62,42 @@ class CalendarViewModel() : ViewModel() {
 
             is CalendarEvent.OnDateClick -> {
                 TODO("implement a logic of adding a new session or checking the current one")
+            }
+        }
+    }
+
+    fun onSessionFillingEvent(event: SessionFillingEvent) {
+        when (event) {
+            is SessionFillingEvent.AddBeerDrink -> {
+                _fillingSessionState.update { currentState ->
+                    val updatedBeerIntake = currentState.beerIntake.update(event.beer)
+                    currentState.copy(beerIntake = updatedBeerIntake)
+                }
+            }
+
+            is SessionFillingEvent.AddWineDrink -> {
+                _fillingSessionState.update { currentState ->
+                    val updatedWineIntake = currentState.wineIntake.update(event.wine)
+                    currentState.copy(wineIntake = updatedWineIntake)
+                }
+            }
+
+            is SessionFillingEvent.AddSpiritsDrink -> {
+                _fillingSessionState.update { currentState ->
+                    val updatedSpiritsIntake = currentState.spiritsIntake.update(event.spirits)
+                    currentState.copy(spiritsIntake = updatedSpiritsIntake)
+                }
+            }
+
+            is SessionFillingEvent.AddOtherDrink -> {
+                _fillingSessionState.update { currentState ->
+                    val updatedOtherIntake = currentState.otherIntake.update(event.otherDrink)
+                    currentState.copy(otherIntake = updatedOtherIntake)
+                }
+            }
+
+            is SessionFillingEvent.ConfirmSession -> {
+                TODO()
             }
         }
     }

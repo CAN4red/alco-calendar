@@ -22,7 +22,7 @@ import java.time.format.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.alcocalendar.db.entities.DrinkingSession
-import com.example.alcocalendar.viewmodel.CalendarEvent
+import com.example.alcocalendar.viewmodel.events.CalendarEvent
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -33,7 +33,7 @@ import java.util.Locale
 @Composable
 fun DateCell(
     session: DrinkingSession,
-    onEvent: (CalendarEvent) -> Unit,
+    onCalendarEvent: (CalendarEvent) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val day = session.date.formatToStringDay()
@@ -47,7 +47,7 @@ fun DateCell(
                 color = lightColorScheme().secondaryContainer
             )
             .clip(RoundedCornerShape(CornerSize(8.dp)))
-            .clickable(onClick = { onEvent(CalendarEvent.OnDateClick) })
+            .clickable(onClick = { onCalendarEvent(CalendarEvent.OnDateClick) })
     ) {
         Text(
             text = day,
@@ -144,7 +144,7 @@ fun getDayOfWeekAbbreviation(
 fun DateCellPreview() {
     DateCell(
         session = DrinkingSession(LocalDate.now()),
-        onEvent = { }
+        onCalendarEvent = { }
     )
 }
 

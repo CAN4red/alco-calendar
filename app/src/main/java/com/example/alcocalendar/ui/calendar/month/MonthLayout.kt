@@ -7,15 +7,15 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.example.alcocalendar.ui.calendar.CalendarNavigationBar
-import com.example.alcocalendar.viewmodel.CalendarEvent
-import com.example.alcocalendar.viewmodel.CalendarState
+import com.example.alcocalendar.viewmodel.events.CalendarEvent
+import com.example.alcocalendar.viewmodel.states.CalendarState
 
 
 @SuppressLint("NewApi")
 @Composable
 fun MonthLayout(
     calendarState: CalendarState,
-    onEvent: (CalendarEvent) -> Unit,
+    onCalendarEvent: (CalendarEvent) -> Unit,
     navigateToYear: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -47,7 +47,7 @@ fun MonthLayout(
         MonthPager(
             calendarState = calendarState,
             pagerState = pagerState,
-            onEvent = onEvent,
+            onCalendarEvent = onCalendarEvent,
             modifier = Modifier.fillMaxWidth()
         )
     }

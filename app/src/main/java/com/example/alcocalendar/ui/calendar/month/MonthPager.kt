@@ -6,16 +6,16 @@ import androidx.compose.foundation.pager.PagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
-import com.example.alcocalendar.viewmodel.CalendarEvent
-import com.example.alcocalendar.viewmodel.CalendarState
-import com.example.alcocalendar.viewmodel.IndexConverter
+import com.example.alcocalendar.viewmodel.events.CalendarEvent
+import com.example.alcocalendar.viewmodel.states.CalendarState
+import com.example.alcocalendar.viewmodel.states.IndexConverter
 
 
 @Composable
 fun MonthPager(
     calendarState: CalendarState,
     pagerState: PagerState,
-    onEvent: (CalendarEvent) -> Unit,
+    onCalendarEvent: (CalendarEvent) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     HorizontalPager(
@@ -25,7 +25,7 @@ fun MonthPager(
 
         MonthGrid(
             monthModel = calendarState.getMonthByIndex(monthIndex),
-            onEvent = onEvent,
+            onCalendarEvent = onCalendarEvent,
             startFromSunday = calendarState.startFromSunday,
             modifier = Modifier.fillMaxHeight()
         )
@@ -34,8 +34,8 @@ fun MonthPager(
             val currentYear = calendarState.getMonthByIndex(pagerState.currentPage).year
             val currentYearIndex = IndexConverter.getYearIndex(currentYear)
 
-            onEvent(CalendarEvent.ChangeMonth(pagerState.currentPage))
-            onEvent(CalendarEvent.ChangeYear(currentYearIndex))
+            onCalendarEvent(CalendarEvent.ChangeMonth(pagerState.currentPage))
+            onCalendarEvent(CalendarEvent.ChangeYear(currentYearIndex))
         }
     }
 }

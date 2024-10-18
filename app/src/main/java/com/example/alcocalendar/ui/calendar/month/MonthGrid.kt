@@ -11,7 +11,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.alcocalendar.model.MonthModel
 import com.example.alcocalendar.ui.calendar.DateCell
 import com.example.alcocalendar.ui.calendar.DatesGrid
-import com.example.alcocalendar.viewmodel.CalendarEvent
+import com.example.alcocalendar.viewmodel.events.CalendarEvent
 import java.time.Month
 
 
@@ -19,7 +19,7 @@ import java.time.Month
 @Composable
 fun MonthGrid(
     monthModel: MonthModel,
-    onEvent: (CalendarEvent) -> Unit,
+    onCalendarEvent: (CalendarEvent) -> Unit,
     startFromSunday: Boolean,
     modifier: Modifier = Modifier,
 ) {
@@ -30,7 +30,7 @@ fun MonthGrid(
             monthModel = monthModel,
             startFromSunday = startFromSunday,
             showDaysOfWeek = true,
-            dateCell = { session -> DateCell(session = session, onEvent = onEvent) },
+            dateCell = { session -> DateCell(session = session, onCalendarEvent = onCalendarEvent) },
             modifier = Modifier.fillMaxWidth()
         )
 
@@ -44,7 +44,7 @@ fun MonthGrid(
 fun MonthGridPreview() {
     MonthGrid(
         monthModel = MonthModel(2024, Month.AUGUST),
-        onEvent = {},
+        onCalendarEvent = {},
         startFromSunday = false,
         modifier = Modifier.background(color = Color.White)
     )
