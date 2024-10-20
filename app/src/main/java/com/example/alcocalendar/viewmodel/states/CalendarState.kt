@@ -3,6 +3,7 @@ package com.example.alcocalendar.viewmodel.states
 import android.annotation.SuppressLint
 import android.os.Build
 import androidx.annotation.RequiresApi
+import com.example.alcocalendar.db.entities.DrinkingSession
 import com.example.alcocalendar.model.MonthModel
 import com.example.alcocalendar.model.YearModel
 import kotlinx.collections.immutable.ImmutableMap
@@ -21,6 +22,7 @@ data class CalendarState(
     val currentYearIndex: Int = IndexConverter.getYearIndex(
         LocalDate.now().year
     ),
+    val updateToggle: Boolean = true,
 ) {
     val yearsCount = calendarMap.size
     val monthsCount = yearsCount * MONTHS_NUMBER
@@ -34,6 +36,13 @@ data class CalendarState(
     fun getYearByIndex(index: Int): YearModel {
         val year = index + FIRST_YEAR
         return calendarMap[year] ?: YearModel(year)
+    }
+
+    fun updateSession(session: DrinkingSession) {
+        val date = session.date
+        calendarMap[date.year]
+            ?.getMonthModel(date.month)
+            ?.updateDrinkingSession(session)
     }
 
     fun hasNextMonth(): Boolean {

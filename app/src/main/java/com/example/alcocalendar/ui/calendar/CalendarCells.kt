@@ -37,6 +37,10 @@ fun DateCell(
     modifier: Modifier = Modifier,
 ) {
     val day = session.date.formatToStringDay()
+    val color = if (session.isEmpty)
+        lightColorScheme().secondaryContainer.copy(alpha = 0.7f)
+    else
+        Color.Red
 
     Box(
         modifier = modifier
@@ -44,7 +48,7 @@ fun DateCell(
             .padding(2.dp)
             .background(
                 shape = RoundedCornerShape(CornerSize(8.dp)),
-                color = lightColorScheme().secondaryContainer
+                color = color
             )
             .clip(RoundedCornerShape(CornerSize(8.dp)))
             .clickable(onClick = { onCalendarEvent(CalendarEvent.OnDateClick) })
@@ -70,13 +74,18 @@ fun SmallDateCell(
     session: DrinkingSession,
     modifier: Modifier = Modifier,
 ) {
+    val color = if (session.isEmpty)
+        lightColorScheme().secondaryContainer.copy(alpha = 0.7f)
+    else
+        Color.Red
+
     Box(
         modifier = modifier
             .aspectRatio(1f)
             .padding(2.dp)
             .background(
                 shape = CircleShape,
-                color = lightColorScheme().tertiaryContainer.copy(alpha = 0.7f)
+                color = color
             )
             .clip(CircleShape)
     )

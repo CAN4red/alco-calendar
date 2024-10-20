@@ -8,6 +8,11 @@ data class OtherIntake(
     @Embedded val shots: Shots = Shots(),
     @Embedded val moonshine: Moonshine = Moonshine(),
 ) {
+    val isEmpty: Boolean
+        get() = cocktails.isEmpty &&
+                shots.isEmpty &&
+                moonshine.isEmpty
+
     fun update(otherDrink: OtherDrink): OtherIntake {
         return when (otherDrink) {
             is Cocktails -> this.copy(cocktails = otherDrink)
@@ -19,6 +24,8 @@ data class OtherIntake(
 
 sealed interface OtherDrink {
     val liters: Double
+    val isEmpty: Boolean
+        get() = liters == 0.0
 }
 
 data class Cocktails(

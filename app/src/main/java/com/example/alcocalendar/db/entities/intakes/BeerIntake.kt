@@ -10,6 +10,13 @@ data class BeerIntake(
     @Embedded val unfiltered: Unfiltered = Unfiltered(),
     @Embedded val el: El = El(),
 ) {
+    val isEmpty: Boolean
+        get() = light.isEmpty &&
+                dark.isEmpty &&
+                cider.isEmpty &&
+                unfiltered.isEmpty &&
+                el.isEmpty
+
     fun update(beer: Beer): BeerIntake {
         return when (beer) {
             is Light -> this.copy(light = beer)
@@ -23,6 +30,8 @@ data class BeerIntake(
 
 sealed interface Beer {
     val liters: Double
+    val isEmpty: Boolean
+        get() = liters == 0.0
 }
 
 data class Light(

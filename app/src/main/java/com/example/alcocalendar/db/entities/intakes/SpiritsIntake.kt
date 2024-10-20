@@ -13,6 +13,16 @@ data class SpiritsIntake(
     @Embedded val absinthe: Absinthe = Absinthe(),
     @Embedded val brandy: Brandy = Brandy()
 ) {
+    val isEmpty: Boolean
+        get() = vodka.isEmpty &&
+                whiskey.isEmpty &&
+                cognac.isEmpty &&
+                rum.isEmpty &&
+                tequila.isEmpty &&
+                gin.isEmpty &&
+                absinthe.isEmpty &&
+                brandy.isEmpty
+
     fun update(spirits: Spirits): SpiritsIntake {
         return when (spirits) {
             is Vodka -> this.copy(vodka = spirits)
@@ -29,6 +39,8 @@ data class SpiritsIntake(
 
 sealed interface Spirits {
     val liters: Double
+    val isEmpty: Boolean
+        get() = liters == 0.0
 }
 
 data class Vodka(

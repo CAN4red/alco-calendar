@@ -16,4 +16,10 @@ data class DrinkingSession(
     @Embedded val wineIntake: WineIntake = WineIntake(),
     @Embedded val spiritsIntake: SpiritsIntake = SpiritsIntake(),
     @Embedded val otherIntake: OtherIntake = OtherIntake(),
-)
+) {
+    val isEmpty: Boolean
+        get() = beerIntake.isEmpty &&
+                wineIntake.isEmpty &&
+                spiritsIntake.isEmpty &&
+                otherIntake.isEmpty
+}

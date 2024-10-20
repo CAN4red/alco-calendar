@@ -11,6 +11,14 @@ data class WineIntake(
     @Embedded val port: Port = Port(),
     @Embedded val vermouth: Vermouth = Vermouth(),
 ) {
+    val isEmpty: Boolean
+        get() = red.isEmpty &&
+                white.isEmpty &&
+                rose.isEmpty &&
+                champagne.isEmpty &&
+                port.isEmpty &&
+                vermouth.isEmpty
+
     fun update(wine: Wine): WineIntake {
         return when (wine) {
             is Red -> this.copy(red = wine)
@@ -25,6 +33,8 @@ data class WineIntake(
 
 sealed interface Wine {
     val liters: Double
+    val isEmpty: Boolean
+        get() = liters == 0.0
 }
 
 data class Red(
