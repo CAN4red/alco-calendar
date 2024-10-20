@@ -15,13 +15,8 @@ import java.time.Month
 data class CalendarState(
     val calendarMap: ImmutableMap<Int, YearModel>,
     val startFromSunday: Boolean,
-    val currentMonthIndex: Int = IndexConverter.getMonthIndex(
-        LocalDate.now().year,
-        LocalDate.now().month
-    ),
-    val currentYearIndex: Int = IndexConverter.getYearIndex(
-        LocalDate.now().year
-    ),
+    val currentMonthIndex: Int = getInitialMonthIndex(),
+    val currentYearIndex: Int = getInitialYearIndex(),
     val updateToggle: Boolean = true,
 ) {
     val yearsCount = calendarMap.size
@@ -45,37 +40,42 @@ data class CalendarState(
             ?.updateDrinkingSession(session)
     }
 
-    fun hasNextMonth(): Boolean {
-        return hasNextYear() || getMonthByIndex(currentMonthIndex).month != Month.DECEMBER
-    }
+    fun hasNextMonth(): Boolean =
+        hasNextYear() || getMonthByIndex(currentMonthIndex).month != Month.DECEMBER
 
-    fun hasPrevMonth(): Boolean {
-        return hasPrevYear() || getMonthByIndex(currentMonthIndex).month != Month.JANUARY
-    }
+    fun hasPrevMonth(): Boolean =
+        hasPrevYear() || getMonthByIndex(currentMonthIndex).month != Month.JANUARY
 
-    fun hasNextYear(): Boolean {
-        return getYearByIndex(currentYearIndex).year != LAST_YEAR
-    }
+    fun hasNextYear(): Boolean =
+        getYearByIndex(currentYearIndex).year != LAST_YEAR
 
-    fun hasPrevYear(): Boolean {
-        return getYearByIndex(currentYearIndex).year != FIRST_YEAR
-    }
+    fun hasPrevYear(): Boolean =
+        getYearByIndex(currentYearIndex).year != FIRST_YEAR
+
 
     companion object {
         const val FIRST_YEAR: Int = 2000
         const val LAST_YEAR: Int = 2200
         const val MONTHS_NUMBER: Int = 12
+
+        private fun getInitialMonthIndex(): Int =
+            IndexConverter.getMonthIndex(
+                LocalDate.now().year,
+                LocalDate.now().month
+            )
+
+        private fun getInitialYearIndex(): Int =
+            IndexConverter.getYearIndex(
+                LocalDate.now().year
+            )
     }
 }
 
 
 object IndexConverter {
     @RequiresApi(Build.VERSION_CODES.O)
-    fun getMonthIndex(year: Int, month: Month): Int {
-        return (year - CalendarState.FIRST_YEAR) * CalendarState.MONTHS_NUMBER + month.value - 1
-    }
+    fun getMonthIndex(year: Int, month: Month): Int =
+        (year - CalendarState.FIRST_YEAR) * CalendarState.MONTHS_NUMBER + month.value - 1
 
-    fun getYearIndex(year: Int): Int {
-        return year - CalendarState.FIRST_YEAR
-    }
+    fun getYearIndex(year: Int): Int = year - CalendarState.FIRST_YEAR
 }
