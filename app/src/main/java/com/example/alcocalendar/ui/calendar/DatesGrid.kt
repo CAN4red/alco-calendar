@@ -1,14 +1,12 @@
 package com.example.alcocalendar.ui.calendar
 
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.alcocalendar.db.entities.DrinkingSession
@@ -30,10 +28,6 @@ fun DatesGrid(
     val orderedDaysOfWeek = orderDaysOfWeek(daysOfWeek.keys.toList(), startFromSunday)
     val firstDayIndex = getFirstDayIndex(monthModel.sessions.first().date, startFromSunday)
 
-    LaunchedEffect(monthModel.sessions.size) {
-        Log.d("NewSessionAdded", "New sessions size: ${monthModel.sessions.size}")
-    }
-
     Row(
         modifier = modifier
     ) {
@@ -54,7 +48,6 @@ fun DatesGrid(
                 daysOfWeek[dayOfWeek]?.forEach { session ->
                     dateCell(session)
                 }
-//                Log.d("GridGeneration", "Number of days of week for $dayOfWeek: ${daysOfWeek[dayOfWeek]?.size}")
             }
         }
     }

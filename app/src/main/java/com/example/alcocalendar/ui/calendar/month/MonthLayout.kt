@@ -34,8 +34,8 @@ fun MonthLayout(
         CalendarNavigationBar(
             titleString = titleString,
             onTitleClick = navigateToYear,
-            enabledPrev = calendarState.hasPrevMonth(),
-            enabledNext = calendarState.hasNextMonth(),
+            enabledPrev = calendarState.hasPrevMonth,
+            enabledNext = calendarState.hasNextMonth,
             onBackNavigationClick = {
                 pagerState.animateScrollToPage(pagerState.currentPage - 1)
             },

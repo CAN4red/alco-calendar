@@ -153,7 +153,7 @@ fun getDayOfWeekAbbreviation(
 fun DateCellPreview() {
     DateCell(
         session = DrinkingSession(LocalDate.now()),
-        onCalendarEvent = { }
+        onCalendarEvent = {}
     )
 }
 

@@ -32,8 +32,8 @@ fun YearLayout(
         CalendarNavigationBar(
             onTitleClick = navigateToYear,
             titleString = titleString,
-            enabledPrev = calendarState.hasPrevYear(),
-            enabledNext = calendarState.hasNextYear(),
+            enabledPrev = calendarState.hasPrevYear,
+            enabledNext = calendarState.hasNextYear,
             onBackNavigationClick = {
                 pagerState.animateScrollToPage(pagerState.currentPage - 1)
             },

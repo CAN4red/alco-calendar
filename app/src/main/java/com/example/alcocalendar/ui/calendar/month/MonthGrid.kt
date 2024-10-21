@@ -33,7 +33,6 @@ fun MonthGrid(
             dateCell = { session -> DateCell(session = session, onCalendarEvent = onCalendarEvent) },
             modifier = Modifier.fillMaxWidth()
         )
-
     }
 }
 

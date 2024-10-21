@@ -17,10 +17,11 @@ data class CalendarState(
     val startFromSunday: Boolean,
     val currentMonthIndex: Int = getInitialMonthIndex(),
     val currentYearIndex: Int = getInitialYearIndex(),
+    val isShowingSessionMenu: Boolean = false,
     val updateToggle: Boolean = true,
 ) {
-    val yearsCount = calendarMap.size
-    val monthsCount = yearsCount * MONTHS_NUMBER
+    val yearsCount get() = calendarMap.size
+    val monthsCount get() = yearsCount * MONTHS_NUMBER
 
     fun getMonthByIndex(index: Int): MonthModel {
         val year = index / MONTHS_NUMBER + FIRST_YEAR
@@ -40,17 +41,17 @@ data class CalendarState(
             ?.updateDrinkingSession(session)
     }
 
-    fun hasNextMonth(): Boolean =
-        hasNextYear() || getMonthByIndex(currentMonthIndex).month != Month.DECEMBER
+    val hasNextMonth: Boolean
+        get() = hasNextYear || getMonthByIndex(currentMonthIndex).month != Month.DECEMBER
 
-    fun hasPrevMonth(): Boolean =
-        hasPrevYear() || getMonthByIndex(currentMonthIndex).month != Month.JANUARY
+    val hasPrevMonth: Boolean
+        get() = hasPrevYear || getMonthByIndex(currentMonthIndex).month != Month.JANUARY
 
-    fun hasNextYear(): Boolean =
-        getYearByIndex(currentYearIndex).year != LAST_YEAR
+    val hasNextYear: Boolean
+        get() = getYearByIndex(currentYearIndex).year != LAST_YEAR
 
-    fun hasPrevYear(): Boolean =
-        getYearByIndex(currentYearIndex).year != FIRST_YEAR
+    val hasPrevYear: Boolean
+        get() = getYearByIndex(currentYearIndex).year != FIRST_YEAR
 
 
     companion object {
