@@ -57,6 +57,7 @@ class MainActivity : ComponentActivity() {
                     AlcoCalendarApp(
                         calendarState = calendarState,
                         onCalendarEvent = viewModel::onCalendarEvent,
+                        onSessionFillingEvent = viewModel::onSessionFillingEvent,
                         navController = navController,
                         modifier = Modifier.padding(innerPadding)
                     )

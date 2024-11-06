@@ -67,7 +67,11 @@ class CalendarViewModel(
             }
 
             is CalendarEvent.OnDateClick -> {
-                TODO("implement a logic of adding a new session or checking the current one")
+                _calendarState.update { currentState ->
+                    currentState.copy(
+                        isShowingSessionEditMenu = true
+                    )
+                }
             }
         }
     }
@@ -103,7 +107,11 @@ class CalendarViewModel(
             }
 
             is SessionFillingEvent.ConfirmSession -> {
-                TODO()
+                _calendarState.update { currentState ->
+                    currentState.copy(
+                        isShowingSessionEditMenu = false
+                    )
+                }
             }
         }
     }

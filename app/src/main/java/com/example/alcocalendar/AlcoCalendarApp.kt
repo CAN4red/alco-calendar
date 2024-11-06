@@ -12,12 +12,14 @@ import com.example.alcocalendar.ui.calendar.year.YearLayout
 import com.example.alcocalendar.viewmodel.events.CalendarEvent
 import com.example.alcocalendar.viewmodel.states.CalendarState
 import com.example.alcocalendar.ui.navigation.CalendarScreen
+import com.example.alcocalendar.viewmodel.events.SessionFillingEvent
 
 
 @Composable
 fun AlcoCalendarApp(
     calendarState: CalendarState,
     onCalendarEvent: (CalendarEvent) -> Unit,
+    onSessionFillingEvent: (SessionFillingEvent) -> Unit,
     navController: NavHostController = rememberNavController(),
     @SuppressLint("ModifierParameter") modifier: Modifier = Modifier,
 ) {
@@ -31,6 +33,7 @@ fun AlcoCalendarApp(
                 calendarState = calendarState,
                 onCalendarEvent = onCalendarEvent,
                 navigateToYear = { navController.navigate(CalendarScreen.YearView.name) },
+                onSessionFillingEvent = onSessionFillingEvent,
                 modifier = modifier
             )
         }

@@ -17,7 +17,7 @@ data class CalendarState(
     val startFromSunday: Boolean,
     val currentMonthIndex: Int = getInitialMonthIndex(),
     val currentYearIndex: Int = getInitialYearIndex(),
-    val isShowingSessionMenu: Boolean = false,
+    val isShowingSessionEditMenu: Boolean = false,
     val updateToggle: Boolean = true,
 ) {
     val yearsCount get() = calendarMap.size
