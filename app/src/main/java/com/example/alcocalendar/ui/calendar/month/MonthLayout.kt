@@ -15,13 +15,11 @@ import com.example.alcocalendar.viewmodel.events.SessionFillingEvent
 import com.example.alcocalendar.viewmodel.states.CalendarState
 
 
-@OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("NewApi")
 @Composable
 fun MonthLayout(
     calendarState: CalendarState,
     onCalendarEvent: (CalendarEvent) -> Unit,
-    onSessionFillingEvent: (SessionFillingEvent) -> Unit,
     navigateToYear: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -56,16 +54,5 @@ fun MonthLayout(
             onCalendarEvent = onCalendarEvent,
             modifier = Modifier.fillMaxWidth()
         )
-
-        if (calendarState.isShowingSessionEditMenu) {
-            ModalBottomSheet(onDismissRequest = { onSessionFillingEvent(SessionFillingEvent.ConfirmSession) }) {
-                Column {
-                    Text("lol")
-                    Text("lol")
-                    Text("lol")
-                    Text("lol")
-                }
-            }
-        }
     }
 }

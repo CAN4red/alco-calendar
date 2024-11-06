@@ -1,12 +1,17 @@
 package com.example.alcocalendar
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.alcocalendar.db.entities.DrinkingSession
 import com.example.alcocalendar.ui.calendar.month.MonthLayout
 import com.example.alcocalendar.ui.calendar.year.YearLayout
 import com.example.alcocalendar.viewmodel.events.CalendarEvent
@@ -15,9 +20,11 @@ import com.example.alcocalendar.ui.navigation.CalendarScreen
 import com.example.alcocalendar.viewmodel.events.SessionFillingEvent
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AlcoCalendarApp(
     calendarState: CalendarState,
+    fillingSessionState: DrinkingSession,
     onCalendarEvent: (CalendarEvent) -> Unit,
     onSessionFillingEvent: (SessionFillingEvent) -> Unit,
     navController: NavHostController = rememberNavController(),
@@ -33,7 +40,6 @@ fun AlcoCalendarApp(
                 calendarState = calendarState,
                 onCalendarEvent = onCalendarEvent,
                 navigateToYear = { navController.navigate(CalendarScreen.YearView.name) },
-                onSessionFillingEvent = onSessionFillingEvent,
                 modifier = modifier
             )
         }
@@ -44,6 +50,16 @@ fun AlcoCalendarApp(
                 navigateToYear = { navController.navigate(CalendarScreen.MonthView.name) },
                 modifier = modifier,
             )
+        }
+    }
+    if (calendarState.isShowingSessionEditMenu) {
+        ModalBottomSheet(onDismissRequest = { onSessionFillingEvent(SessionFillingEvent.ConfirmSession) }) {
+            Column {
+                Text(fillingSessionState.date.toString())
+                Text(fillingSessionState.date.toString())
+                Text(fillingSessionState.date.toString())
+                Text(fillingSessionState.date.toString())
+            }
         }
     }
 }

@@ -72,6 +72,11 @@ class CalendarViewModel(
                         isShowingSessionEditMenu = true
                     )
                 }
+                _fillingSessionState.update { currentState ->
+                    currentState.copy(
+                        date = event.date
+                    )
+                }
             }
         }
     }

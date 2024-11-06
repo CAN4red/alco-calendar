@@ -50,12 +50,14 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             val calendarState by viewModel.calendarState.collectAsState()
+            val fillingSessionState by viewModel.fillingSessionState.collectAsState()
 
             AlcoCalendarTheme {
                 val navController = rememberNavController()
                 Scaffold { innerPadding ->
                     AlcoCalendarApp(
                         calendarState = calendarState,
+                        fillingSessionState = fillingSessionState,
                         onCalendarEvent = viewModel::onCalendarEvent,
                         onSessionFillingEvent = viewModel::onSessionFillingEvent,
                         navController = navController,

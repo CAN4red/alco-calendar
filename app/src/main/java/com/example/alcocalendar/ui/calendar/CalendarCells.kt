@@ -51,7 +51,7 @@ fun DateCell(
                 color = color
             )
             .clip(RoundedCornerShape(CornerSize(8.dp)))
-            .clickable(onClick = { onCalendarEvent(CalendarEvent.OnDateClick) })
+            .clickable(onClick = { onCalendarEvent(CalendarEvent.OnDateClick(date = session.date)) })
     ) {
         Text(
             text = day,
