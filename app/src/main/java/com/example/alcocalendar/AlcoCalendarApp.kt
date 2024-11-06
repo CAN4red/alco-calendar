@@ -53,7 +53,9 @@ fun AlcoCalendarApp(
         }
     }
     if (calendarState.isShowingSessionEditMenu) {
-        ModalBottomSheet(onDismissRequest = { onSessionFillingEvent(SessionFillingEvent.ConfirmSession) }) {
+        ModalBottomSheet(onDismissRequest = {
+            onSessionFillingEvent(SessionFillingEvent.DismissSession)
+        }) {
             Column {
                 Text(fillingSessionState.date.toString())
                 Text(fillingSessionState.date.toString())

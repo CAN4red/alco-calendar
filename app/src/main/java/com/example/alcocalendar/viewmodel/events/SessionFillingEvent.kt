@@ -11,4 +11,5 @@ sealed interface SessionFillingEvent {
     data class AddSpiritsDrink(val spirits: Spirits) : SessionFillingEvent
     data class AddOtherDrink(val otherDrink: OtherDrink) : SessionFillingEvent
     data object ConfirmSession : SessionFillingEvent
+    data object DismissSession : SessionFillingEvent
 }

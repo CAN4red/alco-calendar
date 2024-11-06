@@ -118,6 +118,14 @@ class CalendarViewModel(
                     )
                 }
             }
+
+            is SessionFillingEvent.DismissSession -> {
+                _calendarState.update { currentState ->
+                    currentState.copy(
+                        isShowingSessionEditMenu = false
+                    )
+                }
+            }
         }
     }
 
