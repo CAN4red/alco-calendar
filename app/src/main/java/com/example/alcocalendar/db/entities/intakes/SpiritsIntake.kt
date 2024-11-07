@@ -11,6 +11,7 @@ data class SpiritsIntake(
     @Embedded val tequila: Tequila = Tequila(),
     @Embedded val gin: Gin = Gin(),
     @Embedded val absinthe: Absinthe = Absinthe(),
+    @Embedded val liquor: Liquor = Liquor(),
     @Embedded val brandy: Brandy = Brandy()
 ) {
     val isEmpty: Boolean
@@ -32,6 +33,7 @@ data class SpiritsIntake(
             is Tequila -> this.copy(tequila = spirits)
             is Gin -> this.copy(gin = spirits)
             is Absinthe -> this.copy(absinthe = spirits)
+            is Liquor -> this.copy(liquor = spirits)
             is Brandy -> this.copy(brandy = spirits)
         }
     }
@@ -75,6 +77,11 @@ data class Gin(
 
 data class Absinthe(
     @ColumnInfo(name = "absinthe_liters")
+    override val liters: Double = 0.0
+) : Spirits
+
+data class Liquor(
+    @ColumnInfo(name = "liquor_liters")
     override val liters: Double = 0.0
 ) : Spirits
 

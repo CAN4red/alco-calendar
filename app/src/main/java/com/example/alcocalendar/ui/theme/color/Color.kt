@@ -1,4 +1,4 @@
-package com.example.alcocalendar.ui.theme
+package com.example.alcocalendar.ui.theme.color
 
 import androidx.compose.ui.graphics.Color
 
