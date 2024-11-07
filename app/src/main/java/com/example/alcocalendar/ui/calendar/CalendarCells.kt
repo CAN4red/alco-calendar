@@ -22,7 +22,7 @@ import java.time.format.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.alcocalendar.db.entities.DrinkingSession
-import com.example.alcocalendar.viewmodel.events.CalendarEvent
+import com.example.alcocalendar.ui.calendar.viewmodel.events.CalendarEvent
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter

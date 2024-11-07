@@ -11,7 +11,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.alcocalendar.model.MonthModel
 import com.example.alcocalendar.ui.calendar.DateCell
 import com.example.alcocalendar.ui.calendar.DatesGrid
-import com.example.alcocalendar.viewmodel.events.CalendarEvent
+import com.example.alcocalendar.ui.calendar.viewmodel.events.CalendarEvent
 import java.time.Month
 
 

@@ -14,20 +14,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.compose.rememberNavController
 import com.example.alcocalendar.db.DrinkingSessionDatabase
-import com.example.alcocalendar.db.entities.DrinkingSession
-import com.example.alcocalendar.db.entities.intakes.BeerIntake
-import com.example.alcocalendar.db.entities.intakes.Cider
-import com.example.alcocalendar.db.entities.intakes.Light
-import com.example.alcocalendar.db.entities.intakes.SpiritsIntake
-import com.example.alcocalendar.db.entities.intakes.Vodka
-import com.example.alcocalendar.viewmodel.CalendarViewModel
+import com.example.alcocalendar.ui.addsession.viewmodel.FillingSessionViewModel
+import com.example.alcocalendar.ui.calendar.viewmodel.CalendarViewModel
 import com.example.alcocalendar.ui.theme.AlcoCalendarTheme
-import kotlinx.coroutines.launch
-import java.time.LocalDate
-import java.time.Month
 
 
 class MainActivity : ComponentActivity() {
@@ -36,12 +27,19 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         val dao = DrinkingSessionDatabase.getInstance(this).drinkingSessionsDao
-        val viewModel: CalendarViewModel by viewModels {
+        val calendarViewModel: CalendarViewModel by viewModels {
             object : ViewModelProvider.Factory {
-                @RequiresApi(Build.VERSION_CODES.O)
                 @Suppress("UNCHECKED_CAST")
                 override fun <T : ViewModel> create(modelClass: Class<T>): T {
                     return CalendarViewModel(dao) as T
+                }
+            }
+        }
+        val fillingSessionViewModel: FillingSessionViewModel by viewModels {
+            object : ViewModelProvider.Factory {
+                @Suppress("UNCHECKED_CAST")
+                override fun <T: ViewModel> create(modelClass: Class<T>): T {
+                    return FillingSessionViewModel(dao) as T
                 }
             }
         }
@@ -49,8 +47,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
 
         setContent {
-            val calendarState by viewModel.calendarState.collectAsState()
-            val fillingSessionState by viewModel.fillingSessionState.collectAsState()
+            val calendarState by calendarViewModel.calendarState.collectAsState()
+            val fillingSessionState by fillingSessionViewModel.fillingSessionState.collectAsState()
 
             AlcoCalendarTheme {
                 val navController = rememberNavController()
@@ -58,8 +56,8 @@ class MainActivity : ComponentActivity() {
                     AlcoCalendarApp(
                         calendarState = calendarState,
                         fillingSessionState = fillingSessionState,
-                        onCalendarEvent = viewModel::onCalendarEvent,
-                        onSessionFillingEvent = viewModel::onSessionFillingEvent,
+                        onCalendarEvent = calendarViewModel::onCalendarEvent,
+                        onSessionFillingEvent = fillingSessionViewModel::onSessionFillingEvent,
                         navController = navController,
                         modifier = Modifier.padding(innerPadding)
                     )

@@ -8,9 +8,9 @@ import androidx.compose.foundation.pager.PagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
-import com.example.alcocalendar.viewmodel.events.CalendarEvent
-import com.example.alcocalendar.viewmodel.states.CalendarState
-import com.example.alcocalendar.viewmodel.states.IndexConverter
+import com.example.alcocalendar.ui.calendar.viewmodel.events.CalendarEvent
+import com.example.alcocalendar.ui.calendar.viewmodel.states.CalendarState
+import com.example.alcocalendar.ui.calendar.viewmodel.states.IndexConverter
 
 
 @RequiresApi(Build.VERSION_CODES.O)

@@ -1,4 +1,4 @@
-package com.example.alcocalendar.viewmodel.states
+package com.example.alcocalendar.ui.calendar.viewmodel.states
 
 import android.annotation.SuppressLint
 import android.os.Build
@@ -17,7 +17,6 @@ data class CalendarState(
     val startFromSunday: Boolean,
     val currentMonthIndex: Int = getInitialMonthIndex(),
     val currentYearIndex: Int = getInitialYearIndex(),
-    val isShowingSessionEditMenu: Boolean = false,
     val updateToggle: Boolean = true,
 ) {
     val yearsCount get() = calendarMap.size

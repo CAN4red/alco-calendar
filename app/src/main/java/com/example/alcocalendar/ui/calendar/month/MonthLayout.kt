@@ -10,9 +10,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.example.alcocalendar.ui.calendar.CalendarNavigationBar
-import com.example.alcocalendar.viewmodel.events.CalendarEvent
-import com.example.alcocalendar.viewmodel.events.SessionFillingEvent
-import com.example.alcocalendar.viewmodel.states.CalendarState
+import com.example.alcocalendar.ui.calendar.viewmodel.events.CalendarEvent
+import com.example.alcocalendar.ui.calendar.viewmodel.events.SessionFillingEvent
+import com.example.alcocalendar.ui.calendar.viewmodel.states.CalendarState
 
 
 @SuppressLint("NewApi")
