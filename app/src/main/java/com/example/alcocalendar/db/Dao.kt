@@ -8,6 +8,7 @@ import androidx.room.Query
 import androidx.room.Transaction
 import androidx.room.Update
 import com.example.alcocalendar.db.entities.DrinkingSession
+import java.time.LocalDate
 
 @Dao
 interface DrinkingSessionsDao {
@@ -20,6 +21,10 @@ interface DrinkingSessionsDao {
 
     @Delete
     suspend fun deleteDrinkingSession(drinkingSession: DrinkingSession)
+
+    @Transaction
+    @Query("SELECT * FROM drinking_sessions WHERE date = :date LIMIT 1")
+    suspend fun getDrinkingSession(date: LocalDate): DrinkingSession?
 
     @Transaction
     @Query("SELECT * FROM drinking_sessions")
