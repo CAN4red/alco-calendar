@@ -1,4 +1,4 @@
-package com.example.alcocalendar.ui.calendar
+package com.example.alcocalendar.ui.calendar.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row

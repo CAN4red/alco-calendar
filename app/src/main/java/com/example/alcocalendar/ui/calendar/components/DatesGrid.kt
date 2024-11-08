@@ -1,4 +1,4 @@
-package com.example.alcocalendar.ui.calendar
+package com.example.alcocalendar.ui.calendar.components
 
 import android.os.Build
 import androidx.annotation.RequiresApi

@@ -15,10 +15,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.alcocalendar.ui.calendar.SmallDateCell
+import com.example.alcocalendar.ui.calendar.components.SmallDateCell
 import com.example.alcocalendar.model.MonthModel
 import com.example.alcocalendar.model.YearModel
-import com.example.alcocalendar.ui.calendar.DatesGrid
+import com.example.alcocalendar.ui.calendar.components.DatesGrid
 import com.example.alcocalendar.ui.calendar.viewmodel.events.CalendarEvent
 import com.example.alcocalendar.ui.calendar.viewmodel.states.IndexConverter
 import java.time.Month
