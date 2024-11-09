@@ -40,6 +40,11 @@ data class CalendarState(
             ?.updateDrinkingSession(session)
     }
 
+    fun deleteSession(session: DrinkingSession) {
+        val emptySession = DrinkingSession(date = session.date)
+        this.updateSession(emptySession)
+    }
+
     val hasNextMonth: Boolean
         get() = hasNextYear || getMonthByIndex(currentMonthIndex).month != Month.DECEMBER
 

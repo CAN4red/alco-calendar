@@ -5,7 +5,6 @@ import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.alcocalendar.db.DrinkingSessionsDao
-import com.example.alcocalendar.db.entities.DrinkingSession
 import com.example.alcocalendar.model.YearModel
 import kotlinx.collections.immutable.toImmutableMap
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -63,7 +62,7 @@ class CalendarViewModel(
 
             is CalendarEvent.DeleteDrinkingSession -> {
                 _calendarState.update { currentState ->
-                    currentState.updateSession(DrinkingSession(event.session.date))
+                    currentState.deleteSession(event.session)
                     currentState.copy(updateToggle = !currentState.updateToggle)
                 }
             }
