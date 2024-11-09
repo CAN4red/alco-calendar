@@ -104,13 +104,24 @@ fun ChooseCategoryScreen(
 
         Button(
             onClick = {
-                navigateBack()
                 onFillingSessionEvent(FillingSessionEvent.ConfirmSession)
                 onCalendarEvent(CalendarEvent.UpdateDrinkingSession(fillingSessionState))
+                navigateBack()
             },
             modifier = Modifier.align(Alignment.CenterHorizontally)
         ) {
             Text(text = "Confirm Session")
+        }
+
+        Button(
+            onClick = {
+                onFillingSessionEvent(FillingSessionEvent.DeleteSession)
+                onCalendarEvent(CalendarEvent.DeleteDrinkingSession(fillingSessionState))
+                navigateBack()
+            },
+            modifier = Modifier.align(Alignment.CenterHorizontally)
+        ) {
+            Text(text = "Delete Session")
         }
     }
 }

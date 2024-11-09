@@ -15,7 +15,7 @@ import java.time.LocalDate
 @RequiresApi(Build.VERSION_CODES.O)
 class FillingSessionViewModel(
     private val dao: DrinkingSessionsDao,
-): ViewModel() {
+) : ViewModel() {
     private val _fillingSessionState: MutableStateFlow<DrinkingSession> = MutableStateFlow(
         DrinkingSession(date = LocalDate.now())
     )
@@ -62,11 +62,22 @@ class FillingSessionViewModel(
             }
 
             is FillingSessionEvent.ConfirmSession -> {
-                viewModelScope.launch { dao.insertDrinkingSession(_fillingSessionState.value) }
+                viewModelScope.launch {
+                    dao.insertDrinkingSession(_fillingSessionState.value)
+                }
             }
 
-            is FillingSessionEvent.DismissSession -> {
+            is FillingSessionEvent.CancelSession -> {
 
+            }
+
+            is FillingSessionEvent.DeleteSession -> {
+                viewModelScope.launch {
+                    dao.deleteDrinkingSession(_fillingSessionState.value)
+                }
+                _fillingSessionState.update { currentState ->
+                    DrinkingSession(date = currentState.date)
+                }
             }
         }
     }

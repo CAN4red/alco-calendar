@@ -92,4 +92,7 @@ dependencies {
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
     implementation(kotlin("script-runtime"))
+
+    // Mutex
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
 }
