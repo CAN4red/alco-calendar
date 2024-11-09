@@ -17,7 +17,8 @@ import com.example.alcocalendar.ui.theme.color.DrinkColor
 
 @Composable
 fun AddWineScreen(
-    onEvent: (FillingSessionEvent) -> Unit,
+    onFillingSessionEvent: (FillingSessionEvent) -> Unit,
+    navigateBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     AddDrinkScreen(
@@ -28,7 +29,8 @@ fun AddWineScreen(
                 titleColor = Color.White,
                 backgroundColor = DrinkColor.WineRed,
                 onClick = {
-                    onEvent(FillingSessionEvent.AddWineDrink(Red(1.0)))
+                    onFillingSessionEvent(FillingSessionEvent.AddWineDrink(Red(1.0)))
+                    navigateBack()
                 },
                 modifier = buttonModifier
             )
@@ -40,7 +42,8 @@ fun AddWineScreen(
                 titleColor = Color.Black,
                 backgroundColor = DrinkColor.WineWhite,
                 onClick = {
-                    onEvent(FillingSessionEvent.AddWineDrink(White(1.0)))
+                    onFillingSessionEvent(FillingSessionEvent.AddWineDrink(White(1.0)))
+                    navigateBack()
                 },
                 modifier = buttonModifier
             )
@@ -52,7 +55,8 @@ fun AddWineScreen(
                 titleColor = Color.Black,
                 backgroundColor = DrinkColor.WineChampagne,
                 onClick = {
-                    onEvent(FillingSessionEvent.AddWineDrink(Champagne(1.0)))
+                    onFillingSessionEvent(FillingSessionEvent.AddWineDrink(Champagne(1.0)))
+                    navigateBack()
                 },
                 modifier = buttonModifier
             )
@@ -64,7 +68,8 @@ fun AddWineScreen(
                 titleColor = Color.Black,
                 backgroundColor = DrinkColor.WineRose,
                 onClick = {
-                    onEvent(FillingSessionEvent.AddWineDrink(Rose(1.0)))
+                    onFillingSessionEvent(FillingSessionEvent.AddWineDrink(Rose(1.0)))
+                    navigateBack()
                 },
                 modifier = buttonModifier
             )
@@ -76,7 +81,8 @@ fun AddWineScreen(
                 titleColor = Color.White,
                 backgroundColor = DrinkColor.WinePort,
                 onClick = {
-                    onEvent(FillingSessionEvent.AddWineDrink(Port(1.0)))
+                    onFillingSessionEvent(FillingSessionEvent.AddWineDrink(Port(1.0)))
+                    navigateBack()
                 },
                 modifier = buttonModifier
             )
@@ -88,7 +94,8 @@ fun AddWineScreen(
                 titleColor = Color.Black,
                 backgroundColor = DrinkColor.WineVermouth,
                 onClick = {
-                    onEvent(FillingSessionEvent.AddWineDrink(Vermouth(1.0)))
+                    onFillingSessionEvent(FillingSessionEvent.AddWineDrink(Vermouth(1.0)))
+                    navigateBack()
                 },
                 modifier = buttonModifier
             )
@@ -103,7 +110,8 @@ fun AddWineScreen(
 @Preview
 private fun AddWineScreenPreview() {
     AddWineScreen(
-        onEvent = {},
+        onFillingSessionEvent = {},
+        navigateBack = {},
         modifier = Modifier.fillMaxSize()
     )
 }

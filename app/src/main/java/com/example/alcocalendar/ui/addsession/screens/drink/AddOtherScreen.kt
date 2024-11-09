@@ -14,7 +14,8 @@ import com.example.alcocalendar.ui.theme.color.DrinkColor
 
 @Composable
 fun AddOtherScreen(
-    onEvent: (FillingSessionEvent) -> Unit,
+    onFillingSessionEvent: (FillingSessionEvent) -> Unit,
+    navigateBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     AddDrinkScreen(
@@ -25,7 +26,8 @@ fun AddOtherScreen(
                 titleColor = Color.White,
                 backgroundColor = DrinkColor.OtherCocktails,
                 onClick = {
-                    onEvent(FillingSessionEvent.AddOtherDrink(Cocktails(1.0)))
+                    onFillingSessionEvent(FillingSessionEvent.AddOtherDrink(Cocktails(1.0)))
+                    navigateBack()
                 },
                 modifier = buttonModifier
             )
@@ -37,7 +39,8 @@ fun AddOtherScreen(
                 titleColor = Color.Black,
                 backgroundColor = DrinkColor.OtherShots,
                 onClick = {
-                    onEvent(FillingSessionEvent.AddOtherDrink(Shots(1.0)))
+                    onFillingSessionEvent(FillingSessionEvent.AddOtherDrink(Shots(1.0)))
+                    navigateBack()
                 },
                 modifier = buttonModifier
             )
@@ -49,7 +52,8 @@ fun AddOtherScreen(
                 titleColor = Color.Black,
                 backgroundColor = DrinkColor.OtherMoonshine,
                 onClick = {
-                    onEvent(FillingSessionEvent.AddOtherDrink(Moonshine(1.0)))
+                    onFillingSessionEvent(FillingSessionEvent.AddOtherDrink(Moonshine(1.0)))
+                    navigateBack()
                 },
                 modifier = buttonModifier
             )
@@ -63,7 +67,8 @@ fun AddOtherScreen(
 @Preview
 private fun AddOtherScreenPreview() {
     AddOtherScreen(
-        onEvent = {},
+        onFillingSessionEvent = {},
+        navigateBack = {},
         modifier = Modifier.fillMaxSize()
     )
 }

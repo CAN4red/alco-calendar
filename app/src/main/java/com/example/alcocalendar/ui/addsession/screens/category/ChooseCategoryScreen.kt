@@ -5,9 +5,9 @@ import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -18,22 +18,31 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.alcocalendar.R
+import com.example.alcocalendar.db.entities.DrinkingSession
 import com.example.alcocalendar.ui.addsession.components.CategoryCard
+import com.example.alcocalendar.ui.addsession.viewmodel.FillingSessionEvent
+import com.example.alcocalendar.ui.calendar.viewmodel.CalendarEvent
 import com.example.alcocalendar.ui.theme.color.DrinkColor
 import java.time.LocalDate
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun ChooseCategoryScreen(
-    date: LocalDate,
+    fillingSessionState: DrinkingSession,
+    onFillingSessionEvent: (FillingSessionEvent) -> Unit,
+    onCalendarEvent: (CalendarEvent) -> Unit,
     onBeerClick: () -> Unit,
     onWineClick: () -> Unit,
     onSpiritsClick: () -> Unit,
     onOtherClick: () -> Unit,
+    navigateBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
 
-    val title = "${date.dayOfMonth} ${date.month} ${date.year}"
+    val title =
+        "${fillingSessionState.date.dayOfMonth} " +
+                "${fillingSessionState.date.month} " +
+                "${fillingSessionState.date.year}"
 
     Column(
         modifier = modifier
@@ -47,7 +56,6 @@ fun ChooseCategoryScreen(
 
         LazyColumn(
             contentPadding = PaddingValues(16.dp),
-            modifier = Modifier.fillMaxSize()
         ) {
             item {
                 CategoryCard(
@@ -93,6 +101,17 @@ fun ChooseCategoryScreen(
                 )
             }
         }
+
+        Button(
+            onClick = {
+                navigateBack()
+                onFillingSessionEvent(FillingSessionEvent.ConfirmSession)
+                onCalendarEvent(CalendarEvent.UpdateDrinkingSession(fillingSessionState))
+            },
+            modifier = Modifier.align(Alignment.CenterHorizontally)
+        ) {
+            Text(text = "Confirm Session")
+        }
     }
 }
 
@@ -101,11 +120,14 @@ fun ChooseCategoryScreen(
 @Preview
 private fun ChooseCategoryScreenPreview() {
     ChooseCategoryScreen(
-        date = LocalDate.now(),
+        fillingSessionState = DrinkingSession(LocalDate.now()),
+        onFillingSessionEvent = {},
+        onCalendarEvent = {},
         onBeerClick = {},
         onWineClick = {},
         onSpiritsClick = {},
         onOtherClick = {},
+        navigateBack = {},
         modifier = Modifier.fillMaxSize()
     )
 }

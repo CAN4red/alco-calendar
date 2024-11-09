@@ -6,9 +6,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import com.example.alcocalendar.ui.addsession.viewmodel.FillingSessionEvent
 import com.example.alcocalendar.ui.calendar.components.CalendarNavigationBar
 import com.example.alcocalendar.ui.calendar.viewmodel.CalendarEvent
 import com.example.alcocalendar.ui.calendar.viewmodel.CalendarState
+import java.time.LocalDate
 
 
 @SuppressLint("NewApi")
@@ -16,6 +18,8 @@ import com.example.alcocalendar.ui.calendar.viewmodel.CalendarState
 fun MonthLayout(
     calendarState: CalendarState,
     onCalendarEvent: (CalendarEvent) -> Unit,
+    onFillingSessionEvent: (FillingSessionEvent) -> Unit,
+    navigateToCategoryScreen: () -> Unit,
     navigateToYear: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -48,6 +52,8 @@ fun MonthLayout(
             calendarState = calendarState,
             pagerState = pagerState,
             onCalendarEvent = onCalendarEvent,
+            onFillingSessionEvent = onFillingSessionEvent,
+            navigateToCategoryScreen = navigateToCategoryScreen,
             modifier = Modifier.fillMaxWidth()
         )
     }

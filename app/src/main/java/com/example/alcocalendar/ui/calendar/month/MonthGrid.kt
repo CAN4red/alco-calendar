@@ -9,9 +9,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.alcocalendar.model.MonthModel
+import com.example.alcocalendar.ui.addsession.viewmodel.FillingSessionEvent
 import com.example.alcocalendar.ui.calendar.components.DateCell
 import com.example.alcocalendar.ui.calendar.components.DatesGrid
 import com.example.alcocalendar.ui.calendar.viewmodel.CalendarEvent
+import java.time.LocalDate
 import java.time.Month
 
 
@@ -19,7 +21,8 @@ import java.time.Month
 @Composable
 fun MonthGrid(
     monthModel: MonthModel,
-    onCalendarEvent: (CalendarEvent) -> Unit,
+    onFillingSessionEvent: (FillingSessionEvent) -> Unit,
+    navigateToCategoryScreen: () -> Unit,
     startFromSunday: Boolean,
     modifier: Modifier = Modifier,
 ) {
@@ -30,7 +33,15 @@ fun MonthGrid(
             monthModel = monthModel,
             startFromSunday = startFromSunday,
             showDaysOfWeek = true,
-            dateCell = { session -> DateCell(session = session, onCalendarEvent = onCalendarEvent) },
+            dateCell = { session ->
+                DateCell(
+                    session = session,
+                    onClick = {
+                        onFillingSessionEvent(FillingSessionEvent.InitNewSession(session.date))
+                        navigateToCategoryScreen()
+                    }
+                )
+            },
             modifier = Modifier.fillMaxWidth()
         )
     }
@@ -43,7 +54,8 @@ fun MonthGrid(
 fun MonthGridPreview() {
     MonthGrid(
         monthModel = MonthModel(2024, Month.AUGUST),
-        onCalendarEvent = {},
+        onFillingSessionEvent = {},
+        navigateToCategoryScreen = {},
         startFromSunday = false,
         modifier = Modifier.background(color = Color.White)
     )

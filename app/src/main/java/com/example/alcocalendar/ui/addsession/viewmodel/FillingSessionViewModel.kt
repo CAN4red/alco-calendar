@@ -62,7 +62,7 @@ class FillingSessionViewModel(
             }
 
             is FillingSessionEvent.ConfirmSession -> {
-
+                viewModelScope.launch { dao.insertDrinkingSession(_fillingSessionState.value) }
             }
 
             is FillingSessionEvent.DismissSession -> {

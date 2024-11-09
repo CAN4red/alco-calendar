@@ -33,7 +33,7 @@ import java.util.Locale
 @Composable
 fun DateCell(
     session: DrinkingSession,
-    onCalendarEvent: (CalendarEvent) -> Unit,
+    onClick: (LocalDate) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val day = session.date.formatToStringDay()
@@ -51,7 +51,7 @@ fun DateCell(
                 color = color
             )
             .clip(RoundedCornerShape(CornerSize(8.dp)))
-            .clickable(onClick = { onCalendarEvent(CalendarEvent.OnDateClick(date = session.date)) })
+            .clickable(onClick = { onClick(session.date) })
     ) {
         Text(
             text = day,
@@ -153,7 +153,7 @@ fun getDayOfWeekAbbreviation(
 fun DateCellPreview() {
     DateCell(
         session = DrinkingSession(LocalDate.now()),
-        onCalendarEvent = {}
+        onClick = {}
     )
 }
 

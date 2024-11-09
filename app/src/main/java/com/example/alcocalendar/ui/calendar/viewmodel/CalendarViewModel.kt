@@ -38,7 +38,7 @@ class CalendarViewModel(
     fun onCalendarEvent(event: CalendarEvent) {
         when (event) {
             is CalendarEvent.ChangeMonth -> {
-                _calendarState.update { currentState ->
+                 _calendarState.update { currentState ->
                     currentState.copy(
                         currentMonthIndex = event.monthIndex,
                     )
@@ -53,8 +53,11 @@ class CalendarViewModel(
                 }
             }
 
-            is CalendarEvent.OnDateClick -> {
-
+            is CalendarEvent.UpdateDrinkingSession -> {
+                _calendarState.update { currentState ->
+                    currentState.updateSession(event.session)
+                    currentState.copy(updateToggle = !currentState.updateToggle)
+                }
             }
         }
     }

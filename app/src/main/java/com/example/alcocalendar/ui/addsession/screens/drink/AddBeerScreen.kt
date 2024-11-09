@@ -17,7 +17,8 @@ import com.example.alcocalendar.ui.theme.color.DrinkColor
 
 @Composable
 fun AddBeerScreen(
-    onEvent: (FillingSessionEvent) -> Unit,
+    onFillingSessionEvent: (FillingSessionEvent) -> Unit,
+    navigateBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     AddDrinkScreen(
@@ -28,7 +29,8 @@ fun AddBeerScreen(
                 titleColor = Color.Black,
                 backgroundColor = DrinkColor.BeerLight,
                 onClick = {
-                    onEvent(FillingSessionEvent.AddBeerDrink(Light(1.0)))
+                    onFillingSessionEvent(FillingSessionEvent.AddBeerDrink(Light(1.0)))
+                    navigateBack()
                 },
                 modifier = buttonModifier
             )
@@ -40,7 +42,8 @@ fun AddBeerScreen(
                 titleColor = Color.White,
                 backgroundColor = DrinkColor.BeerDark,
                 onClick = {
-                    onEvent(FillingSessionEvent.AddBeerDrink(Dark(1.0)))
+                    onFillingSessionEvent(FillingSessionEvent.AddBeerDrink(Dark(1.0)))
+                    navigateBack()
                 },
                 modifier = buttonModifier
             )
@@ -52,7 +55,8 @@ fun AddBeerScreen(
                 titleColor = Color.Black,
                 backgroundColor = DrinkColor.BeerCider,
                 onClick = {
-                    onEvent(FillingSessionEvent.AddBeerDrink(Cider(1.0)))
+                    onFillingSessionEvent(FillingSessionEvent.AddBeerDrink(Cider(1.0)))
+                    navigateBack()
                 },
                 modifier = buttonModifier
             )
@@ -64,7 +68,8 @@ fun AddBeerScreen(
                 titleColor = Color.Black,
                 backgroundColor = DrinkColor.BeerUnfiltered,
                 onClick = {
-                    onEvent(FillingSessionEvent.AddBeerDrink(Unfiltered(1.0)))
+                    onFillingSessionEvent(FillingSessionEvent.AddBeerDrink(Unfiltered(1.0)))
+                    navigateBack()
                 },
                 modifier = buttonModifier
             )
@@ -76,7 +81,8 @@ fun AddBeerScreen(
                 titleColor = Color.Black,
                 backgroundColor = DrinkColor.BeerEl,
                 onClick = {
-                    onEvent(FillingSessionEvent.AddBeerDrink(El(1.0)))
+                    onFillingSessionEvent(FillingSessionEvent.AddBeerDrink(El(1.0)))
+                    navigateBack()
                 },
                 modifier = buttonModifier
             )
@@ -90,7 +96,8 @@ fun AddBeerScreen(
 @Preview
 private fun AddBeerScreenPreview() {
     AddBeerScreen(
-        onEvent = {},
+        onFillingSessionEvent = {},
+        navigateBack = {},
         modifier = Modifier.fillMaxSize()
     )
 }
