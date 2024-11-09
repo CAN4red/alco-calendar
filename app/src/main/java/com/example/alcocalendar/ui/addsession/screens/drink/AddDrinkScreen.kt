@@ -1,4 +1,4 @@
-package com.example.alcocalendar.ui.addsession.screen
+package com.example.alcocalendar.ui.addsession.screens.drink
 
 
 import androidx.compose.foundation.layout.PaddingValues

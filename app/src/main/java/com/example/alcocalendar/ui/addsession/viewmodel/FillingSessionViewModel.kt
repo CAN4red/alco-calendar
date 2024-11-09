@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.alcocalendar.db.DrinkingSessionsDao
 import com.example.alcocalendar.db.entities.DrinkingSession
-import com.example.alcocalendar.ui.calendar.viewmodel.events.FillingSessionEvent
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update

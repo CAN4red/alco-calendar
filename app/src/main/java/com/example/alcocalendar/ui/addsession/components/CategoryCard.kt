@@ -33,7 +33,7 @@ fun CategoryCard(
     title: String,
     @DrawableRes iconId: Int,
     iconColor: Color,
-    color: Color,
+    backgroundIconColor: Color,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -54,7 +54,7 @@ fun CategoryCard(
                 title = title,
                 iconId = iconId,
                 iconColor = iconColor,
-                color = color
+                color = backgroundIconColor
             )
             Text(
                 text = title,
@@ -96,7 +96,7 @@ private fun CategoryButtonPreview() {
         title = "Beer",
         iconId = R.drawable.beer_category,
         iconColor = DrinkColor.BeerDark,
-        color = DrinkColor.BeerLight,
+        backgroundIconColor = DrinkColor.BeerLight,
         onClick = {},
         modifier = Modifier.fillMaxWidth()
     )

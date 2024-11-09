@@ -6,8 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.alcocalendar.db.DrinkingSessionsDao
 import com.example.alcocalendar.model.YearModel
-import com.example.alcocalendar.ui.calendar.viewmodel.events.CalendarEvent
-import com.example.alcocalendar.ui.calendar.viewmodel.states.CalendarState
 import kotlinx.collections.immutable.toImmutableMap
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

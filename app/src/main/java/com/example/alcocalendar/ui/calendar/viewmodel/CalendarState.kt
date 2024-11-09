@@ -1,4 +1,4 @@
-package com.example.alcocalendar.ui.calendar.viewmodel.states
+package com.example.alcocalendar.ui.calendar.viewmodel
 
 import android.annotation.SuppressLint
 import android.os.Build

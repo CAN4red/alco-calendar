@@ -19,8 +19,8 @@ import com.example.alcocalendar.ui.calendar.components.SmallDateCell
 import com.example.alcocalendar.model.MonthModel
 import com.example.alcocalendar.model.YearModel
 import com.example.alcocalendar.ui.calendar.components.DatesGrid
-import com.example.alcocalendar.ui.calendar.viewmodel.events.CalendarEvent
-import com.example.alcocalendar.ui.calendar.viewmodel.states.IndexConverter
+import com.example.alcocalendar.ui.calendar.viewmodel.CalendarEvent
+import com.example.alcocalendar.ui.calendar.viewmodel.IndexConverter
 import java.time.Month
 
 

@@ -1,4 +1,4 @@
-package com.example.alcocalendar.ui.addsession.screen
+package com.example.alcocalendar.ui.addsession.screens.drink
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
@@ -9,7 +9,7 @@ import com.example.alcocalendar.db.entities.intakes.Cocktails
 import com.example.alcocalendar.db.entities.intakes.Moonshine
 import com.example.alcocalendar.db.entities.intakes.Shots
 import com.example.alcocalendar.ui.addsession.components.AddDrinkButton
-import com.example.alcocalendar.ui.calendar.viewmodel.events.FillingSessionEvent
+import com.example.alcocalendar.ui.addsession.viewmodel.FillingSessionEvent
 import com.example.alcocalendar.ui.theme.color.DrinkColor
 
 @Composable

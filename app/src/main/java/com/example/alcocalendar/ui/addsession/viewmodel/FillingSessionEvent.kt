@@ -1,4 +1,4 @@
-package com.example.alcocalendar.ui.calendar.viewmodel.events
+package com.example.alcocalendar.ui.addsession.viewmodel
 
 import com.example.alcocalendar.db.entities.intakes.Beer
 import com.example.alcocalendar.db.entities.intakes.OtherDrink
