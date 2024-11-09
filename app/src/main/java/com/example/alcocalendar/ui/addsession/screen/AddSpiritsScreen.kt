@@ -7,16 +7,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.alcocalendar.db.entities.intakes.Absinthe
 import com.example.alcocalendar.db.entities.intakes.Brandy
-import com.example.alcocalendar.db.entities.intakes.Cider
 import com.example.alcocalendar.db.entities.intakes.Cognac
-import com.example.alcocalendar.db.entities.intakes.Dark
-import com.example.alcocalendar.db.entities.intakes.El
 import com.example.alcocalendar.db.entities.intakes.Gin
-import com.example.alcocalendar.db.entities.intakes.Light
 import com.example.alcocalendar.db.entities.intakes.Liquor
 import com.example.alcocalendar.db.entities.intakes.Rum
 import com.example.alcocalendar.db.entities.intakes.Tequila
-import com.example.alcocalendar.db.entities.intakes.Unfiltered
 import com.example.alcocalendar.db.entities.intakes.Vodka
 import com.example.alcocalendar.db.entities.intakes.Whiskey
 import com.example.alcocalendar.ui.addsession.components.AddDrinkButton
