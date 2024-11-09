@@ -12,7 +12,7 @@ data object DrinkColor {
     val WineRed = Color(0xFF9A0C24)
     val WineWhite = Color(0xFFF7E7B6)
     val WineChampagne = Color(0xFFF3DF8F)
-    val WinePink = Color(0xFFFE9278)
+    val WineRose = Color(0xFFFE9278)
     val WinePort = Color(0xFF461E1F)
     val WineVermouth = Color(0xFFC8CA98)
 
