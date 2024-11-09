@@ -1,7 +1,6 @@
 package com.example.alcocalendar
 
 import android.annotation.SuppressLint
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -11,7 +10,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.alcocalendar.db.entities.DrinkingSession
 import com.example.alcocalendar.ui.calendar.month.MonthLayout
 import com.example.alcocalendar.ui.calendar.viewmodel.events.CalendarEvent
-import com.example.alcocalendar.ui.calendar.viewmodel.events.SessionFillingEvent
+import com.example.alcocalendar.ui.calendar.viewmodel.events.FillingSessionEvent
 import com.example.alcocalendar.ui.calendar.viewmodel.states.CalendarState
 import com.example.alcocalendar.ui.calendar.year.YearLayout
 import com.example.alcocalendar.ui.navigation.CalendarScreen
@@ -22,7 +21,7 @@ fun AlcoCalendarApp(
     calendarState: CalendarState,
     fillingSessionState: DrinkingSession,
     onCalendarEvent: (CalendarEvent) -> Unit,
-    onSessionFillingEvent: (SessionFillingEvent) -> Unit,
+    onSessionFillingEvent: (FillingSessionEvent) -> Unit,
     navController: NavHostController = rememberNavController(),
     @SuppressLint("ModifierParameter") modifier: Modifier = Modifier,
 ) {

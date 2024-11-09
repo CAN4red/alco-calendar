@@ -5,20 +5,14 @@ import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.alcocalendar.db.DrinkingSessionsDao
-import com.example.alcocalendar.db.entities.DrinkingSession
 import com.example.alcocalendar.model.YearModel
 import com.example.alcocalendar.ui.calendar.viewmodel.events.CalendarEvent
-import com.example.alcocalendar.ui.calendar.viewmodel.events.SessionFillingEvent
 import com.example.alcocalendar.ui.calendar.viewmodel.states.CalendarState
 import kotlinx.collections.immutable.toImmutableMap
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import java.lang.Thread.sleep
-import java.time.LocalDate
 
 
 @RequiresApi(Build.VERSION_CODES.O)

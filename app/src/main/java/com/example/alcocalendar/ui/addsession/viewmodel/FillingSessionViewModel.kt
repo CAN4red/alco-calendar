@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.alcocalendar.db.DrinkingSessionsDao
 import com.example.alcocalendar.db.entities.DrinkingSession
-import com.example.alcocalendar.ui.calendar.viewmodel.events.SessionFillingEvent
+import com.example.alcocalendar.ui.calendar.viewmodel.events.FillingSessionEvent
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -23,9 +23,9 @@ class FillingSessionViewModel(
     val fillingSessionState: StateFlow<DrinkingSession>
         get() = _fillingSessionState
 
-    fun onSessionFillingEvent(event: SessionFillingEvent) {
+    fun onSessionFillingEvent(event: FillingSessionEvent) {
         when (event) {
-            is SessionFillingEvent.InitNewSession -> {
+            is FillingSessionEvent.InitNewSession -> {
                 _fillingSessionState.update {
                     DrinkingSession(date = event.date)
                 }
@@ -34,39 +34,39 @@ class FillingSessionViewModel(
                 }
             }
 
-            is SessionFillingEvent.AddBeerDrink -> {
+            is FillingSessionEvent.AddBeerDrink -> {
                 _fillingSessionState.update { currentState ->
                     val updatedBeerIntake = currentState.beerIntake.update(event.beer)
                     currentState.copy(beerIntake = updatedBeerIntake)
                 }
             }
 
-            is SessionFillingEvent.AddWineDrink -> {
+            is FillingSessionEvent.AddWineDrink -> {
                 _fillingSessionState.update { currentState ->
                     val updatedWineIntake = currentState.wineIntake.update(event.wine)
                     currentState.copy(wineIntake = updatedWineIntake)
                 }
             }
 
-            is SessionFillingEvent.AddSpiritsDrink -> {
+            is FillingSessionEvent.AddSpiritsDrink -> {
                 _fillingSessionState.update { currentState ->
                     val updatedSpiritsIntake = currentState.spiritsIntake.update(event.spirits)
                     currentState.copy(spiritsIntake = updatedSpiritsIntake)
                 }
             }
 
-            is SessionFillingEvent.AddOtherDrink -> {
+            is FillingSessionEvent.AddOtherDrink -> {
                 _fillingSessionState.update { currentState ->
                     val updatedOtherIntake = currentState.otherIntake.update(event.otherDrink)
                     currentState.copy(otherIntake = updatedOtherIntake)
                 }
             }
 
-            is SessionFillingEvent.ConfirmSession -> {
+            is FillingSessionEvent.ConfirmSession -> {
 
             }
 
-            is SessionFillingEvent.DismissSession -> {
+            is FillingSessionEvent.DismissSession -> {
 
             }
         }

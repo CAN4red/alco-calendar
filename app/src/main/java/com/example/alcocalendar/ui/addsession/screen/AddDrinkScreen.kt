@@ -23,7 +23,7 @@ fun AddDrinkScreen(
         modifier = modifier
     ) {
         addDrinkButtons.forEach { button ->
-            item { button(Modifier.padding(vertical = 8.dp)) }
+            item { button(Modifier.padding(bottom = 16.dp)) }
         }
     }
 }
