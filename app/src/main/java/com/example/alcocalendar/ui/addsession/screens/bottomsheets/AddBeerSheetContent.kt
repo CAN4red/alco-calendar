@@ -8,6 +8,7 @@ import androidx.compose.material.Button
 //noinspection UsingMaterialAndMaterial3Libraries
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableDoubleStateOf
 import androidx.compose.runtime.remember
@@ -25,6 +26,10 @@ fun AddBeerSheetContent(
 ) {
     var intakeFillingState by remember {
         mutableDoubleStateOf(initialIntake.liters)
+    }
+
+    LaunchedEffect(initialIntake) {
+        intakeFillingState = initialIntake.liters
     }
 
     val increaseIntakeButtons = listOf<@Composable () -> Unit>(
