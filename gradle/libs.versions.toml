@@ -1,5 +1,4 @@
 [versions]
-accompanistFlowlayout = "0.24.13-alpha"
 agp = "8.5.2"
 kotlin = "2.0.0"
 ksp = "2.0.21-1.0.25"
@@ -20,7 +19,6 @@ navigation = "2.8.3"
 roomRuntime = "2.6.1"
 
 [libraries]
-accompanist-flowlayout = { module = "com.google.accompanist:accompanist-flowlayout", version.ref = "accompanistFlowlayout" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomRuntime" }
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomRuntime" }

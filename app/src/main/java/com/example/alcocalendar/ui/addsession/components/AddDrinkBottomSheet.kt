@@ -19,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.alcocalendar.ui.addsession.screens.bottomsheets.SheetContent
 import com.example.alcocalendar.ui.addsession.screens.columns.AddBeerScreen
 
 @Composable
@@ -32,45 +33,12 @@ fun AddDrinkBottomSheet(
     }
 }
 
-@OptIn(ExperimentalLayoutApi::class)
-@Composable
-private fun SheetContent(
-    intakeValue: String,
-    onIntakeChange: (String) -> Unit,
-    onConfirmClick: () -> Unit,
-    vararg increaseIntakeButtons: @Composable () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Column(modifier = modifier.fillMaxSize()) {
-        TextField(
-            value = intakeValue,
-            onValueChange = onIntakeChange,
-            keyboardOptions = KeyboardOptions.Default.copy(
-                keyboardType = KeyboardType.Number
-            ),
-        )
-        FlowRow(
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            increaseIntakeButtons.forEach { increaseIntakeButton ->
-                increaseIntakeButton()
-            }
-        }
-
-        Button(
-            onClick = onConfirmClick,
-        ) {
-            Text("Confirm")
-        }
-    }
-}
-
 @Composable
 @Preview
 private fun AddDrinkBottomSheetPreview() {
     AddDrinkBottomSheet(
         sheetContent = {
-            SheetContent(intakeValue = "", onIntakeChange = {}, onConfirmClick = {}, { Button(onClick = { /*TODO*/ }) {Text("Lol")} })
+            SheetContent(intakeValue = 0.0, onIntakeChange = {}, onConfirmClick = {}, { Button(onClick = { /*TODO*/ }) {Text("Lol")} })
         },
         screenContent = { AddBeerScreen(onFillingSessionEvent = {}, navigateBack = { /*TODO*/ }) }
     )

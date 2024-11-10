@@ -7,12 +7,12 @@ plugins {
 
 android {
     namespace = "com.example.alcocalendar"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.alcocalendar"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -92,7 +92,4 @@ dependencies {
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
     implementation(kotlin("script-runtime"))
-
-    // FlowRow
-    implementation(libs.accompanist.flowlayout)
 }
