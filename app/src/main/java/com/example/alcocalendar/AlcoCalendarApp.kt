@@ -10,8 +10,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.alcocalendar.db.entities.DrinkingSession
+import com.example.alcocalendar.ui.addsession.screens.AddBeerScreen
 import com.example.alcocalendar.ui.addsession.screens.category.ChooseCategoryScreen
-import com.example.alcocalendar.ui.addsession.screens.columns.AddBeerScreen
+import com.example.alcocalendar.ui.addsession.screens.columns.AddBeerColumn
 import com.example.alcocalendar.ui.addsession.screens.columns.AddOtherScreen
 import com.example.alcocalendar.ui.addsession.screens.columns.AddSpiritsScreen
 import com.example.alcocalendar.ui.addsession.screens.columns.AddWineScreen
@@ -70,8 +71,9 @@ fun AlcoCalendarApp(
         }
         composable(route = CalendarScreen.AddBeer.name) {
             AddBeerScreen(
+                fillingSessionState = fillingSessionState,
                 onFillingSessionEvent = onFillingSessionEvent,
-                navigateBack = { navController.navigateUp() },
+                navigateBack = { navController.navigateUp() }
             )
         }
         composable(route = CalendarScreen.AddWine.name) {

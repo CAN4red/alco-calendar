@@ -15,7 +15,7 @@ import com.example.alcocalendar.db.entities.intakes.Tequila
 import com.example.alcocalendar.db.entities.intakes.Vodka
 import com.example.alcocalendar.db.entities.intakes.Whiskey
 import com.example.alcocalendar.ui.addsession.components.AddDrinkButton
-import com.example.alcocalendar.ui.addsession.components.AddDrinkScreen
+import com.example.alcocalendar.ui.addsession.components.AddDrinkColumn
 import com.example.alcocalendar.ui.addsession.viewmodel.FillingSessionEvent
 import com.example.alcocalendar.ui.theme.color.DrinkColor
 
@@ -25,7 +25,7 @@ fun AddSpiritsScreen(
     navigateBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    AddDrinkScreen(
+    AddDrinkColumn(
 
         { buttonModifier ->
             AddDrinkButton(

@@ -32,6 +32,16 @@ sealed interface Beer {
     val liters: Double
     val isEmpty: Boolean
         get() = liters == 0.0
+
+    fun genericCopy(liters: Double): Beer {
+        return when (this) {
+            is Light -> this.copy(liters = liters)
+            is Dark -> this.copy(liters = liters)
+            is Cider -> this.copy(liters = liters)
+            is Unfiltered -> this.copy(liters = liters)
+            is El -> this.copy(liters = liters)
+        }
+    }
 }
 
 data class Light(

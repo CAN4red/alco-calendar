@@ -1,55 +1,26 @@
 package com.example.alcocalendar.ui.addsession.components
 
-
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.layout.ColumnScope
+//noinspection UsingMaterialAndMaterial3Libraries
+import androidx.compose.material.ModalBottomSheetLayout
+import androidx.compose.material.ModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import com.example.alcocalendar.ui.theme.color.DrinkColor
+import com.example.alcocalendar.ui.addsession.screens.bottomsheets.SheetContent
+import com.example.alcocalendar.ui.addsession.screens.columns.AddBeerColumn
 
 @Composable
 fun AddDrinkScreen(
-    vararg addDrinkButtons: @Composable (Modifier) -> Unit,
+    sheetState: ModalBottomSheetState,
+    sheetContent: @Composable ColumnScope.() -> Unit,
+    screenContent: @Composable (Modifier) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    LazyColumn(
-        contentPadding = PaddingValues(16.dp),
-        modifier = modifier
+    ModalBottomSheetLayout(
+        sheetState = sheetState,
+        sheetContent = sheetContent
     ) {
-        addDrinkButtons.forEach { button ->
-            item { button(Modifier.padding(bottom = 16.dp)) }
-        }
+        screenContent(modifier)
     }
-}
-
-@Composable
-@Preview
-private fun AddDrinkScreenPreview() {
-    AddDrinkScreen(
-        { modifier ->
-            AddDrinkButton(
-                title = "Light",
-                titleColor = DrinkColor.BeerDark,
-                backgroundColor = DrinkColor.BeerLight,
-                onClick = {},
-                modifier = modifier.fillMaxWidth()
-            )
-        },
-
-        { modifier ->
-            AddDrinkButton(
-                title = "Light",
-                titleColor = DrinkColor.BeerDark,
-                backgroundColor = DrinkColor.BeerLight,
-                onClick = {},
-                modifier = modifier.fillMaxWidth()
-            )
-        },
-        modifier = Modifier.fillMaxSize()
-    )
 }

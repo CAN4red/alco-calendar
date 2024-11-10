@@ -9,7 +9,7 @@ import com.example.alcocalendar.db.entities.intakes.Cocktails
 import com.example.alcocalendar.db.entities.intakes.Moonshine
 import com.example.alcocalendar.db.entities.intakes.Shots
 import com.example.alcocalendar.ui.addsession.components.AddDrinkButton
-import com.example.alcocalendar.ui.addsession.components.AddDrinkScreen
+import com.example.alcocalendar.ui.addsession.components.AddDrinkColumn
 import com.example.alcocalendar.ui.addsession.viewmodel.FillingSessionEvent
 import com.example.alcocalendar.ui.theme.color.DrinkColor
 
@@ -19,7 +19,7 @@ fun AddOtherScreen(
     navigateBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    AddDrinkScreen(
+    AddDrinkColumn(
 
         { buttonModifier ->
             AddDrinkButton(
