@@ -1,4 +1,4 @@
-package com.example.alcocalendar.ui.calendar.year
+package com.example.alcocalendar.ui.calendar.yearscreen
 
 import android.os.Build
 import androidx.annotation.RequiresApi

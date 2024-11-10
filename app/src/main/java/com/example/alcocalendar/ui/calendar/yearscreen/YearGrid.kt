@@ -1,4 +1,4 @@
-package com.example.alcocalendar.ui.calendar.year
+package com.example.alcocalendar.ui.calendar.yearscreen
 
 import android.annotation.SuppressLint
 import android.os.Build

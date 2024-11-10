@@ -11,15 +11,15 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.alcocalendar.db.entities.DrinkingSession
 import com.example.alcocalendar.ui.addsession.screens.category.ChooseCategoryScreen
-import com.example.alcocalendar.ui.addsession.screens.drink.AddBeerScreen
-import com.example.alcocalendar.ui.addsession.screens.drink.AddOtherScreen
-import com.example.alcocalendar.ui.addsession.screens.drink.AddSpiritsScreen
-import com.example.alcocalendar.ui.addsession.screens.drink.AddWineScreen
-import com.example.alcocalendar.ui.calendar.month.MonthLayout
+import com.example.alcocalendar.ui.addsession.screens.columns.AddBeerScreen
+import com.example.alcocalendar.ui.addsession.screens.columns.AddOtherScreen
+import com.example.alcocalendar.ui.addsession.screens.columns.AddSpiritsScreen
+import com.example.alcocalendar.ui.addsession.screens.columns.AddWineScreen
+import com.example.alcocalendar.ui.calendar.monthscreen.MonthLayout
 import com.example.alcocalendar.ui.calendar.viewmodel.CalendarEvent
 import com.example.alcocalendar.ui.addsession.viewmodel.FillingSessionEvent
 import com.example.alcocalendar.ui.calendar.viewmodel.CalendarState
-import com.example.alcocalendar.ui.calendar.year.YearLayout
+import com.example.alcocalendar.ui.calendar.yearscreen.YearLayout
 import com.example.alcocalendar.ui.navigation.CalendarScreen
 
 

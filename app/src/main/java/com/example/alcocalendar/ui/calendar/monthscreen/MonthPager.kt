@@ -1,4 +1,4 @@
-package com.example.alcocalendar.ui.calendar.month
+package com.example.alcocalendar.ui.calendar.monthscreen
 
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.pager.HorizontalPager
@@ -10,7 +10,6 @@ import com.example.alcocalendar.ui.addsession.viewmodel.FillingSessionEvent
 import com.example.alcocalendar.ui.calendar.viewmodel.CalendarEvent
 import com.example.alcocalendar.ui.calendar.viewmodel.CalendarState
 import com.example.alcocalendar.ui.calendar.viewmodel.IndexConverter
-import java.time.LocalDate
 
 
 @Composable

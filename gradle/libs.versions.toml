@@ -1,24 +1,26 @@
 [versions]
+accompanistFlowlayout = "0.24.13-alpha"
 agp = "8.5.2"
 kotlin = "2.0.0"
 ksp = "2.0.21-1.0.25"
-coreKtx = "1.13.1"
+coreKtx = "1.15.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 kotlinxCollectionsImmutable = "0.3.5"
-lifecycleRuntimeKtx = "2.8.6"
-activityCompose = "1.9.2"
-composeBom = "2024.09.03"
+lifecycleRuntimeKtx = "2.8.7"
+activityCompose = "1.9.3"
+composeBom = "2024.10.01"
 accompanist = "0.34.0"
 androidx-core = "1.10.0"
-lifecycle-viewmodel-ktx = "2.8.6"
+lifecycle-viewmodel-ktx = "2.8.7"
 kotlinx-coroutines-core = "1.8.1"
 kotlinx-coroutines-android = "1.8.1"
-navigation = "2.8.2"
+navigation = "2.8.3"
 roomRuntime = "2.6.1"
 
 [libraries]
+accompanist-flowlayout = { module = "com.google.accompanist:accompanist-flowlayout", version.ref = "accompanistFlowlayout" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomRuntime" }
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomRuntime" }

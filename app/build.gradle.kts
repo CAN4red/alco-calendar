@@ -93,6 +93,6 @@ dependencies {
     implementation(libs.androidx.room.ktx)
     implementation(kotlin("script-runtime"))
 
-    // Mutex
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
+    // FlowRow
+    implementation(libs.accompanist.flowlayout)
 }

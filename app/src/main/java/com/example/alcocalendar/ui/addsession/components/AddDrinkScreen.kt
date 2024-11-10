@@ -1,4 +1,4 @@
-package com.example.alcocalendar.ui.addsession.screens.drink
+package com.example.alcocalendar.ui.addsession.components
 
 
 import androidx.compose.foundation.layout.PaddingValues
@@ -10,7 +10,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.alcocalendar.ui.addsession.components.AddDrinkButton
 import com.example.alcocalendar.ui.theme.color.DrinkColor
 
 @Composable

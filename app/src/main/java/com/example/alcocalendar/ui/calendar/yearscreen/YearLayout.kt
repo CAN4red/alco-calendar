@@ -1,4 +1,4 @@
-package com.example.alcocalendar.ui.calendar.month
+package com.example.alcocalendar.ui.calendar.yearscreen
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
@@ -6,40 +6,34 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.example.alcocalendar.ui.addsession.viewmodel.FillingSessionEvent
 import com.example.alcocalendar.ui.calendar.components.CalendarNavigationBar
 import com.example.alcocalendar.ui.calendar.viewmodel.CalendarEvent
 import com.example.alcocalendar.ui.calendar.viewmodel.CalendarState
-import java.time.LocalDate
 
 
 @SuppressLint("NewApi")
 @Composable
-fun MonthLayout(
+fun YearLayout(
     calendarState: CalendarState,
     onCalendarEvent: (CalendarEvent) -> Unit,
-    onFillingSessionEvent: (FillingSessionEvent) -> Unit,
-    navigateToCategoryScreen: () -> Unit,
     navigateToYear: () -> Unit,
-    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier
 ) {
     val pagerState = rememberPagerState(
-        initialPage = calendarState.currentMonthIndex,
-        pageCount = { calendarState.monthsCount }
+        initialPage = calendarState.currentYearIndex,
+        pageCount = { calendarState.yearsCount }
     )
 
-    val month = calendarState.getMonthByIndex(pagerState.currentPage).month
-    val year = calendarState.getMonthByIndex(pagerState.currentPage).year
-    val titleString = "$month $year"
+    val titleString = calendarState.getYearByIndex(pagerState.currentPage).year.toString()
 
     Column(
         modifier = modifier,
     ) {
         CalendarNavigationBar(
-            titleString = titleString,
             onTitleClick = navigateToYear,
-            enabledPrev = calendarState.hasPrevMonth,
-            enabledNext = calendarState.hasNextMonth,
+            titleString = titleString,
+            enabledPrev = calendarState.hasPrevYear,
+            enabledNext = calendarState.hasNextYear,
             onBackNavigationClick = {
                 pagerState.animateScrollToPage(pagerState.currentPage - 1)
             },
@@ -48,12 +42,11 @@ fun MonthLayout(
             },
         )
 
-        MonthPager(
+        YearPager(
             calendarState = calendarState,
-            pagerState = pagerState,
             onCalendarEvent = onCalendarEvent,
-            onFillingSessionEvent = onFillingSessionEvent,
-            navigateToCategoryScreen = navigateToCategoryScreen,
+            navigateToMonth = navigateToYear,
+            pagerState = pagerState,
             modifier = Modifier.fillMaxWidth()
         )
     }
