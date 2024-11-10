@@ -14,8 +14,8 @@ import com.example.alcocalendar.db.entities.intakes.Rum
 import com.example.alcocalendar.db.entities.intakes.Tequila
 import com.example.alcocalendar.db.entities.intakes.Vodka
 import com.example.alcocalendar.db.entities.intakes.Whiskey
-import com.example.alcocalendar.ui.addsession.components.AddDrinkButton
 import com.example.alcocalendar.ui.addsession.components.AddDrinkColumn
+import com.example.alcocalendar.ui.addsession.components.getAddDrinkButtonComposable
 import com.example.alcocalendar.ui.addsession.viewmodel.FillingSessionEvent
 import com.example.alcocalendar.ui.theme.color.DrinkColor
 
@@ -25,125 +25,93 @@ fun AddSpiritsScreen(
     navigateBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val addDrinkButtons = listOf(
+        getAddDrinkButtonComposable(
+            title = "Vodka",
+            titleColor = Color.Black,
+            backgroundColor = DrinkColor.SpiritsVodka,
+            onClick = {
+                onFillingSessionEvent(FillingSessionEvent.AddSpiritsDrink(Vodka(1.0)))
+                navigateBack()
+            },
+        ),
+        getAddDrinkButtonComposable(
+            title = "Whiskey",
+            titleColor = Color.Black,
+            backgroundColor = DrinkColor.SpiritsWhiskey,
+            onClick = {
+                onFillingSessionEvent(FillingSessionEvent.AddSpiritsDrink(Whiskey(1.0)))
+                navigateBack()
+            },
+        ),
+        getAddDrinkButtonComposable(
+            title = "Cognac",
+            titleColor = Color.Black,
+            backgroundColor = DrinkColor.SpiritsCognac,
+            onClick = {
+                onFillingSessionEvent(FillingSessionEvent.AddSpiritsDrink(Cognac(1.0)))
+                navigateBack()
+            },
+        ),
+        getAddDrinkButtonComposable(
+            title = "Rum",
+            titleColor = Color.Black,
+            backgroundColor = DrinkColor.SpiritsRum,
+            onClick = {
+                onFillingSessionEvent(FillingSessionEvent.AddSpiritsDrink(Rum(1.0)))
+                navigateBack()
+            },
+        ),
+        getAddDrinkButtonComposable(
+            title = "Tequila",
+            titleColor = Color.Black,
+            backgroundColor = DrinkColor.SpiritsTequila,
+            onClick = {
+                onFillingSessionEvent(FillingSessionEvent.AddSpiritsDrink(Tequila(1.0)))
+                navigateBack()
+            },
+        ),
+        getAddDrinkButtonComposable(
+            title = "Gin",
+            titleColor = Color.Black,
+            backgroundColor = DrinkColor.SpiritsGin,
+            onClick = {
+                onFillingSessionEvent(FillingSessionEvent.AddSpiritsDrink(Gin(1.0)))
+                navigateBack()
+            },
+        ),
+        getAddDrinkButtonComposable(
+            title = "Absinthe",
+            titleColor = Color.Black,
+            backgroundColor = DrinkColor.SpiritsAbsinthe,
+            onClick = {
+                onFillingSessionEvent(FillingSessionEvent.AddSpiritsDrink(Absinthe(1.0)))
+                navigateBack()
+            },
+        ),
+        getAddDrinkButtonComposable(
+            title = "Liquor",
+            titleColor = Color(0xFFFC510E),
+            backgroundColor = DrinkColor.SpiritsLiquor,
+            onClick = {
+                onFillingSessionEvent(FillingSessionEvent.AddSpiritsDrink(Liquor(1.0)))
+                navigateBack()
+            },
+        ),
+        getAddDrinkButtonComposable(
+            title = "Brandy",
+            titleColor = Color.Black,
+            backgroundColor = DrinkColor.SpiritsBrandy,
+            onClick = {
+                onFillingSessionEvent(FillingSessionEvent.AddSpiritsDrink(Brandy(1.0)))
+                navigateBack()
+            },
+        ),
+    )
+
     AddDrinkColumn(
-
-        { buttonModifier ->
-            AddDrinkButton(
-                title = "Vodka",
-                titleColor = Color.Black,
-                backgroundColor = DrinkColor.SpiritsVodka,
-                onClick = {
-                    onFillingSessionEvent(FillingSessionEvent.AddSpiritsDrink(Vodka(1.0)))
-                    navigateBack()
-                },
-                modifier = buttonModifier
-            )
-        },
-
-        { buttonModifier ->
-            AddDrinkButton(
-                title = "Whiskey",
-                titleColor = Color.Black,
-                backgroundColor = DrinkColor.SpiritsWhiskey,
-                onClick = {
-                    onFillingSessionEvent(FillingSessionEvent.AddSpiritsDrink(Whiskey(1.0)))
-                    navigateBack()
-                },
-                modifier = buttonModifier
-            )
-        },
-
-        { buttonModifier ->
-            AddDrinkButton(
-                title = "Cognac",
-                titleColor = Color.Black,
-                backgroundColor = DrinkColor.SpiritsCognac,
-                onClick = {
-                    onFillingSessionEvent(FillingSessionEvent.AddSpiritsDrink(Cognac(1.0)))
-                    navigateBack()
-                },
-                modifier = buttonModifier
-            )
-        },
-
-        { buttonModifier ->
-            AddDrinkButton(
-                title = "Rum",
-                titleColor = Color.Black,
-                backgroundColor = DrinkColor.SpiritsRum,
-                onClick = {
-                    onFillingSessionEvent(FillingSessionEvent.AddSpiritsDrink(Rum(1.0)))
-                    navigateBack()
-                },
-                modifier = buttonModifier
-            )
-        },
-
-        { buttonModifier ->
-            AddDrinkButton(
-                title = "Tequila",
-                titleColor = Color.Black,
-                backgroundColor = DrinkColor.SpiritsTequila,
-                onClick = {
-                    onFillingSessionEvent(FillingSessionEvent.AddSpiritsDrink(Tequila(1.0)))
-                    navigateBack()
-                },
-                modifier = buttonModifier
-            )
-        },
-
-        { buttonModifier ->
-            AddDrinkButton(
-                title = "Gin",
-                titleColor = Color.Black,
-                backgroundColor = DrinkColor.SpiritsGin,
-                onClick = {
-                    onFillingSessionEvent(FillingSessionEvent.AddSpiritsDrink(Gin(1.0)))
-                    navigateBack()
-                },
-                modifier = buttonModifier
-            )
-        },
-
-        { buttonModifier ->
-            AddDrinkButton(
-                title = "Absinthe",
-                titleColor = Color.Black,
-                backgroundColor = DrinkColor.SpiritsAbsinthe,
-                onClick = {
-                    onFillingSessionEvent(FillingSessionEvent.AddSpiritsDrink(Absinthe(1.0)))
-                    navigateBack()
-                },
-                modifier = buttonModifier
-            )
-        },
-
-        { buttonModifier ->
-            AddDrinkButton(
-                title = "Liquor",
-                titleColor = Color(0xFFFC510E),
-                backgroundColor = DrinkColor.SpiritsLiquor,
-                onClick = {
-                    onFillingSessionEvent(FillingSessionEvent.AddSpiritsDrink(Liquor(1.0)))
-                    navigateBack()
-                },
-                modifier = buttonModifier
-            )
-        },
-
-        { buttonModifier ->
-            AddDrinkButton(
-                title = "Brandy",
-                titleColor = Color.Black,
-                backgroundColor = DrinkColor.SpiritsBrandy,
-                onClick = {
-                    onFillingSessionEvent(FillingSessionEvent.AddSpiritsDrink(Brandy(1.0)))
-                    navigateBack()
-                },
-                modifier = buttonModifier
-            )
-        },
-
+        addDrinkButtons = addDrinkButtons,
+        navigateBack = navigateBack,
         modifier = modifier
     )
 }

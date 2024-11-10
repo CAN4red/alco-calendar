@@ -1,7 +1,6 @@
 package com.example.alcocalendar.ui.addsession.screens.bottomsheets
 
 
-import android.util.Log
 import androidx.compose.foundation.layout.fillMaxWidth
 //noinspection UsingMaterialAndMaterial3Libraries
 import androidx.compose.material.Button
@@ -54,7 +53,6 @@ fun AddBeerSheetContent(
         intakeValue = intakeFillingState,
         onIntakeChange = { newIntake ->
             intakeFillingState = newIntake.toDouble()
-            Log.d("BEER_ADDED", "intakeState after change: $intakeFillingState")
         },
         onConfirmClick = { onConfirmClick(initialIntake.genericCopy(intakeFillingState)) },
         increaseIntakeButtons = increaseIntakeButtons,

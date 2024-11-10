@@ -11,8 +11,8 @@ import com.example.alcocalendar.db.entities.intakes.Red
 import com.example.alcocalendar.db.entities.intakes.White
 import com.example.alcocalendar.db.entities.intakes.Rose
 import com.example.alcocalendar.db.entities.intakes.Vermouth
-import com.example.alcocalendar.ui.addsession.components.AddDrinkButton
 import com.example.alcocalendar.ui.addsession.components.AddDrinkColumn
+import com.example.alcocalendar.ui.addsession.components.getAddDrinkButtonComposable
 import com.example.alcocalendar.ui.addsession.viewmodel.FillingSessionEvent
 import com.example.alcocalendar.ui.theme.color.DrinkColor
 
@@ -22,87 +22,66 @@ fun AddWineScreen(
     navigateBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val addDrinkButtons = listOf(
+        getAddDrinkButtonComposable(
+            title = "Red",
+            titleColor = Color.White,
+            backgroundColor = DrinkColor.WineRed,
+            onClick = {
+                onFillingSessionEvent(FillingSessionEvent.AddWineDrink(Red(1.0)))
+                navigateBack()
+            },
+        ),
+        getAddDrinkButtonComposable(
+            title = "White",
+            titleColor = Color.Black,
+            backgroundColor = DrinkColor.WineWhite,
+            onClick = {
+                onFillingSessionEvent(FillingSessionEvent.AddWineDrink(White(1.0)))
+                navigateBack()
+            },
+        ),
+        getAddDrinkButtonComposable(
+            title = "Champagne",
+            titleColor = Color.Black,
+            backgroundColor = DrinkColor.WineChampagne,
+            onClick = {
+                onFillingSessionEvent(FillingSessionEvent.AddWineDrink(Champagne(1.0)))
+                navigateBack()
+            },
+        ),
+        getAddDrinkButtonComposable(
+            title = "Rose",
+            titleColor = Color.Black,
+            backgroundColor = DrinkColor.WineRose,
+            onClick = {
+                onFillingSessionEvent(FillingSessionEvent.AddWineDrink(Rose(1.0)))
+                navigateBack()
+            },
+        ),
+        getAddDrinkButtonComposable(
+            title = "Port",
+            titleColor = Color.White,
+            backgroundColor = DrinkColor.WinePort,
+            onClick = {
+                onFillingSessionEvent(FillingSessionEvent.AddWineDrink(Port(1.0)))
+                navigateBack()
+            },
+        ),
+        getAddDrinkButtonComposable(
+            title = "Vermouth",
+            titleColor = Color.Black,
+            backgroundColor = DrinkColor.WineVermouth,
+            onClick = {
+                onFillingSessionEvent(FillingSessionEvent.AddWineDrink(Vermouth(1.0)))
+                navigateBack()
+            },
+        ),
+    )
+
     AddDrinkColumn(
-
-        { buttonModifier ->
-            AddDrinkButton(
-                title = "Red",
-                titleColor = Color.White,
-                backgroundColor = DrinkColor.WineRed,
-                onClick = {
-                    onFillingSessionEvent(FillingSessionEvent.AddWineDrink(Red(1.0)))
-                    navigateBack()
-                },
-                modifier = buttonModifier
-            )
-        },
-
-        { buttonModifier ->
-            AddDrinkButton(
-                title = "White",
-                titleColor = Color.Black,
-                backgroundColor = DrinkColor.WineWhite,
-                onClick = {
-                    onFillingSessionEvent(FillingSessionEvent.AddWineDrink(White(1.0)))
-                    navigateBack()
-                },
-                modifier = buttonModifier
-            )
-        },
-
-        { buttonModifier ->
-            AddDrinkButton(
-                title = "Champagne",
-                titleColor = Color.Black,
-                backgroundColor = DrinkColor.WineChampagne,
-                onClick = {
-                    onFillingSessionEvent(FillingSessionEvent.AddWineDrink(Champagne(1.0)))
-                    navigateBack()
-                },
-                modifier = buttonModifier
-            )
-        },
-
-        { buttonModifier ->
-            AddDrinkButton(
-                title = "Rose",
-                titleColor = Color.Black,
-                backgroundColor = DrinkColor.WineRose,
-                onClick = {
-                    onFillingSessionEvent(FillingSessionEvent.AddWineDrink(Rose(1.0)))
-                    navigateBack()
-                },
-                modifier = buttonModifier
-            )
-        },
-
-        { buttonModifier ->
-            AddDrinkButton(
-                title = "Port",
-                titleColor = Color.White,
-                backgroundColor = DrinkColor.WinePort,
-                onClick = {
-                    onFillingSessionEvent(FillingSessionEvent.AddWineDrink(Port(1.0)))
-                    navigateBack()
-                },
-                modifier = buttonModifier
-            )
-        },
-
-        { buttonModifier ->
-            AddDrinkButton(
-                title = "Vermouth",
-                titleColor = Color.Black,
-                backgroundColor = DrinkColor.WineVermouth,
-                onClick = {
-                    onFillingSessionEvent(FillingSessionEvent.AddWineDrink(Vermouth(1.0)))
-                    navigateBack()
-                },
-                modifier = buttonModifier
-            )
-        },
-
-
+        addDrinkButtons = addDrinkButtons,
+        navigateBack = navigateBack,
         modifier = modifier
     )
 }

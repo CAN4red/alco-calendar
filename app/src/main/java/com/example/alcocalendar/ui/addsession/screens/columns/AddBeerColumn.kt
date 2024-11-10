@@ -10,13 +10,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.alcocalendar.db.entities.DrinkingSession
 import com.example.alcocalendar.db.entities.intakes.Beer
-import com.example.alcocalendar.db.entities.intakes.Cider
-import com.example.alcocalendar.db.entities.intakes.Dark
-import com.example.alcocalendar.db.entities.intakes.El
-import com.example.alcocalendar.db.entities.intakes.Light
-import com.example.alcocalendar.db.entities.intakes.Unfiltered
-import com.example.alcocalendar.ui.addsession.components.AddDrinkButton
 import com.example.alcocalendar.ui.addsession.components.AddDrinkColumn
+import com.example.alcocalendar.ui.addsession.components.getAddDrinkButtonComposable
 import com.example.alcocalendar.ui.addsession.viewmodel.FillingSessionEvent
 import com.example.alcocalendar.ui.theme.color.DrinkColor
 import java.time.LocalDate
@@ -29,58 +24,42 @@ fun AddBeerColumn(
     navigateBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val addDrinkButtons = listOf(
+        getAddDrinkButtonComposable(
+            title = "Light",
+            titleColor = Color.Black,
+            backgroundColor = DrinkColor.BeerLight,
+            onClick = { onDrinkButtonClick(fillingSessionState.beerIntake.light) },
+        ),
+        getAddDrinkButtonComposable(
+            title = "Dark",
+            titleColor = Color.White,
+            backgroundColor = DrinkColor.BeerDark,
+            onClick = { onDrinkButtonClick(fillingSessionState.beerIntake.dark) },
+        ),
+        getAddDrinkButtonComposable(
+            title = "Cider",
+            titleColor = Color.Black,
+            backgroundColor = DrinkColor.BeerCider,
+            onClick = { onDrinkButtonClick(fillingSessionState.beerIntake.cider) },
+        ),
+        getAddDrinkButtonComposable(
+            title = "Unfiltered",
+            titleColor = Color.Black,
+            backgroundColor = DrinkColor.BeerUnfiltered,
+            onClick = { onDrinkButtonClick(fillingSessionState.beerIntake.unfiltered) },
+        ),
+        getAddDrinkButtonComposable(
+            title = "El",
+            titleColor = Color.Black,
+            backgroundColor = DrinkColor.BeerEl,
+            onClick = { onDrinkButtonClick(fillingSessionState.beerIntake.el) },
+        ),
+    )
+
     AddDrinkColumn(
-
-        { buttonModifier ->
-            AddDrinkButton(
-                title = "Light",
-                titleColor = Color.Black,
-                backgroundColor = DrinkColor.BeerLight,
-                onClick = { onDrinkButtonClick(fillingSessionState.beerIntake.light) },
-                modifier = buttonModifier
-            )
-        },
-
-        { buttonModifier ->
-            AddDrinkButton(
-                title = "Dark",
-                titleColor = Color.White,
-                backgroundColor = DrinkColor.BeerDark,
-                onClick = { onDrinkButtonClick(fillingSessionState.beerIntake.dark) },
-                modifier = buttonModifier
-            )
-        },
-
-        { buttonModifier ->
-            AddDrinkButton(
-                title = "Cider",
-                titleColor = Color.Black,
-                backgroundColor = DrinkColor.BeerCider,
-                onClick = { onDrinkButtonClick(fillingSessionState.beerIntake.cider) },
-                modifier = buttonModifier
-            )
-        },
-
-        { buttonModifier ->
-            AddDrinkButton(
-                title = "Unfiltered",
-                titleColor = Color.Black,
-                backgroundColor = DrinkColor.BeerUnfiltered,
-                onClick = { onDrinkButtonClick(fillingSessionState.beerIntake.unfiltered) },
-                modifier = buttonModifier
-            )
-        },
-
-        { buttonModifier ->
-            AddDrinkButton(
-                title = "El",
-                titleColor = Color.Black,
-                backgroundColor = DrinkColor.BeerEl,
-                onClick = { onDrinkButtonClick(fillingSessionState.beerIntake.el) },
-                modifier = buttonModifier
-            )
-        },
-
+        addDrinkButtons = addDrinkButtons,
+        navigateBack = navigateBack,
         modifier = modifier
     )
 }

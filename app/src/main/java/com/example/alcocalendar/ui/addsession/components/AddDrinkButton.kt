@@ -44,6 +44,23 @@ fun AddDrinkButton(
     }
 }
 
+fun getAddDrinkButtonComposable(
+    title: String,
+    titleColor: Color,
+    backgroundColor: Color,
+    onClick: () -> Unit,
+): @Composable (Modifier) -> Unit {
+    return { buttonModifier ->
+        AddDrinkButton(
+            title = title,
+            titleColor = titleColor,
+            backgroundColor = backgroundColor,
+            onClick = onClick,
+            modifier = buttonModifier
+        )
+    }
+}
+
 @Composable
 @Preview
 private fun AddDrinkButtonPreview() {
