@@ -39,14 +39,6 @@ class FillingSessionViewModel(
                     val updatedBeerIntake = currentState.beerIntake.update(event.beer)
                     currentState.copy(beerIntake = updatedBeerIntake)
                 }
-                Log.d(
-                    "BEER_ADDED",
-                    "light: ${_fillingSessionState.value.beerIntake.light.liters}\n" +
-                            "dark: ${_fillingSessionState.value.beerIntake.dark.liters}\n" +
-                            "cider: ${_fillingSessionState.value.beerIntake.cider.liters}\n" +
-                            "unfiltered: ${_fillingSessionState.value.beerIntake.unfiltered.liters}\n" +
-                            "el: ${_fillingSessionState.value.beerIntake.el.liters}\n"
-                )
             }
 
             is FillingSessionEvent.AddWineDrink -> {
