@@ -4,13 +4,12 @@ package com.example.alcocalendar.ui.addsession.screens.bottomsheets
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.alcocalendar.db.entities.intakes.Beer
 import com.example.alcocalendar.ui.addsession.components.textfield.CustomField
 import com.example.alcocalendar.ui.addsession.components.textfield.CustomTextFieldKeyboard
 import com.example.alcocalendar.ui.addsession.components.textfield.TextFieldEvent
-import com.example.alcocalendar.ui.addsession.viewmodel.FillingSessionEvent
 
 @Composable
 fun AddBeerSheetContent(
@@ -20,22 +19,26 @@ fun AddBeerSheetContent(
     hideBottomSheet: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Column(modifier = modifier) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = modifier
+    ) {
         CustomField(textValue = textFieldState)
 
         CustomTextFieldKeyboard(
             onClickEvent = onTextFieldEvent,
             onConfirmEvent = onConfirmEvent,
-            hideBottomSheet = hideBottomSheet
+            hideBottomSheet = hideBottomSheet,
         )
     }
 }
+
 
 @Composable
 @Preview
 private fun AddBeerBottomSheetPreview() {
     AddBeerSheetContent(
-        textFieldState = "",
+        textFieldState = "7.0",
         onTextFieldEvent = {},
         onConfirmEvent = {},
         hideBottomSheet = {},
