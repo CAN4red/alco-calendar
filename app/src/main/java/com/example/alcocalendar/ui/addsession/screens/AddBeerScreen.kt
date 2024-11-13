@@ -15,7 +15,6 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.alcocalendar.db.entities.DrinkingSession
 import com.example.alcocalendar.db.entities.intakes.Beer
-import com.example.alcocalendar.db.entities.intakes.Light
 import com.example.alcocalendar.ui.addsession.components.textfield.TextFieldEvent
 import com.example.alcocalendar.ui.addsession.components.textfield.TextFieldViewModel
 import com.example.alcocalendar.ui.addsession.screens.bottomsheets.AddBeerSheetContent
@@ -44,9 +43,7 @@ fun AddBeerScreen(
         onDrinkButtonClick = { newIntake ->
             currentIntakeState = newIntake
             textFieldViewModel.onTextFieldEvent(
-                TextFieldEvent.UpdateField(
-                    newIntake.liters.toString().tryToDisplayAsInt()
-                )
+                TextFieldEvent.UpdateField(newIntake.liters.toString().tryToDisplayAsInt())
             )
             isBottomSheetVisible = true
         },
@@ -62,8 +59,8 @@ fun AddBeerScreen(
                 onTextFieldEvent = textFieldViewModel::onTextFieldEvent,
                 hideBottomSheet = { isBottomSheetVisible = false },
                 onConfirmEvent = {
-                    val newIntake =
-                        currentIntakeState?.genericCopy(textFieldStateDouble.value) ?: Light()
+                    val newIntake = currentIntakeState?.copyDrink(textFieldStateDouble.value)
+                        ?: fillingSessionState.beerIntake.light
                     onFillingSessionEvent(FillingSessionEvent.AddBeerDrink(newIntake))
                 },
                 modifier = Modifier.fillMaxWidth()
@@ -74,13 +71,9 @@ fun AddBeerScreen(
 
 private fun String.tryToDisplayAsInt(): String {
     val valueDouble = this.toDouble()
-
-    return if (
-        valueDouble == valueDouble.toInt().toDouble()
-    ) {
-        valueDouble.toInt().toString()
-    } else {
-        this
+    return when (valueDouble == valueDouble.toInt().toDouble()) {
+        true -> valueDouble.toInt().toString()
+        false -> this
     }
 }
 

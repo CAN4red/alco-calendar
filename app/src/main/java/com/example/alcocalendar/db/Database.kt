@@ -10,7 +10,7 @@ import com.example.alcocalendar.db.entities.DrinkingSession
 
 @Database(
     entities = [DrinkingSession::class],
-    version = 2,
+    version = 8,
     exportSchema = false
 )
 @TypeConverters(LocalDateConverter::class)

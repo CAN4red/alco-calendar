@@ -5,9 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.alcocalendar.db.entities.intakes.Cocktails
-import com.example.alcocalendar.db.entities.intakes.Moonshine
-import com.example.alcocalendar.db.entities.intakes.Shots
+import com.example.alcocalendar.db.entities.intakes.OtherDrink
 import com.example.alcocalendar.ui.addsession.components.AddDrinkColumn
 import com.example.alcocalendar.ui.addsession.components.getAddDrinkButtonComposable
 import com.example.alcocalendar.ui.addsession.viewmodel.FillingSessionEvent
@@ -25,7 +23,7 @@ fun AddOtherScreen(
             titleColor = Color.White,
             backgroundColor = DrinkColor.OtherCocktails,
             onClick = {
-                onFillingSessionEvent(FillingSessionEvent.AddOtherDrink(Cocktails(1.0)))
+                onFillingSessionEvent(FillingSessionEvent.AddOtherDrink(OtherDrink.Cocktails(1.0)))
                 navigateBack()
             },
         ),
@@ -34,7 +32,7 @@ fun AddOtherScreen(
             titleColor = Color.Black,
             backgroundColor = DrinkColor.OtherShots,
             onClick = {
-                onFillingSessionEvent(FillingSessionEvent.AddOtherDrink(Shots(1.0)))
+                onFillingSessionEvent(FillingSessionEvent.AddOtherDrink(OtherDrink.Shots(1.0)))
                 navigateBack()
             },
         ),
@@ -43,7 +41,7 @@ fun AddOtherScreen(
             titleColor = Color.Black,
             backgroundColor = DrinkColor.OtherMoonshine,
             onClick = {
-                onFillingSessionEvent(FillingSessionEvent.AddOtherDrink(Moonshine(1.0)))
+                onFillingSessionEvent(FillingSessionEvent.AddOtherDrink(OtherDrink.Moonshine(1.0)))
                 navigateBack()
             },
         ),

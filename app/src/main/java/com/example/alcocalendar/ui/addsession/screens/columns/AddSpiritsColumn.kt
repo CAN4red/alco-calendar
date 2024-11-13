@@ -5,15 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.alcocalendar.db.entities.intakes.Absinthe
-import com.example.alcocalendar.db.entities.intakes.Brandy
-import com.example.alcocalendar.db.entities.intakes.Cognac
-import com.example.alcocalendar.db.entities.intakes.Gin
-import com.example.alcocalendar.db.entities.intakes.Liquor
-import com.example.alcocalendar.db.entities.intakes.Rum
-import com.example.alcocalendar.db.entities.intakes.Tequila
-import com.example.alcocalendar.db.entities.intakes.Vodka
-import com.example.alcocalendar.db.entities.intakes.Whiskey
+import com.example.alcocalendar.db.entities.intakes.Spirits
 import com.example.alcocalendar.ui.addsession.components.AddDrinkColumn
 import com.example.alcocalendar.ui.addsession.components.getAddDrinkButtonComposable
 import com.example.alcocalendar.ui.addsession.viewmodel.FillingSessionEvent
@@ -31,7 +23,7 @@ fun AddSpiritsScreen(
             titleColor = Color.Black,
             backgroundColor = DrinkColor.SpiritsVodka,
             onClick = {
-                onFillingSessionEvent(FillingSessionEvent.AddSpiritsDrink(Vodka(1.0)))
+                onFillingSessionEvent(FillingSessionEvent.AddSpiritsDrink(Spirits.Vodka(1.0)))
                 navigateBack()
             },
         ),
@@ -40,7 +32,7 @@ fun AddSpiritsScreen(
             titleColor = Color.Black,
             backgroundColor = DrinkColor.SpiritsWhiskey,
             onClick = {
-                onFillingSessionEvent(FillingSessionEvent.AddSpiritsDrink(Whiskey(1.0)))
+                onFillingSessionEvent(FillingSessionEvent.AddSpiritsDrink(Spirits.Whiskey(1.0)))
                 navigateBack()
             },
         ),
@@ -49,7 +41,7 @@ fun AddSpiritsScreen(
             titleColor = Color.Black,
             backgroundColor = DrinkColor.SpiritsCognac,
             onClick = {
-                onFillingSessionEvent(FillingSessionEvent.AddSpiritsDrink(Cognac(1.0)))
+                onFillingSessionEvent(FillingSessionEvent.AddSpiritsDrink(Spirits.Cognac(1.0)))
                 navigateBack()
             },
         ),
@@ -58,7 +50,7 @@ fun AddSpiritsScreen(
             titleColor = Color.Black,
             backgroundColor = DrinkColor.SpiritsRum,
             onClick = {
-                onFillingSessionEvent(FillingSessionEvent.AddSpiritsDrink(Rum(1.0)))
+                onFillingSessionEvent(FillingSessionEvent.AddSpiritsDrink(Spirits.Rum(1.0)))
                 navigateBack()
             },
         ),
@@ -67,7 +59,7 @@ fun AddSpiritsScreen(
             titleColor = Color.Black,
             backgroundColor = DrinkColor.SpiritsTequila,
             onClick = {
-                onFillingSessionEvent(FillingSessionEvent.AddSpiritsDrink(Tequila(1.0)))
+                onFillingSessionEvent(FillingSessionEvent.AddSpiritsDrink(Spirits.Tequila(1.0)))
                 navigateBack()
             },
         ),
@@ -76,7 +68,7 @@ fun AddSpiritsScreen(
             titleColor = Color.Black,
             backgroundColor = DrinkColor.SpiritsGin,
             onClick = {
-                onFillingSessionEvent(FillingSessionEvent.AddSpiritsDrink(Gin(1.0)))
+                onFillingSessionEvent(FillingSessionEvent.AddSpiritsDrink(Spirits.Gin(1.0)))
                 navigateBack()
             },
         ),
@@ -85,7 +77,7 @@ fun AddSpiritsScreen(
             titleColor = Color.Black,
             backgroundColor = DrinkColor.SpiritsAbsinthe,
             onClick = {
-                onFillingSessionEvent(FillingSessionEvent.AddSpiritsDrink(Absinthe(1.0)))
+                onFillingSessionEvent(FillingSessionEvent.AddSpiritsDrink(Spirits.Absinthe(1.0)))
                 navigateBack()
             },
         ),
@@ -94,7 +86,7 @@ fun AddSpiritsScreen(
             titleColor = Color(0xFFFC510E),
             backgroundColor = DrinkColor.SpiritsLiquor,
             onClick = {
-                onFillingSessionEvent(FillingSessionEvent.AddSpiritsDrink(Liquor(1.0)))
+                onFillingSessionEvent(FillingSessionEvent.AddSpiritsDrink(Spirits.Liquor(1.0)))
                 navigateBack()
             },
         ),
@@ -103,7 +95,7 @@ fun AddSpiritsScreen(
             titleColor = Color.Black,
             backgroundColor = DrinkColor.SpiritsBrandy,
             onClick = {
-                onFillingSessionEvent(FillingSessionEvent.AddSpiritsDrink(Brandy(1.0)))
+                onFillingSessionEvent(FillingSessionEvent.AddSpiritsDrink(Spirits.Brandy(1.0)))
                 navigateBack()
             },
         ),
