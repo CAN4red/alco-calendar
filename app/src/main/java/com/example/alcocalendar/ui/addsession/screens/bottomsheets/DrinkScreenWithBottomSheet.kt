@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -20,7 +21,6 @@ import com.example.alcocalendar.db.entities.intakes.Spirits
 import com.example.alcocalendar.db.entities.intakes.Wine
 import com.example.alcocalendar.ui.addsession.components.textfield.TextFieldEvent
 import com.example.alcocalendar.ui.addsession.components.textfield.TextFieldViewModel
-import com.example.alcocalendar.ui.addsession.screens.columns.AddBeerColumn
 import com.example.alcocalendar.ui.addsession.viewmodel.FillingSessionEvent
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -30,7 +30,7 @@ fun DrinkScreenWithBottomSheet(
     onFillingSessionEvent: (FillingSessionEvent) -> Unit,
     content: @Composable (onDrinkButtonClick: (Drink) -> Unit) -> Unit,
 ) {
-    var currentIntakeState by rememberSaveable { mutableStateOf<Drink?>(null) }
+    var currentIntakeState by remember { mutableStateOf<Drink?>(null) }
     var isBottomSheetVisible by rememberSaveable { mutableStateOf(false) }
     val sheetState = rememberModalBottomSheetState()
 
@@ -67,25 +67,6 @@ fun DrinkScreenWithBottomSheet(
                 modifier = Modifier.fillMaxWidth()
             )
         }
-    }
-}
-
-
-@Composable
-fun AddBeerScreen(
-    fillingSessionState: DrinkingSession,
-    onFillingSessionEvent: (FillingSessionEvent) -> Unit,
-    navigateBack: () -> Unit
-) {
-    DrinkScreenWithBottomSheet(
-        fillingSessionState = fillingSessionState,
-        onFillingSessionEvent = onFillingSessionEvent,
-    ) { onDrinkButtonClick ->
-        AddBeerColumn(
-            fillingSessionState = fillingSessionState,
-            navigateBack = navigateBack,
-            onDrinkButtonClick = onDrinkButtonClick
-        )
     }
 }
 

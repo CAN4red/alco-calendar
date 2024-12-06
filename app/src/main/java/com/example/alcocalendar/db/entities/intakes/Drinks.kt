@@ -11,7 +11,7 @@ sealed interface Drink {
     fun copyDrink(liters: Double): Drink
 }
 
-sealed class Beer() : Drink {
+sealed class Beer : Drink {
 
     override fun copyDrink(liters: Double): Beer {
         return when (this) {

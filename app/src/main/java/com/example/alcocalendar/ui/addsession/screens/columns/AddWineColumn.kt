@@ -8,16 +8,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.alcocalendar.db.entities.DrinkingSession
-import com.example.alcocalendar.db.entities.intakes.OtherDrink
 import com.example.alcocalendar.db.entities.intakes.Wine
 import com.example.alcocalendar.ui.addsession.components.AddDrinkColumn
 import com.example.alcocalendar.ui.addsession.components.getAddDrinkButtonComposable
-import com.example.alcocalendar.ui.addsession.viewmodel.FillingSessionEvent
 import com.example.alcocalendar.ui.theme.color.DrinkColor
 import java.time.LocalDate
 
 @Composable
-fun AddWineScreen(
+fun AddWineColumn(
     fillingSessionState: DrinkingSession,
     onDrinkButtonClick: (Wine) -> Unit,
     navigateBack: () -> Unit,
@@ -73,7 +71,7 @@ fun AddWineScreen(
 @Composable
 @Preview
 private fun AddWineScreenPreview() {
-    AddWineScreen(
+    AddWineColumn(
         fillingSessionState = DrinkingSession(LocalDate.now()),
         onDrinkButtonClick = {},
         navigateBack = {},
