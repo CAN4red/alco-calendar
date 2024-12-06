@@ -1,4 +1,4 @@
-package com.example.alcocalendar.ui.addsession.screens
+package com.example.alcocalendar.ui.addsession.screens.bottomsheets
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -21,7 +21,6 @@ import com.example.alcocalendar.db.entities.intakes.Spirits
 import com.example.alcocalendar.db.entities.intakes.Wine
 import com.example.alcocalendar.ui.addsession.components.textfield.TextFieldEvent
 import com.example.alcocalendar.ui.addsession.components.textfield.TextFieldViewModel
-import com.example.alcocalendar.ui.addsession.screens.bottomsheets.AddDrinkSheetContent
 import com.example.alcocalendar.ui.addsession.screens.columns.AddBeerColumn
 import com.example.alcocalendar.ui.addsession.viewmodel.FillingSessionEvent
 
@@ -30,7 +29,7 @@ import com.example.alcocalendar.ui.addsession.viewmodel.FillingSessionEvent
 fun AddBeerScreen(
     fillingSessionState: DrinkingSession,
     onFillingSessionEvent: (FillingSessionEvent) -> Unit,
-    navigateBack: () -> Unit,
+    content: @Composable (onDrinkButtonClick: (Drink) -> Unit) -> Unit,
 ) {
     var currentIntakeState by remember { mutableStateOf<Drink?>(null) }
     var isBottomSheetVisible by rememberSaveable { mutableStateOf(false) }
@@ -40,18 +39,13 @@ fun AddBeerScreen(
     val textFieldState = textFieldViewModel.textFieldState.collectAsState()
     val textFieldStateDouble = textFieldViewModel.textFieldStateAsDouble.collectAsState()
 
-    AddBeerColumn(
-        fillingSessionState = fillingSessionState,
-        onFillingSessionEvent = onFillingSessionEvent,
-        navigateBack = navigateBack,
-        onDrinkButtonClick = { newIntake ->
-            currentIntakeState = newIntake
-            textFieldViewModel.onTextFieldEvent(
-                TextFieldEvent.UpdateField(newIntake.liters.toString().tryToDisplayAsInt())
-            )
-            isBottomSheetVisible = true
-        },
-    )
+    content { newIntake ->
+        currentIntakeState = newIntake
+        textFieldViewModel.onTextFieldEvent(
+            TextFieldEvent.UpdateField(newIntake.liters.toString().tryToDisplayAsInt())
+        )
+        isBottomSheetVisible = true
+    }
 
     if (isBottomSheetVisible) {
         ModalBottomSheet(
@@ -74,6 +68,26 @@ fun AddBeerScreen(
                 modifier = Modifier.fillMaxWidth()
             )
         }
+    }
+}
+
+
+@Composable
+fun AddBeerColumnWrapper(
+    fillingSessionState: DrinkingSession,
+    onFillingSessionEvent: (FillingSessionEvent) -> Unit,
+    navigateBack: () -> Unit
+) {
+    AddBeerScreen(
+        fillingSessionState = fillingSessionState,
+        onFillingSessionEvent = onFillingSessionEvent,
+    ) { onDrinkButtonClick ->
+        AddBeerColumn(
+            fillingSessionState = fillingSessionState,
+            onFillingSessionEvent = onFillingSessionEvent,
+            navigateBack = navigateBack,
+            onDrinkButtonClick = onDrinkButtonClick
+        )
     }
 }
 
