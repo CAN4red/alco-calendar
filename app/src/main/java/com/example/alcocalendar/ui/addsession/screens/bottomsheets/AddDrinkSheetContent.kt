@@ -12,7 +12,7 @@ import com.example.alcocalendar.ui.addsession.components.textfield.CustomTextFie
 import com.example.alcocalendar.ui.addsession.components.textfield.TextFieldEvent
 
 @Composable
-fun AddBeerSheetContent(
+fun AddDrinkSheetContent(
     textFieldState: String,
     onTextFieldEvent: (TextFieldEvent) -> Unit,
     onConfirmEvent: () -> Unit,
@@ -37,7 +37,7 @@ fun AddBeerSheetContent(
 @Composable
 @Preview
 private fun AddBeerBottomSheetPreview() {
-    AddBeerSheetContent(
+    AddDrinkSheetContent(
         textFieldState = "7.0",
         onTextFieldEvent = {},
         onConfirmEvent = {},

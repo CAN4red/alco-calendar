@@ -15,9 +15,13 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.alcocalendar.db.entities.DrinkingSession
 import com.example.alcocalendar.db.entities.intakes.Beer
+import com.example.alcocalendar.db.entities.intakes.Drink
+import com.example.alcocalendar.db.entities.intakes.OtherDrink
+import com.example.alcocalendar.db.entities.intakes.Spirits
+import com.example.alcocalendar.db.entities.intakes.Wine
 import com.example.alcocalendar.ui.addsession.components.textfield.TextFieldEvent
 import com.example.alcocalendar.ui.addsession.components.textfield.TextFieldViewModel
-import com.example.alcocalendar.ui.addsession.screens.bottomsheets.AddBeerSheetContent
+import com.example.alcocalendar.ui.addsession.screens.bottomsheets.AddDrinkSheetContent
 import com.example.alcocalendar.ui.addsession.screens.columns.AddBeerColumn
 import com.example.alcocalendar.ui.addsession.viewmodel.FillingSessionEvent
 
@@ -28,7 +32,7 @@ fun AddBeerScreen(
     onFillingSessionEvent: (FillingSessionEvent) -> Unit,
     navigateBack: () -> Unit,
 ) {
-    var currentIntakeState by remember { mutableStateOf<Beer?>(null) }
+    var currentIntakeState by remember { mutableStateOf<Drink?>(null) }
     var isBottomSheetVisible by rememberSaveable { mutableStateOf(false) }
     val sheetState = rememberModalBottomSheetState()
 
@@ -54,20 +58,43 @@ fun AddBeerScreen(
             sheetState = sheetState,
             onDismissRequest = { isBottomSheetVisible = false }
         ) {
-            AddBeerSheetContent(
+            AddDrinkSheetContent(
                 textFieldState = textFieldState.value,
                 onTextFieldEvent = textFieldViewModel::onTextFieldEvent,
                 hideBottomSheet = { isBottomSheetVisible = false },
                 onConfirmEvent = {
-                    val newIntake = currentIntakeState?.copyDrink(textFieldStateDouble.value)
-                        ?: fillingSessionState.beerIntake.light
-                    onFillingSessionEvent(FillingSessionEvent.AddBeerDrink(newIntake))
+                    handleConfirmEvent(
+                        currentIntakeState,
+                        textFieldStateDouble.value,
+                        fillingSessionState,
+                        onFillingSessionEvent
+                    )
+                    isBottomSheetVisible = false
                 },
                 modifier = Modifier.fillMaxWidth()
             )
         }
     }
 }
+
+
+private fun handleConfirmEvent(
+    currentIntakeState: Drink?,
+    textFieldStateDouble: Double,
+    fillingSessionState: DrinkingSession,
+    onFillingSessionEvent: (FillingSessionEvent) -> Unit
+) {
+    val newIntake = currentIntakeState?.copyDrink(textFieldStateDouble)
+        ?: fillingSessionState.beerIntake.light
+
+    when (newIntake) {
+        is Beer -> onFillingSessionEvent(FillingSessionEvent.AddBeerDrink(newIntake))
+        is Wine -> onFillingSessionEvent(FillingSessionEvent.AddWineDrink(newIntake))
+        is Spirits -> onFillingSessionEvent(FillingSessionEvent.AddSpiritsDrink(newIntake))
+        is OtherDrink -> onFillingSessionEvent(FillingSessionEvent.AddOtherDrink(newIntake))
+    }
+}
+
 
 private fun String.tryToDisplayAsInt(): String {
     val valueDouble = this.toDouble()
