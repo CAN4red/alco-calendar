@@ -1,19 +1,25 @@
 package com.example.alcocalendar.ui.addsession.screens.columns
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.alcocalendar.db.entities.DrinkingSession
+import com.example.alcocalendar.db.entities.intakes.OtherDrink
 import com.example.alcocalendar.db.entities.intakes.Wine
 import com.example.alcocalendar.ui.addsession.components.AddDrinkColumn
 import com.example.alcocalendar.ui.addsession.components.getAddDrinkButtonComposable
 import com.example.alcocalendar.ui.addsession.viewmodel.FillingSessionEvent
 import com.example.alcocalendar.ui.theme.color.DrinkColor
+import java.time.LocalDate
 
 @Composable
 fun AddWineScreen(
-    onFillingSessionEvent: (FillingSessionEvent) -> Unit,
+    fillingSessionState: DrinkingSession,
+    onDrinkButtonClick: (Wine) -> Unit,
     navigateBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -22,55 +28,37 @@ fun AddWineScreen(
             title = "Red",
             titleColor = Color.White,
             backgroundColor = DrinkColor.WineRed,
-            onClick = {
-                onFillingSessionEvent(FillingSessionEvent.AddWineDrink(Wine.Red(1.0)))
-                navigateBack()
-            },
+            onClick = { onDrinkButtonClick(fillingSessionState.wineIntake.red) },
         ),
         getAddDrinkButtonComposable(
             title = "White",
             titleColor = Color.Black,
             backgroundColor = DrinkColor.WineWhite,
-            onClick = {
-                onFillingSessionEvent(FillingSessionEvent.AddWineDrink(Wine.White(1.0)))
-                navigateBack()
-            },
+            onClick = { onDrinkButtonClick(fillingSessionState.wineIntake.white) },
         ),
         getAddDrinkButtonComposable(
             title = "Champagne",
             titleColor = Color.Black,
             backgroundColor = DrinkColor.WineChampagne,
-            onClick = {
-                onFillingSessionEvent(FillingSessionEvent.AddWineDrink(Wine.Champagne(1.0)))
-                navigateBack()
-            },
+            onClick = { onDrinkButtonClick(fillingSessionState.wineIntake.champagne) },
         ),
         getAddDrinkButtonComposable(
             title = "Rose",
             titleColor = Color.Black,
             backgroundColor = DrinkColor.WineRose,
-            onClick = {
-                onFillingSessionEvent(FillingSessionEvent.AddWineDrink(Wine.Rose(1.0)))
-                navigateBack()
-            },
+            onClick = { onDrinkButtonClick(fillingSessionState.wineIntake.rose) },
         ),
         getAddDrinkButtonComposable(
             title = "Port",
             titleColor = Color.White,
             backgroundColor = DrinkColor.WinePort,
-            onClick = {
-                onFillingSessionEvent(FillingSessionEvent.AddWineDrink(Wine.Port(1.0)))
-                navigateBack()
-            },
+            onClick = { onDrinkButtonClick(fillingSessionState.wineIntake.port) },
         ),
         getAddDrinkButtonComposable(
             title = "Vermouth",
             titleColor = Color.Black,
             backgroundColor = DrinkColor.WineVermouth,
-            onClick = {
-                onFillingSessionEvent(FillingSessionEvent.AddWineDrink(Wine.Vermouth(1.0)))
-                navigateBack()
-            },
+            onClick = { onDrinkButtonClick(fillingSessionState.wineIntake.vermouth) },
         ),
     )
 
@@ -81,11 +69,13 @@ fun AddWineScreen(
     )
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 @Preview
 private fun AddWineScreenPreview() {
     AddWineScreen(
-        onFillingSessionEvent = {},
+        fillingSessionState = DrinkingSession(LocalDate.now()),
+        onDrinkButtonClick = {},
         navigateBack = {},
         modifier = Modifier.fillMaxSize()
     )

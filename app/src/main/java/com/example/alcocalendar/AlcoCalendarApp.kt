@@ -10,7 +10,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.alcocalendar.db.entities.DrinkingSession
-import com.example.alcocalendar.ui.addsession.screens.bottomsheets.AddBeerColumnWrapper
 import com.example.alcocalendar.ui.addsession.screens.bottomsheets.AddBeerScreen
 import com.example.alcocalendar.ui.addsession.screens.category.ChooseCategoryScreen
 import com.example.alcocalendar.ui.addsession.screens.columns.AddOtherScreen
@@ -70,29 +69,29 @@ fun AlcoCalendarApp(
             )
         }
         composable(route = CalendarScreen.AddBeer.name) {
-            AddBeerColumnWrapper(
+            AddBeerScreen(
                 fillingSessionState = fillingSessionState,
                 onFillingSessionEvent = onFillingSessionEvent,
                 navigateBack = { navController.navigateUp() }
             )
         }
-        composable(route = CalendarScreen.AddWine.name) {
-            AddWineScreen(
-                onFillingSessionEvent = onFillingSessionEvent,
-                navigateBack = { navController.navigateUp() },
-            )
-        }
-        composable(route = CalendarScreen.AddSpirits.name) {
-            AddSpiritsScreen(
-                onFillingSessionEvent = onFillingSessionEvent,
-                navigateBack = { navController.navigateUp() },
-            )
-        }
-        composable(route = CalendarScreen.AddOther.name) {
-            AddOtherScreen(
-                onFillingSessionEvent = onFillingSessionEvent,
-                navigateBack = { navController.navigateUp() },
-            )
-        }
+//        composable(route = CalendarScreen.AddWine.name) {
+//            AddWineScreen(
+//                onFillingSessionEvent = onFillingSessionEvent,
+//                navigateBack = { navController.navigateUp() },
+//            )
+//        }
+//        composable(route = CalendarScreen.AddSpirits.name) {
+//            AddSpiritsScreen(
+//                onFillingSessionEvent = onFillingSessionEvent,
+//                navigateBack = { navController.navigateUp() },
+//            )
+//        }
+//        composable(route = CalendarScreen.AddOther.name) {
+//            AddOtherScreen(
+//                onFillingSessionEvent = onFillingSessionEvent,
+//                navigateBack = { navController.navigateUp() },
+//            )
+//        }
     }
 }

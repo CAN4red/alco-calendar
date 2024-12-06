@@ -12,7 +12,6 @@ import com.example.alcocalendar.db.entities.DrinkingSession
 import com.example.alcocalendar.db.entities.intakes.Beer
 import com.example.alcocalendar.ui.addsession.components.AddDrinkColumn
 import com.example.alcocalendar.ui.addsession.components.getAddDrinkButtonComposable
-import com.example.alcocalendar.ui.addsession.viewmodel.FillingSessionEvent
 import com.example.alcocalendar.ui.theme.color.DrinkColor
 import java.time.LocalDate
 
@@ -20,7 +19,6 @@ import java.time.LocalDate
 fun AddBeerColumn(
     fillingSessionState: DrinkingSession,
     onDrinkButtonClick: (Beer) -> Unit,
-    onFillingSessionEvent: (FillingSessionEvent) -> Unit,
     navigateBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -71,7 +69,6 @@ private fun AddBeerScreenPreview() {
     AddBeerColumn(
         fillingSessionState = DrinkingSession(LocalDate.now()),
         onDrinkButtonClick = {},
-        onFillingSessionEvent = {},
         navigateBack = {},
         modifier = Modifier.fillMaxSize()
     )
