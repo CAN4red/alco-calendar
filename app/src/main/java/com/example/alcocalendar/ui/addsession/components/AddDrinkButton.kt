@@ -44,22 +44,12 @@ fun AddDrinkButton(
     }
 }
 
-fun getAddDrinkButtonComposable(
-    title: String,
-    titleColor: Color,
-    backgroundColor: Color,
-    onClick: () -> Unit,
-): @Composable (Modifier) -> Unit {
-    return { buttonModifier ->
-        AddDrinkButton(
-            title = title,
-            titleColor = titleColor,
-            backgroundColor = backgroundColor,
-            onClick = onClick,
-            modifier = buttonModifier
-        )
-    }
-}
+data class DrinkButtonData(
+    val title: String,
+    val titleColor: Color,
+    val backgroundColor: Color,
+    val onClick: () -> Unit
+)
 
 @Composable
 @Preview

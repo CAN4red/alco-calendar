@@ -10,7 +10,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.alcocalendar.db.entities.DrinkingSession
 import com.example.alcocalendar.db.entities.intakes.Wine
 import com.example.alcocalendar.ui.addsession.components.AddDrinkColumn
-import com.example.alcocalendar.ui.addsession.components.getAddDrinkButtonComposable
+import com.example.alcocalendar.ui.addsession.components.DrinkButtonData
 import com.example.alcocalendar.ui.theme.color.DrinkColor
 import java.time.LocalDate
 
@@ -21,47 +21,29 @@ fun AddWineColumn(
     navigateBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val addDrinkButtons = listOf(
-        getAddDrinkButtonComposable(
-            title = "Red",
-            titleColor = Color.White,
-            backgroundColor = DrinkColor.WineRed,
-            onClick = { onDrinkButtonClick(fillingSessionState.wineIntake.red) },
-        ),
-        getAddDrinkButtonComposable(
-            title = "White",
-            titleColor = Color.Black,
-            backgroundColor = DrinkColor.WineWhite,
-            onClick = { onDrinkButtonClick(fillingSessionState.wineIntake.white) },
-        ),
-        getAddDrinkButtonComposable(
-            title = "Champagne",
-            titleColor = Color.Black,
-            backgroundColor = DrinkColor.WineChampagne,
-            onClick = { onDrinkButtonClick(fillingSessionState.wineIntake.champagne) },
-        ),
-        getAddDrinkButtonComposable(
-            title = "Rose",
-            titleColor = Color.Black,
-            backgroundColor = DrinkColor.WineRose,
-            onClick = { onDrinkButtonClick(fillingSessionState.wineIntake.rose) },
-        ),
-        getAddDrinkButtonComposable(
-            title = "Port",
-            titleColor = Color.White,
-            backgroundColor = DrinkColor.WinePort,
-            onClick = { onDrinkButtonClick(fillingSessionState.wineIntake.port) },
-        ),
-        getAddDrinkButtonComposable(
-            title = "Vermouth",
-            titleColor = Color.Black,
-            backgroundColor = DrinkColor.WineVermouth,
-            onClick = { onDrinkButtonClick(fillingSessionState.wineIntake.vermouth) },
-        ),
+    val drinkButtons = listOf(
+        DrinkButtonData("Red", Color.White, DrinkColor.WineRed) {
+            onDrinkButtonClick(fillingSessionState.wineIntake.red)
+        },
+        DrinkButtonData("White", Color.Black, DrinkColor.WineWhite) {
+            onDrinkButtonClick(fillingSessionState.wineIntake.white)
+        },
+        DrinkButtonData("Champagne", Color.Black, DrinkColor.WineChampagne) {
+            onDrinkButtonClick(fillingSessionState.wineIntake.champagne)
+        },
+        DrinkButtonData("Rose", Color.Black, DrinkColor.WineRose) {
+            onDrinkButtonClick(fillingSessionState.wineIntake.rose)
+        },
+        DrinkButtonData("Port", Color.White, DrinkColor.WinePort) {
+            onDrinkButtonClick(fillingSessionState.wineIntake.port)
+        },
+        DrinkButtonData("Vermouth", Color.Black, DrinkColor.WineVermouth) {
+            onDrinkButtonClick(fillingSessionState.wineIntake.vermouth)
+        }
     )
 
     AddDrinkColumn(
-        addDrinkButtons = addDrinkButtons,
+        addDrinkButtons = drinkButtons,
         navigateBack = navigateBack,
         modifier = modifier
     )

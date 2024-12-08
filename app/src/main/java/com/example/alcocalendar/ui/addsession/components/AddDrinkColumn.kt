@@ -4,9 +4,9 @@ package com.example.alcocalendar.ui.addsession.components
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 //noinspection UsingMaterialAndMaterial3Libraries
 import androidx.compose.material.Button
 //noinspection UsingMaterialAndMaterial3Libraries
@@ -14,13 +14,14 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.alcocalendar.ui.theme.color.DrinkColor
 
 @Composable
 fun AddDrinkColumn(
-    addDrinkButtons: List<@Composable (Modifier) -> Unit>,
+    addDrinkButtons: List<DrinkButtonData>,
     navigateBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -31,8 +32,14 @@ fun AddDrinkColumn(
             contentPadding = PaddingValues(16.dp),
             modifier = Modifier.weight(1f)
         ) {
-            addDrinkButtons.forEach { button ->
-                item { button(Modifier.padding(bottom = 16.dp)) }
+            items(addDrinkButtons) { buttonData ->
+                AddDrinkButton(
+                    title = buttonData.title,
+                    titleColor = buttonData.titleColor,
+                    backgroundColor = buttonData.backgroundColor,
+                    onClick = buttonData.onClick,
+                    modifier = Modifier.padding(bottom = 16.dp)
+                )
             }
         }
 
@@ -50,25 +57,9 @@ fun AddDrinkColumn(
 private fun AddDrinkScreenPreview() {
     AddDrinkColumn(
         listOf(
-            { modifier ->
-                AddDrinkButton(
-                    title = "Light",
-                    titleColor = DrinkColor.BeerDark,
-                    backgroundColor = DrinkColor.BeerLight,
-                    onClick = {},
-                    modifier = modifier.fillMaxWidth()
-                )
-            },
-
-            { modifier ->
-                AddDrinkButton(
-                    title = "Light",
-                    titleColor = DrinkColor.BeerDark,
-                    backgroundColor = DrinkColor.BeerLight,
-                    onClick = {},
-                    modifier = modifier.fillMaxWidth()
-                )
-            }
+            DrinkButtonData("Light", Color.Black, DrinkColor.BeerLight) { },
+            DrinkButtonData("Dark", Color.White, DrinkColor.BeerDark) { },
+            DrinkButtonData("Cider", Color.Black, DrinkColor.BeerCider) { },
         ),
         navigateBack = {},
         modifier = Modifier.fillMaxSize()

@@ -10,7 +10,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.alcocalendar.db.entities.DrinkingSession
 import com.example.alcocalendar.db.entities.intakes.OtherDrink
 import com.example.alcocalendar.ui.addsession.components.AddDrinkColumn
-import com.example.alcocalendar.ui.addsession.components.getAddDrinkButtonComposable
+import com.example.alcocalendar.ui.addsession.components.DrinkButtonData
 import com.example.alcocalendar.ui.theme.color.DrinkColor
 import java.time.LocalDate
 
@@ -21,29 +21,20 @@ fun AddOtherColumn(
     navigateBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val addDrinkButtons = listOf(
-        getAddDrinkButtonComposable(
-            title = "Cocktails",
-            titleColor = Color.White,
-            backgroundColor = DrinkColor.OtherCocktails,
-            onClick = { onDrinkButtonClick(fillingSessionState.otherIntake.cocktails) },
-        ),
-        getAddDrinkButtonComposable(
-            title = "Shots",
-            titleColor = Color.Black,
-            backgroundColor = DrinkColor.OtherShots,
-            onClick = { onDrinkButtonClick(fillingSessionState.otherIntake.shots) },
-        ),
-        getAddDrinkButtonComposable(
-            title = "Moonshine",
-            titleColor = Color.Black,
-            backgroundColor = DrinkColor.OtherMoonshine,
-            onClick = { onDrinkButtonClick(fillingSessionState.otherIntake.moonshine) },
-        ),
+    val drinkButtons = listOf(
+        DrinkButtonData("Cocktails", Color.White, DrinkColor.OtherCocktails) {
+            onDrinkButtonClick(fillingSessionState.otherIntake.cocktails)
+        },
+        DrinkButtonData("Shots", Color.Black, DrinkColor.OtherShots) {
+            onDrinkButtonClick(fillingSessionState.otherIntake.shots)
+        },
+        DrinkButtonData("Moonshine", Color.Black, DrinkColor.OtherMoonshine) {
+            onDrinkButtonClick(fillingSessionState.otherIntake.moonshine)
+        },
     )
 
     AddDrinkColumn(
-        addDrinkButtons = addDrinkButtons,
+        addDrinkButtons = drinkButtons,
         navigateBack = navigateBack,
         modifier = modifier
     )
