@@ -25,7 +25,8 @@ fun AddDrinkColumn(
     modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = modifier) {
+        modifier = modifier
+    ) {
         LazyColumn(
             contentPadding = PaddingValues(16.dp),
             modifier = Modifier.weight(1f)
@@ -35,7 +36,10 @@ fun AddDrinkColumn(
             }
         }
 
-        Button(onClick = { navigateBack() }, modifier = Modifier.align(Alignment.CenterHorizontally)) {
+        Button(
+            onClick = { navigateBack() },
+            modifier = Modifier.align(Alignment.CenterHorizontally)
+        ) {
             Text("Confirm")
         }
     }

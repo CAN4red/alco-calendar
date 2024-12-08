@@ -15,12 +15,11 @@ import com.example.alcocalendar.ui.addsession.screens.AddOtherScreen
 import com.example.alcocalendar.ui.addsession.screens.AddSpiritsScreen
 import com.example.alcocalendar.ui.addsession.screens.AddWineScreen
 import com.example.alcocalendar.ui.addsession.screens.category.ChooseCategoryScreen
-import com.example.alcocalendar.ui.calendar.monthscreen.MonthLayout
 import com.example.alcocalendar.ui.calendar.viewmodel.CalendarEvent
 import com.example.alcocalendar.ui.addsession.viewmodel.FillingSessionEvent
+import com.example.alcocalendar.ui.calendar.CalendarScreen
 import com.example.alcocalendar.ui.calendar.viewmodel.CalendarState
-import com.example.alcocalendar.ui.calendar.yearscreen.YearLayout
-import com.example.alcocalendar.ui.navigation.CalendarScreen
+import com.example.alcocalendar.ui.navigation.Screen
 
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -35,61 +34,51 @@ fun AlcoCalendarApp(
 ) {
     NavHost(
         navController = navController,
-        startDestination = CalendarScreen.MonthView.name,
+        startDestination = Screen.Calendar.name,
         modifier = modifier
     ) {
-        composable(route = CalendarScreen.MonthView.name) {
-            MonthLayout(
+        composable(route = Screen.Calendar.name) {
+            CalendarScreen(
                 calendarState = calendarState,
                 onCalendarEvent = onCalendarEvent,
                 onFillingSessionEvent = onFillingSessionEvent,
-                navigateToCategoryScreen = { navController.navigate(CalendarScreen.ChooseCategory.name) },
-                navigateToYear = { navController.navigate(CalendarScreen.YearView.name) },
-                modifier = modifier
+                navigateToCategoryScreen = { navController.navigate(Screen.ChooseCategory.name) }
             )
         }
-        composable(route = CalendarScreen.YearView.name) {
-            YearLayout(
-                calendarState = calendarState,
-                onCalendarEvent = onCalendarEvent,
-                navigateToYear = { navController.navigate(CalendarScreen.MonthView.name) },
-                modifier = modifier,
-            )
-        }
-        composable(route = CalendarScreen.ChooseCategory.name) {
+        composable(route = Screen.ChooseCategory.name) {
             ChooseCategoryScreen(
                 fillingSessionState = fillingSessionState,
                 onFillingSessionEvent = onFillingSessionEvent,
                 onCalendarEvent = onCalendarEvent,
-                onBeerClick = { navController.navigate(CalendarScreen.AddBeer.name) },
-                onWineClick = { navController.navigate(CalendarScreen.AddWine.name) },
-                onSpiritsClick = { navController.navigate(CalendarScreen.AddSpirits.name) },
-                onOtherClick = { navController.navigate(CalendarScreen.AddOther.name) },
+                onBeerClick = { navController.navigate(Screen.AddBeer.name) },
+                onWineClick = { navController.navigate(Screen.AddWine.name) },
+                onSpiritsClick = { navController.navigate(Screen.AddSpirits.name) },
+                onOtherClick = { navController.navigate(Screen.AddOther.name) },
                 navigateBack = { navController.navigateUp() },
             )
         }
-        composable(route = CalendarScreen.AddBeer.name) {
+        composable(route = Screen.AddBeer.name) {
             AddBeerScreen(
                 fillingSessionState = fillingSessionState,
                 onFillingSessionEvent = onFillingSessionEvent,
                 navigateBack = { navController.navigateUp() }
             )
         }
-        composable(route = CalendarScreen.AddWine.name) {
+        composable(route = Screen.AddWine.name) {
             AddWineScreen(
                 fillingSessionState = fillingSessionState,
                 onFillingSessionEvent = onFillingSessionEvent,
                 navigateBack = { navController.navigateUp() }
             )
         }
-        composable(route = CalendarScreen.AddSpirits.name) {
+        composable(route = Screen.AddSpirits.name) {
             AddSpiritsScreen(
                 fillingSessionState = fillingSessionState,
                 onFillingSessionEvent = onFillingSessionEvent,
                 navigateBack = { navController.navigateUp() }
             )
         }
-        composable(route = CalendarScreen.AddOther.name) {
+        composable(route = Screen.AddOther.name) {
             AddOtherScreen(
                 fillingSessionState = fillingSessionState,
                 onFillingSessionEvent = onFillingSessionEvent,

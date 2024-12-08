@@ -10,6 +10,7 @@ import com.example.alcocalendar.ui.addsession.viewmodel.FillingSessionEvent
 import com.example.alcocalendar.ui.calendar.components.CalendarNavigationBar
 import com.example.alcocalendar.ui.calendar.viewmodel.CalendarEvent
 import com.example.alcocalendar.ui.calendar.viewmodel.CalendarState
+import com.example.alcocalendar.ui.navigation.CalendarView
 
 
 @SuppressLint("NewApi")
@@ -19,7 +20,6 @@ fun MonthLayout(
     onCalendarEvent: (CalendarEvent) -> Unit,
     onFillingSessionEvent: (FillingSessionEvent) -> Unit,
     navigateToCategoryScreen: () -> Unit,
-    navigateToYear: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val pagerState = rememberPagerState(
@@ -36,7 +36,7 @@ fun MonthLayout(
     ) {
         CalendarNavigationBar(
             titleString = titleString,
-            onTitleClick = navigateToYear,
+            onTitleClick = { onCalendarEvent(CalendarEvent.ChangeView(CalendarView.YearView)) },
             enabledPrev = calendarState.hasPrevMonth,
             enabledNext = calendarState.hasNextMonth,
             onBackNavigationClick = {

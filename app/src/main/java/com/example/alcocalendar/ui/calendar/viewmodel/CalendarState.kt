@@ -6,6 +6,7 @@ import androidx.annotation.RequiresApi
 import com.example.alcocalendar.db.entities.DrinkingSession
 import com.example.alcocalendar.model.MonthModel
 import com.example.alcocalendar.model.YearModel
+import com.example.alcocalendar.ui.navigation.CalendarView
 import kotlinx.collections.immutable.ImmutableMap
 import java.time.LocalDate
 import java.time.Month
@@ -14,6 +15,7 @@ import java.time.Month
 @SuppressLint("NewApi")
 data class CalendarState(
     val calendarMap: ImmutableMap<Int, YearModel>,
+    val currentView: CalendarView,
     val startFromSunday: Boolean,
     val currentMonthIndex: Int = getInitialMonthIndex(),
     val currentYearIndex: Int = getInitialYearIndex(),

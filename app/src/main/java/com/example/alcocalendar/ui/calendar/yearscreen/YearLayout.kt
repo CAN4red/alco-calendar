@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import com.example.alcocalendar.ui.calendar.components.CalendarNavigationBar
 import com.example.alcocalendar.ui.calendar.viewmodel.CalendarEvent
 import com.example.alcocalendar.ui.calendar.viewmodel.CalendarState
+import com.example.alcocalendar.ui.navigation.CalendarView
 
 
 @SuppressLint("NewApi")
@@ -16,7 +17,6 @@ import com.example.alcocalendar.ui.calendar.viewmodel.CalendarState
 fun YearLayout(
     calendarState: CalendarState,
     onCalendarEvent: (CalendarEvent) -> Unit,
-    navigateToYear: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val pagerState = rememberPagerState(
@@ -30,7 +30,7 @@ fun YearLayout(
         modifier = modifier,
     ) {
         CalendarNavigationBar(
-            onTitleClick = navigateToYear,
+            onTitleClick = { onCalendarEvent(CalendarEvent.ChangeView(CalendarView.MonthView)) },
             titleString = titleString,
             enabledPrev = calendarState.hasPrevYear,
             enabledNext = calendarState.hasNextYear,
@@ -45,7 +45,7 @@ fun YearLayout(
         YearPager(
             calendarState = calendarState,
             onCalendarEvent = onCalendarEvent,
-            navigateToMonth = navigateToYear,
+            navigateToMonth = { onCalendarEvent(CalendarEvent.ChangeView(CalendarView.MonthView)) },
             pagerState = pagerState,
             modifier = Modifier.fillMaxWidth()
         )

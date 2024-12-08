@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.alcocalendar.db.DrinkingSessionsDao
 import com.example.alcocalendar.model.YearModel
+import com.example.alcocalendar.ui.navigation.CalendarView
 import kotlinx.collections.immutable.toImmutableMap
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -26,6 +27,7 @@ class CalendarViewModel(
     private val _calendarState: MutableStateFlow<CalendarState> = MutableStateFlow(
         CalendarState(
             calendarMap = calendarMap,
+            currentView = CalendarView.MonthView,
             startFromSunday = false,
         )
     )
@@ -64,6 +66,14 @@ class CalendarViewModel(
                 _calendarState.update { currentState ->
                     currentState.deleteSession(event.session)
                     currentState.copy(updateToggle = !currentState.updateToggle)
+                }
+            }
+
+            is CalendarEvent.ChangeView -> {
+                _calendarState.update { currentState ->
+                    currentState.copy(
+                        currentView = event.calendarView
+                    )
                 }
             }
         }
