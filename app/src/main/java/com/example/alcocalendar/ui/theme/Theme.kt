@@ -57,7 +57,7 @@ fun AlcoCalendarTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = Typography,
+        typography = AlcoTypography,
         content = content
     )
 }
