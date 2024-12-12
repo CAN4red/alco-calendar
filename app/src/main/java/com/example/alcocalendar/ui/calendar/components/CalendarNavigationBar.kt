@@ -2,13 +2,14 @@ package com.example.alcocalendar.ui.calendar.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -16,10 +17,8 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import androidx.compose.ui.tooling.preview.Preview
 import kotlinx.coroutines.launch
 
 
@@ -35,23 +34,21 @@ fun CalendarNavigationBar(
     val coroutineScope = rememberCoroutineScope()
 
     Row(
-        horizontalArrangement = Arrangement.SpaceBetween,
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp),
+        horizontalArrangement = Arrangement.SpaceEvenly,
+        modifier = Modifier.fillMaxWidth()
     ) {
         NavigationButton(
             enabled = enabledPrev,
             onClick = { coroutineScope.launch { onBackNavigationClick() } },
             icon = Icons.AutoMirrored.Filled.KeyboardArrowLeft,
-            contentDescription = "Back"
+            contentDescription = "Back",
+            modifier = Modifier.align(Alignment.CenterVertically)
         )
 
         TextButton(onClick = onTitleClick) {
             Text(
                 text = titleString,
-                fontSize = 24.sp,
-                fontWeight = FontWeight.Bold,
+                style = MaterialTheme.typography.headlineLarge,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.align(Alignment.CenterVertically)
             )
@@ -61,26 +58,44 @@ fun CalendarNavigationBar(
             enabled = enabledNext,
             onClick = { coroutineScope.launch { onForwardNavigationClick() } },
             icon = Icons.AutoMirrored.Filled.KeyboardArrowRight,
-            contentDescription = "Forward"
+            contentDescription = "Forward",
+            modifier = Modifier.align(Alignment.CenterVertically)
         )
     }
 }
 
 
 @Composable
-fun NavigationButton(
+private fun NavigationButton(
     enabled: Boolean,
     onClick: () -> Unit,
     icon: ImageVector,
-    contentDescription: String
+    contentDescription: String,
+    modifier: Modifier = Modifier
 ) {
     IconButton(
         enabled = enabled,
-        onClick = onClick
+        onClick = onClick,
+        modifier = modifier
     ) {
         Icon(
             imageVector = icon,
-            contentDescription = contentDescription
+            contentDescription = contentDescription,
+            modifier = Modifier.fillMaxSize()
         )
+    }
+}
+
+@Composable
+@Preview
+private fun CalendarNavigationBarPreview() {
+    CalendarNavigationBar(
+        titleString = "December 2024",
+        onTitleClick = { },
+        enabledPrev = true,
+        enabledNext = true,
+        onBackNavigationClick = { }
+    ) {
+
     }
 }

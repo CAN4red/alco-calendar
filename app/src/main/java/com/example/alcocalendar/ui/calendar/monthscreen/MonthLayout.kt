@@ -27,8 +27,15 @@ fun MonthLayout(
         pageCount = { calendarState.monthsCount }
     )
 
-    val month = calendarState.getMonthByIndex(pagerState.currentPage).month
-    val year = calendarState.getMonthByIndex(pagerState.currentPage).year
+    val month = calendarState
+        .getMonthByIndex(pagerState.currentPage)
+        .month
+        .toString()
+        .lowercase()
+        .replaceFirstChar { it.titlecase() }
+    val year = calendarState
+        .getMonthByIndex(pagerState.currentPage)
+        .year
     val titleString = "$month $year"
 
     Column(
