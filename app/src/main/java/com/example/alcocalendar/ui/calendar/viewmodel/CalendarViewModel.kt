@@ -13,7 +13,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-
 @RequiresApi(Build.VERSION_CODES.O)
 class CalendarViewModel(
     private val dao: DrinkingSessionsDao
@@ -39,43 +38,49 @@ class CalendarViewModel(
 
     fun onCalendarEvent(event: CalendarEvent) {
         when (event) {
-            is CalendarEvent.ChangeMonth -> {
-                 _calendarState.update { currentState ->
-                    currentState.copy(
-                        currentMonthIndex = event.monthIndex,
-                    )
-                }
-            }
+            is CalendarEvent.ChangeMonth -> handleChangeMonth(event)
+            is CalendarEvent.ChangeYear -> handleChangeYear(event)
+            is CalendarEvent.UpdateDrinkingSession -> handleUpdateDrinkingSession(event)
+            is CalendarEvent.DeleteDrinkingSession -> handleDeleteDrinkingSession(event)
+            is CalendarEvent.ChangeView -> handleChangeView(event)
+        }
+    }
 
-            is CalendarEvent.ChangeYear -> {
-                _calendarState.update { currentState ->
-                    currentState.copy(
-                        currentYearIndex = event.yearIndex,
-                    )
-                }
-            }
+    private fun handleChangeMonth(event: CalendarEvent.ChangeMonth) {
+        _calendarState.update { currentState ->
+            currentState.copy(
+                currentMonthIndex = event.monthIndex,
+            )
+        }
+    }
 
-            is CalendarEvent.UpdateDrinkingSession -> {
-                _calendarState.update { currentState ->
-                    currentState.updateSession(event.session)
-                    currentState.copy(updateToggle = !currentState.updateToggle)
-                }
-            }
+    private fun handleChangeYear(event: CalendarEvent.ChangeYear) {
+        _calendarState.update { currentState ->
+            currentState.copy(
+                currentYearIndex = event.yearIndex,
+            )
+        }
+    }
 
-            is CalendarEvent.DeleteDrinkingSession -> {
-                _calendarState.update { currentState ->
-                    currentState.deleteSession(event.session)
-                    currentState.copy(updateToggle = !currentState.updateToggle)
-                }
-            }
+    private fun handleUpdateDrinkingSession(event: CalendarEvent.UpdateDrinkingSession) {
+        _calendarState.update { currentState ->
+            currentState.updateSession(event.session)
+            currentState.copy(updateToggle = !currentState.updateToggle)
+        }
+    }
 
-            is CalendarEvent.ChangeView -> {
-                _calendarState.update { currentState ->
-                    currentState.copy(
-                        currentView = event.calendarView
-                    )
-                }
-            }
+    private fun handleDeleteDrinkingSession(event: CalendarEvent.DeleteDrinkingSession) {
+        _calendarState.update { currentState ->
+            currentState.deleteSession(event.session)
+            currentState.copy(updateToggle = !currentState.updateToggle)
+        }
+    }
+
+    private fun handleChangeView(event: CalendarEvent.ChangeView) {
+        _calendarState.update { currentState ->
+            currentState.copy(
+                currentView = event.calendarView
+            )
         }
     }
 
