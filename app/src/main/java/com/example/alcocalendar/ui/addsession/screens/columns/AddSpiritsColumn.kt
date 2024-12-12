@@ -9,6 +9,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.alcocalendar.db.entities.DrinkingSession
 import com.example.alcocalendar.db.entities.intakes.Spirits
+import com.example.alcocalendar.db.entities.intakes.SpiritsIntake
 import com.example.alcocalendar.ui.addsession.components.AddDrinkColumn
 import com.example.alcocalendar.ui.addsession.components.DrinkButtonData
 import com.example.alcocalendar.ui.theme.color.DrinkColor
@@ -21,40 +22,49 @@ fun AddSpiritsColumn(
     navigateBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val drinkButtons = listOf(
-        DrinkButtonData("Vodka", Color.Black, DrinkColor.SpiritsVodka) {
-            onDrinkButtonClick(fillingSessionState.spiritsIntake.vodka)
-        },
-        DrinkButtonData("Whiskey", Color.Black, DrinkColor.SpiritsWhiskey) {
-            onDrinkButtonClick(fillingSessionState.spiritsIntake.whiskey)
-        },
-        DrinkButtonData("Cognac", Color.Black, DrinkColor.SpiritsCognac) {
-            onDrinkButtonClick(fillingSessionState.spiritsIntake.cognac)
-        },
-        DrinkButtonData("Rum", Color.Black, DrinkColor.SpiritsRum) {
-            onDrinkButtonClick(fillingSessionState.spiritsIntake.rum)
-        },
-        DrinkButtonData("Tequila", Color.Black, DrinkColor.SpiritsTequila) {
-            onDrinkButtonClick(fillingSessionState.spiritsIntake.tequila)
-        },
-        DrinkButtonData("Gin", Color.Black, DrinkColor.SpiritsGin) {
-            onDrinkButtonClick(fillingSessionState.spiritsIntake.gin)
-        },
-        DrinkButtonData("Absinthe", Color.Black, DrinkColor.SpiritsAbsinthe) {
-            onDrinkButtonClick(fillingSessionState.spiritsIntake.absinthe)
-        },
-        DrinkButtonData("Liquor", Color(0xFFFC510E), DrinkColor.SpiritsLiquor) {
-            onDrinkButtonClick(fillingSessionState.spiritsIntake.liquor)
-        },
-        DrinkButtonData("Brandy", Color.Black, DrinkColor.SpiritsBrandy) {
-            onDrinkButtonClick(fillingSessionState.spiritsIntake.brandy)
-        }
+    val drinkButtons = getSpiritsButtonsData(
+        spiritsIntake = fillingSessionState.spiritsIntake,
+        onDrinkButtonClick = onDrinkButtonClick,
     )
-
     AddDrinkColumn(
         addDrinkButtons = drinkButtons,
         navigateBack = navigateBack,
         modifier = modifier
+    )
+}
+
+private fun getSpiritsButtonsData(
+    spiritsIntake: SpiritsIntake,
+    onDrinkButtonClick: (Spirits) -> Unit
+): List<DrinkButtonData> {
+    return listOf(
+        DrinkButtonData("Vodka", Color.Black, DrinkColor.SpiritsVodka) {
+            onDrinkButtonClick(spiritsIntake.vodka)
+        },
+        DrinkButtonData("Whiskey", Color.Black, DrinkColor.SpiritsWhiskey) {
+            onDrinkButtonClick(spiritsIntake.whiskey)
+        },
+        DrinkButtonData("Cognac", Color.Black, DrinkColor.SpiritsCognac) {
+            onDrinkButtonClick(spiritsIntake.cognac)
+        },
+        DrinkButtonData("Rum", Color.Black, DrinkColor.SpiritsRum) {
+            onDrinkButtonClick(spiritsIntake.rum)
+        },
+        DrinkButtonData("Tequila", Color.Black, DrinkColor.SpiritsTequila) {
+            onDrinkButtonClick(spiritsIntake.tequila)
+        },
+        DrinkButtonData("Gin", Color.Black, DrinkColor.SpiritsGin) {
+            onDrinkButtonClick(spiritsIntake.gin)
+        },
+        DrinkButtonData("Absinthe", Color.Black, DrinkColor.SpiritsAbsinthe) {
+            onDrinkButtonClick(spiritsIntake.absinthe)
+        },
+        DrinkButtonData("Liquor", Color(0xFFFC510E), DrinkColor.SpiritsLiquor) {
+            onDrinkButtonClick(spiritsIntake.liquor)
+        },
+        DrinkButtonData("Brandy", Color.Black, DrinkColor.SpiritsBrandy) {
+            onDrinkButtonClick(spiritsIntake.brandy)
+        }
     )
 }
 

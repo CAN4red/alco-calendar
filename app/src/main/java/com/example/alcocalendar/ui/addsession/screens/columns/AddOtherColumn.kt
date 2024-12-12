@@ -9,6 +9,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.alcocalendar.db.entities.DrinkingSession
 import com.example.alcocalendar.db.entities.intakes.OtherDrink
+import com.example.alcocalendar.db.entities.intakes.OtherIntake
 import com.example.alcocalendar.ui.addsession.components.AddDrinkColumn
 import com.example.alcocalendar.ui.addsession.components.DrinkButtonData
 import com.example.alcocalendar.ui.theme.color.DrinkColor
@@ -21,22 +22,31 @@ fun AddOtherColumn(
     navigateBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val drinkButtons = listOf(
-        DrinkButtonData("Cocktails", Color.White, DrinkColor.OtherCocktails) {
-            onDrinkButtonClick(fillingSessionState.otherIntake.cocktails)
-        },
-        DrinkButtonData("Shots", Color.Black, DrinkColor.OtherShots) {
-            onDrinkButtonClick(fillingSessionState.otherIntake.shots)
-        },
-        DrinkButtonData("Moonshine", Color.Black, DrinkColor.OtherMoonshine) {
-            onDrinkButtonClick(fillingSessionState.otherIntake.moonshine)
-        },
+    val drinkButtons = getOtherDrinkButtonsData(
+        otherIntake = fillingSessionState.otherIntake,
+        onDrinkButtonClick = onDrinkButtonClick,
     )
-
     AddDrinkColumn(
         addDrinkButtons = drinkButtons,
         navigateBack = navigateBack,
         modifier = modifier
+    )
+}
+
+private fun getOtherDrinkButtonsData(
+    otherIntake: OtherIntake,
+    onDrinkButtonClick: (OtherDrink) -> Unit
+): List<DrinkButtonData> {
+    return listOf(
+        DrinkButtonData("Cocktails", Color.White, DrinkColor.OtherCocktails) {
+            onDrinkButtonClick(otherIntake.cocktails)
+        },
+        DrinkButtonData("Shots", Color.Black, DrinkColor.OtherShots) {
+            onDrinkButtonClick(otherIntake.shots)
+        },
+        DrinkButtonData("Moonshine", Color.Black, DrinkColor.OtherMoonshine) {
+            onDrinkButtonClick(otherIntake.moonshine)
+        },
     )
 }
 
