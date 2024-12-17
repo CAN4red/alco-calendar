@@ -3,7 +3,6 @@ package com.example.alcocalendar.model
 import android.annotation.SuppressLint
 import android.os.Build
 import androidx.annotation.RequiresApi
-import com.example.alcocalendar.db.entities.DrinkingSession
 import com.example.alcocalendar.db.entities.DrinkingSessionDb
 import java.time.DayOfWeek
 import java.time.LocalDate
@@ -22,7 +21,7 @@ data class MonthModel(
         _sessions = generateEmptySessions(year, month).toMutableList(),
     )
 
-    val sessions: List<DrinkingSession>
+    val sessions: List<DrinkingSessionWrapper>
         get() = _sessions.toList()
 
     private fun getDrinkingSession(date: Int): DrinkingSessionWrapper {

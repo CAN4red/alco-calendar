@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.lightColorScheme
@@ -24,6 +25,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.alcocalendar.db.entities.DrinkingSession
 import com.example.alcocalendar.db.entities.DrinkingSessionDb
+import com.example.alcocalendar.model.DrinkingSessionWrapper
+import com.example.alcocalendar.model.SessionOrder
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -33,22 +36,23 @@ import java.util.Locale
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun DateCell(
-    session: DrinkingSession,
+    session: DrinkingSessionWrapper,
     onClick: (LocalDate) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val day = session.date.formatToStringDay()
     val color = getCellColor(session)
+    val shape = getCellShape(session)
 
     Box(
         modifier = modifier
             .aspectRatio(1f)
             .padding(4.dp)
             .background(
-                shape = CircleShape,
+                shape = shape,
                 color = color
             )
-            .clip(CircleShape)
+            .clip(shape)
             .clickable(onClick = { onClick(session.date) })
     ) {
         Text(
@@ -67,6 +71,16 @@ private fun getCellColor(session: DrinkingSession): Color {
     }
 }
 
+private fun getCellShape(session: DrinkingSessionWrapper): RoundedCornerShape {
+    return when (session.sessionOrder) {
+        SessionOrder.SINGLE_SESSION -> CircleShape
+        SessionOrder.FIRST_IN_ROW -> RoundedCornerShape(topStart = 50.dp, bottomStart = 50.dp)
+        SessionOrder.MIDDLE_IN_ROW -> RoundedCornerShape(0.dp)
+        SessionOrder.LAST_IN_ROW -> RoundedCornerShape(topEnd = 50.dp, bottomEnd = 50.dp)
+        SessionOrder.EMPTY_SESSION -> CircleShape
+    }
+
+}
 
 @RequiresApi(Build.VERSION_CODES.O)
 private fun LocalDate.formatToStringDay(): String {
@@ -158,7 +172,7 @@ fun getDayOfWeekAbbreviation(
 @Composable
 fun DateCellPreview() {
     DateCell(
-        session = DrinkingSessionDb(LocalDate.now()),
+        session = DrinkingSessionWrapper(DrinkingSessionDb(LocalDate.now())),
         onClick = {}
     )
 }
