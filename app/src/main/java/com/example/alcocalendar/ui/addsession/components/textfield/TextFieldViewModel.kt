@@ -20,14 +20,14 @@ class TextFieldViewModel : ViewModel() {
 
     fun onTextFieldEvent(event: TextFieldEvent) {
         when (event) {
-            is TextFieldEvent.AddNumber -> handleAddNumber(event.char)
+            is TextFieldEvent.AddDigit -> handleAddDigit(event.char)
             is TextFieldEvent.AddDot -> handleAddDot()
             is TextFieldEvent.EraseCharacter -> handleEraseCharacter()
             is TextFieldEvent.UpdateField -> handleUpdateField(event.newTextValue)
         }
     }
 
-    private fun handleAddNumber(char: Char) {
+    private fun handleAddDigit(char: Char) {
         _textFieldState.update { currentState ->
             when {
                 currentState.isEmpty() || currentState.isSingleDigitZero() -> char.toString()
@@ -62,6 +62,6 @@ class TextFieldViewModel : ViewModel() {
         }
     }
 
-    private fun String.isSingleDigitZero(): Boolean = this.length == 1 && this[0] == '0'
+    private fun String.isSingleDigitZero(): Boolean = (this.length == 1 && this[0] == '0')
     private fun String.hasDot(): Boolean = this.contains('.')
 }

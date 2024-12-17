@@ -2,14 +2,15 @@ package com.example.alcocalendar.ui.calendar.components
 
 
 import android.annotation.SuppressLint
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.CornerSize
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
@@ -22,14 +23,13 @@ import java.time.format.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.alcocalendar.db.entities.DrinkingSession
-import com.example.alcocalendar.ui.calendar.viewmodel.CalendarEvent
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
 
-@SuppressLint("NewApi")
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun DateCell(
     session: DrinkingSession,
@@ -38,23 +38,24 @@ fun DateCell(
 ) {
     val day = session.date.formatToStringDay()
     val color = if (session.isEmpty)
-        lightColorScheme().secondaryContainer.copy(alpha = 0.7f)
+        Color.Transparent
     else
         Color.Red
 
     Box(
         modifier = modifier
             .aspectRatio(1f)
-            .padding(2.dp)
+            .padding(4.dp)
             .background(
-                shape = RoundedCornerShape(CornerSize(8.dp)),
+                shape = CircleShape,
                 color = color
             )
-            .clip(RoundedCornerShape(CornerSize(8.dp)))
+            .clip(CircleShape)
             .clickable(onClick = { onClick(session.date) })
     ) {
         Text(
             text = day,
+            style = MaterialTheme.typography.bodyLarge,
             color = lightColorScheme().onSecondaryContainer,
             modifier = Modifier.align(Alignment.Center),
         )
@@ -62,7 +63,7 @@ fun DateCell(
 }
 
 
-@SuppressLint("NewApi")
+@RequiresApi(Build.VERSION_CODES.O)
 private fun LocalDate.formatToStringDay(): String {
     val formatter = DateTimeFormatter.ofPattern("d", Locale.getDefault())
     return this.format(formatter)
@@ -106,7 +107,6 @@ fun EmptyCell(modifier: Modifier = Modifier) {
 }
 
 
-@SuppressLint("NewApi")
 @Composable
 fun WeekdayCell(
     dayOfWeek: DayOfWeek,
@@ -125,6 +125,7 @@ fun WeekdayCell(
     ) {
         Text(
             text = text,
+            style = MaterialTheme.typography.bodyLarge,
             color = Color.White,
             modifier = Modifier.align(Alignment.Center)
         )
@@ -143,7 +144,7 @@ fun getDayOfWeekAbbreviation(
         else -> Locale.getDefault()
     }
 
-    return dayOfWeek.getDisplayName(TextStyle.SHORT, locale).uppercase()
+    return dayOfWeek.getDisplayName(TextStyle.NARROW, locale).uppercase()
 }
 
 

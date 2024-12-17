@@ -16,15 +16,15 @@ fun CustomTextFieldKeyboard(
     Column(modifier) {
         Row(modifier = Modifier) {
             CustomTextFieldButton(
-                onClick = { onClickEvent(TextFieldEvent.AddNumber('1')) },
+                onClick = { onClickEvent(TextFieldEvent.AddDigit('1')) },
                 buttonContent = { Text(text = "1") }
             )
             CustomTextFieldButton(
-                onClick = { onClickEvent(TextFieldEvent.AddNumber('2')) },
+                onClick = { onClickEvent(TextFieldEvent.AddDigit('2')) },
                 buttonContent = { Text(text = "2") }
             )
             CustomTextFieldButton(
-                onClick = { onClickEvent(TextFieldEvent.AddNumber('3')) },
+                onClick = { onClickEvent(TextFieldEvent.AddDigit('3')) },
                 buttonContent = { Text(text = "3") }
             )
             CustomTextFieldButton(
@@ -34,15 +34,15 @@ fun CustomTextFieldKeyboard(
 
         Row(modifier = Modifier) {
             CustomTextFieldButton(
-                onClick = { onClickEvent(TextFieldEvent.AddNumber('4')) },
+                onClick = { onClickEvent(TextFieldEvent.AddDigit('4')) },
                 buttonContent = { Text(text = "4") }
             )
             CustomTextFieldButton(
-                onClick = { onClickEvent(TextFieldEvent.AddNumber('5')) },
+                onClick = { onClickEvent(TextFieldEvent.AddDigit('5')) },
                 buttonContent = { Text(text = "5") }
             )
             CustomTextFieldButton(
-                onClick = { onClickEvent(TextFieldEvent.AddNumber('6')) },
+                onClick = { onClickEvent(TextFieldEvent.AddDigit('6')) },
                 buttonContent = { Text(text = "6") }
             )
             CustomTextFieldButton(
@@ -52,15 +52,15 @@ fun CustomTextFieldKeyboard(
 
         Row(modifier = Modifier) {
             CustomTextFieldButton(
-                onClick = { onClickEvent(TextFieldEvent.AddNumber('7')) },
+                onClick = { onClickEvent(TextFieldEvent.AddDigit('7')) },
                 buttonContent = { Text(text = "7") }
             )
             CustomTextFieldButton(
-                onClick = { onClickEvent(TextFieldEvent.AddNumber('8')) },
+                onClick = { onClickEvent(TextFieldEvent.AddDigit('8')) },
                 buttonContent = { Text(text = "8") }
             )
             CustomTextFieldButton(
-                onClick = { onClickEvent(TextFieldEvent.AddNumber('9')) },
+                onClick = { onClickEvent(TextFieldEvent.AddDigit('9')) },
                 buttonContent = { Text(text = "9") }
             )
             CustomTextFieldButton(
@@ -74,7 +74,7 @@ fun CustomTextFieldKeyboard(
         Row(modifier = Modifier) {
             CustomTextFieldButton(onClick = {}, buttonContent = { Text(text = "") })
             CustomTextFieldButton(
-                onClick = { onClickEvent(TextFieldEvent.AddNumber('0')) },
+                onClick = { onClickEvent(TextFieldEvent.AddDigit('0')) },
                 buttonContent = { Text(text = "0") }
             )
             CustomTextFieldButton(onClick = {}, buttonContent = { Text(text = "") })
