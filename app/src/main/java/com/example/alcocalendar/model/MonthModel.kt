@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Build
 import androidx.annotation.RequiresApi
 import com.example.alcocalendar.db.entities.DrinkingSession
+import com.example.alcocalendar.db.entities.DrinkingSessionDb
 import java.time.LocalDate
 import java.time.Month
 
@@ -11,7 +12,7 @@ import java.time.Month
 data class MonthModel(
     val year: Int,
     val month: Month,
-    private val _sessions: MutableList<DrinkingSession>,
+    private val _sessions: MutableList<DrinkingSessionWrapper>,
 ) {
     @SuppressLint("NewApi")
     constructor(year: Int, month: Month) : this(
@@ -28,7 +29,7 @@ data class MonthModel(
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun updateDrinkingSession(session: DrinkingSession) {
+    fun updateDrinkingSession(session: DrinkingSessionWrapper) {
         _sessions[session.date.dayOfMonth - 1] = session
     }
 }
@@ -47,9 +48,11 @@ private fun Int.isLeapYear(): Boolean {
 
 
 @SuppressLint("NewApi")
-private fun generateEmptySessions(year: Int, month: Month): List<DrinkingSession> {
+private fun generateEmptySessions(year: Int, month: Month): List<DrinkingSessionWrapper> {
     val lastDayOfMonth = getLastDayOfMonth(year, month).dayOfMonth
     return (1..lastDayOfMonth).map { day ->
-        DrinkingSession(LocalDate.of(year, month, day))
+        DrinkingSessionWrapper(
+            drinkingSession = DrinkingSessionDb(LocalDate.of(year, month, day))
+        )
     }
 }

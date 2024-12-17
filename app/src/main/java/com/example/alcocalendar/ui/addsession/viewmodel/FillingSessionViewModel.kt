@@ -5,7 +5,7 @@ import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.alcocalendar.db.DrinkingSessionsDao
-import com.example.alcocalendar.db.entities.DrinkingSession
+import com.example.alcocalendar.db.entities.DrinkingSessionDb
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -16,10 +16,10 @@ import java.time.LocalDate
 class FillingSessionViewModel(
     private val dao: DrinkingSessionsDao,
 ) : ViewModel() {
-    private val _fillingSessionState: MutableStateFlow<DrinkingSession> = MutableStateFlow(
-        DrinkingSession(date = LocalDate.now())
+    private val _fillingSessionState: MutableStateFlow<DrinkingSessionDb> = MutableStateFlow(
+        DrinkingSessionDb(date = LocalDate.now())
     )
-    val fillingSessionState: StateFlow<DrinkingSession>
+    val fillingSessionState: StateFlow<DrinkingSessionDb>
         get() = _fillingSessionState
 
     fun onSessionFillingEvent(event: FillingSessionEvent) {
@@ -37,7 +37,7 @@ class FillingSessionViewModel(
 
     private fun handleInitNewSession(event: FillingSessionEvent.InitNewSession) {
         _fillingSessionState.update {
-            DrinkingSession(date = event.date)
+            DrinkingSessionDb(date = event.date)
         }
         viewModelScope.launch {
             loadNewSession(date = event.date)
@@ -87,7 +87,7 @@ class FillingSessionViewModel(
             dao.deleteDrinkingSession(_fillingSessionState.value)
         }
         _fillingSessionState.update { currentState ->
-            DrinkingSession(date = currentState.date)
+            DrinkingSessionDb(date = currentState.date)
         }
     }
 

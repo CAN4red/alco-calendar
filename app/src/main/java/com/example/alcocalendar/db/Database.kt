@@ -6,11 +6,11 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.alcocalendar.db.converters.LocalDateConverter
-import com.example.alcocalendar.db.entities.DrinkingSession
+import com.example.alcocalendar.db.entities.DrinkingSessionDb
 
 @Database(
-    entities = [DrinkingSession::class],
-    version = 8,
+    entities = [DrinkingSessionDb::class],
+    version = 9,
     exportSchema = false
 )
 @TypeConverters(LocalDateConverter::class)

@@ -23,6 +23,7 @@ import java.time.format.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.alcocalendar.db.entities.DrinkingSession
+import com.example.alcocalendar.db.entities.DrinkingSessionDb
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -37,10 +38,7 @@ fun DateCell(
     modifier: Modifier = Modifier,
 ) {
     val day = session.date.formatToStringDay()
-    val color = if (session.isEmpty)
-        Color.Transparent
-    else
-        Color.Red
+    val color = getCellColor(session)
 
     Box(
         modifier = modifier
@@ -59,6 +57,13 @@ fun DateCell(
             color = lightColorScheme().onSecondaryContainer,
             modifier = Modifier.align(Alignment.Center),
         )
+    }
+}
+
+private fun getCellColor(session: DrinkingSession): Color {
+    return when (session.isEmpty) {
+        true -> Color.Transparent
+        false -> Color.Red
     }
 }
 
@@ -153,7 +158,7 @@ fun getDayOfWeekAbbreviation(
 @Composable
 fun DateCellPreview() {
     DateCell(
-        session = DrinkingSession(LocalDate.now()),
+        session = DrinkingSessionDb(LocalDate.now()),
         onClick = {}
     )
 }
@@ -171,5 +176,5 @@ fun WeekdayCellPreview() {
 @Preview
 @Composable
 fun SmallDateCellPreview() {
-    SmallDateCell(session = DrinkingSession(LocalDate.now()))
+    SmallDateCell(session = DrinkingSessionDb(LocalDate.now()))
 }

@@ -18,7 +18,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.alcocalendar.R
-import com.example.alcocalendar.db.entities.DrinkingSession
+import com.example.alcocalendar.db.entities.DrinkingSessionDb
+import com.example.alcocalendar.model.DrinkingSessionWrapper
 import com.example.alcocalendar.ui.addsession.components.CategoryCard
 import com.example.alcocalendar.ui.addsession.viewmodel.FillingSessionEvent
 import com.example.alcocalendar.ui.calendar.viewmodel.CalendarEvent
@@ -28,7 +29,7 @@ import java.time.LocalDate
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun ChooseCategoryScreen(
-    fillingSessionState: DrinkingSession,
+    fillingSessionState: DrinkingSessionDb,
     onFillingSessionEvent: (FillingSessionEvent) -> Unit,
     onCalendarEvent: (CalendarEvent) -> Unit,
     onBeerClick: () -> Unit,
@@ -105,7 +106,11 @@ fun ChooseCategoryScreen(
         Button(
             onClick = {
                 onFillingSessionEvent(FillingSessionEvent.ConfirmSession)
-                onCalendarEvent(CalendarEvent.UpdateDrinkingSession(fillingSessionState))
+                onCalendarEvent(
+                    CalendarEvent.UpdateDrinkingSession(
+                        DrinkingSessionWrapper(fillingSessionState)
+                    )
+                )
                 navigateBack()
             },
             modifier = Modifier.align(Alignment.CenterHorizontally)
@@ -116,7 +121,11 @@ fun ChooseCategoryScreen(
         Button(
             onClick = {
                 onFillingSessionEvent(FillingSessionEvent.DeleteSession)
-                onCalendarEvent(CalendarEvent.DeleteDrinkingSession(fillingSessionState))
+                onCalendarEvent(
+                    CalendarEvent.DeleteDrinkingSession(
+                        DrinkingSessionWrapper(fillingSessionState)
+                    )
+                )
                 navigateBack()
             },
             modifier = Modifier.align(Alignment.CenterHorizontally)
@@ -131,7 +140,7 @@ fun ChooseCategoryScreen(
 @Preview
 private fun ChooseCategoryScreenPreview() {
     ChooseCategoryScreen(
-        fillingSessionState = DrinkingSession(LocalDate.now()),
+        fillingSessionState = DrinkingSessionDb(LocalDate.now()),
         onFillingSessionEvent = {},
         onCalendarEvent = {},
         onBeerClick = {},

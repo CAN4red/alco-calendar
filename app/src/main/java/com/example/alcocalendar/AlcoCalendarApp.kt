@@ -9,7 +9,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.alcocalendar.db.entities.DrinkingSession
+import com.example.alcocalendar.db.entities.DrinkingSessionDb
 import com.example.alcocalendar.ui.addsession.screens.AddBeerScreen
 import com.example.alcocalendar.ui.addsession.screens.AddOtherScreen
 import com.example.alcocalendar.ui.addsession.screens.AddSpiritsScreen
@@ -26,7 +26,7 @@ import com.example.alcocalendar.ui.navigation.Screen
 @Composable
 fun AlcoCalendarApp(
     calendarState: CalendarState,
-    fillingSessionState: DrinkingSession,
+    fillingSessionState: DrinkingSessionDb,
     onCalendarEvent: (CalendarEvent) -> Unit,
     onFillingSessionEvent: (FillingSessionEvent) -> Unit,
     navController: NavHostController = rememberNavController(),

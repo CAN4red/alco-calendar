@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.alcocalendar.db.entities.DrinkingSession
+import com.example.alcocalendar.db.entities.DrinkingSessionDb
 import com.example.alcocalendar.db.entities.intakes.Wine
 import com.example.alcocalendar.db.entities.intakes.WineIntake
 import com.example.alcocalendar.ui.addsession.components.AddDrinkColumn
@@ -64,7 +65,7 @@ private fun getWineButtonsData(
 @Preview
 private fun AddWineScreenPreview() {
     AddWineColumn(
-        fillingSessionState = DrinkingSession(LocalDate.now()),
+        fillingSessionState = DrinkingSessionDb(LocalDate.now()),
         onDrinkButtonClick = {},
         navigateBack = {},
         modifier = Modifier.fillMaxSize()

@@ -5,6 +5,7 @@ import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.alcocalendar.db.DrinkingSessionsDao
+import com.example.alcocalendar.model.DrinkingSessionWrapper
 import com.example.alcocalendar.model.YearModel
 import com.example.alcocalendar.ui.navigation.CalendarView
 import kotlinx.collections.immutable.toImmutableMap
@@ -87,7 +88,11 @@ class CalendarViewModel(
     private suspend fun loadInitialData() {
         val initialSessions = dao.getDrinkingSessions()
         _calendarState.update { currentState ->
-            initialSessions.forEach { session -> currentState.updateSession(session) }
+            initialSessions.forEach { session ->
+                currentState.updateSession(
+                    DrinkingSessionWrapper(session)
+                )
+            }
             currentState.copy(updateToggle = !currentState.updateToggle)
         }
     }

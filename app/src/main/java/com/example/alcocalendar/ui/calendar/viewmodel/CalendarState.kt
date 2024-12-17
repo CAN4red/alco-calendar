@@ -3,7 +3,8 @@ package com.example.alcocalendar.ui.calendar.viewmodel
 import android.annotation.SuppressLint
 import android.os.Build
 import androidx.annotation.RequiresApi
-import com.example.alcocalendar.db.entities.DrinkingSession
+import com.example.alcocalendar.db.entities.DrinkingSessionDb
+import com.example.alcocalendar.model.DrinkingSessionWrapper
 import com.example.alcocalendar.model.MonthModel
 import com.example.alcocalendar.model.YearModel
 import com.example.alcocalendar.ui.navigation.CalendarView
@@ -35,15 +36,15 @@ data class CalendarState(
         return calendarMap[year] ?: YearModel(year)
     }
 
-    fun updateSession(session: DrinkingSession) {
+    fun updateSession(session: DrinkingSessionWrapper) {
         val date = session.date
         calendarMap[date.year]
             ?.getMonthModel(date.month)
             ?.updateDrinkingSession(session)
     }
 
-    fun deleteSession(session: DrinkingSession) {
-        val emptySession = DrinkingSession(date = session.date)
+    fun deleteSession(session: DrinkingSessionWrapper) {
+        val emptySession = DrinkingSessionWrapper(DrinkingSessionDb(session.date))
         this.updateSession(emptySession)
     }
 
