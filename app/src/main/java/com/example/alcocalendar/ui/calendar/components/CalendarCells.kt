@@ -7,6 +7,7 @@ import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
@@ -22,6 +23,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import java.time.format.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.alcocalendar.db.entities.DrinkingSession
 import com.example.alcocalendar.db.entities.DrinkingSessionDb
@@ -43,11 +45,12 @@ fun DateCell(
     val day = session.date.formatToStringDay()
     val color = getCellColor(session)
     val shape = getCellShape(session)
+    val paddingValue = getCellPadding(session)
 
     Box(
         modifier = modifier
             .aspectRatio(1f)
-            .padding(4.dp)
+            .padding(paddingValue)
             .background(
                 shape = shape,
                 color = color
@@ -64,9 +67,27 @@ fun DateCell(
     }
 }
 
-private fun getCellColor(session: DrinkingSession): Color {
+private fun getCellPadding(
+    session: DrinkingSessionWrapper,
+    paddingValue: Dp = 4.dp
+): PaddingValues {
+    return when (session.sessionOrder) {
+        SessionOrder.SINGLE_SESSION -> PaddingValues(paddingValue)
+        SessionOrder.MIDDLE_IN_ROW -> PaddingValues(vertical = paddingValue)
+        SessionOrder.EMPTY_SESSION -> PaddingValues(paddingValue)
+        SessionOrder.FIRST_IN_ROW -> PaddingValues(
+            start = paddingValue, bottom = paddingValue, top = paddingValue
+        )
+
+        SessionOrder.LAST_IN_ROW -> PaddingValues(
+            end = paddingValue, bottom = paddingValue, top = paddingValue
+        )
+    }
+}
+
+private fun getCellColor(session: DrinkingSession, defaultColor: Color = Color.Transparent): Color {
     return when (session.isEmpty) {
-        true -> Color.Transparent
+        true -> defaultColor
         false -> Color.Red
     }
 }
@@ -74,12 +95,11 @@ private fun getCellColor(session: DrinkingSession): Color {
 private fun getCellShape(session: DrinkingSessionWrapper): RoundedCornerShape {
     return when (session.sessionOrder) {
         SessionOrder.SINGLE_SESSION -> CircleShape
-        SessionOrder.FIRST_IN_ROW -> RoundedCornerShape(topStart = 50.dp, bottomStart = 50.dp)
         SessionOrder.MIDDLE_IN_ROW -> RoundedCornerShape(0.dp)
-        SessionOrder.LAST_IN_ROW -> RoundedCornerShape(topEnd = 50.dp, bottomEnd = 50.dp)
         SessionOrder.EMPTY_SESSION -> CircleShape
+        SessionOrder.FIRST_IN_ROW -> RoundedCornerShape(topStart = 50.dp, bottomStart = 50.dp)
+        SessionOrder.LAST_IN_ROW -> RoundedCornerShape(topEnd = 50.dp, bottomEnd = 50.dp)
     }
-
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -91,20 +111,19 @@ private fun LocalDate.formatToStringDay(): String {
 
 @Composable
 fun SmallDateCell(
-    session: DrinkingSession,
+    session: DrinkingSessionWrapper,
     modifier: Modifier = Modifier,
 ) {
-    val color = if (session.isEmpty)
-        lightColorScheme().secondaryContainer.copy(alpha = 0.7f)
-    else
-        Color.Red
+    val color = getCellColor(session, lightColorScheme().secondaryContainer.copy(alpha = 0.7f))
+    val shape = getCellShape(session)
+    val paddingValue = getCellPadding(session, 2.dp)
 
     Box(
         modifier = modifier
             .aspectRatio(1f)
-            .padding(2.dp)
+            .padding(paddingValue)
             .background(
-                shape = CircleShape,
+                shape = shape,
                 color = color
             )
             .clip(CircleShape)
@@ -190,5 +209,5 @@ fun WeekdayCellPreview() {
 @Preview
 @Composable
 fun SmallDateCellPreview() {
-    SmallDateCell(session = DrinkingSessionDb(LocalDate.now()))
+    SmallDateCell(session = DrinkingSessionWrapper(DrinkingSessionDb(LocalDate.now())))
 }
