@@ -34,9 +34,7 @@ fun DatesGrid(
                 orderedDaysOfWeek.forEach { dayOfWeek ->
                     WeekdayCell(
                         dayOfWeek = dayOfWeek,
-                        modifier = Modifier
-                            .weight(1f)
-                            .fillMaxWidth()
+                        modifier = Modifier.weight(1f)
                     )
                 }
             }
@@ -52,12 +50,11 @@ fun DatesGrid(
                 week.forEach { session ->
                     dateCell(session)
                 }
-                if (index == weeks.indices.last) {
+                if (index == weeks.lastIndex) {
                     repeat(lastEmptyCellsCount) {
                         EmptyCell(modifier = Modifier.weight(1f))
                     }
                 }
-
             }
         }
     }
@@ -66,18 +63,16 @@ fun DatesGrid(
 private fun orderDaysOfWeek(
     daysOfWeek: List<DayOfWeek>, startFromSunday: Boolean
 ): List<DayOfWeek> {
-    val orderedDays = daysOfWeek.sorted()
     return if (startFromSunday) {
-        listOf(orderedDays.last()) + orderedDays.dropLast(1)
+        listOf(daysOfWeek.last()) + daysOfWeek.dropLast(1)
     } else {
-        orderedDays
+        daysOfWeek.sorted()
     }
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
 private fun getWeeks(
-    days: List<DrinkingSessionWrapper>,
-    startFromSunday: Boolean
+    days: List<DrinkingSessionWrapper>, startFromSunday: Boolean
 ): List<List<DrinkingSessionWrapper>> {
     val firstDayIndex = getFirstDayIndex(days.first().date, startFromSunday)
     val firstWeekLength = 7 - firstDayIndex
@@ -93,7 +88,7 @@ private fun getFirstDayIndex(
     firstDay: LocalDate, startFromSunday: Boolean
 ): Int {
     return if (startFromSunday) {
-        (firstDay.dayOfWeek.value % 7) // Sunday as the first day
+        firstDay.dayOfWeek.value % 7 // Sunday as the first day
     } else {
         firstDay.dayOfWeek.value - 1 // Monday as the first day
     }

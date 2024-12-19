@@ -48,6 +48,7 @@ fun DateCell(
     val paddingValue = getCellPadding(session, 4.dp)
 
     Box(
+        contentAlignment = Alignment.Center,
         modifier = modifier
             .aspectRatio(1f)
             .padding(paddingValue)
