@@ -8,9 +8,12 @@ import java.time.LocalDate
 
 interface DrinkingSession {
     val date: LocalDate
+
     val beerIntake: BeerIntake
     val wineIntake: WineIntake
     val spiritsIntake: SpiritsIntake
     val otherIntake: OtherIntake
+
     val isEmpty: Boolean
+    val alcoUnits: Double
 }

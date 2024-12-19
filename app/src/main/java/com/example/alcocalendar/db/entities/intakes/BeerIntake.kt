@@ -8,13 +8,20 @@ data class BeerIntake(
     @Embedded val cider: Beer.Cider = Beer.Cider(),
     @Embedded val unfiltered: Beer.Unfiltered = Beer.Unfiltered(),
     @Embedded val el: Beer.El = Beer.El(),
-) {
-    val isEmpty: Boolean
+): Intake {
+    override val isEmpty: Boolean
         get() = light.isEmpty &&
                 dark.isEmpty &&
                 cider.isEmpty &&
                 unfiltered.isEmpty &&
                 el.isEmpty
+
+    override val alcoUnits: Double
+        get() = light.alcoUnits +
+                dark.alcoUnits +
+                cider.alcoUnits +
+                unfiltered.alcoUnits +
+                el.alcoUnits
 
     fun update(beer: Beer): BeerIntake {
         return when (beer) {

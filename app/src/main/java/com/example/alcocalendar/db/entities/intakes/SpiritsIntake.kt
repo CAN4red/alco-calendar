@@ -12,8 +12,8 @@ data class SpiritsIntake(
     @Embedded val absinthe: Spirits.Absinthe = Spirits.Absinthe(),
     @Embedded val liquor: Spirits.Liquor = Spirits.Liquor(),
     @Embedded val brandy: Spirits.Brandy = Spirits.Brandy()
-) {
-    val isEmpty: Boolean
+): Intake {
+    override val isEmpty: Boolean
         get() = vodka.isEmpty &&
                 whiskey.isEmpty &&
                 cognac.isEmpty &&
@@ -22,6 +22,16 @@ data class SpiritsIntake(
                 gin.isEmpty &&
                 absinthe.isEmpty &&
                 brandy.isEmpty
+
+    override val alcoUnits: Double
+        get() = vodka.alcoUnits +
+                whiskey.alcoUnits +
+                cognac.alcoUnits +
+                rum.alcoUnits +
+                tequila.alcoUnits +
+                gin.alcoUnits +
+                absinthe.alcoUnits +
+                brandy.alcoUnits
 
     fun update(spirits: Spirits): SpiritsIntake {
         return when (spirits) {

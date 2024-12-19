@@ -2,6 +2,7 @@ package com.example.alcocalendar.db.entities.intakes
 
 import androidx.room.ColumnInfo
 import androidx.room.Ignore
+import kotlin.math.round
 
 sealed interface Drink {
     val liters: Double
@@ -11,6 +12,14 @@ sealed interface Drink {
         get() = liters == 0.0
 
     fun copyDrink(liters: Double): Drink
+
+    val alcoUnits: Double
+        get() = round(liters * strengthPercent * ETHANOL_MASS * ACCURACY) / ACCURACY
+
+    companion object {
+        private const val ETHANOL_MASS = 0.789
+        private const val ACCURACY = 10_000.0
+    }
 }
 
 sealed class Beer : Drink {

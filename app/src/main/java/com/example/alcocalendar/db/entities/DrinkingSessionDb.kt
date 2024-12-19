@@ -22,4 +22,10 @@ data class DrinkingSessionDb(
                 wineIntake.isEmpty &&
                 spiritsIntake.isEmpty &&
                 otherIntake.isEmpty
+
+    override val alcoUnits: Double
+        get() = beerIntake.alcoUnits +
+                wineIntake.alcoUnits +
+                spiritsIntake.alcoUnits +
+                otherIntake.alcoUnits
 }
