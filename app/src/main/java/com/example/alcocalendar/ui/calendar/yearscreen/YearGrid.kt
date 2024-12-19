@@ -14,13 +14,19 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.alcocalendar.db.entities.DrinkingSessionDb
+import com.example.alcocalendar.db.entities.intakes.Beer
+import com.example.alcocalendar.db.entities.intakes.BeerIntake
+import com.example.alcocalendar.model.DrinkingSessionWrapper
 import com.example.alcocalendar.ui.calendar.components.SmallDateCell
 import com.example.alcocalendar.model.MonthModel
 import com.example.alcocalendar.model.YearModel
 import com.example.alcocalendar.ui.calendar.components.DatesGrid
 import com.example.alcocalendar.ui.calendar.viewmodel.CalendarEvent
 import com.example.alcocalendar.ui.calendar.viewmodel.IndexConverter
+import java.time.LocalDate
 import java.time.Month
 
 
@@ -76,9 +82,84 @@ fun NonDetailedMonthLayout(
             startFromSunday = startFromSunday,
             showDaysOfWeek = false,
             dateCell = { session ->
-                SmallDateCell(session = session)
+                SmallDateCell(session = session, modifier = Modifier.weight(1f))
             },
             modifier = modifier
         )
     }
+}
+
+@Preview
+@Composable
+@RequiresApi(Build.VERSION_CODES.O)
+private fun NonDetailedMonthLayoutPreview() {
+    val month = Month.MAY
+    val monthModel = MonthModel(2024, month)
+    monthModel.updateDrinkingSession(
+        DrinkingSessionWrapper(
+            DrinkingSessionDb(
+                date = LocalDate.of(2024, month, 5),
+                beerIntake = BeerIntake(light = Beer.Light(1.0))
+            )
+        )
+    )
+
+    monthModel.updateDrinkingSession(
+        DrinkingSessionWrapper(
+            DrinkingSessionDb(
+                date = LocalDate.of(2024, month, 6),
+                beerIntake = BeerIntake(light = Beer.Light(1.0))
+            )
+        )
+    )
+
+    monthModel.updateDrinkingSession(
+        DrinkingSessionWrapper(
+            DrinkingSessionDb(
+                date = LocalDate.of(2024, month, 7),
+                beerIntake = BeerIntake(light = Beer.Light(1.0))
+            )
+        )
+    )
+
+    monthModel.updateDrinkingSession(
+        DrinkingSessionWrapper(
+            DrinkingSessionDb(
+                date = LocalDate.of(2024, month, 8),
+                beerIntake = BeerIntake(light = Beer.Light(1.0))
+            )
+        )
+    )
+
+    monthModel.updateDrinkingSession(
+        DrinkingSessionWrapper(
+            DrinkingSessionDb(
+                date = LocalDate.of(2024, month, 9),
+                beerIntake = BeerIntake(light = Beer.Light(1.0))
+            )
+        )
+    )
+
+    monthModel.updateDrinkingSession(
+        DrinkingSessionWrapper(
+            DrinkingSessionDb(
+                date = LocalDate.of(2024, month, 10),
+                beerIntake = BeerIntake(light = Beer.Light(1.0))
+            )
+        )
+    )
+
+    monthModel.updateDrinkingSession(
+        DrinkingSessionWrapper(
+            DrinkingSessionDb(
+                date = LocalDate.of(2024, month, 11),
+                beerIntake = BeerIntake(light = Beer.Light(1.0))
+            )
+        )
+    )
+
+    NonDetailedMonthLayout(
+        monthModel = monthModel,
+        startFromSunday = false,
+    )
 }

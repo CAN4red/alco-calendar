@@ -1,6 +1,6 @@
 package com.example.alcocalendar.ui.calendar.monthscreen
 
-import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.runtime.Composable
@@ -31,7 +31,7 @@ fun MonthPager(
             onFillingSessionEvent = onFillingSessionEvent,
             navigateToCategoryScreen = navigateToCategoryScreen,
             startFromSunday = calendarState.startFromSunday,
-            modifier = Modifier.fillMaxHeight()
+            modifier = Modifier.fillMaxSize()
         )
 
         LaunchedEffect(pagerState.currentPage) {

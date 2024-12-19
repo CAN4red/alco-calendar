@@ -45,16 +45,13 @@ fun DateCell(
     val day = session.date.formatToStringDay()
     val color = getCellColor(session)
     val shape = getCellShape(session)
-    val paddingValue = getCellPadding(session)
+    val paddingValue = getCellPadding(session, 4.dp)
 
     Box(
         modifier = modifier
             .aspectRatio(1f)
             .padding(paddingValue)
-            .background(
-                shape = shape,
-                color = color
-            )
+            .background(shape = shape, color = color)
             .clip(shape)
             .clickable(onClick = { onClick(session.date) })
     ) {
@@ -189,7 +186,7 @@ fun getDayOfWeekAbbreviation(
 @SuppressLint("NewApi")
 @Preview
 @Composable
-fun DateCellPreview() {
+private fun DateCellPreview() {
     DateCell(
         session = DrinkingSessionWrapper(DrinkingSessionDb(LocalDate.now())),
         onClick = {}
@@ -200,7 +197,7 @@ fun DateCellPreview() {
 @SuppressLint("NewApi")
 @Preview
 @Composable
-fun WeekdayCellPreview() {
+private fun WeekdayCellPreview() {
     WeekdayCell(dayOfWeek = DayOfWeek.of(1))
 }
 
@@ -208,6 +205,6 @@ fun WeekdayCellPreview() {
 @SuppressLint("NewApi")
 @Preview
 @Composable
-fun SmallDateCellPreview() {
+private fun SmallDateCellPreview() {
     SmallDateCell(session = DrinkingSessionWrapper(DrinkingSessionDb(LocalDate.now())))
 }
