@@ -52,7 +52,7 @@ val AlcoTypography = Typography(
 
     headlineLarge = TextStyle(
         fontFamily = Roboto,
-        fontWeight = FontWeight.Normal,
+        fontWeight = FontWeight.Medium,
         fontSize = 32.sp,
         lineHeight = 40.sp,
         letterSpacing = 0.sp,

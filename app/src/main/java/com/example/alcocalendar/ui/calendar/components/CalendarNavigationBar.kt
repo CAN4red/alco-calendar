@@ -53,6 +53,7 @@ fun CalendarNavigationBar(
             Text(
                 text = titleString,
                 style = MaterialTheme.typography.headlineLarge,
+                color = MaterialTheme.colorScheme.onBackground,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.align(Alignment.CenterVertically)
             )
@@ -85,7 +86,8 @@ private fun NavigationButton(
         Icon(
             imageVector = icon,
             contentDescription = contentDescription,
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier.fillMaxSize(),
+            tint = MaterialTheme.colorScheme.onBackground
         )
     }
 }

@@ -12,4 +12,5 @@ data class DrinkingSessionWrapper(
     override val spiritsIntake get() = drinkingSession.spiritsIntake
     override val otherIntake get() = drinkingSession.otherIntake
     override val isEmpty get() = drinkingSession.isEmpty
+    override val alcoUnits: Double get() = drinkingSession.alcoUnits
 }
