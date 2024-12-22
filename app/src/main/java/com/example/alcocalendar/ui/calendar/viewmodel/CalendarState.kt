@@ -3,6 +3,7 @@ package com.example.alcocalendar.ui.calendar.viewmodel
 import android.annotation.SuppressLint
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.ui.graphics.Color
 import com.example.alcocalendar.db.entities.DrinkingSessionDb
 import com.example.alcocalendar.model.DrinkingSessionWrapper
 import com.example.alcocalendar.model.MonthModel
@@ -24,6 +25,7 @@ data class CalendarState(
 ) {
     val yearsCount get() = calendarMap.size
     val monthsCount get() = yearsCount * MONTHS_NUMBER
+    private val statistics: DrinkStatistics = DrinkStatistics()
 
     fun getMonthByIndex(index: Int): MonthModel {
         val year = index / MONTHS_NUMBER + FIRST_YEAR
@@ -41,11 +43,17 @@ data class CalendarState(
         calendarMap[date.year]
             ?.getMonthModel(date.month)
             ?.updateDrinkingSession(session)
+        statistics.updatePopulation(session.alcoUnits)
     }
 
     fun deleteSession(session: DrinkingSessionWrapper) {
         val emptySession = DrinkingSessionWrapper(DrinkingSessionDb(session.date))
         this.updateSession(emptySession)
+        statistics.deleteFromPopulation(session.alcoUnits)
+    }
+
+    fun getSessionColor(session: DrinkingSessionWrapper): Color {
+        return statistics.getSessionColor(session.alcoUnits)
     }
 
     val hasNextMonth: Boolean
