@@ -15,6 +15,7 @@ class DrinkStatistics {
     private var minAlcoUnitsForHard: Double = 0.0
 
     fun updatePopulation(alcoUnits: Double) {
+        if (alcoUnits == 0.0) return
         alcoUnitsPopulation.add(alcoUnits)
         alcoUnitsPopulation.sort()
         updateMinAlcoUnits()
@@ -29,7 +30,8 @@ class DrinkStatistics {
         if (alcoUnits > minAlcoUnitsForHard) return GreenDrunkHard
         if (alcoUnits > minAlcoUnitsForHigh) return GreenDrunkHigh
         if (alcoUnits > minAlcoUnitsForMedium) return GreenDrunkMedium
-        return GreenDrunkLow
+        if (alcoUnits > minAlcoUnitsForLow) return GreenDrunkLow
+        return Color.Transparent
     }
 
     private fun updateMinAlcoUnits() {

@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.alcocalendar.db.entities.DrinkingSession
 import com.example.alcocalendar.db.entities.DrinkingSessionDb
 import com.example.alcocalendar.db.entities.intakes.Beer
 import com.example.alcocalendar.db.entities.intakes.BeerIntake
@@ -27,6 +28,7 @@ import java.time.Month
 fun MonthGrid(
     monthModel: MonthModel,
     onFillingSessionEvent: (FillingSessionEvent) -> Unit,
+    getSessionColor: (DrinkingSession) -> Color,
     navigateToCategoryScreen: () -> Unit,
     startFromSunday: Boolean,
     modifier: Modifier = Modifier,
@@ -45,10 +47,13 @@ fun MonthGrid(
                         onFillingSessionEvent(FillingSessionEvent.InitNewSession(session.date))
                         navigateToCategoryScreen()
                     },
+                    color = getSessionColor(session),
                     modifier = Modifier.weight(1f)
                 )
             },
-            modifier = Modifier.padding(16.dp).fillMaxWidth()
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth()
         )
     }
 }
@@ -128,6 +133,7 @@ fun MonthGridPreview() {
         monthModel = monthModel,
         onFillingSessionEvent = {},
         navigateToCategoryScreen = {},
+        getSessionColor = { Color.Transparent },
         startFromSunday = false,
         modifier = Modifier.background(color = Color.White)
     )

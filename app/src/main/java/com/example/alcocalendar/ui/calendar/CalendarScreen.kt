@@ -4,6 +4,8 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import com.example.alcocalendar.db.entities.DrinkingSession
 import com.example.alcocalendar.ui.addsession.viewmodel.FillingSessionEvent
 import com.example.alcocalendar.ui.calendar.monthscreen.MonthLayout
 import com.example.alcocalendar.ui.calendar.viewmodel.CalendarEvent
@@ -16,6 +18,7 @@ fun CalendarScreen(
     calendarState: CalendarState,
     onCalendarEvent: (CalendarEvent) -> Unit,
     onFillingSessionEvent: (FillingSessionEvent) -> Unit,
+    getSessionColor: (DrinkingSession) -> Color,
     navigateToCategoryScreen: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -31,6 +34,7 @@ fun CalendarScreen(
                 calendarState = calendarState,
                 onCalendarEvent = onCalendarEvent,
                 onFillingSessionEvent = onFillingSessionEvent,
+                getSessionColor = getSessionColor,
                 navigateToCategoryScreen = navigateToCategoryScreen,
                 modifier = modifier
             )

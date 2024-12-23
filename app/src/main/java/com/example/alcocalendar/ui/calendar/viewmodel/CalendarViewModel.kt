@@ -2,9 +2,11 @@ package com.example.alcocalendar.ui.calendar.viewmodel
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.alcocalendar.db.DrinkingSessionsDao
+import com.example.alcocalendar.db.entities.DrinkingSession
 import com.example.alcocalendar.model.DrinkingSessionWrapper
 import com.example.alcocalendar.model.YearModel
 import com.example.alcocalendar.ui.navigation.CalendarView
@@ -35,6 +37,10 @@ class CalendarViewModel(
 
     init {
         viewModelScope.launch { loadInitialData() }
+    }
+
+    fun getSessionColor(session: DrinkingSession): Color {
+        return _calendarState.value.getSessionColor(session.alcoUnits)
     }
 
     fun onCalendarEvent(event: CalendarEvent) {

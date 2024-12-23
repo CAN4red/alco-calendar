@@ -22,10 +22,10 @@ data class CalendarState(
     val currentMonthIndex: Int = getInitialMonthIndex(),
     val currentYearIndex: Int = getInitialYearIndex(),
     val updateToggle: Boolean = true,
+    private val statistics: DrinkStatistics = DrinkStatistics()
 ) {
     val yearsCount get() = calendarMap.size
     val monthsCount get() = yearsCount * MONTHS_NUMBER
-    private val statistics: DrinkStatistics = DrinkStatistics()
 
     fun getMonthByIndex(index: Int): MonthModel {
         val year = index / MONTHS_NUMBER + FIRST_YEAR
@@ -52,8 +52,8 @@ data class CalendarState(
         statistics.deleteFromPopulation(session.alcoUnits)
     }
 
-    fun getSessionColor(session: DrinkingSessionWrapper): Color {
-        return statistics.getSessionColor(session.alcoUnits)
+    fun getSessionColor(alcoUnits: Double): Color {
+        return statistics.getSessionColor(alcoUnits)
     }
 
     val hasNextMonth: Boolean

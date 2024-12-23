@@ -5,10 +5,12 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.alcocalendar.db.entities.DrinkingSession
 import com.example.alcocalendar.db.entities.DrinkingSessionDb
 import com.example.alcocalendar.ui.addsession.screens.AddBeerScreen
 import com.example.alcocalendar.ui.addsession.screens.AddOtherScreen
@@ -29,6 +31,7 @@ fun AlcoCalendarApp(
     fillingSessionState: DrinkingSessionDb,
     onCalendarEvent: (CalendarEvent) -> Unit,
     onFillingSessionEvent: (FillingSessionEvent) -> Unit,
+    getSessionColor: (DrinkingSession) -> Color,
     navController: NavHostController = rememberNavController(),
     @SuppressLint("ModifierParameter") modifier: Modifier = Modifier,
 ) {
@@ -42,6 +45,7 @@ fun AlcoCalendarApp(
                 calendarState = calendarState,
                 onCalendarEvent = onCalendarEvent,
                 onFillingSessionEvent = onFillingSessionEvent,
+                getSessionColor = getSessionColor,
                 navigateToCategoryScreen = { navController.navigate(Screen.ChooseCategory.name) }
             )
         }

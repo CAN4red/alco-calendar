@@ -58,6 +58,7 @@ class MainActivity : ComponentActivity() {
                         fillingSessionState = fillingSessionState,
                         onCalendarEvent = calendarViewModel::onCalendarEvent,
                         onFillingSessionEvent = fillingSessionViewModel::onSessionFillingEvent,
+                        getSessionColor = calendarViewModel::getSessionColor,
                         navController = navController,
                         modifier = Modifier.padding(innerPadding)
                     )

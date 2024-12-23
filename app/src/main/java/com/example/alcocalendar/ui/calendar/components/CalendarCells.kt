@@ -39,11 +39,11 @@ import java.util.Locale
 @Composable
 fun DateCell(
     session: DrinkingSessionWrapper,
+    color: Color,
     onClick: (LocalDate) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val day = session.date.formatToStringDay()
-    val color = getCellColor(session)
     val shape = getCellShape(session)
     val paddingValue = getCellPadding(session, 4.dp)
 
@@ -190,6 +190,7 @@ fun getDayOfWeekAbbreviation(
 private fun DateCellPreview() {
     DateCell(
         session = DrinkingSessionWrapper(DrinkingSessionDb(LocalDate.now())),
+        color = Color.Transparent,
         onClick = {}
     )
 }

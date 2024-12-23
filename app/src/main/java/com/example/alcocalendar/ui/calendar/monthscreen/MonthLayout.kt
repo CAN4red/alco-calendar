@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import com.example.alcocalendar.db.entities.DrinkingSession
 import com.example.alcocalendar.ui.addsession.viewmodel.FillingSessionEvent
 import com.example.alcocalendar.ui.calendar.components.CalendarNavigationBar
 import com.example.alcocalendar.ui.calendar.viewmodel.CalendarEvent
@@ -19,6 +21,7 @@ fun MonthLayout(
     calendarState: CalendarState,
     onCalendarEvent: (CalendarEvent) -> Unit,
     onFillingSessionEvent: (FillingSessionEvent) -> Unit,
+    getSessionColor: (DrinkingSession) -> Color,
     navigateToCategoryScreen: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -28,9 +31,7 @@ fun MonthLayout(
     )
 
     val month = calendarState
-        .getMonthByIndex(pagerState.currentPage)
-        .month
-        .toString()
+        .getMonthByIndex(pagerState.currentPage).month.toString()
         .lowercase()
         .replaceFirstChar { it.titlecase() }
     val year = calendarState
@@ -59,6 +60,7 @@ fun MonthLayout(
             pagerState = pagerState,
             onCalendarEvent = onCalendarEvent,
             onFillingSessionEvent = onFillingSessionEvent,
+            getSessionColor = getSessionColor,
             navigateToCategoryScreen = navigateToCategoryScreen,
             modifier = Modifier.fillMaxWidth()
         )
