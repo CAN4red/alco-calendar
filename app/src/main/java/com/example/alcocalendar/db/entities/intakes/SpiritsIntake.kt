@@ -21,6 +21,7 @@ data class SpiritsIntake(
                 tequila.isEmpty &&
                 gin.isEmpty &&
                 absinthe.isEmpty &&
+                liquor.isEmpty &&
                 brandy.isEmpty
 
     override val alcoUnits: Double
@@ -31,6 +32,7 @@ data class SpiritsIntake(
                 tequila.alcoUnits +
                 gin.alcoUnits +
                 absinthe.alcoUnits +
+                liquor.alcoUnits +
                 brandy.alcoUnits
 
     fun update(spirits: Spirits): SpiritsIntake {
