@@ -10,12 +10,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.alcocalendar.db.entities.DrinkingSession
 import com.example.alcocalendar.db.entities.DrinkingSessionDb
 import com.example.alcocalendar.db.entities.intakes.Beer
 import com.example.alcocalendar.db.entities.intakes.BeerIntake
@@ -35,7 +38,9 @@ import java.time.Month
 fun YearGrid(
     yearModel: YearModel,
     onCalendarEvent: (CalendarEvent) -> Unit,
+    getSessionColor: (DrinkingSession) -> Color,
     navigateToMonth: () -> Unit,
+    defaultCellColor: Color,
     startFromSunday: Boolean,
     modifier: Modifier = Modifier,
 ) {
@@ -48,6 +53,8 @@ fun YearGrid(
             val monthModel = yearModel.getMonthModel(month)
             NonDetailedMonthLayout(
                 monthModel = monthModel,
+                defaultCellColor = defaultCellColor,
+                getSessionColor = getSessionColor,
                 startFromSunday = startFromSunday,
                 modifier = Modifier
                     .padding(8.dp)
@@ -71,6 +78,8 @@ fun YearGrid(
 @Composable
 fun NonDetailedMonthLayout(
     monthModel: MonthModel,
+    getSessionColor: (DrinkingSession) -> Color,
+    defaultCellColor: Color,
     startFromSunday: Boolean,
     modifier: Modifier = Modifier,
 ) {
@@ -82,7 +91,11 @@ fun NonDetailedMonthLayout(
             startFromSunday = startFromSunday,
             showDaysOfWeek = false,
             dateCell = { session ->
-                SmallDateCell(session = session, modifier = Modifier.weight(1f))
+                SmallDateCell(
+                    session = session,
+                    color = if (session.isEmpty) defaultCellColor else getSessionColor(session),
+                    modifier = Modifier.weight(1f)
+                )
             },
             modifier = modifier
         )
@@ -160,6 +173,8 @@ private fun NonDetailedMonthLayoutPreview() {
 
     NonDetailedMonthLayout(
         monthModel = monthModel,
+        defaultCellColor =  MaterialTheme.colorScheme.surface,
+        getSessionColor = { Color.Red },
         startFromSunday = false,
     )
 }

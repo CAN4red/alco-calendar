@@ -9,10 +9,10 @@ import com.example.alcocalendar.ui.theme.color.GreenDrunkMedium
 class DrinkStatistics {
     private val alcoUnitsPopulation: MutableList<Double> = mutableListOf()
 
-    private var minAlcoUnitsForLow: Double = 0.0
-    private var minAlcoUnitsForMedium: Double = 0.0
-    private var minAlcoUnitsForHigh: Double = 0.0
-    private var minAlcoUnitsForHard: Double = 0.0
+    private var thresholdLow: Double = 0.0
+    private var thresholdMedium: Double = 0.0
+    private var thresholdHigh: Double = 0.0
+    private var thresholdHard: Double = 0.0
 
     fun updatePopulation(alcoUnits: Double) {
         if (alcoUnits == 0.0) return
@@ -27,29 +27,29 @@ class DrinkStatistics {
     }
 
     fun getSessionColor(alcoUnits: Double): Color {
-        if (alcoUnits > minAlcoUnitsForHard) return GreenDrunkHard
-        if (alcoUnits > minAlcoUnitsForHigh) return GreenDrunkHigh
-        if (alcoUnits > minAlcoUnitsForMedium) return GreenDrunkMedium
-        if (alcoUnits > minAlcoUnitsForLow) return GreenDrunkLow
+        if (alcoUnits > thresholdHard) return GreenDrunkHard
+        if (alcoUnits > thresholdHigh) return GreenDrunkHigh
+        if (alcoUnits > thresholdMedium) return GreenDrunkMedium
+        if (alcoUnits > thresholdLow) return GreenDrunkLow
         return Color.Transparent
     }
 
     private fun updateMinAlcoUnits() {
-        minAlcoUnitsForHard = getMinFor(CUMULATIVE_PERCENT_HARD)
-        minAlcoUnitsForHigh = getAdjustedMinFor(CUMULATIVE_PERCENT_HIGH, minAlcoUnitsForHard)
-        minAlcoUnitsForMedium = getAdjustedMinFor(CUMULATIVE_PERCENT_MEDIUM, minAlcoUnitsForHigh)
-        minAlcoUnitsForLow = getAdjustedMinFor(CUMULATIVE_PERCENT_LOW, minAlcoUnitsForMedium)
+        thresholdHard = getThresholdFor(CUMULATIVE_PERCENT_HARD)
+        thresholdHigh = getAdjustedThresholdFor(CUMULATIVE_PERCENT_HIGH, thresholdHard)
+        thresholdMedium = getAdjustedThresholdFor(CUMULATIVE_PERCENT_MEDIUM, thresholdHigh)
+        thresholdLow = getAdjustedThresholdFor(CUMULATIVE_PERCENT_LOW, thresholdMedium)
     }
 
-    private fun getAdjustedMinFor(percentage: Double, reference: Double): Double {
-        val minValue = getMinFor(percentage)
+    private fun getAdjustedThresholdFor(percentage: Double, reference: Double): Double {
+        val minValue = getThresholdFor(percentage)
         if (minValue == reference) {
             return alcoUnitsPopulation.lastOrNull { it < reference } ?: minValue
         }
         return minValue
     }
 
-    private fun getMinFor(percentage: Double): Double {
+    private fun getThresholdFor(percentage: Double): Double {
         if (alcoUnitsPopulation.isEmpty()) return 0.0
         val index = (percentage * alcoUnitsPopulation.lastIndex).toInt()
         return alcoUnitsPopulation[index]

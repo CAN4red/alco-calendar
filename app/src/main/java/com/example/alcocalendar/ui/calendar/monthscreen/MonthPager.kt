@@ -21,6 +21,7 @@ fun MonthPager(
     onCalendarEvent: (CalendarEvent) -> Unit,
     onFillingSessionEvent: (FillingSessionEvent) -> Unit,
     getSessionColor: (DrinkingSession) -> Color,
+    defaultCellColor: Color,
     navigateToCategoryScreen: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -35,6 +36,7 @@ fun MonthPager(
             navigateToCategoryScreen = navigateToCategoryScreen,
             startFromSunday = calendarState.startFromSunday,
             getSessionColor = getSessionColor,
+            defaultCellColor = defaultCellColor,
             modifier = Modifier.fillMaxSize()
         )
 

@@ -22,6 +22,7 @@ fun MonthLayout(
     onCalendarEvent: (CalendarEvent) -> Unit,
     onFillingSessionEvent: (FillingSessionEvent) -> Unit,
     getSessionColor: (DrinkingSession) -> Color,
+    defaultCellColor: Color,
     navigateToCategoryScreen: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -61,6 +62,7 @@ fun MonthLayout(
             onCalendarEvent = onCalendarEvent,
             onFillingSessionEvent = onFillingSessionEvent,
             getSessionColor = getSessionColor,
+            defaultCellColor = defaultCellColor,
             navigateToCategoryScreen = navigateToCategoryScreen,
             modifier = Modifier.fillMaxWidth()
         )

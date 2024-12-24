@@ -25,7 +25,6 @@ import java.time.format.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.example.alcocalendar.db.entities.DrinkingSession
 import com.example.alcocalendar.db.entities.DrinkingSessionDb
 import com.example.alcocalendar.model.DrinkingSessionWrapper
 import com.example.alcocalendar.model.SessionOrder
@@ -83,13 +82,6 @@ private fun getCellPadding(
     }
 }
 
-private fun getCellColor(session: DrinkingSession, defaultColor: Color = Color.Transparent): Color {
-    return when (session.isEmpty) {
-        true -> defaultColor
-        false -> Color.Red
-    }
-}
-
 private fun getCellShape(session: DrinkingSessionWrapper): RoundedCornerShape {
     return when (session.sessionOrder) {
         SessionOrder.SINGLE_SESSION -> CircleShape
@@ -110,9 +102,9 @@ private fun LocalDate.formatToStringDay(): String {
 @Composable
 fun SmallDateCell(
     session: DrinkingSessionWrapper,
+    color: Color,
     modifier: Modifier = Modifier,
 ) {
-    val color = getCellColor(session, lightColorScheme().secondaryContainer.copy(alpha = 0.7f))
     val shape = getCellShape(session)
     val paddingValue = getCellPadding(session, 2.dp)
 
@@ -120,10 +112,7 @@ fun SmallDateCell(
         modifier = modifier
             .aspectRatio(1f)
             .padding(paddingValue)
-            .background(
-                shape = shape,
-                color = color
-            )
+            .background(shape = shape, color = color)
             .clip(CircleShape)
     )
 }
@@ -135,9 +124,7 @@ fun EmptyCell(modifier: Modifier = Modifier) {
         modifier = modifier
             .aspectRatio(1f)
             .padding(2.dp)
-            .background(
-                color = Color.Transparent
-            )
+            .background(color = Color.Transparent)
             .clip(RectangleShape)
     ) {}
 }
@@ -208,5 +195,8 @@ private fun WeekdayCellPreview() {
 @Preview
 @Composable
 private fun SmallDateCellPreview() {
-    SmallDateCell(session = DrinkingSessionWrapper(DrinkingSessionDb(LocalDate.now())))
+    SmallDateCell(
+        session = DrinkingSessionWrapper(DrinkingSessionDb(LocalDate.now())),
+        color = Color.Red
+    )
 }

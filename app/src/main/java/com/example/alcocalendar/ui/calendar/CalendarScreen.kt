@@ -2,6 +2,7 @@ package com.example.alcocalendar.ui.calendar
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -35,6 +36,7 @@ fun CalendarScreen(
                 onCalendarEvent = onCalendarEvent,
                 onFillingSessionEvent = onFillingSessionEvent,
                 getSessionColor = getSessionColor,
+                defaultCellColor = Color.Transparent,
                 navigateToCategoryScreen = navigateToCategoryScreen,
                 modifier = modifier
             )
@@ -42,8 +44,11 @@ fun CalendarScreen(
             CalendarView.YearView -> YearLayout(
                 calendarState = calendarState,
                 onCalendarEvent = onCalendarEvent,
+                getSessionColor = getSessionColor,
+                defaultCellColor = MaterialTheme.colorScheme.surface,
                 modifier = modifier
             )
         }
+
     }
 }

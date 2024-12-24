@@ -8,6 +8,8 @@ import androidx.compose.foundation.pager.PagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import com.example.alcocalendar.db.entities.DrinkingSession
 import com.example.alcocalendar.ui.calendar.viewmodel.CalendarEvent
 import com.example.alcocalendar.ui.calendar.viewmodel.CalendarState
 import com.example.alcocalendar.ui.calendar.viewmodel.IndexConverter
@@ -18,8 +20,10 @@ import com.example.alcocalendar.ui.calendar.viewmodel.IndexConverter
 fun YearPager(
     calendarState: CalendarState,
     pagerState: PagerState,
-    navigateToMonth: () -> Unit,
     onCalendarEvent: (CalendarEvent) -> Unit,
+    getSessionColor: (DrinkingSession) -> Color,
+    navigateToMonth: () -> Unit,
+    defaultCellColor: Color,
     modifier: Modifier = Modifier
 ) {
     HorizontalPager(
@@ -28,7 +32,9 @@ fun YearPager(
     ) { yearIndex ->
         YearGrid(
             yearModel = calendarState.getYearByIndex(yearIndex),
+            defaultCellColor = defaultCellColor,
             onCalendarEvent = onCalendarEvent,
+            getSessionColor = getSessionColor,
             navigateToMonth = navigateToMonth,
             startFromSunday = calendarState.startFromSunday,
             modifier = Modifier.fillMaxSize()

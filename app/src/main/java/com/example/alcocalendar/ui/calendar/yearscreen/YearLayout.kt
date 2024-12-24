@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import com.example.alcocalendar.db.entities.DrinkingSession
 import com.example.alcocalendar.ui.calendar.components.CalendarNavigationBar
 import com.example.alcocalendar.ui.calendar.viewmodel.CalendarEvent
 import com.example.alcocalendar.ui.calendar.viewmodel.CalendarState
@@ -17,6 +19,8 @@ import com.example.alcocalendar.ui.navigation.CalendarView
 fun YearLayout(
     calendarState: CalendarState,
     onCalendarEvent: (CalendarEvent) -> Unit,
+    getSessionColor: (DrinkingSession) -> Color,
+    defaultCellColor: Color,
     modifier: Modifier = Modifier
 ) {
     val pagerState = rememberPagerState(
@@ -44,9 +48,11 @@ fun YearLayout(
 
         YearPager(
             calendarState = calendarState,
-            onCalendarEvent = onCalendarEvent,
-            navigateToMonth = { onCalendarEvent(CalendarEvent.ChangeView(CalendarView.MonthView)) },
             pagerState = pagerState,
+            onCalendarEvent = onCalendarEvent,
+            getSessionColor = getSessionColor,
+            navigateToMonth = { onCalendarEvent(CalendarEvent.ChangeView(CalendarView.MonthView)) },
+            defaultCellColor = defaultCellColor,
             modifier = Modifier.fillMaxWidth()
         )
     }

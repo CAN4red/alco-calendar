@@ -30,6 +30,7 @@ fun MonthGrid(
     onFillingSessionEvent: (FillingSessionEvent) -> Unit,
     getSessionColor: (DrinkingSession) -> Color,
     navigateToCategoryScreen: () -> Unit,
+    defaultCellColor: Color,
     startFromSunday: Boolean,
     modifier: Modifier = Modifier,
 ) {
@@ -47,7 +48,7 @@ fun MonthGrid(
                         onFillingSessionEvent(FillingSessionEvent.InitNewSession(session.date))
                         navigateToCategoryScreen()
                     },
-                    color = getSessionColor(session),
+                    color = if (session.isEmpty) defaultCellColor else getSessionColor(session),
                     modifier = Modifier.weight(1f)
                 )
             },
@@ -133,7 +134,8 @@ fun MonthGridPreview() {
         monthModel = monthModel,
         onFillingSessionEvent = {},
         navigateToCategoryScreen = {},
-        getSessionColor = { Color.Transparent },
+        getSessionColor = { Color.Red },
+        defaultCellColor = Color.Transparent,
         startFromSunday = false,
         modifier = Modifier.background(color = Color.White)
     )
