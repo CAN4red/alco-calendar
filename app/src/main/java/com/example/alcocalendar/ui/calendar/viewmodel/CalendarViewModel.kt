@@ -39,8 +39,8 @@ class CalendarViewModel(
         viewModelScope.launch { loadInitialData() }
     }
 
-    fun getSessionColor(session: DrinkingSession): Color {
-        return _calendarState.value.getSessionColor(session.alcoUnits)
+    fun getSessionColor(session: DrinkingSession, isSystemInDarkTheme: Boolean): Color {
+        return _calendarState.value.getSessionColor(session.alcoUnits, isSystemInDarkTheme)
     }
 
     fun onCalendarEvent(event: CalendarEvent) {

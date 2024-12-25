@@ -52,8 +52,8 @@ data class CalendarState(
         statistics.deleteFromPopulation(session.alcoUnits)
     }
 
-    fun getSessionColor(alcoUnits: Double): Color {
-        return statistics.getSessionColor(alcoUnits)
+    fun getSessionColor(alcoUnits: Double, isSystemInDarkTheme: Boolean): Color {
+        return statistics.getSessionColor(alcoUnits, isSystemInDarkTheme)
     }
 
     val hasNextMonth: Boolean

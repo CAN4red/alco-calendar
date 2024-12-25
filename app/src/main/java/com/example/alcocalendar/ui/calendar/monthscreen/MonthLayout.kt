@@ -21,7 +21,7 @@ fun MonthLayout(
     calendarState: CalendarState,
     onCalendarEvent: (CalendarEvent) -> Unit,
     onFillingSessionEvent: (FillingSessionEvent) -> Unit,
-    getSessionColor: (DrinkingSession) -> Color,
+    getSessionColor: (DrinkingSession, Boolean) -> Color,
     defaultCellColor: Color,
     navigateToCategoryScreen: () -> Unit,
     modifier: Modifier = Modifier,

@@ -2,6 +2,7 @@ package com.example.alcocalendar.ui.calendar.monthscreen
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -28,7 +29,7 @@ import java.time.Month
 fun MonthGrid(
     monthModel: MonthModel,
     onFillingSessionEvent: (FillingSessionEvent) -> Unit,
-    getSessionColor: (DrinkingSession) -> Color,
+    getSessionColor: (DrinkingSession, Boolean) -> Color,
     navigateToCategoryScreen: () -> Unit,
     defaultCellColor: Color,
     startFromSunday: Boolean,
@@ -48,7 +49,8 @@ fun MonthGrid(
                         onFillingSessionEvent(FillingSessionEvent.InitNewSession(session.date))
                         navigateToCategoryScreen()
                     },
-                    color = if (session.isEmpty) defaultCellColor else getSessionColor(session),
+                    color = if (session.isEmpty) defaultCellColor
+                    else getSessionColor(session, isSystemInDarkTheme()),
                     modifier = Modifier.weight(1f)
                 )
             },
@@ -134,7 +136,7 @@ fun MonthGridPreview() {
         monthModel = monthModel,
         onFillingSessionEvent = {},
         navigateToCategoryScreen = {},
-        getSessionColor = { Color.Red },
+        getSessionColor = { _, _ -> Color.Red },
         defaultCellColor = Color.Transparent,
         startFromSunday = false,
         modifier = Modifier.background(color = Color.White)

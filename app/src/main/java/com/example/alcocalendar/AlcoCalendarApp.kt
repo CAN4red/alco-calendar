@@ -31,7 +31,7 @@ fun AlcoCalendarApp(
     fillingSessionState: DrinkingSessionDb,
     onCalendarEvent: (CalendarEvent) -> Unit,
     onFillingSessionEvent: (FillingSessionEvent) -> Unit,
-    getSessionColor: (DrinkingSession) -> Color,
+    getSessionColor: (DrinkingSession, Boolean) -> Color,
     navController: NavHostController = rememberNavController(),
     @SuppressLint("ModifierParameter") modifier: Modifier = Modifier,
 ) {

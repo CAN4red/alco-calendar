@@ -21,7 +21,7 @@ fun YearPager(
     calendarState: CalendarState,
     pagerState: PagerState,
     onCalendarEvent: (CalendarEvent) -> Unit,
-    getSessionColor: (DrinkingSession) -> Color,
+    getSessionColor: (DrinkingSession, Boolean) -> Color,
     navigateToMonth: () -> Unit,
     defaultCellColor: Color,
     modifier: Modifier = Modifier

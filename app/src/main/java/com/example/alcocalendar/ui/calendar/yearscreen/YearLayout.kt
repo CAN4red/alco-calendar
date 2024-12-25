@@ -19,7 +19,7 @@ import com.example.alcocalendar.ui.navigation.CalendarView
 fun YearLayout(
     calendarState: CalendarState,
     onCalendarEvent: (CalendarEvent) -> Unit,
-    getSessionColor: (DrinkingSession) -> Color,
+    getSessionColor: (DrinkingSession, Boolean) -> Color,
     defaultCellColor: Color,
     modifier: Modifier = Modifier
 ) {

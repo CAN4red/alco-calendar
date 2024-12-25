@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
@@ -38,7 +39,7 @@ import java.time.Month
 fun YearGrid(
     yearModel: YearModel,
     onCalendarEvent: (CalendarEvent) -> Unit,
-    getSessionColor: (DrinkingSession) -> Color,
+    getSessionColor: (DrinkingSession, Boolean) -> Color,
     navigateToMonth: () -> Unit,
     defaultCellColor: Color,
     startFromSunday: Boolean,
@@ -78,7 +79,7 @@ fun YearGrid(
 @Composable
 fun NonDetailedMonthLayout(
     monthModel: MonthModel,
-    getSessionColor: (DrinkingSession) -> Color,
+    getSessionColor: (DrinkingSession, Boolean) -> Color,
     defaultCellColor: Color,
     startFromSunday: Boolean,
     modifier: Modifier = Modifier,
@@ -93,7 +94,8 @@ fun NonDetailedMonthLayout(
             dateCell = { session ->
                 SmallDateCell(
                     session = session,
-                    color = if (session.isEmpty) defaultCellColor else getSessionColor(session),
+                    color = if (session.isEmpty) defaultCellColor
+                    else getSessionColor(session, isSystemInDarkTheme()),
                     modifier = Modifier.weight(1f)
                 )
             },
@@ -173,8 +175,8 @@ private fun NonDetailedMonthLayoutPreview() {
 
     NonDetailedMonthLayout(
         monthModel = monthModel,
-        defaultCellColor =  MaterialTheme.colorScheme.surface,
-        getSessionColor = { Color.Red },
+        defaultCellColor = MaterialTheme.colorScheme.surface,
+        getSessionColor = { _, _ -> Color.Red },
         startFromSunday = false,
     )
 }

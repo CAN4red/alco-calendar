@@ -1,10 +1,8 @@
 package com.example.alcocalendar.ui.calendar.viewmodel
 
 import androidx.compose.ui.graphics.Color
-import com.example.alcocalendar.ui.theme.color.GreenDrunkHard
-import com.example.alcocalendar.ui.theme.color.GreenDrunkHigh
-import com.example.alcocalendar.ui.theme.color.GreenDrunkLow
-import com.example.alcocalendar.ui.theme.color.GreenDrunkMedium
+import com.example.alcocalendar.ui.theme.color.DarkSessionPallet
+import com.example.alcocalendar.ui.theme.color.LightSessionPallet
 
 class DrinkStatistics {
     private val alcoUnitsPopulation: MutableList<Double> = mutableListOf()
@@ -26,11 +24,12 @@ class DrinkStatistics {
         updateMinAlcoUnits()
     }
 
-    fun getSessionColor(alcoUnits: Double): Color {
-        if (alcoUnits > thresholdHard) return GreenDrunkHard
-        if (alcoUnits > thresholdHigh) return GreenDrunkHigh
-        if (alcoUnits > thresholdMedium) return GreenDrunkMedium
-        if (alcoUnits > thresholdLow) return GreenDrunkLow
+    fun getSessionColor(alcoUnits: Double, isSystemInDarkTheme: Boolean): Color {
+        val sessionPallet = if (isSystemInDarkTheme) DarkSessionPallet else LightSessionPallet
+        if (alcoUnits >= thresholdHard) return sessionPallet.GreenDrunkHard
+        if (alcoUnits >= thresholdHigh) return sessionPallet.GreenDrunkHigh
+        if (alcoUnits >= thresholdMedium) return sessionPallet.GreenDrunkMedium
+        if (alcoUnits >= thresholdLow) return sessionPallet.GreenDrunkLow
         return Color.Transparent
     }
 
