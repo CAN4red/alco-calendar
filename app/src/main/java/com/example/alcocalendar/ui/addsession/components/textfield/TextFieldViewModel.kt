@@ -24,6 +24,7 @@ class TextFieldViewModel : ViewModel() {
             is TextFieldEvent.AddDot -> handleAddDot()
             is TextFieldEvent.EraseCharacter -> handleEraseCharacter()
             is TextFieldEvent.UpdateField -> handleUpdateField(event.newTextValue)
+            is TextFieldEvent.Confirm -> handleConfirm(event.onConfirm)
             is TextFieldEvent.EraseAll -> handleEraseAll()
             is TextFieldEvent.Empty -> {}
         }
@@ -64,9 +65,9 @@ class TextFieldViewModel : ViewModel() {
         }
     }
 
-    private fun handleEraseAll() {
-        _textFieldState.update { "" }
-    }
+    private fun handleConfirm(onConfirm: () -> Unit) = onConfirm()
+    private fun handleEraseAll() = _textFieldState.update { "" }
+
 
     private fun String.isSingleDigitZero(): Boolean = (this.length == 1 && this[0] == '0')
     private fun String.hasDot(): Boolean = this.contains('.')

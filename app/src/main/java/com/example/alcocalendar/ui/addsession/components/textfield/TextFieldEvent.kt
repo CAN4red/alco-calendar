@@ -5,6 +5,7 @@ sealed interface TextFieldEvent {
     data object AddDot : TextFieldEvent
     data object EraseCharacter : TextFieldEvent
     data class UpdateField(val newTextValue: String) : TextFieldEvent
+    data class Confirm(val onConfirm: () -> Unit) : TextFieldEvent
     data object Empty : TextFieldEvent
     data object EraseAll : TextFieldEvent
 }
