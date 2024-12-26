@@ -58,7 +58,7 @@ fun DateCell(
         Text(
             text = day,
             style = MaterialTheme.typography.bodyLarge,
-            color = MaterialTheme.colorScheme.onSurface,
+            color = MaterialTheme.colorScheme.onBackground,
             modifier = Modifier.align(Alignment.Center),
         )
     }
