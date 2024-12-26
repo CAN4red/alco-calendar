@@ -24,6 +24,8 @@ class TextFieldViewModel : ViewModel() {
             is TextFieldEvent.AddDot -> handleAddDot()
             is TextFieldEvent.EraseCharacter -> handleEraseCharacter()
             is TextFieldEvent.UpdateField -> handleUpdateField(event.newTextValue)
+            is TextFieldEvent.EraseAll -> handleEraseAll()
+            is TextFieldEvent.Empty -> {}
         }
     }
 
@@ -60,6 +62,10 @@ class TextFieldViewModel : ViewModel() {
         _textFieldState.update {
             if (newTextValue.toDoubleOrNull() == 0.0) "" else newTextValue
         }
+    }
+
+    private fun handleEraseAll() {
+        _textFieldState.update { "" }
     }
 
     private fun String.isSingleDigitZero(): Boolean = (this.length == 1 && this[0] == '0')

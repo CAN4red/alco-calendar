@@ -13,69 +13,47 @@ fun CustomTextFieldKeyboard(
     hideBottomSheet: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val buttonRows = listOf(
+        listOf('1', '2', '3', TextFieldEvent.EraseCharacter),
+        listOf('4', '5', '6', TextFieldEvent.AddDot),
+        listOf('7', '8', '9', TextFieldEvent.AddDigit('0')),
+        listOf(TextFieldEvent.Empty, '0', TextFieldEvent.Empty, TextFieldEvent.Empty)
+    )
+
     Column(modifier) {
-        Row(modifier = Modifier) {
-            CustomTextFieldButton(
-                onClick = { onClickEvent(TextFieldEvent.AddDigit('1')) },
-                buttonContent = { Text(text = "1") }
-            )
-            CustomTextFieldButton(
-                onClick = { onClickEvent(TextFieldEvent.AddDigit('2')) },
-                buttonContent = { Text(text = "2") }
-            )
-            CustomTextFieldButton(
-                onClick = { onClickEvent(TextFieldEvent.AddDigit('3')) },
-                buttonContent = { Text(text = "3") }
-            )
-            CustomTextFieldButton(
-                onClick = { onClickEvent(TextFieldEvent.EraseCharacter) },
-                buttonContent = { Text(text = "back") })
-        }
-
-        Row(modifier = Modifier) {
-            CustomTextFieldButton(
-                onClick = { onClickEvent(TextFieldEvent.AddDigit('4')) },
-                buttonContent = { Text(text = "4") }
-            )
-            CustomTextFieldButton(
-                onClick = { onClickEvent(TextFieldEvent.AddDigit('5')) },
-                buttonContent = { Text(text = "5") }
-            )
-            CustomTextFieldButton(
-                onClick = { onClickEvent(TextFieldEvent.AddDigit('6')) },
-                buttonContent = { Text(text = "6") }
-            )
-            CustomTextFieldButton(
-                onClick = { onClickEvent(TextFieldEvent.AddDot) },
-                buttonContent = { Text(text = "._") })
-        }
-
-        Row(modifier = Modifier) {
-            CustomTextFieldButton(
-                onClick = { onClickEvent(TextFieldEvent.AddDigit('7')) },
-                buttonContent = { Text(text = "7") }
-            )
-            CustomTextFieldButton(
-                onClick = { onClickEvent(TextFieldEvent.AddDigit('8')) },
-                buttonContent = { Text(text = "8") }
-            )
-            CustomTextFieldButton(
-                onClick = { onClickEvent(TextFieldEvent.AddDigit('9')) },
-                buttonContent = { Text(text = "9") }
-            )
-            CustomTextFieldButton(
-                onClick = {
-                    onConfirmEvent()
-                    hideBottomSheet()
-                },
-                buttonContent = { Text(text = "enter") })
+        buttonRows.forEach { row ->
+            Row(modifier = Modifier) {
+                row.forEach { item ->
+                    when (item) {
+                        is Char -> CustomTextFieldButton(
+                            onClick = { onClickEvent(TextFieldEvent.AddDigit(item)) },
+                            buttonContent = { Text(text = item.toString()) }
+                        )
+                        TextFieldEvent.EraseCharacter -> CustomTextFieldButton(
+                            onClick = { onClickEvent(TextFieldEvent.EraseCharacter) },
+                            buttonContent = { Text(text = "back") }
+                        )
+                        TextFieldEvent.AddDot -> CustomTextFieldButton(
+                            onClick = { onClickEvent(TextFieldEvent.AddDot) },
+                            buttonContent = { Text(text = "._") }
+                        )
+                        TextFieldEvent.Empty -> CustomTextFieldButton(
+                            onClick = {},
+                            buttonContent = { Text(text = "") }
+                        )
+                    }
+                }
+            }
         }
 
         Row(modifier = Modifier) {
             CustomTextFieldButton(onClick = {}, buttonContent = { Text(text = "") })
             CustomTextFieldButton(
-                onClick = { onClickEvent(TextFieldEvent.AddDigit('0')) },
-                buttonContent = { Text(text = "0") }
+                onClick = {
+                    onConfirmEvent()
+                    hideBottomSheet()
+                },
+                buttonContent = { Text(text = "enter") }
             )
             CustomTextFieldButton(onClick = {}, buttonContent = { Text(text = "") })
             CustomTextFieldButton(onClick = {}, buttonContent = { Text(text = "") })
