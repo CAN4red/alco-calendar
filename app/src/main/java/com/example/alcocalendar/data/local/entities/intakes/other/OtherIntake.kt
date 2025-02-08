@@ -1,8 +1,8 @@
-package com.example.alcocalendar.data.entities.intakes.other
+package com.example.alcocalendar.data.local.entities.intakes.other
 
 import androidx.room.ColumnInfo
 import com.example.alcocalendar.common.AlcoStrengthConstants
-import com.example.alcocalendar.data.entities.DrinkIntake
+import com.example.alcocalendar.data.local.entities.DrinkIntake
 
 sealed class OtherIntake() : DrinkIntake
 

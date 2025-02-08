@@ -1,4 +1,4 @@
-package com.example.alcocalendar.data.entities.intakes.other
+package com.example.alcocalendar.data.local.entities.intakes.other
 
 import androidx.room.Embedded
 
