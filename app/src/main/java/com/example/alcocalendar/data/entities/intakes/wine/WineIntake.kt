@@ -1,4 +1,4 @@
-package com.example.alcocalendar.data.entities.intakes
+package com.example.alcocalendar.data.entities.intakes.wine
 
 import androidx.room.ColumnInfo
 import com.example.alcocalendar.common.AlcoStrengthConstants
