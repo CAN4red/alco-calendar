@@ -2,7 +2,7 @@ package com.example.alcocalendar.data.entities.intakes.spirits
 
 import androidx.room.ColumnInfo
 import com.example.alcocalendar.common.AlcoStrengthConstants
-import com.example.alcocalendar.data.DrinkIntake
+import com.example.alcocalendar.data.entities.DrinkIntake
 
 sealed class SpiritsIntake() : DrinkIntake
 

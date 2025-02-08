@@ -1,4 +1,4 @@
-package com.example.alcocalendar.data
+package com.example.alcocalendar.data.entities
 
 interface DrinkIntake {
     val liters: Double
