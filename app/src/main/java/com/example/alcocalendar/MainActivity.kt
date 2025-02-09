@@ -14,11 +14,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.lifecycleScope
 import com.example.alcocalendar.data.local.database.DrinkingSessionDatabase
 import com.example.alcocalendar.data.local.entities.DrinkingSessionEntity
-import com.example.alcocalendar.data.local.entities.TotalIntake
 import com.example.alcocalendar.data.local.entities.drinks.DrinkIntakeEntity
 import com.example.alcocalendar.data.local.entities.drinks.types.BeerType
-import com.example.alcocalendar.data.local.entities.intakes.beer.LightIntake
-import com.example.alcocalendar.data.local.entities.intakes.beer.TotalBeerIntake
 import com.example.alcocalendar.ui.theme.AlcoCalendarTheme
 import kotlinx.coroutines.launch
 import java.time.LocalDate
@@ -32,7 +29,7 @@ class MainActivity : ComponentActivity() {
 
         lifecycleScope.launch {
             dao.insertDrinkingSession(DrinkingSessionEntity(LocalDate.now()))
-            dao.deleteDrinkIntake(DrinkIntakeEntity(
+            dao.insertDrinkIntake(DrinkIntakeEntity(
                 date = LocalDate.now(),
                 drinkType = BeerType.LIGHT,
                 liters = 1.0,

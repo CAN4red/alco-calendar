@@ -3,7 +3,6 @@ package com.example.alcocalendar.data.local.entities.drinks
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
-import com.example.alcocalendar.data.local.entities.DrinkIntake
 import com.example.alcocalendar.data.local.entities.DrinkingSessionEntity
 import com.example.alcocalendar.data.local.entities.drinks.types.DrinkType
 import java.time.LocalDate
@@ -24,7 +23,7 @@ data class DrinkIntakeEntity(
     @PrimaryKey(autoGenerate = true)
     val drinkIntakeId: Int = 0,
     val date: LocalDate,
-    override val drinkType: DrinkType,
-    override val liters: Double = 0.0,
-    override val alcoStrength: Double = drinkType.defaultAlcoStrength,
-) : DrinkIntake
+    val drinkType: DrinkType,
+    val liters: Double = 0.0,
+    val alcoStrength: Double = drinkType.defaultAlcoStrength,
+)
