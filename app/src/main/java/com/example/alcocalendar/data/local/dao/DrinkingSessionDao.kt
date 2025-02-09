@@ -8,7 +8,7 @@ import androidx.room.Query
 import androidx.room.Transaction
 import androidx.room.Update
 import com.example.alcocalendar.data.local.entities.DrinkingSessionEntity
-import com.example.alcocalendar.data.local.entities.drinks.DrinkIntakeEntity
+import com.example.alcocalendar.data.local.entities.DrinkIntakeEntity
 import com.example.alcocalendar.data.local.entities.relations.DrinkingSessionWithDrinkIntakes
 import java.time.LocalDate
 
@@ -30,14 +30,20 @@ interface DrinkingSessionDao {
     @Delete
     suspend fun deleteDrinkingSession(drinkingSessionEntity: DrinkingSessionEntity)
 
+    @Query("DELETE FROM drinking_session WHERE date = :date")
+    suspend fun deleteDrinkingSessionByDate(date: LocalDate)
+
     @Delete
     suspend fun deleteDrinkIntake(drinkIntakeEntity: DrinkIntakeEntity)
 
+    @Query("DELETE FROM drink_intake WHERE drinkIntakeId = :drinkIntakeId")
+    suspend fun deleteDrinkIntakeById(drinkIntakeId: Int)
+
     @Transaction
     @Query("SELECT * FROM drinking_session WHERE date = :date")
-    fun getParentWithChildren(date: LocalDate): DrinkingSessionWithDrinkIntakes
+    fun getDrinkingSessionWithDrinkIntakes(date: LocalDate): DrinkingSessionWithDrinkIntakes
 
     @Transaction
     @Query("SELECT * FROM drinking_session")
-    fun getAllParentsWithChildren(): List<DrinkingSessionWithDrinkIntakes>
+    fun getDrinkingSessionsWithDrinkIntakes(): List<DrinkingSessionWithDrinkIntakes>
 }

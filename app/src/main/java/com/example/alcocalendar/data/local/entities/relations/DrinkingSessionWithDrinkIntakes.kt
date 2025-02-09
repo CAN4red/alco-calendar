@@ -3,7 +3,7 @@ package com.example.alcocalendar.data.local.entities.relations
 import androidx.room.Embedded
 import androidx.room.Relation
 import com.example.alcocalendar.data.local.entities.DrinkingSessionEntity
-import com.example.alcocalendar.data.local.entities.drinks.DrinkIntakeEntity
+import com.example.alcocalendar.data.local.entities.DrinkIntakeEntity
 
 data class DrinkingSessionWithDrinkIntakes(
     @Embedded

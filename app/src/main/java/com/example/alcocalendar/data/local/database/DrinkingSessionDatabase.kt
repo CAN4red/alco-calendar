@@ -9,7 +9,7 @@ import com.example.alcocalendar.data.local.converters.DrinkTypeConverter
 import com.example.alcocalendar.data.local.converters.LocalDateConverter
 import com.example.alcocalendar.data.local.dao.DrinkingSessionDao
 import com.example.alcocalendar.data.local.entities.DrinkingSessionEntity
-import com.example.alcocalendar.data.local.entities.drinks.DrinkIntakeEntity
+import com.example.alcocalendar.data.local.entities.DrinkIntakeEntity
 
 @Database(
     entities = [DrinkingSessionEntity::class, DrinkIntakeEntity::class],

@@ -1,11 +1,11 @@
 package com.example.alcocalendar.data.local.converters
 
 import androidx.room.TypeConverter
-import com.example.alcocalendar.data.local.entities.drinks.types.BeerType
-import com.example.alcocalendar.data.local.entities.drinks.types.DrinkType
-import com.example.alcocalendar.data.local.entities.drinks.types.OtherType
-import com.example.alcocalendar.data.local.entities.drinks.types.SpiritsType
-import com.example.alcocalendar.data.local.entities.drinks.types.WineType
+import com.example.alcocalendar.data.local.entities.drink_types.BeerType
+import com.example.alcocalendar.data.local.entities.drink_types.DrinkType
+import com.example.alcocalendar.data.local.entities.drink_types.OtherType
+import com.example.alcocalendar.data.local.entities.drink_types.SpiritsType
+import com.example.alcocalendar.data.local.entities.drink_types.WineType
 
 
 class DrinkTypeConverter {
@@ -28,10 +28,4 @@ class DrinkTypeConverter {
     fun toDrinkType(string: String): DrinkType {
         return stringToDrinkTypeMap[string.lowercase()] ?: throw IllegalArgumentException()
     }
-}
-
-fun main() {
-    val tp = DrinkTypeConverter()
-    println(tp.fromDrinkType(BeerType.LIGHT))
-    println(tp.toDrinkType("light"))
 }
