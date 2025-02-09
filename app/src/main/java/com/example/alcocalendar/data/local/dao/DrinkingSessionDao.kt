@@ -7,7 +7,6 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.example.alcocalendar.data.local.entities.DrinkingSessionEntity
-import kotlinx.coroutines.flow.Flow
 import java.time.LocalDate
 
 @Dao
@@ -23,8 +22,8 @@ interface DrinkingSessionDao {
     suspend fun deleteDrinkingSession(drinkingSessionEntity: DrinkingSessionEntity)
 
     @Query("SELECT * from drinking_sessions WHERE date = :date LIMIT 1")
-    suspend fun getDrinkingSession(date: LocalDate): Flow<DrinkingSessionEntity>
+    suspend fun getDrinkingSession(date: LocalDate): DrinkingSessionEntity
 
     @Query("SELECT * from drinking_sessions")
-    suspend fun getAllDrinkingSessions(): Flow<List<DrinkingSessionEntity>>
+    suspend fun getAllDrinkingSessions(): List<DrinkingSessionEntity>
 }

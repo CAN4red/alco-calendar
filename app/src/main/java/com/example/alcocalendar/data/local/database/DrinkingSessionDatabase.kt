@@ -11,7 +11,7 @@ import com.example.alcocalendar.data.local.entities.DrinkingSessionEntity
 
 @Database(
     entities = [DrinkingSessionEntity::class],
-    version = 0,
+    version = 1,
     exportSchema = false,
 )
 @TypeConverters(LocalDateConverter::class)

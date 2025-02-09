@@ -11,11 +11,27 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.lifecycleScope
+import com.example.alcocalendar.data.local.database.DrinkingSessionDatabase
+import com.example.alcocalendar.data.local.entities.DrinkingSessionEntity
+import com.example.alcocalendar.data.local.entities.TotalIntake
+import com.example.alcocalendar.data.local.entities.intakes.beer.LightIntake
+import com.example.alcocalendar.data.local.entities.intakes.beer.TotalBeerIntake
 import com.example.alcocalendar.ui.theme.AlcoCalendarTheme
+import kotlinx.coroutines.launch
+import java.time.LocalDate
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
+
+        val dao = DrinkingSessionDatabase.getInstance(this).drinkingSessionDao
+
+        lifecycleScope.launch {
+            dao.insertDrinkingSession(DrinkingSessionEntity(LocalDate.now(), TotalIntake(totalBeerIntake = TotalBeerIntake(lightIntake = LightIntake(liters = 1.0)))))
+        }
+
         enableEdgeToEdge()
         setContent {
             AlcoCalendarTheme {
