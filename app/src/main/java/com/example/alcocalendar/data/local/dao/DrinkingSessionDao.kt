@@ -21,9 +21,9 @@ interface DrinkingSessionDao {
     @Delete
     suspend fun deleteDrinkingSession(drinkingSessionEntity: DrinkingSessionEntity)
 
-    @Query("SELECT * from drinking_sessions WHERE date = :date LIMIT 1")
+    @Query("SELECT * from drinking_session WHERE date = :date LIMIT 1")
     suspend fun getDrinkingSession(date: LocalDate): DrinkingSessionEntity
 
-    @Query("SELECT * from drinking_sessions")
+    @Query("SELECT * from drinking_session")
     suspend fun getAllDrinkingSessions(): List<DrinkingSessionEntity>
 }
