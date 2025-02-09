@@ -8,10 +8,11 @@ import androidx.room.TypeConverters
 import com.example.alcocalendar.data.local.converters.LocalDateConverter
 import com.example.alcocalendar.data.local.dao.DrinkingSessionDao
 import com.example.alcocalendar.data.local.entities.DrinkingSessionEntity
+import com.example.alcocalendar.data.local.entities.drinks.DrinkIntakeEntity
 
 @Database(
-    entities = [DrinkingSessionEntity::class],
-    version = 1,
+    entities = [DrinkingSessionEntity::class, DrinkIntakeEntity::class],
+    version = 2,
     exportSchema = false,
 )
 @TypeConverters(LocalDateConverter::class)

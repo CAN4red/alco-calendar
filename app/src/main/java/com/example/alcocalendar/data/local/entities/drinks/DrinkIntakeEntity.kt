@@ -22,7 +22,7 @@ import java.time.LocalDate
 )
 data class DrinkIntakeEntity(
     @PrimaryKey(autoGenerate = true)
-    val drinkIntakeId: Int,
+    val drinkIntakeId: Int = 0,
     val date: LocalDate,
     override val drinkType: DrinkType,
     override val liters: Double = 0.0,
