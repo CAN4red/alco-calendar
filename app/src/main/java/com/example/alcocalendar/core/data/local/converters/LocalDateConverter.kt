@@ -1,4 +1,4 @@
-package com.example.alcocalendar.core.database.converters
+package com.example.alcocalendar.core.data.local.converters
 
 import androidx.room.TypeConverter
 import java.time.LocalDate

@@ -2,15 +2,15 @@ package com.example.alcocalendar.features.drink_intake.data.local.entities.relat
 
 import androidx.room.Embedded
 import androidx.room.Relation
-import com.example.alcocalendar.core.database.entities.DrinkingSessionEntity
-import com.example.alcocalendar.core.database.entities.DrinkIntakeEntity
+import com.example.alcocalendar.core.data.local.entities.DrinkingSession
+import com.example.alcocalendar.core.data.local.entities.DrinkIntake
 
 data class DrinkingSessionWithDrinkIntakes(
     @Embedded
-    val drinkingSessionEntity: DrinkingSessionEntity,
+    val drinkingSession: DrinkingSession,
     @Relation(
         parentColumn = "date",
         entityColumn = "date",
     )
-    val drinkIntakes: List<DrinkIntakeEntity>,
+    val drinkIntakes: List<DrinkIntake>,
 )

@@ -1,11 +1,11 @@
-package com.example.alcocalendar.core.database.converters
+package com.example.alcocalendar.core.data.local.converters
 
 import androidx.room.TypeConverter
-import com.example.alcocalendar.core.database.entities.drink_types.BeerType
-import com.example.alcocalendar.core.database.entities.drink_types.DrinkType
-import com.example.alcocalendar.core.database.entities.drink_types.OtherType
-import com.example.alcocalendar.core.database.entities.drink_types.SpiritsType
-import com.example.alcocalendar.core.database.entities.drink_types.WineType
+import com.example.alcocalendar.core.data.local.entities.drink_types.BeerType
+import com.example.alcocalendar.core.data.local.entities.drink_types.DrinkType
+import com.example.alcocalendar.core.data.local.entities.drink_types.OtherType
+import com.example.alcocalendar.core.data.local.entities.drink_types.SpiritsType
+import com.example.alcocalendar.core.data.local.entities.drink_types.WineType
 
 
 class DrinkTypeConverter {

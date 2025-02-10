@@ -7,7 +7,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
 import androidx.room.Update
-import com.example.alcocalendar.core.database.entities.DrinkIntakeEntity
+import com.example.alcocalendar.core.data.local.entities.DrinkIntake
 import com.example.alcocalendar.features.drink_intake.data.local.entities.relations.DrinkingSessionWithDrinkIntakes
 import java.time.LocalDate
 
@@ -15,13 +15,13 @@ import java.time.LocalDate
 interface DrinkIntakeDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertDrinkIntake(drinkIntakeEntity: DrinkIntakeEntity)
+    suspend fun insertDrinkIntake(drinkIntake: DrinkIntake)
 
     @Update
-    suspend fun updateDrinkIntake(drinkIntakeEntity: DrinkIntakeEntity)
+    suspend fun updateDrinkIntake(drinkIntake: DrinkIntake)
 
     @Delete
-    suspend fun deleteDrinkIntake(drinkIntakeEntity: DrinkIntakeEntity)
+    suspend fun deleteDrinkIntake(drinkIntake: DrinkIntake)
 
     @Query("DELETE FROM drink_intake WHERE drinkIntakeId = :drinkIntakeId")
     suspend fun deleteDrinkIntakeById(drinkIntakeId: Int)

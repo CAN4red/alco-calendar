@@ -1,19 +1,19 @@
-package com.example.alcocalendar.core.database
+package com.example.alcocalendar.core.data.local
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.example.alcocalendar.core.database.converters.DrinkTypeConverter
-import com.example.alcocalendar.core.database.converters.LocalDateConverter
-import com.example.alcocalendar.core.database.dao.DrinkingSessionDao
-import com.example.alcocalendar.core.database.entities.DrinkingSessionEntity
+import com.example.alcocalendar.core.data.local.converters.DrinkTypeConverter
+import com.example.alcocalendar.core.data.local.converters.LocalDateConverter
+import com.example.alcocalendar.core.data.local.dao.DrinkingSessionDao
+import com.example.alcocalendar.core.data.local.entities.DrinkingSession
 import com.example.alcocalendar.features.drink_intake.data.local.dao.DrinkIntakeDao
-import com.example.alcocalendar.core.database.entities.DrinkIntakeEntity
+import com.example.alcocalendar.core.data.local.entities.DrinkIntake
 
 @Database(
-    entities = [DrinkingSessionEntity::class, DrinkIntakeEntity::class],
+    entities = [DrinkingSession::class, DrinkIntake::class],
     version = 2,
     exportSchema = false,
 )
