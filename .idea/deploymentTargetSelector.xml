@@ -8,10 +8,13 @@
       <SelectionState runConfigName="DrinkingSessionDatabaseTest">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="ExampleInstrumentedTest">
+      <SelectionState runConfigName="DrinkingSessionDatabaseTest (1)">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="DrinkingSessionDatabaseTest (1)">
+      <SelectionState runConfigName="Tests in 'com.example.alcocalendar'">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="DrinkingSessionDatabaseTest (2)">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>
