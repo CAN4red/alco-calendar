@@ -5,8 +5,9 @@ import com.example.alcocalendar.core.domain.repository.DrinkIntakeRepository
 import com.example.alcocalendar.features.drink_intake.data.local.dao.DrinkIntakeDao
 import com.example.alcocalendar.features.drink_intake.data.local.entities.relations.DrinkingSessionWithDrinkIntakes
 import java.time.LocalDate
+import javax.inject.Inject
 
-class DrinkIntakeRepositoryImpl(
+class DrinkIntakeRepositoryImpl @Inject constructor(
     private val drinkIntakeDao: DrinkIntakeDao
 ) : DrinkIntakeRepository {
     override suspend fun insertDrinkIntake(drinkIntake: DrinkIntake) {
