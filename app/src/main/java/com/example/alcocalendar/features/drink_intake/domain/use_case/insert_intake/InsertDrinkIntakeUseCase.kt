@@ -10,7 +10,7 @@ class InsertDrinkIntakeUseCase @Inject constructor(
     suspend operator fun invoke(drinkIntake: DrinkIntake) {
         val existingDrinkIntakes = repository.getDrinkIntakesByDate(drinkIntake.date)
 
-        val existingDrinkIntake = existingDrinkIntakes.find {
+        val existingDrinkIntake = existingDrinkIntakes.find() {
             it.drinkType == drinkIntake.drinkType && it.alcoStrength == drinkIntake.alcoStrength
         }
 
