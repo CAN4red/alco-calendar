@@ -1,4 +1,4 @@
-package com.example.alcocalendar.features.drink_intake.domain
+package com.example.alcocalendar.features.drink_intake.domain.repository
 
 import com.example.alcocalendar.core.data.local.entities.DrinkIntake
 import com.example.alcocalendar.core.domain.repository.SharedDrinkIntakeRepository
