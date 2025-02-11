@@ -1,9 +1,9 @@
 package com.example.alcocalendar.features.drink_intake.data.local.repository
 
 import com.example.alcocalendar.core.data.local.entities.DrinkIntake
-import com.example.alcocalendar.core.domain.repository.DrinkIntakeRepository
 import com.example.alcocalendar.features.drink_intake.data.local.dao.DrinkIntakeDao
 import com.example.alcocalendar.features.drink_intake.data.local.entities.relations.DrinkingSessionWithDrinkIntakes
+import com.example.alcocalendar.features.drink_intake.domain.DrinkIntakeRepository
 import java.time.LocalDate
 import javax.inject.Inject
 
