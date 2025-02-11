@@ -6,7 +6,7 @@ import java.time.LocalDate
 
 interface SharedDrinkIntakeRepository {
 
-    fun getDrinkIntakesByDate(date: LocalDate): List<DrinkIntake>
+    suspend fun getDrinkIntakesByDate(date: LocalDate): List<DrinkIntake>
 
-    fun getDrinkingSessionsWithDrinkIntakes(): List<DrinkingSessionWithDrinkIntakes>
+    suspend fun getDrinkingSessionsWithDrinkIntakes(): List<DrinkingSessionWithDrinkIntakes>
 }

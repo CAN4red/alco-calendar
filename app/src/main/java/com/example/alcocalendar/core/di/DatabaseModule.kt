@@ -3,7 +3,6 @@ package com.example.alcocalendar.core.di
 import android.content.Context
 import com.example.alcocalendar.core.data.local.DrinkingSessionDatabase
 import com.example.alcocalendar.core.data.local.dao.DrinkingSessionDao
-import com.example.alcocalendar.features.drink_intake.data.local.dao.DrinkIntakeDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -23,10 +22,5 @@ object DatabaseModule {
     @Provides
     fun provideDrinkingSessionDao(db: DrinkingSessionDatabase): DrinkingSessionDao {
         return db.drinkingSessionDao
-    }
-
-    @Provides
-    fun provideDrinkIntakeDao(db: DrinkingSessionDatabase): DrinkIntakeDao {
-        return db.drinkIntakeDao
     }
 }
