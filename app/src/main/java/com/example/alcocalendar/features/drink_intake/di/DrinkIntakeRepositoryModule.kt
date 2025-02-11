@@ -10,7 +10,7 @@ import dagger.hilt.components.SingletonComponent
 
 @Module
 @InstallIn(SingletonComponent::class)
-class RepositoryModule {
+class DrinkIntakeRepositoryModule {
     @Provides
     fun provideDrinkIntakeRepository(dao: DrinkIntakeDao): DrinkIntakeRepository {
         return DrinkIntakeRepositoryImpl(dao)

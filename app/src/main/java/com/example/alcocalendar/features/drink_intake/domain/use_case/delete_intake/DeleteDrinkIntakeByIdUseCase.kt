@@ -4,7 +4,7 @@ import com.example.alcocalendar.features.drink_intake.domain.repository.DrinkInt
 import javax.inject.Inject
 
 class DeleteDrinkIntakeByIdUseCase @Inject constructor(
-  private val repository: DrinkIntakeRepository
+    private val repository: DrinkIntakeRepository
 ) {
     suspend operator fun invoke(drinkIntakeId: Int) {
         repository.deleteDrinkIntakeById(drinkIntakeId)

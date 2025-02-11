@@ -4,7 +4,7 @@ import com.example.alcocalendar.core.data.local.entities.DrinkIntake
 import com.example.alcocalendar.features.drink_intake.domain.repository.DrinkIntakeRepository
 import javax.inject.Inject
 
-class InsertDrinkIntakeUseCase @Inject constructor(
+class SafeInsertDrinkIntakeUseCase @Inject constructor(
     private val repository: DrinkIntakeRepository
 ) {
     suspend operator fun invoke(drinkIntake: DrinkIntake) {
