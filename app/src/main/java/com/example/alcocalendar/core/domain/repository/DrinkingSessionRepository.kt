@@ -1,6 +1,6 @@
 package com.example.alcocalendar.core.domain.repository
 
-import com.example.alcocalendar.core.data.local.entities.DrinkingSession
+import com.example.alcocalendar.core.domain.model.DrinkingSession
 import java.time.LocalDate
 
 interface DrinkingSessionRepository {
