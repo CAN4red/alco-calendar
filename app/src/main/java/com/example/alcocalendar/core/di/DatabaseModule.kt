@@ -20,6 +20,7 @@ object DatabaseModule {
     }
 
     @Provides
+    @Singleton
     fun provideDrinkingSessionDao(db: DrinkingSessionDatabase): DrinkingSessionDao {
         return db.drinkingSessionDao
     }

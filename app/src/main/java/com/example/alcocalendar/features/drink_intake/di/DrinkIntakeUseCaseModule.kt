@@ -11,7 +11,7 @@ import dagger.hilt.components.SingletonComponent
 
 @Module
 @InstallIn(SingletonComponent::class)
-class DrinkIntakeUseCaseModule {
+object DrinkIntakeUseCaseModule {
     @Provides
     fun provideSafeInsertDrinkIntakeUseCase(
         repository: DrinkIntakeRepository
