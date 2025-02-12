@@ -10,7 +10,7 @@ import java.time.LocalDate
     tableName = "drink_intake",
     foreignKeys = [
         ForeignKey(
-            entity = DrinkingSession::class,
+            entity = DrinkingSessionEntity::class,
             parentColumns = ["date"],
             childColumns = ["date"],
             onDelete = ForeignKey.CASCADE,
@@ -18,21 +18,11 @@ import java.time.LocalDate
         )
     ]
 )
-data class DrinkIntake(
+data class DrinkIntakeEntity(
     @PrimaryKey(autoGenerate = true)
     val drinkIntakeId: Int = 0,
     val date: LocalDate,
     val drinkType: DrinkType,
     val liters: Double = 0.0,
     val alcoStrength: Double = drinkType.defaultAlcoStrength,
-) {
-    val isEmpty: Boolean
-        get() = (liters == 0.0)
-
-    val alcoUnits: Double
-        get() = liters * alcoStrength * ETHANOL_MASS
-
-    companion object {
-        private const val ETHANOL_MASS = 0.789
-    }
-}
+)
