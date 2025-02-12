@@ -1,7 +1,7 @@
 package com.example.alcocalendar.core.domain.repository
 
-import com.example.alcocalendar.core.data.local.entities.DrinkIntake
-import com.example.alcocalendar.features.drink_intake.data.local.entities.relations.DrinkingSessionWithDrinkIntakes
+import com.example.alcocalendar.core.domain.model.DrinkIntake
+import com.example.alcocalendar.core.data.local.relations.DrinkingSessionWithDrinkIntakes
 import java.time.LocalDate
 
 interface SharedDrinkIntakeRepository {
