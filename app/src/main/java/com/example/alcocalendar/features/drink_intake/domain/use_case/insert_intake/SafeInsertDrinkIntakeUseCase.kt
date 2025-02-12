@@ -1,6 +1,6 @@
 package com.example.alcocalendar.features.drink_intake.domain.use_case.insert_intake
 
-import com.example.alcocalendar.core.data.local.entities.DrinkIntake
+import com.example.alcocalendar.core.domain.model.DrinkIntake
 import com.example.alcocalendar.features.drink_intake.domain.repository.DrinkIntakeRepository
 import javax.inject.Inject
 

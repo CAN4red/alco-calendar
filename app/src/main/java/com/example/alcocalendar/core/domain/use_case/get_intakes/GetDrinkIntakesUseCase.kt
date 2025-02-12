@@ -1,6 +1,6 @@
 package com.example.alcocalendar.core.domain.use_case.get_intakes
 
-import com.example.alcocalendar.core.data.local.entities.DrinkIntake
+import com.example.alcocalendar.core.domain.model.DrinkIntake
 import com.example.alcocalendar.core.domain.repository.SharedDrinkIntakeRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
