@@ -5,12 +5,12 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.example.alcocalendar.core.data.local.DrinkingSessionDatabase
 import com.example.alcocalendar.core.data.local.dao.DrinkingSessionDao
-import com.example.alcocalendar.core.data.local.entities.DrinkIntake
-import com.example.alcocalendar.core.data.local.entities.DrinkingSession
+import com.example.alcocalendar.core.data.local.entities.DrinkIntakeEntity
+import com.example.alcocalendar.core.data.local.entities.DrinkingSessionEntity
 import com.example.alcocalendar.features.drink_intake.data.local.dao.DrinkIntakeDao
 import com.example.alcocalendar.core.data.local.entities.drink_types.BeerType
 import com.example.alcocalendar.core.data.local.entities.drink_types.WineType
-import com.example.alcocalendar.features.drink_intake.data.local.entities.relations.DrinkingSessionWithDrinkIntakes
+import com.example.alcocalendar.core.data.local.relations.DrinkingSessionWithDrinkIntakes
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert.assertEquals
@@ -46,7 +46,7 @@ class DrinkingSessionDatabaseTest {
     @Throws(Exception::class)
     fun insertDrinkingSessionAndGet_singleDrinkingSession() = runBlocking {
         val date = LocalDate.of(2025, 2, 9)
-        val drinkingSessionInserted = DrinkingSession(date)
+        val drinkingSessionInserted = DrinkingSessionEntity(date)
 
         drinkingSessionDao.insertDrinkingSession(drinkingSessionInserted)
 
@@ -61,15 +61,15 @@ class DrinkingSessionDatabaseTest {
     @Throws(Exception::class)
     fun insertDrinkingSessionWithDrinkIntakesAndGet_singleDrinkingSessionWithTwoDrinkIntakes() = runBlocking {
         val date = LocalDate.of(2025, 1, 1)
-        val drinkingSessionInserted = DrinkingSession(date)
-        val drinkIntakeInserted1 = DrinkIntake(
+        val drinkingSessionInserted = DrinkingSessionEntity(date)
+        val drinkIntakeInserted1 = DrinkIntakeEntity(
             drinkIntakeId = 1,
             date = date,
             drinkType = BeerType.LIGHT,
             liters = 0.45,
             alcoStrength = 5.5
         )
-        val drinkIntakeInserted2 = DrinkIntake(
+        val drinkIntakeInserted2 = DrinkIntakeEntity(
             drinkIntakeId = 2,
             date = date,
             drinkType = WineType.VERMOUTH,
@@ -101,9 +101,9 @@ class DrinkingSessionDatabaseTest {
         val date1 = LocalDate.of(2025, 1, 2)
         val date2 = LocalDate.of(2025, 1, 3)
 
-        val drinkingSessionInserted1 = DrinkingSession(date1)
-        val drinkingSessionInserted2 = DrinkingSession(date2)
-        val drinkingSessionInserted3 = DrinkingSession(date2)
+        val drinkingSessionInserted1 = DrinkingSessionEntity(date1)
+        val drinkingSessionInserted2 = DrinkingSessionEntity(date2)
+        val drinkingSessionInserted3 = DrinkingSessionEntity(date2)
 
         drinkingSessionDao.insertDrinkingSession(drinkingSessionInserted1)
         drinkingSessionDao.insertDrinkingSession(drinkingSessionInserted2)
@@ -119,14 +119,14 @@ class DrinkingSessionDatabaseTest {
     fun updateDrinkIntake_OneDrinkingSessionWithTwoDrinkIntakes() = runBlocking {
         val date = LocalDate.of(2005, 8, 2)
 
-        val drinkingSessionInserted = DrinkingSession(date)
-        val drinkIntakeInserted1 = DrinkIntake(
+        val drinkingSessionInserted = DrinkingSessionEntity(date)
+        val drinkIntakeInserted1 = DrinkIntakeEntity(
             date = date,
             drinkType = WineType.VERMOUTH,
             liters = 0.9,
             alcoStrength = 20.5
         )
-        val drinkIntakeInserted2 = DrinkIntake(
+        val drinkIntakeInserted2 = DrinkIntakeEntity(
             date = date,
             drinkType = BeerType.LIGHT,
             liters = 0.45,
@@ -137,7 +137,7 @@ class DrinkingSessionDatabaseTest {
         drinkIntakeDao.insertDrinkIntake(drinkIntakeInserted1)
         drinkIntakeDao.insertDrinkIntake(drinkIntakeInserted2)
 
-        val drinkIntakeUpdated = DrinkIntake(
+        val drinkIntakeUpdated = DrinkIntakeEntity(
             drinkIntakeId = drinkIntakeDao
                 .getDrinkingSessionWithDrinkIntakes(date)
                 .drinkIntakes[0]
@@ -165,8 +165,8 @@ class DrinkingSessionDatabaseTest {
     fun deleteDrinkIntake_OneDrinkingSessionWithOneDrinkIntake() = runBlocking {
         val date = LocalDate.of(2005, 1, 13)
 
-        val drinkingSessionInserted = DrinkingSession(date)
-        val drinkIntakeInserted = DrinkIntake(
+        val drinkingSessionInserted = DrinkingSessionEntity(date)
+        val drinkIntakeInserted = DrinkIntakeEntity(
             date = date,
             drinkType = WineType.VERMOUTH,
             liters = 0.9,
@@ -195,8 +195,8 @@ class DrinkingSessionDatabaseTest {
     fun deleteDrinkingSession_OneDrinkingSessionWithOneDrinkIntake() = runBlocking {
         val date = LocalDate.of(2005, 1, 13)
 
-        val drinkingSessionInserted = DrinkingSession(date)
-        val drinkIntakeInserted = DrinkIntake(
+        val drinkingSessionInserted = DrinkingSessionEntity(date)
+        val drinkIntakeInserted = DrinkIntakeEntity(
             date = date,
             drinkType = WineType.VERMOUTH,
             liters = 0.9,
