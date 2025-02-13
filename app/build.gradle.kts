@@ -81,6 +81,9 @@ dependencies {
 
     // Hilt Navigation
     implementation(libs.androidx.hilt.navigation.compose)
+
+    // ViewModelScope
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
 }
 
 kapt {
