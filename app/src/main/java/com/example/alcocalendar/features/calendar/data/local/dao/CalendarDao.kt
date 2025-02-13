@@ -11,10 +11,14 @@ import java.time.YearMonth
 interface CalendarDao {
 
     @Transaction
+    @Query("SELECT * FROM drinking_session")
+    suspend fun getDrinkingSessionsWithDrinkIntakes(): List<DrinkingSessionWithDrinkIntakes>
+
+    @Transaction
     @Query("SELECT * FROM drinking_session WHERE yearMonth = :yearMonth")
-    fun getDrinkingSessionsWithDrinkIntakesByMonth(yearMonth: YearMonth): List<DrinkingSessionWithDrinkIntakes>
+    suspend fun getDrinkingSessionsWithDrinkIntakesByMonth(yearMonth: YearMonth): List<DrinkingSessionWithDrinkIntakes>
 
     @Transaction
     @Query("SELECT * FROM drinking_session WHERE year = :year")
-    fun getDrinkingSessionsWithDrinkIntakesByYear(year: Year): List<DrinkingSessionWithDrinkIntakes>
+    suspend fun getDrinkingSessionsWithDrinkIntakesByYear(year: Year): List<DrinkingSessionWithDrinkIntakes>
 }
