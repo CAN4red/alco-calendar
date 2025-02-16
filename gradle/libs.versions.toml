@@ -16,6 +16,7 @@ kotlin = "2.1.0"
 ksp = "2.1.0-1.0.29"
 lifecycleRuntimeKtx = "2.8.7"
 roomRuntime = "2.6.1"
+navigation = "2.8.7"
 media3TestUtils = "1.5.1"
 
 [libraries]
@@ -45,6 +46,7 @@ androidx-material3 = { group = "androidx.compose.material3", name = "material3" 
 junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter", version.ref = "junitJupiter" }
 androidx-junit-ktx = { group = "androidx.test.ext", name = "junit-ktx", version.ref = "junitKtx" }
 androidx-media3-test-utils = { group = "androidx.media3", name = "media3-test-utils", version.ref = "media3TestUtils" }
+androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

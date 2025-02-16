@@ -84,6 +84,9 @@ dependencies {
 
     // ViewModelScope
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
+
+    // Navigation
+    implementation(libs.androidx.navigation.compose)
 }
 
 kapt {
