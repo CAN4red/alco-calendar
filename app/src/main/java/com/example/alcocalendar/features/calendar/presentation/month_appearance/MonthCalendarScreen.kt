@@ -7,6 +7,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.example.alcocalendar.features.calendar.presentation.common.CalendarViewModel
 import com.example.alcocalendar.features.calendar.presentation.common.getSessionWithIntakes
 import com.example.alcocalendar.features.calendar.presentation.month_appearance.components.MonthCalendarPager
@@ -19,12 +20,13 @@ import java.time.Month
 import java.time.YearMonth
 
 @Composable
-fun MonthAppearanceScreen(
+fun MonthCalendarScreen(
+    navController: NavController,
     modifier: Modifier = Modifier, // temporary!
     firstVisibleMonth: YearMonth = YearMonth.now(),
     viewModel: CalendarViewModel = hiltViewModel(),
 ) {
-    val calendarDataState by viewModel.calendarDataState.collectAsState()
+    val calendarDataState by viewModel.calendarState.collectAsState()
     val calendarState = rememberCalendarState(
         startMonth = YearMonth.of(2020, Month.JANUARY),
         endMonth = YearMonth.of(2025, Month.DECEMBER),

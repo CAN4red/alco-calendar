@@ -7,6 +7,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.example.alcocalendar.features.calendar.presentation.common.CalendarViewModel
 import com.example.alcocalendar.features.calendar.presentation.common.getSessionWithIntakes
 import com.example.alcocalendar.features.calendar.presentation.year_appearance.components.YearCalendarPager
@@ -18,12 +19,13 @@ import java.time.Year
 
 @OptIn(ExperimentalCalendarApi::class)
 @Composable
-fun YearAppearanceScreen(
+fun YearCalendarScreen(
+    navController: NavController,
     modifier: Modifier = Modifier, // temporary!
     firstVisibleYear: Year = Year.now(),
     viewModel: CalendarViewModel = hiltViewModel(),
 ) {
-    val calendarDataState by viewModel.calendarDataState.collectAsState()
+    val calendarDataState by viewModel.calendarState.collectAsState()
     val yearCalendarState = rememberYearCalendarState(
         startYear = Year.of(2020),
         endYear = Year.of(2025),

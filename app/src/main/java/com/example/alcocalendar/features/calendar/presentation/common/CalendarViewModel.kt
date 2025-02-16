@@ -15,13 +15,13 @@ class CalendarViewModel @Inject constructor(
     private val getSessionsWithIntakesUseCase: GetSessionsWithIntakesUseCase,
 ) : ViewModel() {
 
-    private val _calendarDataState = MutableStateFlow(CalendarDataState())
-    val calendarDataState: StateFlow<CalendarDataState> get() = _calendarDataState
+    private val _calendarState = MutableStateFlow(CalendarState())
+    val calendarState: StateFlow<CalendarState> get() = _calendarState
 
     init {
         viewModelScope.launch {
-            _calendarDataState.update { currentState ->
-                currentState.copy(value = getSessionsWithIntakesUseCase())
+            _calendarState.update { currentState ->
+                currentState.copy(intakesData = getSessionsWithIntakesUseCase())
             }
         }
     }
