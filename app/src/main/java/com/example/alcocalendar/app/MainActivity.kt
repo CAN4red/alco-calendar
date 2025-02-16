@@ -1,4 +1,4 @@
-package com.example.alcocalendar
+package com.example.alcocalendar.app
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -11,7 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.alcocalendar.features.calendar.presentation.month_appearance.components.MonthAppearanceScreen
+import com.example.alcocalendar.features.calendar.presentation.year_appearance.YearAppearanceScreen
 import com.example.alcocalendar.features.drink_intake.ui.theme.AlcoCalendarTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,7 +25,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             AlcoCalendarTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    MonthAppearanceScreen(modifier = Modifier.padding(innerPadding))
+                    YearAppearanceScreen(modifier = Modifier.padding(innerPadding))
                 }
             }
         }

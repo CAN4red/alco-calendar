@@ -1,4 +1,4 @@
-package com.example.alcocalendar
+package com.example.alcocalendar.app
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

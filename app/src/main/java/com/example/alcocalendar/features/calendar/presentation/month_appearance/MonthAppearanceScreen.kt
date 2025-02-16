@@ -13,7 +13,6 @@ import com.example.alcocalendar.features.calendar.presentation.month_appearance.
 import com.example.alcocalendar.features.calendar.presentation.month_appearance.components.MonthTitleWithNavigation
 import com.example.alcocalendar.features.calendar.presentation.month_appearance.components.rememberFirstMostVisibleMonth
 import com.kizitonwose.calendar.compose.rememberCalendarState
-import com.kizitonwose.calendar.core.firstDayOfWeekFromLocale
 import com.kizitonwose.calendar.core.nextMonth
 import com.kizitonwose.calendar.core.previousMonth
 import java.time.Month
@@ -22,19 +21,19 @@ import java.time.YearMonth
 @Composable
 fun MonthAppearanceScreen(
     modifier: Modifier = Modifier, // temporary!
+    firstVisibleMonth: YearMonth = YearMonth.now(),
     viewModel: CalendarViewModel = hiltViewModel(),
 ) {
     val calendarDataState by viewModel.calendarDataState.collectAsState()
     val calendarState = rememberCalendarState(
         startMonth = YearMonth.of(2020, Month.JANUARY),
         endMonth = YearMonth.of(2025, Month.DECEMBER),
-        firstVisibleMonth = YearMonth.now(),
-        firstDayOfWeek = firstDayOfWeekFromLocale()
+        firstVisibleMonth = firstVisibleMonth,
     )
 
     val visibleMonth = rememberFirstMostVisibleMonth(calendarState, 90f)
 
-    Column() {
+    Column(modifier = modifier) {
         MonthTitleWithNavigation(
             month = visibleMonth.yearMonth,
             scrollToPrevMonth = { calendarState.animateScrollToMonth(visibleMonth.yearMonth.previousMonth) },
@@ -44,7 +43,7 @@ fun MonthAppearanceScreen(
         MonthCalendarPager(
             calendarState = calendarState,
             getCalendarSessionWithIntakes = calendarDataState::getSessionWithIntakes,
-            modifier = modifier.fillMaxSize()
+            modifier = Modifier.fillMaxSize()
         )
     }
 }
