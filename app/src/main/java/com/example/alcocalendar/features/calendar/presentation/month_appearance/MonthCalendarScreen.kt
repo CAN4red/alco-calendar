@@ -10,12 +10,15 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.alcocalendar.core.navigation.NavRoutes
+import com.example.alcocalendar.features.calendar.presentation.common.CalendarEvent
 import com.example.alcocalendar.features.calendar.presentation.common.SharedCalendarViewModel
 import com.example.alcocalendar.features.calendar.presentation.common.getSessionWithIntakes
 import com.example.alcocalendar.features.calendar.presentation.month_appearance.components.MonthCalendarPager
 import com.example.alcocalendar.features.calendar.presentation.month_appearance.components.MonthTitleWithNavigation
 import com.example.alcocalendar.features.calendar.presentation.month_appearance.components.rememberFirstMostVisibleMonth
+import com.kizitonwose.calendar.compose.CalendarState
 import com.kizitonwose.calendar.compose.rememberCalendarState
+import com.kizitonwose.calendar.core.CalendarMonth
 import com.kizitonwose.calendar.core.nextMonth
 import com.kizitonwose.calendar.core.previousMonth
 import java.time.Month
@@ -39,9 +42,9 @@ fun MonthCalendarScreen(
     Column(modifier = modifier) {
         MonthTitleWithNavigation(
             month = visibleMonth.yearMonth,
-            scrollToPrevMonth = { calendarState.animateScrollToMonth(visibleMonth.yearMonth.previousMonth) },
-            scrollToNextMonth = { calendarState.animateScrollToMonth(visibleMonth.yearMonth.nextMonth) },
-            navigateToYearCalendar = { navController.navigate(NavRoutes.YEAR_CALENDAR) }
+            scrollToPrevMonth = { calendarState.scrollToPrevMonth(visibleMonth) },
+            scrollToNextMonth = { calendarState.scrollToNextMonth(visibleMonth) },
+            navigateToYearCalendar = { navController.navigate(NavRoutes.YEAR_CALENDAR) },
         )
 
         MonthCalendarPager(
@@ -52,9 +55,19 @@ fun MonthCalendarScreen(
     }
 
     LaunchedEffect(visibleMonth) {
-        viewModel.updateCurrentYearMonth(
-            year = visibleMonth.yearMonth.year,
-            month = visibleMonth.yearMonth.month
+        viewModel.onEvent(
+            CalendarEvent.UpdateCurrentYearMonth(
+                year = visibleMonth.yearMonth.year,
+                month = visibleMonth.yearMonth.month,
+            )
         )
     }
+}
+
+private suspend fun CalendarState.scrollToPrevMonth(currentMonth: CalendarMonth) {
+    this.animateScrollToMonth(currentMonth.yearMonth.previousMonth)
+}
+
+private suspend fun CalendarState.scrollToNextMonth(currentMonth: CalendarMonth) {
+    this.animateScrollToMonth(currentMonth.yearMonth.nextMonth)
 }

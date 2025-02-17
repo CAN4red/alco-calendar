@@ -12,12 +12,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.alcocalendar.features.calendar.domain.model.CalendarSessionWithIntakes
+import com.example.alcocalendar.features.calendar.presentation.common.CalendarEvent
 import com.kizitonwose.calendar.compose.HorizontalYearCalendar
 import com.kizitonwose.calendar.compose.yearcalendar.YearCalendarState
 import com.kizitonwose.calendar.compose.yearcalendar.rememberYearCalendarState
+import com.kizitonwose.calendar.core.CalendarMonth
 import com.kizitonwose.calendar.core.ExperimentalCalendarApi
 import java.time.LocalDate
-import java.time.Month
 import java.time.YearMonth
 import java.time.format.TextStyle
 import java.util.Locale
@@ -27,7 +28,7 @@ import java.util.Locale
 fun YearCalendarPager(
     yearCalendarState: YearCalendarState,
     getCalendarSessionWithIntakes: (LocalDate) -> CalendarSessionWithIntakes,
-    updateCurrentYearMonth: (Int, Month) -> Unit,
+    onCalendarEvent: (CalendarEvent) -> Unit,
     navigateToTheMonth: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -41,20 +42,22 @@ fun YearCalendarPager(
         },
         monthHeader = { month -> MonthTitle(month.yearMonth) },
         monthBody = { month, content ->
-            Box(modifier = Modifier.clickable {
-                updateCurrentYearMonth(
-                    month.yearMonth.year,
-                    month.yearMonth.month
-                )
-                navigateToTheMonth()
-            }) { content() }
+            ClickableMonthBody(
+                content = content,
+                onMonthClick = {
+                    onMonthClick(
+                        month = month,
+                        onCalendarEvent = onCalendarEvent,
+                        navigateToTheMonth = navigateToTheMonth
+                    )
+                }
+            )
         },
         monthHorizontalSpacing = 16.dp,
         monthVerticalSpacing = 14.dp,
         modifier = modifier,
     )
 }
-
 
 @Composable
 private fun MonthTitle(month: YearMonth) {
@@ -66,6 +69,33 @@ private fun MonthTitle(month: YearMonth) {
     }
 }
 
+@Composable
+private fun ClickableMonthBody(
+    content: @Composable () -> Unit,
+    onMonthClick: () -> Unit,
+) {
+    Box(
+        modifier = Modifier.clickable { onMonthClick() }
+    ) {
+        content()
+    }
+}
+
+
+private fun onMonthClick(
+    month: CalendarMonth,
+    onCalendarEvent: (CalendarEvent) -> Unit,
+    navigateToTheMonth: () -> Unit
+) {
+    onCalendarEvent(
+        CalendarEvent.UpdateCurrentYearMonth(
+            year = month.yearMonth.year,
+            month = month.yearMonth.month
+        )
+    )
+    navigateToTheMonth()
+}
+
 
 @OptIn(ExperimentalCalendarApi::class)
 @Preview
@@ -74,7 +104,7 @@ private fun CalendarPagerPreview() {
     YearCalendarPager(
         yearCalendarState = rememberYearCalendarState(),
         getCalendarSessionWithIntakes = { date -> CalendarSessionWithIntakes(date) },
-        updateCurrentYearMonth = {_, _ -> },
+        onCalendarEvent = {},
         navigateToTheMonth = {},
         modifier = Modifier.fillMaxSize()
     )

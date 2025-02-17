@@ -29,11 +29,19 @@ class SharedCalendarViewModel @Inject constructor(
         }
     }
 
-    fun updateCurrentYearMonth(
-        year: Int = calendarState.value.currentYearMonth.year,
-        month: Month = calendarState.value.currentYearMonth.month
-    ) {
-        val newYearMonth = YearMonth.of(year, month)
+    fun onEvent(event: CalendarEvent) {
+        when (event) {
+            is CalendarEvent.UpdateCurrentYearMonth -> {
+                handleUpdateCurrentYearMonth(year = event.year, month = event.month)
+            }
+        }
+    }
+
+    private fun handleUpdateCurrentYearMonth(year: Int?, month: Month?) {
+        val newYear = year ?: calendarState.value.currentYearMonth.year
+        val newMonth = month ?: calendarState.value.currentYearMonth.month
+
+        val newYearMonth = YearMonth.of(newYear, newMonth)
         _calendarState.update { currentState ->
             currentState.copy(currentYearMonth = newYearMonth)
         }
