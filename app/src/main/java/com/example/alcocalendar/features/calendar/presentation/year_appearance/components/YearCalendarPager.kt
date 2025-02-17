@@ -1,6 +1,8 @@
 package com.example.alcocalendar.features.calendar.presentation.year_appearance.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,6 +17,7 @@ import com.kizitonwose.calendar.compose.yearcalendar.YearCalendarState
 import com.kizitonwose.calendar.compose.yearcalendar.rememberYearCalendarState
 import com.kizitonwose.calendar.core.ExperimentalCalendarApi
 import java.time.LocalDate
+import java.time.Month
 import java.time.YearMonth
 import java.time.format.TextStyle
 import java.util.Locale
@@ -24,6 +27,8 @@ import java.util.Locale
 fun YearCalendarPager(
     yearCalendarState: YearCalendarState,
     getCalendarSessionWithIntakes: (LocalDate) -> CalendarSessionWithIntakes,
+    updateCurrentYearMonth: (Int, Month) -> Unit,
+    navigateToTheMonth: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     HorizontalYearCalendar(
@@ -35,6 +40,15 @@ fun YearCalendarPager(
             )
         },
         monthHeader = { month -> MonthTitle(month.yearMonth) },
+        monthBody = { month, content ->
+            Box(modifier = Modifier.clickable {
+                updateCurrentYearMonth(
+                    month.yearMonth.year,
+                    month.yearMonth.month
+                )
+                navigateToTheMonth()
+            }) { content() }
+        },
         monthHorizontalSpacing = 16.dp,
         monthVerticalSpacing = 14.dp,
         modifier = modifier,
@@ -60,6 +74,8 @@ private fun CalendarPagerPreview() {
     YearCalendarPager(
         yearCalendarState = rememberYearCalendarState(),
         getCalendarSessionWithIntakes = { date -> CalendarSessionWithIntakes(date) },
+        updateCurrentYearMonth = {_, _ -> },
+        navigateToTheMonth = {},
         modifier = Modifier.fillMaxSize()
     )
 }

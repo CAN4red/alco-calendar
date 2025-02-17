@@ -1,5 +1,6 @@
 package com.example.alcocalendar.features.calendar.presentation.year_appearance
 
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
@@ -27,11 +28,11 @@ fun YearCalendarScreen(
     modifier: Modifier = Modifier, // temporary!
     viewModel: SharedCalendarViewModel = hiltViewModel(),
 ) {
-    val calendarDataState by viewModel.calendarState.collectAsState()
+    val sharedCalendarState by viewModel.calendarState.collectAsState()
     val yearCalendarState = rememberYearCalendarState(
         startYear = Year.of(2020),
         endYear = Year.of(2025),
-        firstVisibleYear = calendarDataState.currentYearMonth.asYear(),
+        firstVisibleYear = sharedCalendarState.currentYearMonth.asYear(),
     )
 
     val visibleYear = rememberFirstMostVisibleYear(yearCalendarState, 90f)
@@ -39,24 +40,35 @@ fun YearCalendarScreen(
     Column(modifier = modifier) {
         YearTitleWithNavigation(
             year = visibleYear.year,
-            scrollToPrevYear = { yearCalendarState.animateScrollToYear(visibleYear.year.minusYears(1)) },
-            scrollToNextYear = { yearCalendarState.animateScrollToYear(visibleYear.year.plusYears(1)) },
+            scrollToPrevYear = {
+                yearCalendarState.animateScrollToYear(visibleYear.year.minusYears(1))
+            },
+            scrollToNextYear = {
+                yearCalendarState.animateScrollToYear(visibleYear.year.plusYears(1))
+            },
             navigateToMonthCalendar = {
-                navController.popBackStack(
-                    route = NavRoutes.MONTH_CALENDAR,
-                    inclusive = false
-                )
+                navController.navigate(NavRoutes.MONTH_CALENDAR) {
+                    popUpTo(NavRoutes.MONTH_CALENDAR) { inclusive = true }
+                }
             }
         )
 
         YearCalendarPager(
             yearCalendarState = yearCalendarState,
-            getCalendarSessionWithIntakes = calendarDataState::getSessionWithIntakes,
+            getCalendarSessionWithIntakes = sharedCalendarState::getSessionWithIntakes,
+            updateCurrentYearMonth = viewModel::updateCurrentYearMonth,
+            navigateToTheMonth = {
+                navController.navigate(NavRoutes.MONTH_CALENDAR) {
+                    popUpTo(NavRoutes.MONTH_CALENDAR) { inclusive = true }
+                }
+            },
             modifier = Modifier.fillMaxSize()
         )
     }
 
     LaunchedEffect(visibleYear) {
+        Log.i("Update Year", "${visibleYear.year.value}")
         viewModel.updateCurrentYearMonth(year = visibleYear.year.value)
     }
 }
+
