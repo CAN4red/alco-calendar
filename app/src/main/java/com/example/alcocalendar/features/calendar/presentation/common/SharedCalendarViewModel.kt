@@ -8,15 +8,18 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.time.Month
+import java.time.Year
+import java.time.YearMonth
 import javax.inject.Inject
 
 @HiltViewModel
-class CalendarViewModel @Inject constructor(
+class SharedCalendarViewModel @Inject constructor(
     private val getSessionsWithIntakesUseCase: GetSessionsWithIntakesUseCase,
 ) : ViewModel() {
 
-    private val _calendarState = MutableStateFlow(CalendarState())
-    val calendarState: StateFlow<CalendarState> get() = _calendarState
+    private val _calendarState = MutableStateFlow(SharedCalendarState())
+    val calendarState: StateFlow<SharedCalendarState> get() = _calendarState
 
     init {
         viewModelScope.launch {
@@ -25,4 +28,18 @@ class CalendarViewModel @Inject constructor(
             }
         }
     }
+
+    fun updateCurrentYearMonth(
+        year: Int = calendarState.value.currentYearMonth.year,
+        month: Month = calendarState.value.currentYearMonth.month
+    ) {
+        val newYearMonth = YearMonth.of(year, month)
+        _calendarState.update { currentState ->
+            currentState.copy(currentYearMonth = newYearMonth)
+        }
+    }
+}
+
+fun YearMonth.asYear(): Year {
+    return Year.of(this.year)
 }

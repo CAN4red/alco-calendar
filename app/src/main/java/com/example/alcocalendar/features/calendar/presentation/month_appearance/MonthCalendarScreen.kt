@@ -3,12 +3,14 @@ package com.example.alcocalendar.features.calendar.presentation.month_appearance
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.example.alcocalendar.features.calendar.presentation.common.CalendarViewModel
+import com.example.alcocalendar.core.navigation.NavRoutes
+import com.example.alcocalendar.features.calendar.presentation.common.SharedCalendarViewModel
 import com.example.alcocalendar.features.calendar.presentation.common.getSessionWithIntakes
 import com.example.alcocalendar.features.calendar.presentation.month_appearance.components.MonthCalendarPager
 import com.example.alcocalendar.features.calendar.presentation.month_appearance.components.MonthTitleWithNavigation
@@ -23,14 +25,13 @@ import java.time.YearMonth
 fun MonthCalendarScreen(
     navController: NavController,
     modifier: Modifier = Modifier, // temporary!
-    firstVisibleMonth: YearMonth = YearMonth.now(),
-    viewModel: CalendarViewModel = hiltViewModel(),
+    viewModel: SharedCalendarViewModel = hiltViewModel(),
 ) {
-    val calendarDataState by viewModel.calendarState.collectAsState()
+    val sharedCalendarState by viewModel.calendarState.collectAsState()
     val calendarState = rememberCalendarState(
         startMonth = YearMonth.of(2020, Month.JANUARY),
         endMonth = YearMonth.of(2025, Month.DECEMBER),
-        firstVisibleMonth = firstVisibleMonth,
+        firstVisibleMonth = sharedCalendarState.currentYearMonth,
     )
 
     val visibleMonth = rememberFirstMostVisibleMonth(calendarState, 90f)
@@ -39,13 +40,21 @@ fun MonthCalendarScreen(
         MonthTitleWithNavigation(
             month = visibleMonth.yearMonth,
             scrollToPrevMonth = { calendarState.animateScrollToMonth(visibleMonth.yearMonth.previousMonth) },
-            scrollToNextMonth = { calendarState.animateScrollToMonth(visibleMonth.yearMonth.nextMonth) }
+            scrollToNextMonth = { calendarState.animateScrollToMonth(visibleMonth.yearMonth.nextMonth) },
+            navigateToYearCalendar = { navController.navigate(NavRoutes.YEAR_CALENDAR) }
         )
 
         MonthCalendarPager(
             calendarState = calendarState,
-            getCalendarSessionWithIntakes = calendarDataState::getSessionWithIntakes,
+            getCalendarSessionWithIntakes = sharedCalendarState::getSessionWithIntakes,
             modifier = Modifier.fillMaxSize()
+        )
+    }
+
+    LaunchedEffect(visibleMonth) {
+        viewModel.updateCurrentYearMonth(
+            year = visibleMonth.yearMonth.year,
+            month = visibleMonth.yearMonth.month
         )
     }
 }

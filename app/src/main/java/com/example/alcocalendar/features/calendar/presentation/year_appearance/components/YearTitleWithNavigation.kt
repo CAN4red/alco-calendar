@@ -1,5 +1,6 @@
 package com.example.alcocalendar.features.calendar.presentation.year_appearance.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -22,7 +23,8 @@ import java.time.Year
 fun YearTitleWithNavigation(
     year: Year,
     scrollToPrevYear: suspend () -> Unit,
-    scrollToNextYear: suspend () -> Unit
+    scrollToNextYear: suspend () -> Unit,
+    navigateToMonthCalendar: () -> Unit,
 ) {
     val coroutineScope = rememberCoroutineScope()
 
@@ -38,7 +40,7 @@ fun YearTitleWithNavigation(
             )
         }
 
-        YearTitle(year)
+        YearTitle(year, navigateToMonthCalendar)
 
         IconButton(onClick = { coroutineScope.launch { scrollToNextYear() } }) {
             Icon(
@@ -50,11 +52,15 @@ fun YearTitleWithNavigation(
 }
 
 @Composable
-private fun YearTitle(year: Year, modifier: Modifier = Modifier) {
+private fun YearTitle(
+    year: Year,
+    navigateToMonthCalendar: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     Text(
         text = year.toString(),
         textAlign = TextAlign.Center,
-        modifier = modifier
+        modifier = modifier.clickable { navigateToMonthCalendar() }
     )
 }
 
@@ -65,6 +71,7 @@ private fun MonthTitleWithNavigationPreview() {
     YearTitleWithNavigation(
         year = Year.now(),
         scrollToPrevYear = {},
-        scrollToNextYear = {}
+        scrollToNextYear = {},
+        navigateToMonthCalendar = {}
     )
 }

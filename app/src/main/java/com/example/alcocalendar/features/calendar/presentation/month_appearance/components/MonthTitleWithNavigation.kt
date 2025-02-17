@@ -1,5 +1,6 @@
 package com.example.alcocalendar.features.calendar.presentation.month_appearance.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -24,7 +25,8 @@ import java.util.Locale
 fun MonthTitleWithNavigation(
     month: YearMonth,
     scrollToPrevMonth: suspend () -> Unit,
-    scrollToNextMonth: suspend () -> Unit
+    scrollToNextMonth: suspend () -> Unit,
+    navigateToYearCalendar: () -> Unit,
 ) {
     val coroutineScope = rememberCoroutineScope()
 
@@ -40,7 +42,7 @@ fun MonthTitleWithNavigation(
             )
         }
 
-        MonthTitle(month)
+        MonthTitle(month, navigateToYearCalendar)
 
         IconButton(onClick = { coroutineScope.launch { scrollToNextMonth() } }) {
             Icon(
@@ -52,11 +54,15 @@ fun MonthTitleWithNavigation(
 }
 
 @Composable
-private fun MonthTitle(month: YearMonth, modifier: Modifier = Modifier) {
+private fun MonthTitle(
+    month: YearMonth,
+    navigateToYearCalendar: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     Text(
         text = month.month.getDisplayName(TextStyle.FULL, Locale.getDefault()),
         textAlign = TextAlign.Center,
-        modifier = modifier
+        modifier = modifier.clickable { navigateToYearCalendar() }
     )
 }
 
@@ -67,6 +73,7 @@ private fun MonthTitleWithNavigationPreview() {
     MonthTitleWithNavigation(
         month = YearMonth.now(),
         scrollToPrevMonth = {},
-        scrollToNextMonth = {}
+        scrollToNextMonth = {},
+        navigateToYearCalendar = {},
     )
 }
