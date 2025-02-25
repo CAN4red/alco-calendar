@@ -1,4 +1,4 @@
-package com.example.alcocalendar.features.calendar.presentation.common
+package com.example.alcocalendar.features.calendar.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -9,7 +9,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.time.Month
-import java.time.Year
 import java.time.YearMonth
 import javax.inject.Inject
 

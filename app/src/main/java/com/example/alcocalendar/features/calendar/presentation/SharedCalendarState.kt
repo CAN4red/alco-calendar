@@ -1,4 +1,4 @@
-package com.example.alcocalendar.features.calendar.presentation.common
+package com.example.alcocalendar.features.calendar.presentation
 
 import com.example.alcocalendar.features.calendar.domain.model.CalendarSessionWithIntakes
 import java.time.LocalDate

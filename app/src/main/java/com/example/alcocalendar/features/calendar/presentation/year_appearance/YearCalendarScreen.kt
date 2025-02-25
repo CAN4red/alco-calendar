@@ -10,9 +10,9 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.alcocalendar.core.navigation.NavRoutes
-import com.example.alcocalendar.features.calendar.presentation.common.CalendarEvent
-import com.example.alcocalendar.features.calendar.presentation.common.SharedCalendarViewModel
-import com.example.alcocalendar.features.calendar.presentation.common.getSessionWithIntakes
+import com.example.alcocalendar.features.calendar.presentation.CalendarEvent
+import com.example.alcocalendar.features.calendar.presentation.SharedCalendarViewModel
+import com.example.alcocalendar.features.calendar.presentation.getSessionWithIntakes
 import com.example.alcocalendar.features.calendar.presentation.year_appearance.components.YearCalendarPager
 import com.example.alcocalendar.features.calendar.presentation.year_appearance.components.YearCalendarUtils.asYear
 import com.example.alcocalendar.features.calendar.presentation.year_appearance.components.YearCalendarUtils.rememberFirstMostVisibleYear

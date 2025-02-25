@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.alcocalendar.features.calendar.domain.model.CalendarSessionWithIntakes
-import com.example.alcocalendar.features.calendar.presentation.common.CalendarEvent
+import com.example.alcocalendar.features.calendar.presentation.CalendarEvent
 import com.kizitonwose.calendar.compose.HorizontalYearCalendar
 import com.kizitonwose.calendar.compose.yearcalendar.YearCalendarState
 import com.kizitonwose.calendar.compose.yearcalendar.rememberYearCalendarState
