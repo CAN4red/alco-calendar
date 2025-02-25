@@ -1,6 +1,7 @@
 package com.example.alcocalendar.core.data.local.entities.drink_types
 
 import com.example.alcocalendar.core.common.AlcoStrengthConstants
+import com.example.alcocalendar.core.domain.model.DrinkType
 
 enum class SpiritsType(override val defaultAlcoStrength: Double) : DrinkType {
     VODKA(AlcoStrengthConstants.SPIRITS_VODKA_STRENGTH),

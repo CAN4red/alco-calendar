@@ -3,7 +3,7 @@ package com.example.alcocalendar.core.data.local.entities
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
-import com.example.alcocalendar.core.data.local.entities.drink_types.DrinkType
+import com.example.alcocalendar.core.domain.model.DrinkType
 import java.time.LocalDate
 
 @Entity(

@@ -1,6 +1,5 @@
 package com.example.alcocalendar.core.domain.model
 
-import com.example.alcocalendar.core.data.local.entities.drink_types.DrinkType
 import java.time.LocalDate
 
 data class DrinkIntake(
