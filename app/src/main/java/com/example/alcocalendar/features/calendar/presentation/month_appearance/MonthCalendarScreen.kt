@@ -14,8 +14,8 @@ import com.example.alcocalendar.features.calendar.presentation.common.CalendarEv
 import com.example.alcocalendar.features.calendar.presentation.common.SharedCalendarViewModel
 import com.example.alcocalendar.features.calendar.presentation.common.getSessionWithIntakes
 import com.example.alcocalendar.features.calendar.presentation.month_appearance.components.MonthCalendarPager
+import com.example.alcocalendar.features.calendar.presentation.month_appearance.components.MonthCalendarUtils.rememberFirstMostVisibleMonth
 import com.example.alcocalendar.features.calendar.presentation.month_appearance.components.MonthTitleWithNavigation
-import com.example.alcocalendar.features.calendar.presentation.month_appearance.components.rememberFirstMostVisibleMonth
 import com.kizitonwose.calendar.compose.CalendarState
 import com.kizitonwose.calendar.compose.rememberCalendarState
 import com.kizitonwose.calendar.core.CalendarMonth

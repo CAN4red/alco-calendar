@@ -12,11 +12,11 @@ import androidx.navigation.NavController
 import com.example.alcocalendar.core.navigation.NavRoutes
 import com.example.alcocalendar.features.calendar.presentation.common.CalendarEvent
 import com.example.alcocalendar.features.calendar.presentation.common.SharedCalendarViewModel
-import com.example.alcocalendar.features.calendar.presentation.common.asYear
 import com.example.alcocalendar.features.calendar.presentation.common.getSessionWithIntakes
 import com.example.alcocalendar.features.calendar.presentation.year_appearance.components.YearCalendarPager
+import com.example.alcocalendar.features.calendar.presentation.year_appearance.components.YearCalendarUtils.asYear
+import com.example.alcocalendar.features.calendar.presentation.year_appearance.components.YearCalendarUtils.rememberFirstMostVisibleYear
 import com.example.alcocalendar.features.calendar.presentation.year_appearance.components.YearTitleWithNavigation
-import com.example.alcocalendar.features.calendar.presentation.year_appearance.components.rememberFirstMostVisibleYear
 import com.kizitonwose.calendar.compose.yearcalendar.YearCalendarState
 import com.kizitonwose.calendar.compose.yearcalendar.rememberYearCalendarState
 import com.kizitonwose.calendar.core.CalendarYear

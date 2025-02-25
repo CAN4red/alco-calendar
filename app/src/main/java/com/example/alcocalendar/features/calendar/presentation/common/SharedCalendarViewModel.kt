@@ -47,7 +47,3 @@ class SharedCalendarViewModel @Inject constructor(
         }
     }
 }
-
-fun YearMonth.asYear(): Year {
-    return Year.of(this.year)
-}
