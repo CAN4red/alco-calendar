@@ -12,7 +12,7 @@ class DrinkIntakeRepositoryImpl @Inject constructor(
     private val drinkIntakeDao: DrinkIntakeDao
 ) : DrinkIntakeRepository {
     override suspend fun insertDrinkIntake(drinkIntake: DrinkIntake) {
-        drinkIntakeDao.insertDrinkIntake(DrinkIntakeMapper.toData(drinkIntake))
+        drinkIntakeDao.insertDrinkIntake(DrinkIntakeMapper.toInsertingData(drinkIntake))
     }
 
     override suspend fun updateDrinkIntake(drinkIntake: DrinkIntake) {
