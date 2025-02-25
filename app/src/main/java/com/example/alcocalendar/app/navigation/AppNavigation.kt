@@ -59,12 +59,3 @@ inline fun <reified T : ViewModel> NavBackStackEntry.sharedViewModel(navControll
     }
     return hiltViewModel(parentEntry)
 }
-
-private fun initialMonthCalendarRoute(): String {
-    val currentMonth = YearMonth.now()
-
-    return NavRoutes.monthCalendarRoute(
-        year = currentMonth.year.toString(),
-        month = currentMonth.month.toString().lowercase()
-    )
-}
