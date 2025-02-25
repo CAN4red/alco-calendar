@@ -10,7 +10,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.example.alcocalendar.app.navigation.AppNavigation
-import com.example.alcocalendar.features.drink_intake.ui.theme.AlcoCalendarTheme
+import com.example.alcocalendar.core.presentation.theme.AlcoCalendarTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

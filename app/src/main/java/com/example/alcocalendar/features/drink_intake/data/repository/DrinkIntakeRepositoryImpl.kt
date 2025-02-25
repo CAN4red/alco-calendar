@@ -1,4 +1,4 @@
-package com.example.alcocalendar.features.drink_intake.data.local.repository
+package com.example.alcocalendar.features.drink_intake.data.repository
 
 import com.example.alcocalendar.core.data.mappers.DrinkIntakeMapper
 import com.example.alcocalendar.core.domain.model.DrinkIntake
@@ -24,8 +24,7 @@ class DrinkIntakeRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getDrinkIntakesByDate(date: LocalDate): List<DrinkIntake> {
-        return drinkIntakeDao.getDrinkingSessionWithDrinkIntakes(date)
-            .drinkIntakes
+        return drinkIntakeDao.getDrinkingSessionWithDrinkIntakes(date).drinkIntakes
             .map { DrinkIntakeMapper.toDomain(it) }
     }
 

@@ -37,13 +37,13 @@ fun MonthCalendarScreen(
         firstVisibleMonth = sharedCalendarState.currentYearMonth,
     )
 
-    val visibleMonth = rememberFirstMostVisibleMonth(calendarState, 90f)
+    val currentMonth = rememberFirstMostVisibleMonth(calendarState, 90f)
 
     Column(modifier = modifier) {
         MonthTitleWithNavigation(
-            month = visibleMonth.yearMonth,
-            scrollToPrevMonth = { calendarState.scrollToPrevMonth(visibleMonth) },
-            scrollToNextMonth = { calendarState.scrollToNextMonth(visibleMonth) },
+            month = currentMonth.yearMonth,
+            scrollToPrevMonth = { calendarState.scrollToPrevMonth(currentMonth) },
+            scrollToNextMonth = { calendarState.scrollToNextMonth(currentMonth) },
             navigateToYearCalendar = { navController.navigate(NavRoutes.YEAR_CALENDAR) },
         )
 
@@ -54,11 +54,11 @@ fun MonthCalendarScreen(
         )
     }
 
-    LaunchedEffect(visibleMonth) {
+    LaunchedEffect(currentMonth) {
         viewModel.onEvent(
             CalendarEvent.UpdateCurrentYearMonth(
-                year = visibleMonth.yearMonth.year,
-                month = visibleMonth.yearMonth.month,
+                year = currentMonth.yearMonth.year,
+                month = currentMonth.yearMonth.month,
             )
         )
     }

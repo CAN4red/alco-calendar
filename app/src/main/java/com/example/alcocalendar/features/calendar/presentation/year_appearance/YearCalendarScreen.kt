@@ -37,13 +37,13 @@ fun YearCalendarScreen(
         firstVisibleYear = sharedCalendarState.currentYearMonth.asYear(),
     )
 
-    val visibleYear = rememberFirstMostVisibleYear(yearCalendarState, 90f)
+    val currentYear = rememberFirstMostVisibleYear(yearCalendarState, 90f)
 
     Column(modifier = modifier) {
         YearTitleWithNavigation(
-            year = visibleYear.year,
-            scrollToPrevYear = { yearCalendarState.scrollToPrevYear(visibleYear) },
-            scrollToNextYear = { yearCalendarState.scrollToNextYear(visibleYear) },
+            year = currentYear.year,
+            scrollToPrevYear = { yearCalendarState.scrollToPrevYear(currentYear) },
+            scrollToNextYear = { yearCalendarState.scrollToNextYear(currentYear) },
             navigateToMonthCalendar = navController::navigateToMonthCalendar
         )
 
@@ -56,8 +56,8 @@ fun YearCalendarScreen(
         )
     }
 
-    LaunchedEffect(visibleYear) {
-        viewModel.onEvent(CalendarEvent.UpdateCurrentYearMonth(year = visibleYear.year.value))
+    LaunchedEffect(currentYear) {
+        viewModel.onEvent(CalendarEvent.UpdateCurrentYearMonth(year = currentYear.year.value))
     }
 }
 

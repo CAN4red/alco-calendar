@@ -1,4 +1,4 @@
-package com.example.alcocalendar.features.drink_intake.ui.theme
+package com.example.alcocalendar.core.presentation.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
