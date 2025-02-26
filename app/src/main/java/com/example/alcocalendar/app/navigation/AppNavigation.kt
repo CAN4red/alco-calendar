@@ -14,7 +14,6 @@ import androidx.navigation.compose.navigation
 import com.example.alcocalendar.core.navigation.NavRoutes
 import com.example.alcocalendar.features.calendar.presentation.month_appearance.MonthCalendarScreen
 import com.example.alcocalendar.features.calendar.presentation.year_appearance.YearCalendarScreen
-import java.time.YearMonth
 
 @Composable
 fun AppNavigation(

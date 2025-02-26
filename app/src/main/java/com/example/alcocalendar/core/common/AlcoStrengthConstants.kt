@@ -20,6 +20,7 @@ object AlcoStrengthConstants {
     const val SPIRITS_RUM_STRENGTH = 40.0
     const val SPIRITS_TEQUILA_STRENGTH = 40.0
     const val SPIRITS_GIN_STRENGTH = 40.0
+    const val SPIRITS_SOJU_STRENGTH = 14.0
     const val SPIRITS_ABSINTHE_STRENGTH = 55.0
     const val SPIRITS_LIQUOR_STRENGTH = 20.0
     const val SPIRITS_BRANDY_STRENGTH = 40.0

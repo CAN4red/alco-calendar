@@ -10,6 +10,7 @@ enum class SpiritsType(override val defaultAlcoStrength: Double) : DrinkType {
     RUM(AlcoStrengthConstants.SPIRITS_RUM_STRENGTH),
     TEQUILA(AlcoStrengthConstants.SPIRITS_TEQUILA_STRENGTH),
     GIN(AlcoStrengthConstants.SPIRITS_GIN_STRENGTH),
+    SOJU(AlcoStrengthConstants.SPIRITS_SOJU_STRENGTH),
     ABSINTHE(AlcoStrengthConstants.SPIRITS_ABSINTHE_STRENGTH),
     LIQUOR(AlcoStrengthConstants.SPIRITS_LIQUOR_STRENGTH),
     BRANDY(AlcoStrengthConstants.SPIRITS_BRANDY_STRENGTH),

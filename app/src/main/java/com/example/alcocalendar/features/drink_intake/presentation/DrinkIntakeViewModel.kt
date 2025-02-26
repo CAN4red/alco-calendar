@@ -7,9 +7,9 @@ import com.example.alcocalendar.core.domain.model.DrinkIntake
 import com.example.alcocalendar.core.domain.model.DrinkType
 import com.example.alcocalendar.core.navigation.NavArgs
 import com.example.alcocalendar.features.drink_intake.domain.use_case.DrinkIntakeUseCases
-import com.example.alcocalendar.features.drink_intake.presentation.DrinkIntakeUtils.toDay
-import com.example.alcocalendar.features.drink_intake.presentation.DrinkIntakeUtils.toMonth
-import com.example.alcocalendar.features.drink_intake.presentation.DrinkIntakeUtils.toYear
+import com.example.alcocalendar.features.drink_intake.presentation.utils.StringToDateMapper.toDay
+import com.example.alcocalendar.features.drink_intake.presentation.utils.StringToDateMapper.toMonth
+import com.example.alcocalendar.features.drink_intake.presentation.utils.StringToDateMapper.toYear
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
