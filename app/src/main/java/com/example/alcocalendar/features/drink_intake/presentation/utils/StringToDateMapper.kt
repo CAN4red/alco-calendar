@@ -6,8 +6,8 @@ import java.time.Month
 object StringToDateMapper {
 
     fun String?.toYear(): Int = this?.toInt() ?: LocalDate.now().year
-    fun String?.toMonth(): Month = this?.toMonth() ?: LocalDate.now().month
+    fun String?.toMonth(): Month = this?.toMonthUnsafe() ?: LocalDate.now().month
     fun String?.toDay(): Int = this?.toInt() ?: LocalDate.now().dayOfMonth
 
-    private fun String.toMonth() = Month.valueOf(this.uppercase())
+    private fun String.toMonthUnsafe() = Month.valueOf(this.uppercase())
 }
