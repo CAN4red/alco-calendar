@@ -27,7 +27,7 @@ val Typography = Typography(
 
     headlineMedium = TextStyle(
         fontFamily = ReadexPro,
-        fontWeight = FontWeight.Normal,
+        fontWeight = FontWeight.Medium,
         fontSize = 28.sp,
         lineHeight = 36.sp,
         letterSpacing = 0.sp,

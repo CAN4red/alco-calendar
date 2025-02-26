@@ -36,7 +36,7 @@ object DrinkTypeToDrawableMapper {
             WineType.ROSE -> R.drawable.wine_rose
             WineType.CHAMPAGNE -> R.drawable.wine_champagne
             WineType.PORT -> R.drawable.wine_port
-            WineType.VERMOUTH -> R.drawable.wine_port
+            WineType.VERMOUTH -> R.drawable.wine_vermouth
         }
     }
 

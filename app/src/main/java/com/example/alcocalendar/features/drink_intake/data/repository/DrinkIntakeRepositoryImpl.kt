@@ -1,9 +1,9 @@
 package com.example.alcocalendar.features.drink_intake.data.repository
 
+import com.example.alcocalendar.core.data.local.relations.DrinkingSessionWithDrinkIntakes
 import com.example.alcocalendar.core.data.mappers.DrinkIntakeMapper
 import com.example.alcocalendar.core.domain.model.DrinkIntake
 import com.example.alcocalendar.features.drink_intake.data.local.dao.DrinkIntakeDao
-import com.example.alcocalendar.core.data.local.relations.DrinkingSessionWithDrinkIntakes
 import com.example.alcocalendar.features.drink_intake.domain.repository.DrinkIntakeRepository
 import java.time.LocalDate
 import javax.inject.Inject
@@ -24,8 +24,8 @@ class DrinkIntakeRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getDrinkIntakesByDate(date: LocalDate): List<DrinkIntake> {
-        return drinkIntakeDao.getDrinkingSessionWithDrinkIntakes(date).drinkIntakes
-            .map { DrinkIntakeMapper.toDomain(it) }
+        val intakes = drinkIntakeDao.getDrinkingSessionWithDrinkIntakes(date)
+        return intakes?.drinkIntakes?.map { DrinkIntakeMapper.toDomain(it) } ?: emptyList()
     }
 
     override suspend fun getDrinkingSessionsWithDrinkIntakes(): List<DrinkingSessionWithDrinkIntakes> {

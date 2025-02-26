@@ -28,9 +28,9 @@ interface DrinkIntakeDao {
 
     @Transaction
     @Query("SELECT * FROM drinking_session WHERE date = :date")
-    fun getDrinkingSessionWithDrinkIntakes(date: LocalDate): DrinkingSessionWithDrinkIntakes
+    suspend fun getDrinkingSessionWithDrinkIntakes(date: LocalDate): DrinkingSessionWithDrinkIntakes?
 
     @Transaction
     @Query("SELECT * FROM drinking_session")
-    fun getDrinkingSessionsWithDrinkIntakes(): List<DrinkingSessionWithDrinkIntakes>
+    suspend fun getDrinkingSessionsWithDrinkIntakes(): List<DrinkingSessionWithDrinkIntakes>
 }
