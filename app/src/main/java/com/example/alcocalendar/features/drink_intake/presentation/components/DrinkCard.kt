@@ -44,7 +44,7 @@ fun DrinkCard(
                 painter = painterResource(drinkType.toDrawable()),
                 contentDescription = stringResource(R.string.drink_type_image),
                 modifier = Modifier
-                    .size(200.dp)
+                    .size(96.dp)
                     .clip(RoundedCornerShape(12.dp))
             )
 
