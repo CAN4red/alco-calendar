@@ -1,5 +1,7 @@
 package com.example.alcocalendar.core.navigation
 
+import java.time.Month
+
 object NavRoutes {
     const val CALENDAR = "calendar"
 
@@ -7,6 +9,8 @@ object NavRoutes {
     const val YEAR_CALENDAR = "year_calendar"
     const val DRINK_INTAKE = "drink_intake/{${NavArgs.YEAR}}/{${NavArgs.MONTH}}/{${NavArgs.DAY}}"
 
-    fun drinkIntakeCalendarRoute(year: String, month: String, day: String) =
-        "drink_intake/{${year.lowercase()}}/{${month.lowercase()}}/{${day.lowercase()}}"
+    fun drinkIntakeCalendarRoute(year: Int, month: Month, day: Int) =
+        "drink_intake/${year.toString().lowercase()}" +
+                "/${month.toString().lowercase()}" +
+                "/${day.toString().lowercase()}"
 }

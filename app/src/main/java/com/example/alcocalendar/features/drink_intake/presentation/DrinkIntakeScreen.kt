@@ -6,6 +6,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.alcocalendar.features.drink_intake.presentation.components.DrinkIntakeScreenContent
 
 @Composable
 fun DrinkIntakeScreen(
@@ -14,11 +15,9 @@ fun DrinkIntakeScreen(
 ) {
     val state by viewModel.state.collectAsState()
 
-
-}
-
-@Preview
-@Composable
-private fun DrinkIntakeScreenPreview() {
-
+    DrinkIntakeScreenContent(
+        state = state,
+        onEvent = viewModel::onEvent,
+        modifier = modifier
+    )
 }

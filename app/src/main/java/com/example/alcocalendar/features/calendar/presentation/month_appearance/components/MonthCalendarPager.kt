@@ -22,6 +22,7 @@ import java.util.Locale
 fun MonthCalendarPager(
     calendarState: CalendarState,
     getCalendarSessionWithIntakes: (LocalDate) -> CalendarSessionWithIntakes,
+    navigateToDrinkIntake: (LocalDate) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     HorizontalCalendar(
@@ -29,7 +30,8 @@ fun MonthCalendarPager(
         dayContent = { calendarDay ->
             DayOfMonthCell(
                 calendarSessionWithIntakes = getCalendarSessionWithIntakes(calendarDay.date),
-                calendarDay = calendarDay
+                calendarDay = calendarDay,
+                navigateToDrinkIntake = { navigateToDrinkIntake(calendarDay.date) }
             )
         },
         monthHeader = { month ->
@@ -61,6 +63,7 @@ private fun CalendarPagerPreview() {
     MonthCalendarPager(
         calendarState = rememberCalendarState(),
         getCalendarSessionWithIntakes = { date -> CalendarSessionWithIntakes(date) },
+        navigateToDrinkIntake = {},
         modifier = Modifier.fillMaxSize()
     )
 }

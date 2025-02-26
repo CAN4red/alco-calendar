@@ -1,5 +1,6 @@
 package com.example.alcocalendar.features.calendar.presentation.month_appearance.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.material3.Text
@@ -16,13 +17,21 @@ import java.time.LocalDate
 fun DayOfMonthCell(
     calendarSessionWithIntakes: CalendarSessionWithIntakes,
     calendarDay: CalendarDay,
+    navigateToDrinkIntake: () -> Unit,
 ) {
     Box(
-        modifier = Modifier.aspectRatio(1f),
-        contentAlignment = Alignment.Center
+        contentAlignment = Alignment.Center,
+        modifier = Modifier.aspectRatio(1f)
     ) {
         if (calendarDay.position == DayPosition.MonthDate) {
-            Text(text = calendarSessionWithIntakes.date.dayOfMonth.toString())
+            Box(
+                contentAlignment = Alignment.Center,
+                modifier = Modifier
+                    .matchParentSize()
+                    .clickable { navigateToDrinkIntake() }
+            ) {
+                Text(text = calendarSessionWithIntakes.date.dayOfMonth.toString())
+            }
         }
     }
 }
@@ -32,6 +41,7 @@ fun DayOfMonthCell(
 private fun DayOfMonthCellPreview() {
     DayOfMonthCell(
         calendarSessionWithIntakes = CalendarSessionWithIntakes(LocalDate.now()),
-        calendarDay = CalendarDay(LocalDate.now(), DayPosition.MonthDate)
+        calendarDay = CalendarDay(LocalDate.now(), DayPosition.MonthDate),
+        navigateToDrinkIntake = {}
     )
 }

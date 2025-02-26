@@ -50,7 +50,16 @@ fun MonthCalendarScreen(
         MonthCalendarPager(
             calendarState = calendarState,
             getCalendarSessionWithIntakes = sharedCalendarState::getSessionWithIntakes,
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier.fillMaxSize(),
+            navigateToDrinkIntake = { date ->
+                navController.navigate(
+                    NavRoutes.drinkIntakeCalendarRoute(
+                        date.year,
+                        date.month,
+                        date.dayOfMonth
+                    )
+                )
+            }
         )
     }
 
