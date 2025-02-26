@@ -2,4 +2,9 @@
     <string name="app_name">Alco Calendar</string>
     <string name="drink_type_image">Drink Type Image</string>
     <string name="unknown_drink">Unknown Drink</string>
+    <string name="beer_headline">Beer</string>
+    <string name="wine_headline">Wine</string>
+    <string name="spirits_headline">Spirits</string>
+    <string name="other_headline">Other</string>
+    <string name="unknown_drink_type_headline">Unknown Drink Type</string>
 </resources>
