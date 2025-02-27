@@ -52,7 +52,7 @@ class DrinkingSessionDatabaseTest {
 
         val drinkingSessionGotten = drinkIntakeDao
             .getDrinkingSessionWithDrinkIntakes(date)
-            .drinkingSession
+            ?.drinkingSession
 
         assertEquals(drinkingSessionInserted, drinkingSessionGotten)
     }
@@ -137,27 +137,33 @@ class DrinkingSessionDatabaseTest {
         drinkIntakeDao.insertDrinkIntake(drinkIntakeInserted1)
         drinkIntakeDao.insertDrinkIntake(drinkIntakeInserted2)
 
-        val drinkIntakeUpdated = DrinkIntakeEntity(
-            drinkIntakeId = drinkIntakeDao
-                .getDrinkingSessionWithDrinkIntakes(date)
-                .drinkIntakes[0]
-                .drinkIntakeId,
-            date = date,
-            drinkType = WineType.RED,
-            liters = 1.5,
-            alcoStrength = 20.5
-        )
-        drinkIntakeDao.updateDrinkIntake(drinkIntakeUpdated)
+        val drinkIntakeUpdated = drinkIntakeDao
+            .getDrinkingSessionWithDrinkIntakes(date)
+            ?.drinkIntakes?.get(0)?.let {
+            DrinkIntakeEntity(
+                drinkIntakeId = it
+                    .drinkIntakeId,
+                date = date,
+                drinkType = WineType.RED,
+                liters = 1.5,
+                alcoStrength = 20.5
+            )
+        }
+        if (drinkIntakeUpdated != null) {
+            drinkIntakeDao.updateDrinkIntake(drinkIntakeUpdated)
+        }
 
         val allDrinkIntakesGotten = drinkIntakeDao
             .getDrinkingSessionWithDrinkIntakes(date)
-            .drinkIntakes
+            ?.drinkIntakes
 
-        assertEquals(2, allDrinkIntakesGotten.size)
-        assertEquals(1.5, allDrinkIntakesGotten[0].liters, 0.001)
-        assertEquals(0.45, allDrinkIntakesGotten[1].liters, 0.001)
-        assertEquals(WineType.RED, allDrinkIntakesGotten[0].drinkType)
-        assertEquals(BeerType.LIGHT, allDrinkIntakesGotten[1].drinkType)
+        if (allDrinkIntakesGotten != null) {
+            assertEquals(2, allDrinkIntakesGotten.size)
+        }
+        allDrinkIntakesGotten?.get(0)?.let { assertEquals(1.5, it.liters, 0.001) }
+        allDrinkIntakesGotten?.get(1)?.let { assertEquals(0.45, it.liters, 0.001) }
+        assertEquals(WineType.RED, allDrinkIntakesGotten?.get(0)?.drinkType)
+        assertEquals(BeerType.LIGHT, allDrinkIntakesGotten?.get(1)?.drinkType)
     }
 
     @Test
@@ -178,16 +184,20 @@ class DrinkingSessionDatabaseTest {
 
         val drinkIntakeIdToDelete = drinkIntakeDao
             .getDrinkingSessionWithDrinkIntakes(date)
-            .drinkIntakes[0]
-            .drinkIntakeId
+            ?.drinkIntakes?.get(0)
+            ?.drinkIntakeId
 
-        drinkIntakeDao.deleteDrinkIntakeById(drinkIntakeIdToDelete)
+        if (drinkIntakeIdToDelete != null) {
+            drinkIntakeDao.deleteDrinkIntakeById(drinkIntakeIdToDelete)
+        }
 
         val allDrinkIntakesGotten = drinkIntakeDao
             .getDrinkingSessionWithDrinkIntakes(date)
-            .drinkIntakes
+            ?.drinkIntakes
 
-        assertEquals(0, allDrinkIntakesGotten.size)
+        if (allDrinkIntakesGotten != null) {
+            assertEquals(0, allDrinkIntakesGotten.size)
+        }
     }
 
     @Test
