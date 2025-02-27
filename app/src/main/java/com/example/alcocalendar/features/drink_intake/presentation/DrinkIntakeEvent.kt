@@ -12,4 +12,6 @@ sealed interface DrinkIntakeEvent {
     data object InsertDrinkIntake : DrinkIntakeEvent
     data object UpdateDrinkIntake : DrinkIntakeEvent
     data object DeleteDrinkIntake : DrinkIntakeEvent
+
+    data class SetExpandedIntake (val drinkType: Class<out DrinkType>?) : DrinkIntakeEvent
 }

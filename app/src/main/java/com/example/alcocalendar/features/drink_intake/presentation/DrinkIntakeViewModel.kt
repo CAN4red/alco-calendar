@@ -74,6 +74,9 @@ class DrinkIntakeViewModel @Inject constructor(
                 handleDeleteDrinkIntake()
             }
 
+            is DrinkIntakeEvent.SetExpandedIntake -> {
+                handleSetExpandedIntake(event.drinkType)
+            }
         }
     }
 
@@ -148,6 +151,12 @@ class DrinkIntakeViewModel @Inject constructor(
             viewModelScope.launch {
                 drinkIntakeUseCases.deleteDrinkIntakeByIdUseCase(drinkIntakeId)
             }
+        }
+    }
+
+    private fun handleSetExpandedIntake(drinkType: Class<out DrinkType>?) {
+        _state.update { currentState ->
+            currentState.copy(expandedDrinkType = drinkType)
         }
     }
 }

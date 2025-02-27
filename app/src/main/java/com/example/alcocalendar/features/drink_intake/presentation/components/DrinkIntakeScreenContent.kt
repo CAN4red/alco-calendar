@@ -14,6 +14,7 @@ import com.example.alcocalendar.core.data.local.entities.drink_types.BeerType
 import com.example.alcocalendar.core.data.local.entities.drink_types.OtherType
 import com.example.alcocalendar.core.data.local.entities.drink_types.SpiritsType
 import com.example.alcocalendar.core.data.local.entities.drink_types.WineType
+import com.example.alcocalendar.core.domain.model.DrinkType
 import com.example.alcocalendar.features.drink_intake.presentation.DrinkIntakeEvent
 import com.example.alcocalendar.features.drink_intake.presentation.DrinkIntakeState
 
@@ -33,24 +34,35 @@ fun DrinkIntakeScreenContent(
 
         LazyColumn {
             items(count = 1) {
-                TitledDrinkList<BeerType>(
-                    onEvent = onEvent
+                DrinkListWithTitle<BeerType>(
+                    onEvent = onEvent,
+                    isListExpanded = isListExpanded<BeerType>(state.expandedDrinkType),
                 )
 
-                TitledDrinkList<WineType>(
-                    onEvent = onEvent
+                DrinkListWithTitle<WineType>(
+                    onEvent = onEvent,
+                    isListExpanded = isListExpanded<WineType>(state.expandedDrinkType),
                 )
 
-                TitledDrinkList<SpiritsType>(
-                    onEvent = onEvent
+                DrinkListWithTitle<SpiritsType>(
+                    onEvent = onEvent,
+                    isListExpanded = isListExpanded<SpiritsType>(state.expandedDrinkType),
                 )
 
-                TitledDrinkList<OtherType>(
-                    onEvent = onEvent
+                DrinkListWithTitle<OtherType>(
+                    onEvent = onEvent,
+                    isListExpanded = isListExpanded<OtherType>(state.expandedDrinkType),
                 )
             }
         }
     }
+}
+
+private inline fun <reified T> isListExpanded(expandedDrinkType: Class<out DrinkType>?): Boolean {
+    if (expandedDrinkType == null) {
+        return false
+    }
+    return T::class.java == expandedDrinkType
 }
 
 @Preview

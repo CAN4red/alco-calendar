@@ -24,8 +24,9 @@ class DrinkIntakeRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getDrinkIntakesByDate(date: LocalDate): List<DrinkIntake> {
-        val intakes = drinkIntakeDao.getDrinkingSessionWithDrinkIntakes(date)
-        return intakes?.drinkIntakes?.map { DrinkIntakeMapper.toDomain(it) } ?: emptyList()
+        return drinkIntakeDao
+            .getDrinkingSessionWithDrinkIntakes(date)?.drinkIntakes
+            ?.map { DrinkIntakeMapper.toDomain(it) } ?: emptyList()
     }
 
     override suspend fun getDrinkingSessionsWithDrinkIntakes(): List<DrinkingSessionWithDrinkIntakes> {

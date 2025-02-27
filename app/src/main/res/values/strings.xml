@@ -7,4 +7,5 @@
     <string name="spirits_headline">Spirits</string>
     <string name="other_headline">Other</string>
     <string name="unknown_drink_type_headline">Unknown Drink Type</string>
+    <string name="expand_icon">Expand Icon</string>
 </resources>
