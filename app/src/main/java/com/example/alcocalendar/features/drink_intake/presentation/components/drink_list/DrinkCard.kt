@@ -1,4 +1,4 @@
-package com.example.alcocalendar.features.drink_intake.presentation.components
+package com.example.alcocalendar.features.drink_intake.presentation.components.drink_list
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable

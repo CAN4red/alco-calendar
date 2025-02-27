@@ -1,4 +1,4 @@
-package com.example.alcocalendar.features.drink_intake.presentation.components
+package com.example.alcocalendar.features.drink_intake.presentation.components.drink_list
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -28,7 +28,7 @@ inline fun <reified T> DrinkListWithTitle(
             onClick = onHeadlineClick,
             isListExpanded = isListExpanded,
         )
-        DrinkListWrapper<T>(
+        DrinkListAnimatedWrapper<T>(
             onEvent = onEvent,
             isListExpanded = isListExpanded,
         )

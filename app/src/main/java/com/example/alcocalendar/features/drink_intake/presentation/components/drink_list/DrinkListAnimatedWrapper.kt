@@ -1,4 +1,4 @@
-package com.example.alcocalendar.features.drink_intake.presentation.components
+package com.example.alcocalendar.features.drink_intake.presentation.components.drink_list
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.expandVertically
@@ -16,7 +16,7 @@ import com.example.alcocalendar.core.domain.model.DrinkType
 import com.example.alcocalendar.features.drink_intake.presentation.DrinkIntakeEvent
 
 @Composable
-inline fun <reified T> DrinkListWrapper(
+inline fun <reified T> DrinkListAnimatedWrapper(
     crossinline onEvent: (DrinkIntakeEvent) -> Unit,
     isListExpanded: Boolean,
     modifier: Modifier = Modifier
