@@ -17,18 +17,34 @@ val ReadexPro = FontFamily(
 )
 
 val Typography = Typography(
+    displayLarge = TextStyle(
+        fontFamily = ReadexPro,
+        fontWeight = FontWeight.Bold,
+        fontSize = 40.sp,
+        lineHeight = 52.sp,
+        letterSpacing = 0.sp
+    ),
+
     displayMedium = TextStyle(
         fontFamily = ReadexPro,
-        fontWeight = FontWeight.Normal,
+        fontWeight = FontWeight.Bold,
         fontSize = 45.sp,
         lineHeight = 52.sp,
         letterSpacing = 0.sp,
     ),
 
+    displaySmall = TextStyle(
+        fontFamily = ReadexPro,
+        fontWeight = FontWeight.Bold,
+        fontSize = 24.sp,
+        lineHeight = 52.sp,
+        letterSpacing = 0.sp
+    ),
+
     headlineMedium = TextStyle(
         fontFamily = ReadexPro,
-        fontWeight = FontWeight.Medium,
-        fontSize = 28.sp,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 32.sp,
         lineHeight = 36.sp,
         letterSpacing = 0.sp,
     ),
