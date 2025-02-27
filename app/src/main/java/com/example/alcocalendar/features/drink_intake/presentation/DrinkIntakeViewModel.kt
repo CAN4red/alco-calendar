@@ -62,6 +62,10 @@ class DrinkIntakeViewModel @Inject constructor(
                 handleSetFillingDrinkIntakeLiters(event.liters)
             }
 
+            DrinkIntakeEvent.DropFillingDrinkIntake -> {
+                handleDropFillingDrinkIntake()
+            }
+
             is DrinkIntakeEvent.InsertDrinkIntake -> {
                 handleInsertDrinkIntake()
             }
@@ -124,6 +128,12 @@ class DrinkIntakeViewModel @Inject constructor(
             _state.update { currentState ->
                 currentState.copy(fillingIntake = updatedFillingIntake)
             }
+        }
+    }
+
+    private fun handleDropFillingDrinkIntake() {
+        _state.update { currentState ->
+            currentState.copy(fillingIntake = null)
         }
     }
 

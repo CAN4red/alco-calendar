@@ -8,10 +8,11 @@ sealed interface DrinkIntakeEvent {
 
     data class SetFillingDrinkIntakeAlcoStrength(val alcoStrength: Double) : DrinkIntakeEvent
     data class SetFillingDrinkIntakeLiters(val liters: Double) : DrinkIntakeEvent
+    data object DropFillingDrinkIntake : DrinkIntakeEvent
 
     data object InsertDrinkIntake : DrinkIntakeEvent
     data object UpdateDrinkIntake : DrinkIntakeEvent
     data object DeleteDrinkIntake : DrinkIntakeEvent
 
-    data class SetExpandedIntake (val drinkType: Class<out DrinkType>?) : DrinkIntakeEvent
+    data class SetExpandedIntake(val drinkType: Class<out DrinkType>?) : DrinkIntakeEvent
 }

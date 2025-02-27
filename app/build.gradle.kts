@@ -87,6 +87,9 @@ dependencies {
 
     // Navigation
     implementation(libs.androidx.navigation.compose)
+
+    // Material3
+    implementation (libs.material3)
 }
 
 kapt {
