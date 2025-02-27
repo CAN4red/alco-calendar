@@ -52,7 +52,7 @@ val Typography = Typography(
     titleMedium = TextStyle(
         fontFamily = ReadexPro,
         fontWeight = FontWeight.Medium,
-        fontSize = 16.sp,
+        fontSize = 20.sp,
         lineHeight = 24.sp,
         letterSpacing = 0.15.sp,
     ),

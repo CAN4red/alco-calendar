@@ -2,12 +2,11 @@ package com.example.alcocalendar.features.drink_intake.presentation.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -31,21 +30,18 @@ fun DrinkCard(
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Card(
-        modifier = modifier
-            .clip(RoundedCornerShape(18.dp))
-            .clickable(onClick = onClick)
+    Box(
+        modifier = modifier.clickable(onClick = onClick)
     ) {
         Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.padding(6.dp)
+            horizontalAlignment = Alignment.Start,
         ) {
             Image(
                 painter = painterResource(drinkType.toDrawable()),
                 contentDescription = stringResource(R.string.drink_type_image),
                 modifier = Modifier
-                    .size(96.dp)
-                    .clip(RoundedCornerShape(12.dp))
+                    .size(120.dp)
+                    .clip(RoundedCornerShape(6.dp))
             )
 
             Spacer(modifier = Modifier.size(4.dp))
