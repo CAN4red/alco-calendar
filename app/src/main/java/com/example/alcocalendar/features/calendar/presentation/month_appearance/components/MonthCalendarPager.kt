@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.alcocalendar.features.calendar.domain.model.CalendarSessionWithIntakes
+import com.example.alcocalendar.features.calendar.presentation.CalendarEvent
 import com.kizitonwose.calendar.compose.CalendarState
 import com.kizitonwose.calendar.compose.HorizontalCalendar
 import com.kizitonwose.calendar.compose.rememberCalendarState
@@ -20,15 +21,17 @@ import java.util.Locale
 
 @Composable
 fun MonthCalendarPager(
-    calendarState: CalendarState,
+    state: CalendarState,
+    onEvent: (CalendarEvent) -> Unit,
     getCalendarSessionWithIntakes: (LocalDate) -> CalendarSessionWithIntakes,
     navigateToDrinkIntake: (LocalDate) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     HorizontalCalendar(
-        state = calendarState,
+        state = state,
         dayContent = { calendarDay ->
             DayOfMonthCell(
+                onEvent = onEvent,
                 calendarSessionWithIntakes = getCalendarSessionWithIntakes(calendarDay.date),
                 calendarDay = calendarDay,
                 navigateToDrinkIntake = { navigateToDrinkIntake(calendarDay.date) }
@@ -61,7 +64,8 @@ private fun DaysOfWeekTitle(daysOfWeek: List<DayOfWeek>) {
 @Composable
 private fun CalendarPagerPreview() {
     MonthCalendarPager(
-        calendarState = rememberCalendarState(),
+        state = rememberCalendarState(),
+        onEvent = {},
         getCalendarSessionWithIntakes = { date -> CalendarSessionWithIntakes(date) },
         navigateToDrinkIntake = {},
         modifier = Modifier.fillMaxSize()

@@ -48,7 +48,8 @@ fun MonthCalendarScreen(
         )
 
         MonthCalendarPager(
-            calendarState = calendarState,
+            state = calendarState,
+            onEvent = viewModel::onEvent,
             getCalendarSessionWithIntakes = sharedCalendarState::getSessionWithIntakes,
             modifier = Modifier.fillMaxSize(),
             navigateToDrinkIntake = { date ->
