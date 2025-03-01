@@ -8,6 +8,8 @@ class SafeInsertDrinkIntakeUseCase @Inject constructor(
     private val repository: DrinkIntakeRepository
 ) {
     suspend operator fun invoke(drinkIntake: DrinkIntake) {
+        if (drinkIntake.liters == 0.0) return
+
         val existingDrinkIntakes = repository.getDrinkIntakesByDate(drinkIntake.date)
 
         val existingDrinkIntake = existingDrinkIntakes.find() {

@@ -12,6 +12,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.alcocalendar.features.drink_intake.presentation.DrinkIntakeEvent
 import com.example.alcocalendar.features.drink_intake.presentation.DrinkIntakeState
+import com.example.alcocalendar.features.drink_intake.presentation.components.dialog.AddIntakeDialog
 
 @Composable
 fun DrinkIntakeScreenContent(
@@ -34,6 +35,13 @@ fun DrinkIntakeScreenContent(
                     onEvent = onEvent,
                 )
             }
+        }
+
+        if (state.fillingIntake != null) {
+            AddIntakeDialog(
+                state = state,
+                onEvent = onEvent,
+            )
         }
     }
 }

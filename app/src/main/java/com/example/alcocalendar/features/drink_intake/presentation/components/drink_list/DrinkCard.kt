@@ -47,7 +47,7 @@ fun DrinkCard(
             Spacer(modifier = Modifier.size(4.dp))
 
             Text(
-                text = drinkType.titleName(),
+                text = stringResource(drinkType.titleName()),
                 style = MaterialTheme.typography.titleMedium
             )
         }

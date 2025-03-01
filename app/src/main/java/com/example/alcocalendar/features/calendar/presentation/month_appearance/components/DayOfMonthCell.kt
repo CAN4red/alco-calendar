@@ -9,12 +9,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.alcocalendar.features.calendar.domain.model.CalendarSessionWithIntakes
+import com.example.alcocalendar.features.calendar.presentation.CalendarEvent
 import com.kizitonwose.calendar.core.CalendarDay
 import com.kizitonwose.calendar.core.DayPosition
 import java.time.LocalDate
 
 @Composable
 fun DayOfMonthCell(
+    onEvent: (CalendarEvent) -> Unit,
     calendarSessionWithIntakes: CalendarSessionWithIntakes,
     calendarDay: CalendarDay,
     navigateToDrinkIntake: () -> Unit,
@@ -28,7 +30,10 @@ fun DayOfMonthCell(
                 contentAlignment = Alignment.Center,
                 modifier = Modifier
                     .matchParentSize()
-                    .clickable { navigateToDrinkIntake() }
+                    .clickable {
+                        navigateToDrinkIntake()
+                        onEvent(CalendarEvent.InitializeSession(calendarSessionWithIntakes.date))
+                    }
             ) {
                 Text(text = calendarSessionWithIntakes.date.dayOfMonth.toString())
             }
@@ -40,6 +45,7 @@ fun DayOfMonthCell(
 @Composable
 private fun DayOfMonthCellPreview() {
     DayOfMonthCell(
+        onEvent = {},
         calendarSessionWithIntakes = CalendarSessionWithIntakes(LocalDate.now()),
         calendarDay = CalendarDay(LocalDate.now(), DayPosition.MonthDate),
         navigateToDrinkIntake = {}

@@ -62,7 +62,7 @@ class DrinkIntakeViewModel @Inject constructor(
                 handleSetFillingDrinkIntakeLiters(event.liters)
             }
 
-            DrinkIntakeEvent.DropFillingDrinkIntake -> {
+            is DrinkIntakeEvent.DropFillingDrinkIntake -> {
                 handleDropFillingDrinkIntake()
             }
 
@@ -86,7 +86,7 @@ class DrinkIntakeViewModel @Inject constructor(
 
     private fun handleSetFillingDrinkIntake(drinkType: DrinkType, alcoStrength: Double) {
         val fittingIntakes = _state.value.intakes
-            .filter { it.drinkType == drinkType && it.alcoStrength == alcoStrength }
+            .filter { it.isFittingWith(drinkType, alcoStrength) }
 
         val fillingIntake = if (fittingIntakes.isEmpty()) {
             DrinkIntake(
@@ -104,16 +104,9 @@ class DrinkIntakeViewModel @Inject constructor(
         }
     }
 
-    private fun handleSetFillingDrinkIntakeAlcoStrength(alcoStrength: Double) {
+    private fun handleSetFillingDrinkIntakeAlcoStrength(alcoStrength: Double, ) {
         _state.value.fillingIntake?.let { fillingIntake ->
-            val fittingIntakes = _state.value.intakes
-                .filter { it.drinkType == fillingIntake.drinkType && it.alcoStrength == alcoStrength }
-
-            val updatedFillingIntake = if (fittingIntakes.isEmpty()) {
-                fillingIntake.copy(alcoStrength = alcoStrength)
-            } else {
-                fittingIntakes.first()
-            }
+            val updatedFillingIntake = fillingIntake.copy(alcoStrength = alcoStrength)
 
             _state.update { currentState ->
                 currentState.copy(fillingIntake = updatedFillingIntake)
@@ -143,6 +136,15 @@ class DrinkIntakeViewModel @Inject constructor(
             viewModelScope.launch {
                 drinkIntakeUseCases.insertDrinkIntakeUseCase(insertingIntake)
             }
+            val updatedIntakes =
+                _state.value.intakes.filter {
+                    !it.isFittingWith(insertingIntake.drinkType, insertingIntake.alcoStrength)
+                } + insertingIntake
+            _state.update { currentState ->
+                currentState.copy(
+                    intakes = updatedIntakes
+                )
+            }
         }
     }
 
@@ -168,5 +170,12 @@ class DrinkIntakeViewModel @Inject constructor(
         _state.update { currentState ->
             currentState.copy(expandedDrinkType = drinkType)
         }
+    }
+
+    private fun DrinkIntake.isFittingWith(
+        otherDrinkType: DrinkType,
+        otherAlcoStrength: Double
+    ): Boolean {
+        return this.drinkType == otherDrinkType && this.alcoStrength == otherAlcoStrength
     }
 }

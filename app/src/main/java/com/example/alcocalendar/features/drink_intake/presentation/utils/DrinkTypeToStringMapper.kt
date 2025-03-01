@@ -1,5 +1,6 @@
 package com.example.alcocalendar.features.drink_intake.presentation.utils
 
+import androidx.annotation.StringRes
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import com.example.alcocalendar.R
@@ -23,17 +24,13 @@ object DrinkTypeToStringMapper {
         }
     }
 
-    @Composable
-    fun DrinkType.titleName(): String = when (this) {
-        is BeerType -> this.displayName()
-        is WineType -> this.displayName()
-        is SpiritsType -> this.displayName()
-        is OtherType -> this.displayName()
+    @StringRes
+    fun DrinkType.titleName(): Int = when (this) {
+        is BeerType -> R.string.beer_title
+        is WineType -> R.string.wine_title
+        is SpiritsType -> R.string.spirits_title
+        is OtherType -> R.string.other_title
 
-        else -> stringResource(R.string.unknown_drink)
+        else -> R.string.unknown_drink
     }
-
-    private fun <T: Enum<T>> T.displayName() = this.name
-        .lowercase()
-        .replaceFirstChar { it.titlecaseChar() }
 }
