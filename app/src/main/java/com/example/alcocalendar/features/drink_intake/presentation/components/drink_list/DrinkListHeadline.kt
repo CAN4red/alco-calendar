@@ -1,5 +1,6 @@
 package com.example.alcocalendar.features.drink_intake.presentation.components.drink_list
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
@@ -18,11 +19,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.alcocalendar.R
 import com.example.alcocalendar.core.data.local.entities.drink_types.BeerType
-import com.example.alcocalendar.features.drink_intake.presentation.utils.DrinkTypeToStringMapper.headlineName
+import com.example.alcocalendar.features.drink_intake.presentation.utils.DrinkTypeToStringMapper.generalTypeName
 
 @Composable
 fun DrinkListHeadline(
-    headline: String,
+    @StringRes headline: Int,
     onClick: () -> Unit,
     isListExpanded: Boolean,
     modifier: Modifier = Modifier,
@@ -32,7 +33,7 @@ fun DrinkListHeadline(
         modifier = modifier.clickable(onClick = onClick)
     ) {
         Text(
-            text = headline,
+            text = stringResource(headline),
             style = MaterialTheme.typography.headlineMedium
         )
         Icon(
@@ -56,7 +57,7 @@ private fun getIcon(isListExpanded: Boolean): ImageVector {
 @Composable
 private fun DrinkListHeadlinePreview() {
     DrinkListHeadline(
-        headline = headlineName<BeerType>(),
+        headline = generalTypeName<BeerType>(),
         onClick = { },
         isListExpanded = false
     )

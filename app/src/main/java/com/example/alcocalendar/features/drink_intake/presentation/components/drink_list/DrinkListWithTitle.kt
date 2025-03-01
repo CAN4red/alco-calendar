@@ -8,7 +8,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.alcocalendar.core.data.local.entities.drink_types.WineType
 import com.example.alcocalendar.core.domain.model.DrinkType
 import com.example.alcocalendar.features.drink_intake.presentation.DrinkIntakeEvent
-import com.example.alcocalendar.features.drink_intake.presentation.utils.DrinkTypeToStringMapper.headlineName
+import com.example.alcocalendar.features.drink_intake.presentation.utils.DrinkTypeToStringMapper.generalTypeName
 
 @Composable
 inline fun <reified T> DrinkListWithTitle(
@@ -24,7 +24,7 @@ inline fun <reified T> DrinkListWithTitle(
 
     Column(modifier = modifier.fillMaxWidth()) {
         DrinkListHeadline(
-            headline = headlineName<T>(),
+            headline = generalTypeName<T>(),
             onClick = onHeadlineClick,
             isListExpanded = isListExpanded,
         )

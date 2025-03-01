@@ -22,7 +22,7 @@ import com.example.alcocalendar.core.data.local.entities.drink_types.BeerType
 import com.example.alcocalendar.core.data.local.entities.drink_types.WineType
 import com.example.alcocalendar.core.domain.model.DrinkType
 import com.example.alcocalendar.features.drink_intake.presentation.utils.DrinkTypeToDrawableMapper.toDrawable
-import com.example.alcocalendar.features.drink_intake.presentation.utils.DrinkTypeToStringMapper.titleName
+import com.example.alcocalendar.features.drink_intake.presentation.utils.DrinkTypeToStringMapper.typeName
 
 @Composable
 fun DrinkCard(
@@ -47,7 +47,7 @@ fun DrinkCard(
             Spacer(modifier = Modifier.size(4.dp))
 
             Text(
-                text = stringResource(drinkType.titleName()),
+                text = stringResource(drinkType.typeName()),
                 style = MaterialTheme.typography.titleMedium
             )
         }

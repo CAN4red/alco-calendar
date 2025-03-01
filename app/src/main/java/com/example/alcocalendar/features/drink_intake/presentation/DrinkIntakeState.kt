@@ -3,7 +3,7 @@ package com.example.alcocalendar.features.drink_intake.presentation
 import com.example.alcocalendar.R
 import com.example.alcocalendar.core.domain.model.DrinkIntake
 import com.example.alcocalendar.core.domain.model.DrinkType
-import com.example.alcocalendar.features.drink_intake.presentation.utils.DrinkTypeToStringMapper.titleName
+import com.example.alcocalendar.features.drink_intake.presentation.utils.DrinkTypeToStringMapper.typeName
 import java.text.NumberFormat
 import java.time.LocalDate
 import java.util.Locale
@@ -15,7 +15,7 @@ data class DrinkIntakeState(
     val expandedDrinkType: Class<out DrinkType>? = null,
 ) {
     val fillingIntakeTitle
-        get() = fillingIntake?.drinkType?.titleName() ?: R.string.unknown_drink
+        get() = fillingIntake?.drinkType?.typeName() ?: R.string.unknown_drink
 
     val fillingAlcoStrengthString
         get() = fillingIntake?.alcoStrength?.formatAsString() ?: ""
