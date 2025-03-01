@@ -95,7 +95,7 @@ fun AddIntakeDialog(
                 )
             )
 
-            DrinkIntakeDialogActionButtons(onEvent = onEvent)
+            DialogActionButtons(onEvent = onEvent)
         }
     }
 }

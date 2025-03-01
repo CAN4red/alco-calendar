@@ -2,6 +2,7 @@ package com.example.alcocalendar.features.drink_intake.presentation.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
@@ -13,6 +14,7 @@ import androidx.compose.ui.unit.dp
 import com.example.alcocalendar.features.drink_intake.presentation.DrinkIntakeEvent
 import com.example.alcocalendar.features.drink_intake.presentation.DrinkIntakeState
 import com.example.alcocalendar.features.drink_intake.presentation.components.dialog.AddIntakeDialog
+import com.example.alcocalendar.features.drink_intake.presentation.components.intake_tag.IntakesFlowRow
 
 @Composable
 fun DrinkIntakeScreenContent(
@@ -36,6 +38,11 @@ fun DrinkIntakeScreenContent(
                 )
             }
         }
+
+        IntakesFlowRow(
+            intakes = state.intakes,
+            modifier = Modifier.fillMaxWidth()
+        )
 
         if (state.fillingIntake != null) {
             AddIntakeDialog(

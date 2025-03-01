@@ -59,13 +59,21 @@ val Typography = Typography(
 
     bodyLarge = TextStyle(
         fontFamily = ReadexPro,
-        fontWeight = FontWeight.Normal,
+        fontWeight = FontWeight.Medium,
         fontSize = 20.sp,
         lineHeight = 24.sp,
         letterSpacing = 0.25.sp,
     ),
 
     bodyMedium = TextStyle(
+        fontFamily = ReadexPro,
+        fontWeight = FontWeight.Normal,
+        fontSize = 16.sp,
+        lineHeight = 20.sp,
+        letterSpacing = 0.25.sp,
+    ),
+
+    bodySmall = TextStyle(
         fontFamily = ReadexPro,
         fontWeight = FontWeight.Normal,
         fontSize = 14.sp,
@@ -76,8 +84,8 @@ val Typography = Typography(
     labelLarge = TextStyle(
         fontFamily = ReadexPro,
         fontWeight = FontWeight.Medium,
-        fontSize = 20.sp,
-        lineHeight = 24.sp,
+        fontSize = 14.sp,
+        lineHeight = 20.sp,
         letterSpacing = 0.5.sp,
     ),
 

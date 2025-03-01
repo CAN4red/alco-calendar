@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import com.example.alcocalendar.features.drink_intake.presentation.DrinkIntakeEvent
 
 @Composable
-fun DrinkIntakeDialogActionButtons(
+fun DialogActionButtons(
     onEvent: (DrinkIntakeEvent) -> Unit,
     modifier: Modifier = Modifier
 ) {
