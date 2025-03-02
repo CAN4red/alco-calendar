@@ -159,6 +159,7 @@ class DrinkIntakeViewModel @Inject constructor(
                 drinkIntakeUseCases.deleteDrinkIntakeUseCase(drinkIntake)
             }
         }
+        loadData(date = _state.value.date)
     }
 
     private fun handleSetExpandedIntake(drinkType: Class<out DrinkType>?) {

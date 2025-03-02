@@ -22,7 +22,7 @@ fun DialogActionButtons(
         modifier = modifier.fillMaxWidth()
     ) {
         Button(
-            onClick = { onEvent(DrinkIntakeEvent.DeleteDrinkIntake) },
+            onClick = { deleteIntake(onEvent) },
             modifier = Modifier.padding(4.dp)
         ) {
             Text(
@@ -45,5 +45,10 @@ fun DialogActionButtons(
 
 private fun submitIntake(onEvent: (DrinkIntakeEvent) -> Unit) {
     onEvent(DrinkIntakeEvent.InsertUpdateDrinkIntake)
+    onEvent(DrinkIntakeEvent.DropFillingDrinkIntake)
+}
+
+private fun deleteIntake(onEvent: (DrinkIntakeEvent) -> Unit) {
+    onEvent(DrinkIntakeEvent.DeleteDrinkIntake)
     onEvent(DrinkIntakeEvent.DropFillingDrinkIntake)
 }

@@ -6,7 +6,7 @@ sealed interface DrinkIntakeEvent {
     data class SetFillingDrinkIntake(
         val drinkType: DrinkType,
         val alcoStrength: Double,
-        val liters: Double = 0.0,
+        val liters: Double = 0.0
     ) : DrinkIntakeEvent
 
     data class SetFillingDrinkIntakeAlcoStrength(val alcoStrength: Double, ) : DrinkIntakeEvent
