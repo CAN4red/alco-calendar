@@ -44,6 +44,6 @@ fun DialogActionButtons(
 }
 
 private fun submitIntake(onEvent: (DrinkIntakeEvent) -> Unit) {
-    onEvent(DrinkIntakeEvent.InsertDrinkIntake)
+    onEvent(DrinkIntakeEvent.InsertUpdateDrinkIntake)
     onEvent(DrinkIntakeEvent.DropFillingDrinkIntake)
 }

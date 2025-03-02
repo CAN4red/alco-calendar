@@ -16,7 +16,7 @@ import java.time.LocalDate
             onUpdate = ForeignKey.CASCADE,
         )
     ],
-    primaryKeys = ["date", "drinkType"]
+    primaryKeys = ["date", "drinkType", "alcoStrength"]
 )
 data class DrinkIntakeEntity(
     val date: LocalDate,

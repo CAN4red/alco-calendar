@@ -89,7 +89,7 @@ fun AddIntakeDialog(
                 ),
                 keyboardActions = KeyboardActions(
                     onDone = {
-                        onEvent(DrinkIntakeEvent.InsertDrinkIntake)
+                        onEvent(DrinkIntakeEvent.InsertUpdateDrinkIntake)
                         onEvent(DrinkIntakeEvent.DropFillingDrinkIntake)
                     }
                 )
