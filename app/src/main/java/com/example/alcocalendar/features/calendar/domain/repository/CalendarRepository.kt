@@ -9,4 +9,6 @@ interface CalendarRepository {
     suspend fun getSessionsWithIntakes(): Map<LocalDate, CalendarSessionWithIntakes>
 
     suspend fun insertDrinkingSession(drinkingSession: DrinkingSession)
+
+    suspend fun getDrinkingSession(date: LocalDate): DrinkingSession?
 }

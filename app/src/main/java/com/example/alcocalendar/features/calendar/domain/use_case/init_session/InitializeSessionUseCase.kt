@@ -8,6 +8,9 @@ class InitializeSessionUseCase @Inject constructor(
     private val repository: CalendarRepository
 ) {
     suspend operator fun invoke(drinkingSession: DrinkingSession) {
-        repository.insertDrinkingSession(drinkingSession)
+        val existingSession = repository.getDrinkingSession(drinkingSession.date)
+        if (existingSession == null) {
+            repository.insertDrinkingSession(drinkingSession)
+        }
     }
 }

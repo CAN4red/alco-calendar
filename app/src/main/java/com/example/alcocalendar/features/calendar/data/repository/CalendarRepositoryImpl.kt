@@ -24,4 +24,8 @@ class CalendarRepositoryImpl @Inject constructor(
     override suspend fun insertDrinkingSession(drinkingSession: DrinkingSession) {
         sessionDao.insertDrinkingSession(DrinkingSessionMapper.toData(drinkingSession))
     }
+
+    override suspend fun getDrinkingSession(date: LocalDate): DrinkingSession? {
+        return DrinkingSessionMapper.toDomain(sessionDao.getDrinkingSession(date))
+    }
 }

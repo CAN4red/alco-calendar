@@ -57,7 +57,7 @@ class SharedCalendarViewModel @Inject constructor(
     private fun handleInitializeSession(sessionDate: LocalDate) {
         if (_calendarState.value.intakesData[sessionDate] == null) {
             viewModelScope.launch {
-                initializeSessionUseCase.invoke(DrinkingSession(sessionDate))
+                initializeSessionUseCase(DrinkingSession(sessionDate))
             }
         }
     }

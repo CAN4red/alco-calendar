@@ -5,7 +5,8 @@ import com.example.alcocalendar.core.domain.model.DrinkingSession
 
 object DrinkingSessionMapper {
 
-    fun toDomain(sessionEntity: DrinkingSessionEntity): DrinkingSession {
+    fun toDomain(sessionEntity: DrinkingSessionEntity?): DrinkingSession? {
+        if (sessionEntity == null) return null
         return DrinkingSession(
             date = sessionEntity.date,
         )
