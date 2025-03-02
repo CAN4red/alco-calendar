@@ -53,7 +53,7 @@ class DrinkIntakeViewModel @Inject constructor(
     fun onEvent(event: DrinkIntakeEvent) {
         when (event) {
             is DrinkIntakeEvent.SetFillingDrinkIntake -> {
-                handleSetFillingDrinkIntake(event.drinkType, event.alcoStrength)
+                handleSetFillingDrinkIntake(event.drinkType, event.alcoStrength, event.liters)
             }
 
             is DrinkIntakeEvent.SetFillingDrinkIntakeAlcoStrength -> {
@@ -82,11 +82,16 @@ class DrinkIntakeViewModel @Inject constructor(
         }
     }
 
-    private fun handleSetFillingDrinkIntake(drinkType: DrinkType, alcoStrength: Double) {
+    private fun handleSetFillingDrinkIntake(
+        drinkType: DrinkType,
+        alcoStrength: Double,
+        liters: Double
+    ) {
         val fillingIntake = DrinkIntake(
             date = _state.value.date,
             drinkType = drinkType,
-            alcoStrength = alcoStrength
+            alcoStrength = alcoStrength,
+            liters = liters
         )
         _state.update { currentState ->
             currentState.copy(

@@ -5,7 +5,8 @@ import com.example.alcocalendar.core.domain.model.DrinkType
 sealed interface DrinkIntakeEvent {
     data class SetFillingDrinkIntake(
         val drinkType: DrinkType,
-        val alcoStrength: Double
+        val alcoStrength: Double,
+        val liters: Double = 0.0,
     ) : DrinkIntakeEvent
 
     data class SetFillingDrinkIntakeAlcoStrength(val alcoStrength: Double, ) : DrinkIntakeEvent

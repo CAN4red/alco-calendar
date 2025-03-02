@@ -10,12 +10,14 @@ import androidx.compose.ui.unit.dp
 import com.example.alcocalendar.core.data.local.entities.drink_types.BeerType
 import com.example.alcocalendar.core.data.local.entities.drink_types.WineType
 import com.example.alcocalendar.core.domain.model.DrinkIntake
+import com.example.alcocalendar.features.drink_intake.presentation.DrinkIntakeEvent
 import java.time.LocalDate
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun IntakesFlowRow(
     intakes: List<DrinkIntake>,
+    onEvent: (DrinkIntakeEvent) -> Unit,
     modifier: Modifier = Modifier
 ) {
     FlowRow(
@@ -24,7 +26,7 @@ fun IntakesFlowRow(
         modifier = modifier
     ) {
         intakes.forEach { intake ->
-            DrinkIntakeTag(drinkIntake = intake)
+            DrinkIntakeTag(drinkIntake = intake, onEvent = onEvent)
         }
     }
 }
@@ -52,6 +54,7 @@ private fun IntakesFlowRowPreview() {
                 liters = 2.0,
                 alcoStrength = 5.5
             )
-        )
+        ),
+        onEvent = {}
     )
 }

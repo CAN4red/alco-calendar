@@ -41,6 +41,7 @@ fun DrinkIntakeScreenContent(
 
         IntakesFlowRow(
             intakes = state.intakes,
+            onEvent = onEvent,
             modifier = Modifier.fillMaxWidth()
         )
 
