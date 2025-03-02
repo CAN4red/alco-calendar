@@ -17,7 +17,7 @@ import com.example.alcocalendar.features.drink_intake.data.local.dao.DrinkIntake
 
 @Database(
     entities = [DrinkingSessionEntity::class, DrinkIntakeEntity::class],
-    version = 3,
+    version = 4,
     exportSchema = false,
 )
 @TypeConverters(

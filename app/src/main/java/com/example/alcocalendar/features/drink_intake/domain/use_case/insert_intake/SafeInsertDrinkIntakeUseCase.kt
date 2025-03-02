@@ -17,9 +17,7 @@ class SafeInsertDrinkIntakeUseCase @Inject constructor(
         }
 
         if (existingDrinkIntake != null) {
-            val updatedDrinkIntake =
-                drinkIntake.copy(drinkIntakeId = existingDrinkIntake.drinkIntakeId)
-            repository.updateDrinkIntake(updatedDrinkIntake)
+            repository.updateDrinkIntake(existingDrinkIntake)
         } else {
             repository.insertDrinkIntake(drinkIntake)
         }

@@ -7,7 +7,6 @@ object DrinkIntakeMapper {
 
     fun toDomain(intakeEntity: DrinkIntakeEntity): DrinkIntake {
         return DrinkIntake(
-            drinkIntakeId = intakeEntity.drinkIntakeId,
             date = intakeEntity.date,
             drinkType = intakeEntity.drinkType,
             liters = intakeEntity.liters,
@@ -17,7 +16,6 @@ object DrinkIntakeMapper {
 
     fun toData(intake: DrinkIntake): DrinkIntakeEntity {
         return DrinkIntakeEntity(
-            drinkIntakeId = intake.drinkIntakeId,
             date = intake.date,
             drinkType = intake.drinkType,
             liters = intake.liters,

@@ -23,9 +23,6 @@ interface DrinkIntakeDao {
     @Delete
     suspend fun deleteDrinkIntake(drinkIntake: DrinkIntakeEntity)
 
-    @Query("DELETE FROM drink_intake WHERE drinkIntakeId = :drinkIntakeId")
-    suspend fun deleteDrinkIntakeById(drinkIntakeId: Int)
-
     @Transaction
     @Query("SELECT * FROM drinking_session WHERE date = :date")
     suspend fun getDrinkingSessionWithDrinkIntakes(date: LocalDate): DrinkingSessionWithDrinkIntakes?

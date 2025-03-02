@@ -62,7 +62,6 @@ fun DrinkIntakeTag(
 private fun DrinkIntakeTagPreview() {
     DrinkIntakeTag(
         drinkIntake = DrinkIntake(
-            drinkIntakeId = 0,
             date = LocalDate.now(),
             drinkType = BeerType.LIGHT,
             liters = 2.6,

@@ -2,7 +2,6 @@ package com.example.alcocalendar.core.data.local.entities
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
-import androidx.room.PrimaryKey
 import com.example.alcocalendar.core.domain.model.DrinkType
 import java.time.LocalDate
 
@@ -16,11 +15,10 @@ import java.time.LocalDate
             onDelete = ForeignKey.CASCADE,
             onUpdate = ForeignKey.CASCADE,
         )
-    ]
+    ],
+    primaryKeys = ["date", "drinkType"]
 )
 data class DrinkIntakeEntity(
-    @PrimaryKey(autoGenerate = true)
-    val drinkIntakeId: Int = 0,
     val date: LocalDate,
     val drinkType: DrinkType,
     val liters: Double = 0.0,

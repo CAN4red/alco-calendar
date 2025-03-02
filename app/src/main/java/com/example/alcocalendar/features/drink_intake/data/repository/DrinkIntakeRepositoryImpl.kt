@@ -19,8 +19,8 @@ class DrinkIntakeRepositoryImpl @Inject constructor(
         drinkIntakeDao.updateDrinkIntake(DrinkIntakeMapper.toData(drinkIntake))
     }
 
-    override suspend fun deleteDrinkIntakeById(drinkIntakeId: Int) {
-        drinkIntakeDao.deleteDrinkIntakeById(drinkIntakeId)
+    override suspend fun deleteDrinkIntake(drinkIntake: DrinkIntake) {
+        drinkIntakeDao.deleteDrinkIntake(DrinkIntakeMapper.toData(drinkIntake))
     }
 
     override suspend fun getDrinkIntakesByDate(date: LocalDate): List<DrinkIntake> {

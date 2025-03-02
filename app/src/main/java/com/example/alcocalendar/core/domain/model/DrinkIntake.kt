@@ -3,7 +3,6 @@ package com.example.alcocalendar.core.domain.model
 import java.time.LocalDate
 
 data class DrinkIntake(
-    val drinkIntakeId: Int = 0,
     val date: LocalDate,
     val drinkType: DrinkType,
     val liters: Double = 0.0,

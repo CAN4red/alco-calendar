@@ -104,7 +104,7 @@ class DrinkIntakeViewModel @Inject constructor(
         }
     }
 
-    private fun handleSetFillingDrinkIntakeAlcoStrength(alcoStrength: Double, ) {
+    private fun handleSetFillingDrinkIntakeAlcoStrength(alcoStrength: Double) {
         _state.value.fillingIntake?.let { fillingIntake ->
             val updatedFillingIntake = fillingIntake.copy(alcoStrength = alcoStrength)
 
@@ -158,10 +158,10 @@ class DrinkIntakeViewModel @Inject constructor(
     }
 
     private fun handleDeleteDrinkIntake() {
-        val drinkIntakeId = _state.value.fillingIntake?.drinkIntakeId
-        drinkIntakeId?.let {
+        val drinkIntake = _state.value.fillingIntake
+        drinkIntake?.let {
             viewModelScope.launch {
-                drinkIntakeUseCases.deleteDrinkIntakeByIdUseCase(drinkIntakeId)
+                drinkIntakeUseCases.deleteDrinkIntakeUseCase(drinkIntake)
             }
         }
     }

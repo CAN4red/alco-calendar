@@ -9,5 +9,5 @@ interface DrinkIntakeRepository: SharedDrinkIntakeRepository {
 
     suspend fun updateDrinkIntake(drinkIntake: DrinkIntake)
 
-    suspend fun deleteDrinkIntakeById(drinkIntakeId: Int)
+    suspend fun deleteDrinkIntake(drinkIntake: DrinkIntake)
 }
