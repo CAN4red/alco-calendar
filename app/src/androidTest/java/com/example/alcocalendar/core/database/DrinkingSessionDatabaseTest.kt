@@ -63,14 +63,12 @@ class DrinkingSessionDatabaseTest {
         val date = LocalDate.of(2025, 1, 1)
         val drinkingSessionInserted = DrinkingSessionEntity(date)
         val drinkIntakeInserted1 = DrinkIntakeEntity(
-            drinkIntakeId = 1,
             date = date,
             drinkType = BeerType.LIGHT,
             liters = 0.45,
             alcoStrength = 5.5
         )
         val drinkIntakeInserted2 = DrinkIntakeEntity(
-            drinkIntakeId = 2,
             date = date,
             drinkType = WineType.VERMOUTH,
             liters = 0.9,
@@ -141,8 +139,6 @@ class DrinkingSessionDatabaseTest {
             .getDrinkingSessionWithDrinkIntakes(date)
             ?.drinkIntakes?.get(0)?.let {
             DrinkIntakeEntity(
-                drinkIntakeId = it
-                    .drinkIntakeId,
                 date = date,
                 drinkType = WineType.RED,
                 liters = 1.5,
@@ -182,13 +178,12 @@ class DrinkingSessionDatabaseTest {
         drinkingSessionDao.insertDrinkingSession(drinkingSessionInserted)
         drinkIntakeDao.insertDrinkIntake(drinkIntakeInserted)
 
-        val drinkIntakeIdToDelete = drinkIntakeDao
+        val drinkIntakeToDelete = drinkIntakeDao
             .getDrinkingSessionWithDrinkIntakes(date)
             ?.drinkIntakes?.get(0)
-            ?.drinkIntakeId
 
-        if (drinkIntakeIdToDelete != null) {
-            drinkIntakeDao.deleteDrinkIntakeById(drinkIntakeIdToDelete)
+        if (drinkIntakeToDelete != null) {
+            drinkIntakeDao.deleteDrinkIntake(drinkIntakeToDelete)
         }
 
         val allDrinkIntakesGotten = drinkIntakeDao

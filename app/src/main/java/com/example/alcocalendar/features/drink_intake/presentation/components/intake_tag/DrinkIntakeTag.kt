@@ -33,8 +33,8 @@ fun DrinkIntakeTag(
         modifier = modifier
             .clip(RoundedCornerShape(12.dp))
             .border(
-                width = 1.dp,
-                color = MaterialTheme.colorScheme.surface,
+                width = 2.dp,
+                color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.32f),
                 shape = RoundedCornerShape(12.dp)
             )
             .padding(6.dp)
