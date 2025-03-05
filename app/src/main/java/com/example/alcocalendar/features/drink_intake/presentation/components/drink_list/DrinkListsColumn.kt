@@ -1,4 +1,4 @@
-package com.example.alcocalendar.features.drink_intake.presentation.components
+package com.example.alcocalendar.features.drink_intake.presentation.components.drink_list
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -12,7 +12,6 @@ import com.example.alcocalendar.core.data.local.entities.drink_types.WineType
 import com.example.alcocalendar.core.domain.model.DrinkType
 import com.example.alcocalendar.features.drink_intake.presentation.DrinkIntakeEvent
 import com.example.alcocalendar.features.drink_intake.presentation.DrinkIntakeState
-import com.example.alcocalendar.features.drink_intake.presentation.components.drink_list.DrinkListWithTitle
 
 @Composable
 fun DrinkListsColumn(

@@ -49,7 +49,7 @@ fun DrinkIntakeTag(
                     )
                 )
             }
-            .padding(6.dp)
+            .padding(10.dp)
     ) {
         Column {
             Row {
