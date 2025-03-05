@@ -39,4 +39,9 @@
     <string name="moonshine">Moonshine</string>
     <string name="shots">Shots</string>
     <string name="cocktails">Cocktails</string>
+
+    <plurals name="liters">
+        <item quantity="one">liter</item>
+        <item quantity="other">liters</item>
+    </plurals>
 </resources>

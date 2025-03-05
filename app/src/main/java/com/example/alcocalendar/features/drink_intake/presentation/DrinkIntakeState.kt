@@ -4,9 +4,8 @@ import com.example.alcocalendar.R
 import com.example.alcocalendar.core.domain.model.DrinkIntake
 import com.example.alcocalendar.core.domain.model.DrinkType
 import com.example.alcocalendar.features.drink_intake.presentation.utils.DrinkTypeToStringMapper.typeName
-import java.text.NumberFormat
+import com.example.alcocalendar.features.drink_intake.presentation.utils.Formatter.formatAsString
 import java.time.LocalDate
-import java.util.Locale
 
 data class DrinkIntakeState(
     val date: LocalDate = LocalDate.now(),
@@ -18,18 +17,13 @@ data class DrinkIntakeState(
         get() = fillingIntake?.drinkType?.typeName() ?: R.string.unknown_drink
 
     val fillingAlcoStrengthString
-        get() = fillingIntake?.alcoStrength?.formatAsString() ?: ""
+        get() = fillingIntake?.alcoStrength?.formatAsStringExcludingZero() ?: ""
 
     val fillingLitersString
-        get() = fillingIntake?.liters?.formatAsString() ?: ""
+        get() = fillingIntake?.liters?.formatAsStringExcludingZero() ?: ""
 
-    private fun Double.formatAsString(): String {
-        return if (this == 0.0) ""
-        else {
-            NumberFormat.getInstance(Locale.getDefault()).apply {
-                maximumFractionDigits = 3
-                isGroupingUsed = false
-            }.format(this)
-        }
+    private fun Double.formatAsStringExcludingZero(): String {
+        if (this == 0.0) return ""
+        return this.formatAsString()
     }
 }

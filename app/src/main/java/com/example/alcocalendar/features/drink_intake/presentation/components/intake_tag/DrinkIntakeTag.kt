@@ -14,13 +14,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.alcocalendar.R
 import com.example.alcocalendar.core.data.local.entities.drink_types.BeerType
 import com.example.alcocalendar.core.domain.model.DrinkIntake
 import com.example.alcocalendar.features.drink_intake.presentation.DrinkIntakeEvent
 import com.example.alcocalendar.features.drink_intake.presentation.utils.DrinkTypeToStringMapper.typeName
+import com.example.alcocalendar.features.drink_intake.presentation.utils.Formatter.formatAsString
 import java.time.LocalDate
 
 @Composable
@@ -37,7 +40,6 @@ fun DrinkIntakeTag(
                 color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.32f),
                 shape = RoundedCornerShape(12.dp)
             )
-            .padding(6.dp)
             .clickable {
                 onEvent(
                     DrinkIntakeEvent.SetFillingDrinkIntake(
@@ -47,6 +49,7 @@ fun DrinkIntakeTag(
                     )
                 )
             }
+            .padding(6.dp)
     ) {
         Column {
             Row {
@@ -58,17 +61,26 @@ fun DrinkIntakeTag(
                 Spacer(Modifier.size(16.dp))
 
                 Text(
-                    text = drinkIntake.alcoStrength.toString() + "%",
+                    text = getAlcoStrengthTitle(drinkIntake.alcoStrength),
                     style = MaterialTheme.typography.bodyLarge
                 )
             }
-
             Text(
-                text = drinkIntake.liters.toString() + " liters",
-                style = MaterialTheme.typography.labelLarge
+                text = getLabel(drinkIntake.liters),
+                style = MaterialTheme.typography.labelLarge,
+                color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.44f)
             )
         }
     }
+}
+
+@Composable
+private fun getAlcoStrengthTitle(alcoStrength: Double) = "${alcoStrength.formatAsString()}%"
+
+@Composable
+private fun getLabel(liters: Double): String {
+    val postfix = pluralStringResource(R.plurals.liters, liters.toInt())
+    return "${liters.formatAsString()} $postfix"
 }
 
 @Preview
