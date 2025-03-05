@@ -1,6 +1,7 @@
 package com.example.alcocalendar.features.drink_intake.presentation.components
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -34,13 +35,17 @@ fun DrinkIntakeScreenContent(
                     onEvent = onEvent,
                 )
             }
+            item {
+                Spacer(Modifier.padding(8.dp))
+            }
+            item {
+                IntakesFlowRow(
+                    intakes = state.intakes,
+                    onEvent = onEvent,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
         }
-
-        IntakesFlowRow(
-            intakes = state.intakes,
-            onEvent = onEvent,
-            modifier = Modifier.fillMaxWidth()
-        )
 
         if (state.fillingIntake != null) {
             AddIntakeDialog(
