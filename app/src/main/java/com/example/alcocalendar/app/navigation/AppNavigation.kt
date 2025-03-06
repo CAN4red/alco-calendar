@@ -14,7 +14,7 @@ import androidx.navigation.compose.navigation
 import com.example.alcocalendar.core.navigation.NavRoutes
 import com.example.alcocalendar.features.calendar.presentation.month_appearance.MonthCalendarScreen
 import com.example.alcocalendar.features.calendar.presentation.year_appearance.YearCalendarScreen
-import com.example.alcocalendar.features.drink_intake.presentation.DrinkIntakeScreen
+import com.example.alcocalendar.features.session_manage.SessionManageScreen
 
 @Composable
 fun AppNavigation(
@@ -49,9 +49,9 @@ fun AppNavigation(
             }
 
             composable(
-                route = NavRoutes.DRINK_INTAKE,
+                route = NavRoutes.SESSION_MANAGE,
             ) {
-                DrinkIntakeScreen()
+                SessionManageScreen()
             }
         }
     }
