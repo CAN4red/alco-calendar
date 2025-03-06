@@ -54,7 +54,7 @@ fun MonthCalendarScreen(
             modifier = Modifier.fillMaxSize(),
             navigateToDrinkIntake = { date ->
                 navController.navigate(
-                    NavRoutes.drinkIntakeCalendarRoute(
+                    NavRoutes.sessionManageRoute(
                         date.year,
                         date.month,
                         date.dayOfMonth
