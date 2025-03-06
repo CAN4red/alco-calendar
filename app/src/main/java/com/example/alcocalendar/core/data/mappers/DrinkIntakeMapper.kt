@@ -22,13 +22,4 @@ object DrinkIntakeMapper {
             alcoStrength = intake.alcoStrength
         )
     }
-
-    fun toInsertingData(intake: DrinkIntake): DrinkIntakeEntity {
-        return DrinkIntakeEntity(
-            date = intake.date,
-            drinkType = intake.drinkType,
-            liters = intake.liters,
-            alcoStrength = intake.alcoStrength
-        )
-    }
 }

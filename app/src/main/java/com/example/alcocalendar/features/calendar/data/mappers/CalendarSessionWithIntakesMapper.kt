@@ -1,6 +1,6 @@
 package com.example.alcocalendar.features.calendar.data.mappers
 
-import com.example.alcocalendar.core.data.local.relations.DrinkingSessionWithDrinkIntakes
+import com.example.alcocalendar.core.data.local.entity.relations.DrinkingSessionWithDrinkIntakes
 import com.example.alcocalendar.core.data.mappers.DrinkIntakeMapper
 import com.example.alcocalendar.features.calendar.domain.model.CalendarSessionWithIntakes
 
