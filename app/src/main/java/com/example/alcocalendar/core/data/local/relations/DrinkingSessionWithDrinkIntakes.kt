@@ -2,8 +2,8 @@ package com.example.alcocalendar.core.data.local.relations
 
 import androidx.room.Embedded
 import androidx.room.Relation
-import com.example.alcocalendar.core.data.local.entities.DrinkingSessionEntity
-import com.example.alcocalendar.core.data.local.entities.DrinkIntakeEntity
+import com.example.alcocalendar.core.data.local.entity.DrinkingSessionEntity
+import com.example.alcocalendar.core.data.local.entity.DrinkIntakeEntity
 
 data class DrinkingSessionWithDrinkIntakes(
     @Embedded

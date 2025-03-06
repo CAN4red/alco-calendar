@@ -6,7 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import com.example.alcocalendar.core.data.local.entities.DrinkingSessionEntity
+import com.example.alcocalendar.core.data.local.entity.DrinkingSessionEntity
 import java.time.LocalDate
 
 @Dao

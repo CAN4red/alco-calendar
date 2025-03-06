@@ -1,4 +1,4 @@
-package com.example.alcocalendar.core.data.local.entities
+package com.example.alcocalendar.core.data.local.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

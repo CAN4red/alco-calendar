@@ -7,7 +7,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
 import androidx.room.Update
-import com.example.alcocalendar.core.data.local.entities.DrinkIntakeEntity
+import com.example.alcocalendar.core.data.local.entity.DrinkIntakeEntity
 import com.example.alcocalendar.core.data.local.relations.DrinkingSessionWithDrinkIntakes
 import java.time.LocalDate
 

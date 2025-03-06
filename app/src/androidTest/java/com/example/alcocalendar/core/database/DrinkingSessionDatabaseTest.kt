@@ -5,11 +5,11 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.example.alcocalendar.core.data.local.DrinkingSessionDatabase
 import com.example.alcocalendar.core.data.local.dao.DrinkingSessionDao
-import com.example.alcocalendar.core.data.local.entities.DrinkIntakeEntity
-import com.example.alcocalendar.core.data.local.entities.DrinkingSessionEntity
+import com.example.alcocalendar.core.data.local.entity.DrinkIntakeEntity
+import com.example.alcocalendar.core.data.local.entity.DrinkingSessionEntity
 import com.example.alcocalendar.features.drink_intake.data.local.dao.DrinkIntakeDao
-import com.example.alcocalendar.core.data.local.entities.drink_types.BeerType
-import com.example.alcocalendar.core.data.local.entities.drink_types.WineType
+import com.example.alcocalendar.core.data.local.entity.drink_types.BeerType
+import com.example.alcocalendar.core.data.local.entity.drink_types.WineType
 import com.example.alcocalendar.core.data.local.relations.DrinkingSessionWithDrinkIntakes
 import kotlinx.coroutines.runBlocking
 import org.junit.After

@@ -9,7 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.alcocalendar.core.data.local.entities.drink_types.BeerType
+import com.example.alcocalendar.core.data.local.entity.drink_types.BeerType
 import com.example.alcocalendar.core.domain.model.DrinkType
 import com.example.alcocalendar.features.drink_intake.presentation.DrinkIntakeEvent
 import kotlin.enums.enumEntries

@@ -1,13 +1,11 @@
 package com.example.alcocalendar.features.drink_intake.presentation.utils
 
 import androidx.annotation.StringRes
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.res.stringResource
 import com.example.alcocalendar.R
-import com.example.alcocalendar.core.data.local.entities.drink_types.BeerType
-import com.example.alcocalendar.core.data.local.entities.drink_types.OtherType
-import com.example.alcocalendar.core.data.local.entities.drink_types.SpiritsType
-import com.example.alcocalendar.core.data.local.entities.drink_types.WineType
+import com.example.alcocalendar.core.data.local.entity.drink_types.BeerType
+import com.example.alcocalendar.core.data.local.entity.drink_types.OtherType
+import com.example.alcocalendar.core.data.local.entity.drink_types.SpiritsType
+import com.example.alcocalendar.core.data.local.entity.drink_types.WineType
 import com.example.alcocalendar.core.domain.model.DrinkType
 
 object DrinkTypeToStringMapper {

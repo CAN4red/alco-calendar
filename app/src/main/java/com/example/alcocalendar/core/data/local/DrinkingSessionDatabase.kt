@@ -10,8 +10,8 @@ import com.example.alcocalendar.core.data.local.converters.LocalDateConverter
 import com.example.alcocalendar.core.data.local.converters.YearMonthTypeConverter
 import com.example.alcocalendar.core.data.local.converters.YearTypeConverter
 import com.example.alcocalendar.core.data.local.dao.DrinkingSessionDao
-import com.example.alcocalendar.core.data.local.entities.DrinkIntakeEntity
-import com.example.alcocalendar.core.data.local.entities.DrinkingSessionEntity
+import com.example.alcocalendar.core.data.local.entity.DrinkIntakeEntity
+import com.example.alcocalendar.core.data.local.entity.DrinkingSessionEntity
 import com.example.alcocalendar.features.calendar.data.local.dao.CalendarDao
 import com.example.alcocalendar.features.drink_intake.data.local.dao.DrinkIntakeDao
 

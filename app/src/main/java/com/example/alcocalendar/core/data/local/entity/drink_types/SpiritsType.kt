@@ -1,4 +1,4 @@
-package com.example.alcocalendar.core.data.local.entities.drink_types
+package com.example.alcocalendar.core.data.local.entity.drink_types
 
 import com.example.alcocalendar.core.common.AlcoStrengthConstants
 import com.example.alcocalendar.core.domain.model.DrinkType

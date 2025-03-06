@@ -1,6 +1,6 @@
 package com.example.alcocalendar.core.data.mappers
 
-import com.example.alcocalendar.core.data.local.entities.DrinkingSessionEntity
+import com.example.alcocalendar.core.data.local.entity.DrinkingSessionEntity
 import com.example.alcocalendar.core.domain.model.DrinkingSession
 
 object DrinkingSessionMapper {
