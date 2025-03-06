@@ -1,7 +1,7 @@
 package com.example.alcocalendar.core.domain.use_case.get_sessions_with_intakes
 
 import com.example.alcocalendar.core.domain.repository.SharedDrinkIntakeRepository
-import com.example.alcocalendar.core.data.local.relations.DrinkingSessionWithDrinkIntakes
+import com.example.alcocalendar.core.data.local.entity.relations.DrinkingSessionWithDrinkIntakes
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
