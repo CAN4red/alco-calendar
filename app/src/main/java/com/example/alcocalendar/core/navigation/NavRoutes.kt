@@ -7,10 +7,10 @@ object NavRoutes {
 
     const val MONTH_CALENDAR = "month_calendar"
     const val YEAR_CALENDAR = "year_calendar"
-    const val DRINK_INTAKE = "drink_intake/{${NavArgs.YEAR}}/{${NavArgs.MONTH}}/{${NavArgs.DAY}}"
+    const val SESSION_MANAGE = "session_manage/{${NavArgs.YEAR}}/{${NavArgs.MONTH}}/{${NavArgs.DAY}}"
 
-    fun drinkIntakeCalendarRoute(year: Int, month: Month, day: Int) =
-        "drink_intake/${year.toString().lowercase()}" +
+    fun sessionManageRoute(year: Int, month: Month, day: Int) =
+        "session_manage/${year.toString().lowercase()}" +
                 "/${month.toString().lowercase()}" +
                 "/${day.toString().lowercase()}"
 }

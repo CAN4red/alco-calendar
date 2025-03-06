@@ -7,10 +7,10 @@ import com.example.alcocalendar.core.data.local.DrinkingSessionDatabase
 import com.example.alcocalendar.core.data.local.dao.DrinkingSessionDao
 import com.example.alcocalendar.core.data.local.entity.DrinkIntakeEntity
 import com.example.alcocalendar.core.data.local.entity.DrinkingSessionEntity
-import com.example.alcocalendar.features.drink_intake.data.local.dao.DrinkIntakeDao
+import com.example.alcocalendar.features.session_manage.drink_intake.data.local.dao.DrinkIntakeDao
 import com.example.alcocalendar.core.data.local.entity.drink_types.BeerType
 import com.example.alcocalendar.core.data.local.entity.drink_types.WineType
-import com.example.alcocalendar.core.data.local.relations.DrinkingSessionWithDrinkIntakes
+import com.example.alcocalendar.core.data.local.entity.relations.DrinkingSessionWithDrinkIntakes
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert.assertEquals
