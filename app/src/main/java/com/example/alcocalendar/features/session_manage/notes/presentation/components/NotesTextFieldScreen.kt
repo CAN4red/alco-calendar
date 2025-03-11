@@ -6,16 +6,19 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.alcocalendar.features.session_manage.notes.domain.model.Note
 import com.example.alcocalendar.features.session_manage.notes.presentation.NotesEvent
+import com.example.alcocalendar.features.session_manage.notes.presentation.NotesState
 
 @Composable
 fun NotesTextFieldScreen(
-    state: Note,
+    state: NotesState,
     onEvent: (NotesEvent) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    BackHandler { onEvent(NotesEvent.SubmitNote(state)) }
+    BackHandler {
+        onEvent(NotesEvent.SubmitNote(state.note))
+        onEvent(NotesEvent.CollapseNote)
+    }
 
     Column(
         modifier = modifier.fillMaxSize()
@@ -29,6 +32,9 @@ fun NotesTextFieldScreen(
 
 @Preview
 @Composable
-private fun NotesTextFieldScreen() {
-
+private fun NotesTextFieldScreenPreview() {
+    NotesTextFieldScreen(
+        state = NotesState(),
+        onEvent = {},
+    )
 }

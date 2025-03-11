@@ -5,6 +5,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.alcocalendar.features.session_manage.components.SessionManageScreenContent
 import com.example.alcocalendar.features.session_manage.drink_intake.presentation.DrinkIntakeViewModel
 import com.example.alcocalendar.features.session_manage.notes.presentation.NotesViewModel
 
@@ -19,8 +20,9 @@ fun SessionManageScreen(
 
     SessionManageScreenContent(
         drinkIntakeState = drinkIntakeState,
-        notesState = notesState.note,
+        notesState = notesState,
         onDrinkIntakeEvent = drinkIntakeViewModel::onEvent,
+        onNotesEvent = notesViewModel::onEvent,
         modifier = modifier
     )
 }

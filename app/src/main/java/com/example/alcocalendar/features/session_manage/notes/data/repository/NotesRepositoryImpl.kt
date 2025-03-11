@@ -1,7 +1,6 @@
 package com.example.alcocalendar.features.session_manage.notes.data.repository
 
 import com.example.alcocalendar.features.session_manage.notes.data.local.dao.NotesDao
-import com.example.alcocalendar.features.session_manage.notes.data.local.entity.NoteEntity
 import com.example.alcocalendar.features.session_manage.notes.data.mappers.NoteMapper
 import com.example.alcocalendar.features.session_manage.notes.domain.model.Note
 import com.example.alcocalendar.features.session_manage.notes.domain.repository.NotesRepository
