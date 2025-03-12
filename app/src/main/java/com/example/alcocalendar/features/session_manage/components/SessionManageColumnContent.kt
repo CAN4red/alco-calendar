@@ -51,6 +51,8 @@ fun SessionManageColumnContent(
             modifier = Modifier.fillMaxWidth()
         )
 
+        Spacer(Modifier.padding(16.dp))
+
         Spacer(Modifier.weight(1f))
 
         with(sharedTransitionScope) {

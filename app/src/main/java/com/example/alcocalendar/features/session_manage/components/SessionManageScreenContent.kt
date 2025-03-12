@@ -4,6 +4,7 @@ import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionLayout
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
@@ -31,6 +32,8 @@ fun SessionManageScreenContent(
         modifier = modifier.padding(horizontal = 8.dp)
     ) {
         DateTitle(state = drinkIntakeState)
+
+        Spacer(Modifier.padding(12.dp))
 
         SharedTransitionLayout {
             AnimatedContent(targetState = notesState.isExpanded) { targetState ->
