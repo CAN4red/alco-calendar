@@ -22,7 +22,10 @@ fun NotesField(
             .background(MaterialTheme.colorScheme.surface)
             .clickable { onClick() }
     ) {
-        Text(text = content)
+        Text(
+            text = content,
+            style = MaterialTheme.typography.bodySmall
+        )
     }
 }
 
