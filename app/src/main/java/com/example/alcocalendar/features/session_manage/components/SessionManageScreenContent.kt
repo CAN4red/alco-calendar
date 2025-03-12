@@ -1,7 +1,14 @@
 package com.example.alcocalendar.features.session_manage.components
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -28,12 +35,25 @@ fun SessionManageScreenContent(
     ) {
         DateTitle(state = drinkIntakeState)
 
-        if (notesState.isExpanded) {
+        AnimatedVisibility(
+            visible = notesState.isExpanded,
+            enter = slideInVertically(animationSpec = tween(400)) { it / 8 } + fadeIn(),
+            exit = slideOutVertically(animationSpec = tween(400)) { it / 8 } + fadeOut(),
+            modifier = Modifier.fillMaxWidth()
+        ) {
             NotesTextFieldScreen(
                 state = notesState,
                 onEvent = onNotesEvent,
+                modifier = Modifier.fillMaxWidth()
             )
-        } else {
+        }
+
+        AnimatedVisibility(
+            visible = !notesState.isExpanded,
+            enter = fadeIn(),
+            exit = fadeOut(),
+            modifier = Modifier.fillMaxWidth()
+        ) {
             SessionManageColumnContent(
                 drinkIntakeState = drinkIntakeState,
                 notesState = notesState,
