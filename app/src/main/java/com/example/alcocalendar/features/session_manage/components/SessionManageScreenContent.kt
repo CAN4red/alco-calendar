@@ -8,7 +8,6 @@ import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -37,14 +36,13 @@ fun SessionManageScreenContent(
 
         AnimatedVisibility(
             visible = notesState.isExpanded,
-            enter = slideInVertically(animationSpec = tween(400)) { it / 8 } + fadeIn(),
-            exit = slideOutVertically(animationSpec = tween(400)) { it / 8 } + fadeOut(),
-            modifier = Modifier.fillMaxWidth()
+            enter = slideInVertically(animationSpec = tween(300)) { (it / 0.6).toInt() } + fadeIn(),
+            exit = slideOutVertically(animationSpec = tween(300)) { (it / 0.6).toInt() } + fadeOut(),
+            modifier = Modifier.fillMaxSize()
         ) {
             NotesTextFieldScreen(
                 state = notesState,
                 onEvent = onNotesEvent,
-                modifier = Modifier.fillMaxWidth()
             )
         }
 
@@ -52,7 +50,7 @@ fun SessionManageScreenContent(
             visible = !notesState.isExpanded,
             enter = fadeIn(),
             exit = fadeOut(),
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxSize()
         ) {
             SessionManageColumnContent(
                 drinkIntakeState = drinkIntakeState,
