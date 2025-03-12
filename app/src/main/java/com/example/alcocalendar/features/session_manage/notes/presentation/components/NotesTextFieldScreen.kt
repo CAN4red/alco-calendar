@@ -1,18 +1,23 @@
 package com.example.alcocalendar.features.session_manage.notes.presentation.components
 
 import androidx.activity.compose.BackHandler
+import androidx.compose.animation.AnimatedVisibilityScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import com.example.alcocalendar.features.session_manage.notes.presentation.NotesEvent
 import com.example.alcocalendar.features.session_manage.notes.presentation.NotesState
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun NotesTextFieldScreen(
     state: NotesState,
     onEvent: (NotesEvent) -> Unit,
+    sharedTransitionScope: SharedTransitionScope,
+    animatedVisibilityScope: AnimatedVisibilityScope,
     modifier: Modifier = Modifier
 ) {
     BackHandler {
@@ -20,21 +25,19 @@ fun NotesTextFieldScreen(
         onEvent(NotesEvent.CollapseNote)
     }
 
-    Column(
-        modifier = modifier.fillMaxSize()
-    ) {
-        NotesTextField(
-            state = state,
-            onEvent = onEvent,
-        )
+    with(sharedTransitionScope) {
+        Column(
+            modifier = modifier
+                .fillMaxSize()
+                .sharedElement(
+                    rememberSharedContentState(key = "text_field"),
+                    animatedVisibilityScope = animatedVisibilityScope
+                )
+        ) {
+            NotesTextField(
+                state = state,
+                onEvent = onEvent,
+            )
+        }
     }
-}
-
-@Preview
-@Composable
-private fun NotesTextFieldScreenPreview() {
-    NotesTextFieldScreen(
-        state = NotesState(),
-        onEvent = {},
-    )
 }

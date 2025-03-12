@@ -1,11 +1,8 @@
 package com.example.alcocalendar.features.session_manage.components
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutVertically
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionLayout
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -21,6 +18,7 @@ import com.example.alcocalendar.features.session_manage.notes.presentation.Notes
 import com.example.alcocalendar.features.session_manage.notes.presentation.NotesState
 import com.example.alcocalendar.features.session_manage.notes.presentation.components.NotesTextFieldScreen
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun SessionManageScreenContent(
     drinkIntakeState: DrinkIntakeState,
@@ -34,30 +32,26 @@ fun SessionManageScreenContent(
     ) {
         DateTitle(state = drinkIntakeState)
 
-        AnimatedVisibility(
-            visible = notesState.isExpanded,
-            enter = slideInVertically(animationSpec = tween(300)) { (it / 0.6).toInt() } + fadeIn(),
-            exit = slideOutVertically(animationSpec = tween(300)) { (it / 0.6).toInt() } + fadeOut(),
-            modifier = Modifier.fillMaxSize()
-        ) {
-            NotesTextFieldScreen(
-                state = notesState,
-                onEvent = onNotesEvent,
-            )
-        }
-
-        AnimatedVisibility(
-            visible = !notesState.isExpanded,
-            enter = fadeIn(),
-            exit = fadeOut(),
-            modifier = Modifier.fillMaxSize()
-        ) {
-            SessionManageColumnContent(
-                drinkIntakeState = drinkIntakeState,
-                notesState = notesState,
-                onDrinkIntakeEvent = onDrinkIntakeEvent,
-                onNotesEvent = onNotesEvent
-            )
+        SharedTransitionLayout {
+            AnimatedContent(targetState = notesState.isExpanded) { targetState ->
+                if (!targetState) {
+                    SessionManageColumnContent(
+                        drinkIntakeState = drinkIntakeState,
+                        notesState = notesState,
+                        onDrinkIntakeEvent = onDrinkIntakeEvent,
+                        onNotesEvent = onNotesEvent,
+                        animatedVisibilityScope = this@AnimatedContent,
+                        sharedTransitionScope = this@SharedTransitionLayout,
+                    )
+                } else {
+                    NotesTextFieldScreen(
+                        state = notesState,
+                        onEvent = onNotesEvent,
+                        animatedVisibilityScope = this@AnimatedContent,
+                        sharedTransitionScope = this@SharedTransitionLayout,
+                    )
+                }
+            }
         }
     }
 

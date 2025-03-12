@@ -1,5 +1,8 @@
 package com.example.alcocalendar.features.session_manage.components
 
+import androidx.compose.animation.AnimatedVisibilityScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -18,14 +21,18 @@ import com.example.alcocalendar.features.session_manage.notes.presentation.Notes
 import com.example.alcocalendar.features.session_manage.notes.presentation.NotesState
 import com.example.alcocalendar.features.session_manage.notes.presentation.components.NotesField
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun SessionManageColumnContent(
     drinkIntakeState: DrinkIntakeState,
     notesState: NotesState,
     onDrinkIntakeEvent: (DrinkIntakeEvent) -> Unit,
     onNotesEvent: (NotesEvent) -> Unit,
+    sharedTransitionScope: SharedTransitionScope,
+    animatedVisibilityScope: AnimatedVisibilityScope,
     modifier: Modifier = Modifier
 ) {
+
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -46,10 +53,17 @@ fun SessionManageColumnContent(
 
         Spacer(Modifier.weight(1f))
 
-        NotesField(
-            onClick = { onNotesEvent(NotesEvent.ExpandNote) },
-            content = notesState.note.content,
-            modifier = Modifier.fillMaxSize()
-        )
+        with(sharedTransitionScope) {
+            NotesField(
+                onClick = { onNotesEvent(NotesEvent.ExpandNote) },
+                content = notesState.note.content,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .sharedElement(
+                        rememberSharedContentState(key = "text_field"),
+                        animatedVisibilityScope = animatedVisibilityScope
+                    )
+            )
+        }
     }
 }
