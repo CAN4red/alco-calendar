@@ -3,17 +3,21 @@ package com.example.alcocalendar.features.session_manage.notes.presentation.comp
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.ime
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.input.TextFieldValue
@@ -31,13 +35,13 @@ fun NotesTextField(
 ) {
     val focusManager = LocalFocusManager.current
     val keyboardController = LocalSoftwareKeyboardController.current
-    var isFocused by remember { mutableStateOf(false) }
+    val isKeyboardOpen by keyboardAsState()
 
     var textFieldValue by remember {
         mutableStateOf(TextFieldValue(text = state.note.content))
     }
 
-    BackHandler(enabled = isFocused) {
+    BackHandler(enabled = isKeyboardOpen) {
         focusManager.clearFocus()
         keyboardController?.hide()
     }
@@ -53,13 +57,16 @@ fun NotesTextField(
                 textFieldValue = newValue
                 onEvent(NotesEvent.SetNoteContent(newValue.text))
             },
-            modifier = Modifier
-                .fillMaxWidth()
-                .onFocusChanged { focusState ->
-                    isFocused = focusState.isFocused
-                },
+            textStyle = MaterialTheme.typography.bodySmall.copy(color = MaterialTheme.colorScheme.onSurface),
+            modifier = Modifier.fillMaxWidth()
         )
     }
+}
+
+@Composable
+private fun keyboardAsState(): State<Boolean> {
+    val isImeVisible = WindowInsets.ime.getBottom(LocalDensity.current) > 0
+    return rememberUpdatedState(isImeVisible)
 }
 
 @Preview
