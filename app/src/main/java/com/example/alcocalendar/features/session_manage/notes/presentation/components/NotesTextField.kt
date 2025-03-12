@@ -1,6 +1,5 @@
 package com.example.alcocalendar.features.session_manage.notes.presentation.components
 
-import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -17,7 +16,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.alcocalendar.features.session_manage.notes.domain.model.Note
@@ -35,6 +33,10 @@ fun NotesTextField(
     val keyboardController = LocalSoftwareKeyboardController.current
     var isFocused by remember { mutableStateOf(false) }
 
+    var textFieldValue by remember {
+        mutableStateOf(TextFieldValue(text = state.note.content))
+    }
+
     BackHandler(enabled = isFocused) {
         focusManager.clearFocus()
         keyboardController?.hide()
@@ -46,18 +48,15 @@ fun NotesTextField(
             .background(MaterialTheme.colorScheme.surface)
     ) {
         BasicTextField(
-            value = TextFieldValue(
-                text = state.note.content,
-                selection = TextRange(state.note.content.length)
-            ),
+            value = textFieldValue,
             onValueChange = { newValue ->
+                textFieldValue = newValue
                 onEvent(NotesEvent.SetNoteContent(newValue.text))
             },
             modifier = Modifier
                 .fillMaxWidth()
                 .onFocusChanged { focusState ->
                     isFocused = focusState.isFocused
-                    Log.i("Focus change", "$focusState $isFocused")
                 },
         )
     }

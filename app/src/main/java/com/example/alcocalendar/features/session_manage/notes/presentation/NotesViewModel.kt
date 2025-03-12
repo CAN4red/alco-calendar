@@ -1,12 +1,13 @@
 package com.example.alcocalendar.features.session_manage.notes.presentation
 
+import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.alcocalendar.features.session_manage.SessionManageUtils.getDate
 import com.example.alcocalendar.features.session_manage.notes.domain.model.Note
 import com.example.alcocalendar.features.session_manage.notes.domain.use_case.get_initial_note.GetInitialNoteUseCase
-import com.example.alcocalendar.features.session_manage.notes.domain.use_case.submit_note.SubmitNoteUseCase
+import com.example.alcocalendar.features.session_manage.notes.domain.use_case.save_note.SaveNoteUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -18,8 +19,8 @@ import javax.inject.Inject
 @HiltViewModel
 class NotesViewModel @Inject constructor(
     private val getInitialNoteUseCase: GetInitialNoteUseCase,
-    private val submitNoteUseCase: SubmitNoteUseCase,
-    private val savedStateHandle: SavedStateHandle,
+    private val saveNoteUseCase: SaveNoteUseCase,
+    savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(NotesState())
@@ -45,12 +46,15 @@ class NotesViewModel @Inject constructor(
             is NotesEvent.SetNoteContent -> {
                 handleSetNoteContent(event.content)
             }
-            is NotesEvent.SubmitNote -> {
-                handleSubmitNote(event.note)
+
+            is NotesEvent.SaveNote -> {
+                handleSaveNote(event.note)
             }
+
             is NotesEvent.ExpandNote -> {
                 handleExpandNote()
             }
+
             is NotesEvent.CollapseNote -> {
                 handleCollapseNote()
             }
@@ -64,9 +68,9 @@ class NotesViewModel @Inject constructor(
         }
     }
 
-    private fun handleSubmitNote(note: Note) {
+    private fun handleSaveNote(note: Note) {
         viewModelScope.launch {
-            submitNoteUseCase(note)
+            saveNoteUseCase(note)
         }
     }
 
@@ -80,5 +84,12 @@ class NotesViewModel @Inject constructor(
         _state.update { currentState ->
             currentState.copy(isExpanded = false)
         }
+    }
+
+    override fun onCleared() {
+        Log.i("On Cleared", "before saving")
+        handleSaveNote(_state.value.note)
+        Log.i("On Cleared", "after saving")
+        super.onCleared()
     }
 }

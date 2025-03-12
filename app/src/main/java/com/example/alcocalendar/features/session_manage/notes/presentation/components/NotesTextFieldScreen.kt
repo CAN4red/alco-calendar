@@ -16,7 +16,7 @@ fun NotesTextFieldScreen(
     modifier: Modifier = Modifier
 ) {
     BackHandler {
-        onEvent(NotesEvent.SubmitNote(state.note))
+        onEvent(NotesEvent.SaveNote(state.note))
         onEvent(NotesEvent.CollapseNote)
     }
 

@@ -19,6 +19,7 @@ material3 = "1.3.1"
 roomRuntime = "2.6.1"
 navigation = "2.8.7"
 media3TestUtils = "1.5.1"
+workRuntimeKtx = "2.10.0"
 
 [libraries]
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
@@ -49,6 +50,7 @@ androidx-junit-ktx = { group = "androidx.test.ext", name = "junit-ktx", version.
 androidx-media3-test-utils = { group = "androidx.media3", name = "media3-test-utils", version.ref = "media3TestUtils" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation" }
 material3 = { module = "androidx.compose.material3:material3", version.ref = "material3" }
+androidx-work-runtime-ktx = { group = "androidx.work", name = "work-runtime-ktx", version.ref = "workRuntimeKtx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
