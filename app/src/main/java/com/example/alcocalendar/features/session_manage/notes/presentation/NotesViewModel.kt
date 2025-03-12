@@ -1,11 +1,9 @@
 package com.example.alcocalendar.features.session_manage.notes.presentation
 
-import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.alcocalendar.features.session_manage.SessionManageUtils.getDate
-import com.example.alcocalendar.features.session_manage.notes.domain.model.Note
 import com.example.alcocalendar.features.session_manage.notes.domain.use_case.get_initial_note.GetInitialNoteUseCase
 import com.example.alcocalendar.features.session_manage.notes.domain.use_case.save_note.SaveNoteUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -48,7 +46,7 @@ class NotesViewModel @Inject constructor(
             }
 
             is NotesEvent.SaveNote -> {
-                handleSaveNote(event.note)
+                handleSaveNote()
             }
 
             is NotesEvent.ExpandNote -> {
@@ -68,9 +66,9 @@ class NotesViewModel @Inject constructor(
         }
     }
 
-    private fun handleSaveNote(note: Note) {
+    private fun handleSaveNote() {
         viewModelScope.launch {
-            saveNoteUseCase(note)
+            saveNoteUseCase(_state.value.note)
         }
     }
 
@@ -87,9 +85,7 @@ class NotesViewModel @Inject constructor(
     }
 
     override fun onCleared() {
-        Log.i("On Cleared", "before saving")
-        handleSaveNote(_state.value.note)
-        Log.i("On Cleared", "after saving")
+        handleSaveNote()
         super.onCleared()
     }
 }

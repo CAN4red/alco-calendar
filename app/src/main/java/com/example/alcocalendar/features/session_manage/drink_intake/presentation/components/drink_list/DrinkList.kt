@@ -1,9 +1,9 @@
 package com.example.alcocalendar.features.session_manage.drink_intake.presentation.components.drink_list
 
 import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -20,6 +20,7 @@ inline fun <reified T> DrinkList(
     modifier: Modifier = Modifier
 ) where T : Enum<T>, T : DrinkType {
     Row(
+        horizontalArrangement = Arrangement.spacedBy(12.dp),
         modifier = modifier
             .fillMaxWidth()
             .horizontalScroll(rememberScrollState())
@@ -35,7 +36,6 @@ inline fun <reified T> DrinkList(
                         )
                     )
                 },
-                modifier = Modifier.padding(4.dp)
             )
         }
     }
