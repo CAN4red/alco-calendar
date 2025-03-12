@@ -34,19 +34,19 @@ fun SessionManageScreenContent(
 
         SharedTransitionLayout {
             AnimatedContent(targetState = notesState.isExpanded) { targetState ->
-                if (!targetState) {
-                    SessionManageColumnContent(
+                when {
+                    targetState -> NotesTextFieldScreen(
+                        state = notesState,
+                        onEvent = onNotesEvent,
+                        animatedVisibilityScope = this@AnimatedContent,
+                        sharedTransitionScope = this@SharedTransitionLayout,
+                    )
+
+                    else -> SessionManageColumnContent(
                         drinkIntakeState = drinkIntakeState,
                         notesState = notesState,
                         onDrinkIntakeEvent = onDrinkIntakeEvent,
                         onNotesEvent = onNotesEvent,
-                        animatedVisibilityScope = this@AnimatedContent,
-                        sharedTransitionScope = this@SharedTransitionLayout,
-                    )
-                } else {
-                    NotesTextFieldScreen(
-                        state = notesState,
-                        onEvent = onNotesEvent,
                         animatedVisibilityScope = this@AnimatedContent,
                         sharedTransitionScope = this@SharedTransitionLayout,
                     )

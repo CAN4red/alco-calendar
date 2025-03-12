@@ -58,11 +58,11 @@ fun SessionManageColumnContent(
                 onClick = { onNotesEvent(NotesEvent.ExpandNote) },
                 content = notesState.note.content,
                 modifier = Modifier
-                    .fillMaxSize()
                     .sharedElement(
                         rememberSharedContentState(key = "text_field"),
                         animatedVisibilityScope = animatedVisibilityScope
                     )
+                    .fillMaxSize()
             )
         }
     }

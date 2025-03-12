@@ -1,7 +1,6 @@
 package com.example.alcocalendar.features.session_manage.notes.presentation.components
 
 import androidx.activity.compose.BackHandler
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
@@ -26,6 +25,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.TextRange
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
@@ -39,6 +39,7 @@ import java.time.LocalDate
 fun NotesTextField(
     state: NotesState,
     onEvent: (NotesEvent) -> Unit,
+    textStyle: TextStyle,
     modifier: Modifier = Modifier,
 ) {
     val focusManager = LocalFocusManager.current
@@ -57,7 +58,6 @@ fun NotesTextField(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.surface)
             .imePadding()
             .clickable(
                 interactionSource = remember { MutableInteractionSource() },
@@ -74,7 +74,7 @@ fun NotesTextField(
                 textFieldValue = newValue
                 onEvent(NotesEvent.SetNoteContent(newValue.text))
             },
-            textStyle = MaterialTheme.typography.bodySmall.copy(color = MaterialTheme.colorScheme.onSurface),
+            textStyle = textStyle,
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Text,
                 imeAction = ImeAction.None,
@@ -116,6 +116,7 @@ private fun NotesTextFieldPreview() {
             )
         ),
         onEvent = {},
+        textStyle = MaterialTheme.typography.bodySmall.copy(color = MaterialTheme.colorScheme.onSurface),
         modifier = Modifier.fillMaxWidth()
     )
 }
