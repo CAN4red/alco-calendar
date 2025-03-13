@@ -43,7 +43,7 @@ fun NotesTextFieldScreen(
                 .clip(RoundedCornerShape(topStart = 18.dp, topEnd = 18.dp))
                 .background(MaterialTheme.colorScheme.surface)
                 .fillMaxSize()
-                .padding(12.dp)
+                .padding(horizontal = 22.dp, vertical = 14.dp)
         ) {
             NotesTitle()
 
@@ -57,9 +57,7 @@ fun NotesTextFieldScreen(
 
                 SaveNoteButton(
                     onEvent = onEvent,
-                    modifier = Modifier
-                        .align(Alignment.BottomEnd)
-//                        .padding(8.dp)
+                    modifier = Modifier.align(Alignment.BottomEnd)
                 )
             }
         }

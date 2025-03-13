@@ -38,7 +38,7 @@ fun NotesField(
                 indication = null,
                 onClick = onClick
             )
-            .padding(12.dp)
+            .padding(horizontal = 22.dp, vertical = 14.dp)
     ) {
         NotesTitle()
         Text(
