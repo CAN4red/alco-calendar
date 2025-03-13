@@ -22,6 +22,7 @@ import com.example.alcocalendar.R
 import com.example.alcocalendar.core.data.local.entity.drink_types.BeerType
 import com.example.alcocalendar.core.domain.model.DrinkIntake
 import com.example.alcocalendar.features.session_manage.drink_intake.presentation.DrinkIntakeEvent
+import com.example.alcocalendar.features.session_manage.drink_intake.presentation.state.FillingType
 import com.example.alcocalendar.features.session_manage.drink_intake.presentation.utils.DrinkTypeToStringMapper.typeName
 import com.example.alcocalendar.features.session_manage.drink_intake.presentation.utils.Formatter.formatAsString
 import java.time.LocalDate
@@ -43,9 +44,10 @@ fun DrinkIntakeTag(
             .clickable {
                 onEvent(
                     DrinkIntakeEvent.SetFillingDrinkIntake(
-                        drinkIntake.drinkType,
-                        drinkIntake.alcoStrength,
-                        drinkIntake.liters
+                        drinkType = drinkIntake.drinkType,
+                        alcoStrength = drinkIntake.alcoStrength,
+                        liters = drinkIntake.liters,
+                        fillingType = FillingType.UPDATING
                     )
                 )
             }

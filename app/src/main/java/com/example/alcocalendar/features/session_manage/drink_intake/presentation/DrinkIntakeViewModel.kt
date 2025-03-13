@@ -7,6 +7,9 @@ import com.example.alcocalendar.core.domain.model.DrinkIntake
 import com.example.alcocalendar.core.domain.model.DrinkType
 import com.example.alcocalendar.features.session_manage.SessionManageUtils.getDate
 import com.example.alcocalendar.features.session_manage.drink_intake.domain.use_case.DrinkIntakeUseCases
+import com.example.alcocalendar.features.session_manage.drink_intake.presentation.state.DrinkIntakeState
+import com.example.alcocalendar.features.session_manage.drink_intake.presentation.state.FillingIntakeState
+import com.example.alcocalendar.features.session_manage.drink_intake.presentation.state.FillingType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -18,13 +21,11 @@ import javax.inject.Inject
 @HiltViewModel
 class DrinkIntakeViewModel @Inject constructor(
     private val drinkIntakeUseCases: DrinkIntakeUseCases,
-    private val savedStateHandle: SavedStateHandle
+    savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(DrinkIntakeState())
     val state: StateFlow<DrinkIntakeState> get() = _state
-
-    private val prevFillingIntake = MutableStateFlow<DrinkIntake?>(null)
 
     init {
         loadData(savedStateHandle.getDate())
@@ -44,7 +45,12 @@ class DrinkIntakeViewModel @Inject constructor(
     fun onEvent(event: DrinkIntakeEvent) {
         when (event) {
             is DrinkIntakeEvent.SetFillingDrinkIntake -> {
-                handleSetFillingDrinkIntake(event.drinkType, event.alcoStrength, event.liters)
+                handleSetFillingDrinkIntake(
+                    event.drinkType,
+                    event.alcoStrength,
+                    event.liters,
+                    event.fillingType
+                )
             }
 
             is DrinkIntakeEvent.SetFillingDrinkIntakeAlcoStrength -> {
@@ -76,7 +82,8 @@ class DrinkIntakeViewModel @Inject constructor(
     private fun handleSetFillingDrinkIntake(
         drinkType: DrinkType,
         alcoStrength: Double,
-        liters: Double
+        liters: Double,
+        fillingType: FillingType,
     ) {
         val fillingIntake = DrinkIntake(
             date = _state.value.date,
@@ -86,15 +93,20 @@ class DrinkIntakeViewModel @Inject constructor(
         )
         _state.update { currentState ->
             currentState.copy(
-                fillingIntake = fillingIntake
+                fillingIntake = FillingIntakeState(
+                    intake = fillingIntake,
+                    initialIntake = getInitFillingIntake(drinkType, alcoStrength),
+                    fillingType = fillingType
+                )
             )
         }
-        setPrevFillingIntake(drinkType, alcoStrength)
+
     }
 
     private fun handleSetFillingDrinkIntakeAlcoStrength(alcoStrength: Double) {
-        _state.value.fillingIntake?.let { fillingIntake ->
-            val updatedFillingIntake = fillingIntake.copy(alcoStrength = alcoStrength)
+        _state.value.fillingIntake?.intake?.let { fillingIntake ->
+            val updatedIntake = fillingIntake.copy(alcoStrength = alcoStrength)
+            val updatedFillingIntake = _state.value.fillingIntake!!.copy(intake = updatedIntake)
 
             _state.update { currentState ->
                 currentState.copy(fillingIntake = updatedFillingIntake)
@@ -103,8 +115,9 @@ class DrinkIntakeViewModel @Inject constructor(
     }
 
     private fun handleSetFillingDrinkIntakeLiters(liters: Double) {
-        _state.value.fillingIntake?.let { fillingIntake ->
-            val updatedFillingIntake = fillingIntake.copy(liters = liters)
+        _state.value.fillingIntake?.intake?.let { fillingIntake ->
+            val updatedIntake = fillingIntake.copy(liters = liters)
+            val updatedFillingIntake = _state.value.fillingIntake!!.copy(intake = updatedIntake)
 
             _state.update { currentState ->
                 currentState.copy(fillingIntake = updatedFillingIntake)
@@ -116,26 +129,22 @@ class DrinkIntakeViewModel @Inject constructor(
         _state.update { currentState ->
             currentState.copy(fillingIntake = null)
         }
-        prevFillingIntake.update { null }
     }
 
     private fun handleInsertUpdateDrinkIntake() {
         val intake = _state.value.fillingIntake
-        intake?.let {
+        intake?.let { fillingIntake ->
             viewModelScope.launch {
                 when {
-                    (prevFillingIntake.value == null) -> {
-                        drinkIntakeUseCases.insertDrinkIntakeUseCase(intake)
-                    }
-
-                    (prevFillingIntake.value!!
-                        .isFittingWith(intake.drinkType, intake.alcoStrength)) -> {
-                        drinkIntakeUseCases.updateDrinkIntakeUseCase(intake)
+                    (fillingIntake.initialIntake != null && fillingIntake.isFittingWithInitial) -> {
+                        drinkIntakeUseCases.updateDrinkIntakeUseCase(fillingIntake.intake)
                     }
 
                     else -> {
-                        drinkIntakeUseCases.deleteDrinkIntakeUseCase(prevFillingIntake.value!!)
-                        drinkIntakeUseCases.insertDrinkIntakeUseCase(intake)
+                        if (fillingIntake.fillingType == FillingType.UPDATING) {
+                            drinkIntakeUseCases.deleteDrinkIntakeUseCase(fillingIntake.initialIntake!!)
+                        }
+                        drinkIntakeUseCases.insertDrinkIntakeUseCase(fillingIntake.intake)
                     }
                 }
                 loadData(date = _state.value.date)
@@ -147,7 +156,7 @@ class DrinkIntakeViewModel @Inject constructor(
         val drinkIntake = _state.value.fillingIntake
         drinkIntake?.let {
             viewModelScope.launch {
-                drinkIntakeUseCases.deleteDrinkIntakeUseCase(drinkIntake)
+                drinkIntakeUseCases.deleteDrinkIntakeUseCase(drinkIntake.intake)
             }
         }
         loadData(date = _state.value.date)
@@ -159,13 +168,11 @@ class DrinkIntakeViewModel @Inject constructor(
         }
     }
 
-    private fun setPrevFillingIntake(drinkType: DrinkType, alcoStrength: Double) {
+    private fun getInitFillingIntake(drinkType: DrinkType, alcoStrength: Double): DrinkIntake? {
         val fittingIntakes = _state.value.intakes
             .filter { it.isFittingWith(drinkType, alcoStrength) }
 
-        prevFillingIntake.update {
-            if (fittingIntakes.isEmpty()) null else fittingIntakes.first()
-        }
+        return if (fittingIntakes.isEmpty()) null else fittingIntakes.first()
     }
 
     private fun DrinkIntake.isFittingWith(

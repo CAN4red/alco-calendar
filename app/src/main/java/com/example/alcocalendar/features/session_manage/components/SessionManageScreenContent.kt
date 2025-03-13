@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.alcocalendar.features.session_manage.drink_intake.presentation.DrinkIntakeEvent
-import com.example.alcocalendar.features.session_manage.drink_intake.presentation.DrinkIntakeState
+import com.example.alcocalendar.features.session_manage.drink_intake.presentation.state.DrinkIntakeState
 import com.example.alcocalendar.features.session_manage.drink_intake.presentation.components.date_title.DateTitle
 import com.example.alcocalendar.features.session_manage.drink_intake.presentation.components.dialog.AddIntakeDialog
 import com.example.alcocalendar.features.session_manage.notes.presentation.NotesEvent

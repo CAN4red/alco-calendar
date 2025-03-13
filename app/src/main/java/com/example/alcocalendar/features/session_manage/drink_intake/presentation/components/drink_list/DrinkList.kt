@@ -12,6 +12,7 @@ import androidx.compose.ui.unit.dp
 import com.example.alcocalendar.core.data.local.entity.drink_types.BeerType
 import com.example.alcocalendar.core.domain.model.DrinkType
 import com.example.alcocalendar.features.session_manage.drink_intake.presentation.DrinkIntakeEvent
+import com.example.alcocalendar.features.session_manage.drink_intake.presentation.state.FillingType
 import kotlin.enums.enumEntries
 
 @Composable
@@ -32,7 +33,8 @@ inline fun <reified T> DrinkList(
                     onEvent(
                         DrinkIntakeEvent.SetFillingDrinkIntake(
                             drinkType = drinkType,
-                            alcoStrength = drinkType.defaultAlcoStrength
+                            alcoStrength = drinkType.defaultAlcoStrength,
+                            fillingType = FillingType.INSERTING
                         )
                     )
                 },

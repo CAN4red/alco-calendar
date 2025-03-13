@@ -9,7 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.alcocalendar.features.session_manage.drink_intake.presentation.DrinkIntakeState
+import com.example.alcocalendar.features.session_manage.drink_intake.presentation.state.DrinkIntakeState
 import com.example.alcocalendar.features.session_manage.drink_intake.presentation.utils.Formatter.formatDayMonth
 
 @Composable

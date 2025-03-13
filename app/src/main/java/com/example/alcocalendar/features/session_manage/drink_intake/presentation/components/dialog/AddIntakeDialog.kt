@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.example.alcocalendar.R
 import com.example.alcocalendar.features.session_manage.drink_intake.presentation.DrinkIntakeEvent
-import com.example.alcocalendar.features.session_manage.drink_intake.presentation.DrinkIntakeState
+import com.example.alcocalendar.features.session_manage.drink_intake.presentation.state.DrinkIntakeState
 
 
 @Composable

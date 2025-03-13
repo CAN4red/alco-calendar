@@ -14,7 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.alcocalendar.features.session_manage.drink_intake.presentation.DrinkIntakeEvent
-import com.example.alcocalendar.features.session_manage.drink_intake.presentation.DrinkIntakeState
+import com.example.alcocalendar.features.session_manage.drink_intake.presentation.state.DrinkIntakeState
 import com.example.alcocalendar.features.session_manage.drink_intake.presentation.components.drink_list.DrinkListsColumn
 import com.example.alcocalendar.features.session_manage.drink_intake.presentation.components.intake_tag.IntakesFlowRow
 import com.example.alcocalendar.features.session_manage.notes.presentation.NotesEvent

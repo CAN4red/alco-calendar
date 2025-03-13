@@ -11,7 +11,7 @@ import com.example.alcocalendar.core.data.local.entity.drink_types.SpiritsType
 import com.example.alcocalendar.core.data.local.entity.drink_types.WineType
 import com.example.alcocalendar.core.domain.model.DrinkType
 import com.example.alcocalendar.features.session_manage.drink_intake.presentation.DrinkIntakeEvent
-import com.example.alcocalendar.features.session_manage.drink_intake.presentation.DrinkIntakeState
+import com.example.alcocalendar.features.session_manage.drink_intake.presentation.state.DrinkIntakeState
 
 @Composable
 fun DrinkListsColumn(
