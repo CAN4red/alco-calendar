@@ -1,6 +1,9 @@
 package com.example.alcocalendar.features.session_manage.media.domain.model
 
-data class MediaModel(
+import java.time.LocalDate
+
+data class MediaItem(
+    val date: LocalDate,
     val name: String,
     val content: ByteArray,
     val path: String,
@@ -12,7 +15,7 @@ data class MediaModel(
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
 
-        other as MediaModel
+        other as MediaItem
 
         if (timeStamp != other.timeStamp) return false
         if (name != other.name) return false
