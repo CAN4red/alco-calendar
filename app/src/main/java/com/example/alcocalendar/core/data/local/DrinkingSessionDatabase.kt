@@ -14,6 +14,8 @@ import com.example.alcocalendar.core.data.local.entity.DrinkIntakeEntity
 import com.example.alcocalendar.core.data.local.entity.DrinkingSessionEntity
 import com.example.alcocalendar.features.calendar.data.local.dao.CalendarDao
 import com.example.alcocalendar.features.session_manage.drink_intake.data.local.dao.DrinkIntakeDao
+import com.example.alcocalendar.features.session_manage.media.data.local.dao.MediaDao
+import com.example.alcocalendar.features.session_manage.media.data.local.entity.MediaItemEntity
 import com.example.alcocalendar.features.session_manage.notes.data.local.dao.NotesDao
 import com.example.alcocalendar.features.session_manage.notes.data.local.entity.NoteEntity
 
@@ -21,9 +23,10 @@ import com.example.alcocalendar.features.session_manage.notes.data.local.entity.
     entities = [
         DrinkingSessionEntity::class,
         DrinkIntakeEntity::class,
-        NoteEntity::class
+        NoteEntity::class,
+        MediaItemEntity::class,
     ],
-    version = 8,
+    version = 9,
     exportSchema = false,
 )
 @TypeConverters(
@@ -38,6 +41,7 @@ abstract class DrinkingSessionDatabase : RoomDatabase() {
     abstract val drinkIntakeDao: DrinkIntakeDao
     abstract val calendarDao: CalendarDao
     abstract val notesDao: NotesDao
+    abstract val mediaDao: MediaDao
 
     companion object {
         @Volatile

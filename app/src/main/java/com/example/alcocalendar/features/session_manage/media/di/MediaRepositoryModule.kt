@@ -1,6 +1,7 @@
 package com.example.alcocalendar.features.session_manage.media.di
 
 import com.example.alcocalendar.features.session_manage.media.data.data_source.LocalImageDataSource
+import com.example.alcocalendar.features.session_manage.media.data.local.dao.MediaDao
 import com.example.alcocalendar.features.session_manage.media.data.repository.ImageRepositoryImpl
 import com.example.alcocalendar.features.session_manage.media.domain.repository.ImageRepository
 import dagger.Module
@@ -14,7 +15,10 @@ import javax.inject.Singleton
 object MediaRepositoryModule {
     @Provides
     @Singleton
-    fun provideImageRepository(localImageDataSource: LocalImageDataSource): ImageRepository {
-        return ImageRepositoryImpl(localImageDataSource)
+    fun provideImageRepository(
+        localImageDataSource: LocalImageDataSource,
+        mediaDao: MediaDao
+    ): ImageRepository {
+        return ImageRepositoryImpl(localImageDataSource, mediaDao)
     }
 }
