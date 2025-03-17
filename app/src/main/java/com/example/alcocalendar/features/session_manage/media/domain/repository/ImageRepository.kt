@@ -1,9 +1,10 @@
 package com.example.alcocalendar.features.session_manage.media.domain.repository
 
-import com.example.alcocalendar.features.session_manage.media.domain.model.MediaModel
+import com.example.alcocalendar.features.session_manage.media.domain.model.MediaItem
+import java.time.LocalDate
 
 interface ImageRepository {
-    suspend fun saveImage(mediaModel: MediaModel): String
+    suspend fun saveImage(mediaItem: MediaItem): String
     suspend fun deleteImage(fileName: String): Boolean
-    fun getImages(fileNames: List<String>): List<MediaModel>
+    suspend fun getImages(date: LocalDate): List<MediaItem>
 }

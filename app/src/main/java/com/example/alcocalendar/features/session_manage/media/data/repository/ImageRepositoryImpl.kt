@@ -1,30 +1,42 @@
 package com.example.alcocalendar.features.session_manage.media.data.repository
 
 import com.example.alcocalendar.features.session_manage.media.data.data_source.LocalImageDataSource
+import com.example.alcocalendar.features.session_manage.media.data.local.dao.MediaDao
 import com.example.alcocalendar.features.session_manage.media.data.mappers.MediaMapper
 import com.example.alcocalendar.features.session_manage.media.data.mappers.MediaMapper.toBitmap
-import com.example.alcocalendar.features.session_manage.media.domain.model.MediaModel
+import com.example.alcocalendar.features.session_manage.media.domain.model.MediaItem
 import com.example.alcocalendar.features.session_manage.media.domain.model.MediaType
 import com.example.alcocalendar.features.session_manage.media.domain.repository.ImageRepository
+import java.time.LocalDate
 import javax.inject.Inject
 
 class ImageRepositoryImpl @Inject constructor(
     private val localImageDataSource: LocalImageDataSource,
+    private val mediaDao: MediaDao,
 ) : ImageRepository {
-    override suspend fun saveImage(mediaModel: MediaModel): String {
+    override suspend fun saveImage(mediaItem: MediaItem): String {
+        mediaDao.insertMediaItem(MediaMapper.toData(mediaItem))
         return localImageDataSource.saveImage(
-            bitmap = mediaModel.content.toBitmap(),
-            fileName = mediaModel.name
+            bitmap = mediaItem.content.toBitmap(),
+            fileName = mediaItem.name,
         )
     }
 
     override suspend fun deleteImage(fileName: String): Boolean {
+        mediaDao.deleteMediaItemByName(fileName)
         return localImageDataSource.deleteImage(fileName)
     }
 
-    override fun getImages(fileNames: List<String>): List<MediaModel> {
-        return localImageDataSource.getImages(fileNames).map { file ->
-            MediaMapper.toDomain(file, MediaType.IMAGE)
+    override suspend fun getImages(date: LocalDate): List<MediaItem> {
+        val mediaItemNames =
+            mediaDao.getDrinkingSessionWithMediaItems(date).mediaItems.map { it.name }
+
+        return localImageDataSource.getImages(mediaItemNames).map { file ->
+            MediaMapper.toDomain(
+                date = date,
+                file = file,
+                mediaType = MediaType.IMAGE
+            )
         }
     }
 }
