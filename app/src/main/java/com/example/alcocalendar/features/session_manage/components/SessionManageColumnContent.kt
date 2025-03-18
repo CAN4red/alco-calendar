@@ -14,9 +14,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.alcocalendar.features.session_manage.drink_intake.presentation.DrinkIntakeEvent
-import com.example.alcocalendar.features.session_manage.drink_intake.presentation.state.DrinkIntakeState
 import com.example.alcocalendar.features.session_manage.drink_intake.presentation.components.drink_list.DrinkListsColumn
 import com.example.alcocalendar.features.session_manage.drink_intake.presentation.components.intake_tag.IntakesFlowRow
+import com.example.alcocalendar.features.session_manage.drink_intake.presentation.state.DrinkIntakeState
+import com.example.alcocalendar.features.session_manage.media.presentation.MediaEvent
+import com.example.alcocalendar.features.session_manage.media.presentation.MediaState
+import com.example.alcocalendar.features.session_manage.media.presentation.components.MediaPager
 import com.example.alcocalendar.features.session_manage.notes.presentation.NotesEvent
 import com.example.alcocalendar.features.session_manage.notes.presentation.NotesState
 import com.example.alcocalendar.features.session_manage.notes.presentation.components.NotesField
@@ -26,8 +29,10 @@ import com.example.alcocalendar.features.session_manage.notes.presentation.compo
 fun SessionManageColumnContent(
     drinkIntakeState: DrinkIntakeState,
     notesState: NotesState,
+    mediaState: MediaState,
     onDrinkIntakeEvent: (DrinkIntakeEvent) -> Unit,
     onNotesEvent: (NotesEvent) -> Unit,
+    onMediaEvent: (MediaEvent) -> Unit,
     sharedTransitionScope: SharedTransitionScope,
     animatedVisibilityScope: AnimatedVisibilityScope,
     modifier: Modifier = Modifier
@@ -38,6 +43,19 @@ fun SessionManageColumnContent(
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
     ) {
+        with(sharedTransitionScope) {
+            MediaPager(
+                state = mediaState,
+                onEvent = onMediaEvent,
+                modifier = Modifier
+                    .sharedElement(
+                        rememberSharedContentState(key = "media_pager"),
+                        animatedVisibilityScope = animatedVisibilityScope
+                    )
+                    .fillMaxWidth()
+            )
+        }
+
         DrinkListsColumn(
             state = drinkIntakeState,
             onEvent = onDrinkIntakeEvent,
