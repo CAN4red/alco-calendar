@@ -7,6 +7,7 @@ import com.example.alcocalendar.features.session_manage.SessionManageUtils.getDa
 import com.example.alcocalendar.features.session_manage.notes.domain.use_case.get_initial_note.GetInitialNoteUseCase
 import com.example.alcocalendar.features.session_manage.notes.domain.use_case.save_note.SaveNoteUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -30,7 +31,7 @@ class NotesViewModel @Inject constructor(
 
     private fun loadData(date: LocalDate) {
         val noteFlow = getInitialNoteUseCase(date)
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             noteFlow.collect { note ->
                 _state.update { currentState ->
                     currentState.copy(note = note)

@@ -42,6 +42,8 @@
     <string name="notes_title">Notes</string>
     <string name="save_note_button">Save Note Button</string>
     <string name="default_note">Add some Notes about this day</string>
+    <string name="image_media_item">Image Media Item</string>
+    <string name="default_media_item">Default Media Item</string>
 
     <plurals name="liters">
         <item quantity="one">liter</item>

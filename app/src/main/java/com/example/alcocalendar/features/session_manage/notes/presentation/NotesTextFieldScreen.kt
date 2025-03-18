@@ -1,4 +1,4 @@
-package com.example.alcocalendar.features.session_manage.notes.presentation.components
+package com.example.alcocalendar.features.session_manage.notes.presentation
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibilityScope
@@ -17,8 +17,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.example.alcocalendar.features.session_manage.notes.presentation.NotesEvent
-import com.example.alcocalendar.features.session_manage.notes.presentation.NotesState
+import com.example.alcocalendar.features.session_manage.notes.presentation.components.NotesTextField
+import com.example.alcocalendar.features.session_manage.notes.presentation.components.NotesTitle
+import com.example.alcocalendar.features.session_manage.notes.presentation.components.SaveNoteButton
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
