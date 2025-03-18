@@ -6,9 +6,9 @@ data class MediaItem(
     val date: LocalDate,
     val name: String,
     val content: ByteArray,
-    val path: String,
+    val path: String? = null,
     val type: MediaType,
-    val timeStamp: Long,
+    val timeStamp: Long? = null,
 ) {
     // Generated Code
     override fun equals(other: Any?): Boolean {
