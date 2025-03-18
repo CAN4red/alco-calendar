@@ -1,4 +1,4 @@
-package com.example.alcocalendar.features.session_manage.media.data.mappers
+package com.example.alcocalendar.features.session_manage.common.mappers
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -24,10 +24,10 @@ object MediaMapper {
     fun toData(mediaItem: MediaItem) = MediaItemEntity(
         name = mediaItem.name,
         date = mediaItem.date,
-        path = mediaItem.path,
+        path = mediaItem.path ?: "", // TODO: replace by path to a default image
     )
 
-    internal fun ByteArray.toBitmap(): Bitmap {
+    fun ByteArray.toBitmap(): Bitmap {
         return BitmapFactory.decodeByteArray(this, 0, this.size)
     }
 }

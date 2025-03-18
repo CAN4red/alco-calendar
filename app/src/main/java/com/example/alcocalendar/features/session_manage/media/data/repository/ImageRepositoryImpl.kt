@@ -2,8 +2,8 @@ package com.example.alcocalendar.features.session_manage.media.data.repository
 
 import com.example.alcocalendar.features.session_manage.media.data.data_source.LocalImageDataSource
 import com.example.alcocalendar.features.session_manage.media.data.local.dao.MediaDao
-import com.example.alcocalendar.features.session_manage.media.data.mappers.MediaMapper
-import com.example.alcocalendar.features.session_manage.media.data.mappers.MediaMapper.toBitmap
+import com.example.alcocalendar.features.session_manage.common.mappers.MediaMapper
+import com.example.alcocalendar.features.session_manage.common.mappers.MediaMapper.toBitmap
 import com.example.alcocalendar.features.session_manage.media.domain.model.MediaItem
 import com.example.alcocalendar.features.session_manage.media.domain.model.MediaType
 import com.example.alcocalendar.features.session_manage.media.domain.repository.ImageRepository
@@ -14,17 +14,17 @@ class ImageRepositoryImpl @Inject constructor(
     private val localImageDataSource: LocalImageDataSource,
     private val mediaDao: MediaDao,
 ) : ImageRepository {
-    override suspend fun saveImage(mediaItem: MediaItem): String {
-        mediaDao.insertMediaItem(MediaMapper.toData(mediaItem))
-        return localImageDataSource.saveImage(
+    override suspend fun saveImage(mediaItem: MediaItem) {
+        val path = localImageDataSource.saveImage(
             bitmap = mediaItem.content.toBitmap(),
             fileName = mediaItem.name,
         )
+        mediaDao.insertMediaItem(MediaMapper.toData(mediaItem).copy(path = path))
     }
 
-    override suspend fun deleteImage(fileName: String): Boolean {
+    override suspend fun deleteImage(fileName: String) {
         mediaDao.deleteMediaItemByName(fileName)
-        return localImageDataSource.deleteImage(fileName)
+        localImageDataSource.deleteImage(fileName)
     }
 
     override suspend fun getImages(date: LocalDate): List<MediaItem> {

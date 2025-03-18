@@ -6,7 +6,7 @@ import javax.inject.Inject
 class DeleteMediaUseCase @Inject constructor(
     private val repository: ImageRepository
 ) {
-    suspend operator fun invoke(fileName: String): Boolean {
-        return repository.deleteImage(fileName)
+    suspend operator fun invoke(fileName: String) {
+        repository.deleteImage(fileName)
     }
 }

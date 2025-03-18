@@ -7,7 +7,7 @@ import javax.inject.Inject
 class SaveMediaUseCase @Inject constructor(
     private val repository: ImageRepository
 ) {
-    suspend operator fun invoke(mediaModel: MediaItem): String {
-        return repository.saveImage(mediaModel)
+    suspend operator fun invoke(mediaItem: MediaItem) {
+        repository.saveImage(mediaItem)
     }
 }

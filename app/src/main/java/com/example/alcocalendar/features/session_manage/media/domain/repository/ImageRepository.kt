@@ -4,7 +4,7 @@ import com.example.alcocalendar.features.session_manage.media.domain.model.Media
 import java.time.LocalDate
 
 interface ImageRepository {
-    suspend fun saveImage(mediaItem: MediaItem): String
-    suspend fun deleteImage(fileName: String): Boolean
+    suspend fun saveImage(mediaItem: MediaItem)
+    suspend fun deleteImage(fileName: String)
     suspend fun getImages(date: LocalDate): List<MediaItem>
 }
