@@ -1,9 +1,10 @@
 package com.example.alcocalendar.features.session_manage.media.data.repository
 
+import androidx.core.net.toUri
+import com.example.alcocalendar.features.session_manage.common.mappers.MediaMapper
 import com.example.alcocalendar.features.session_manage.media.data.data_source.LocalImageDataSource
 import com.example.alcocalendar.features.session_manage.media.data.local.dao.MediaDao
-import com.example.alcocalendar.features.session_manage.common.mappers.MediaMapper
-import com.example.alcocalendar.features.session_manage.common.mappers.MediaMapper.toBitmap
+import com.example.alcocalendar.features.session_manage.media.data.local.entity.MediaItemEntity
 import com.example.alcocalendar.features.session_manage.media.domain.model.MediaItem
 import com.example.alcocalendar.features.session_manage.media.domain.model.MediaType
 import com.example.alcocalendar.features.session_manage.media.domain.repository.ImageRepository
@@ -14,12 +15,17 @@ class ImageRepositoryImpl @Inject constructor(
     private val localImageDataSource: LocalImageDataSource,
     private val mediaDao: MediaDao,
 ) : ImageRepository {
-    override suspend fun saveImage(mediaItem: MediaItem) {
-        val path = localImageDataSource.saveImage(
-            bitmap = mediaItem.content.toBitmap(),
-            fileName = mediaItem.name,
+    override suspend fun saveImage(externalPath: String, date: LocalDate) {
+        val filePath = localImageDataSource.saveImage(
+            externalUri = externalPath.toUri(),
+            fileName = externalPath.toString(),
         )
-        mediaDao.insertMediaItem(MediaMapper.toData(mediaItem).copy(path = path))
+        val mediaItemEntity = MediaItemEntity(
+            name = externalPath.toString(),
+            date = date,
+            path = filePath
+        )
+        mediaDao.insertMediaItem(mediaItemEntity)
     }
 
     override suspend fun deleteImage(fileName: String) {
