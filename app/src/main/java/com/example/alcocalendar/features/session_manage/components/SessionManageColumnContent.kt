@@ -37,7 +37,6 @@ fun SessionManageColumnContent(
     animatedVisibilityScope: AnimatedVisibilityScope,
     modifier: Modifier = Modifier
 ) {
-
     Column(
         modifier = modifier
             .fillMaxSize()

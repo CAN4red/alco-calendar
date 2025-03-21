@@ -1,8 +1,5 @@
 package com.example.alcocalendar.features.session_manage.common.mappers
 
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import com.example.alcocalendar.features.session_manage.media.data.local.entity.MediaItemEntity
 import com.example.alcocalendar.features.session_manage.media.domain.model.MediaItem
 import com.example.alcocalendar.features.session_manage.media.domain.model.MediaType
 import java.io.File
@@ -14,20 +11,9 @@ object MediaMapper {
         return MediaItem(
             date = date,
             name = file.name,
-            content = file.readBytes(),
             path = file.path,
             type = mediaType,
             timeStamp = file.lastModified(),
         )
-    }
-
-    fun toData(mediaItem: MediaItem) = MediaItemEntity(
-        name = mediaItem.name,
-        date = mediaItem.date,
-        path = mediaItem.path ?: "", // TODO: replace by path to a default image
-    )
-
-    fun ByteArray.toBitmap(): Bitmap {
-        return BitmapFactory.decodeByteArray(this, 0, this.size)
     }
 }

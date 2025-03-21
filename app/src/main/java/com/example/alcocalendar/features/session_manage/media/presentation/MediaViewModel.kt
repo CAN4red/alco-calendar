@@ -1,5 +1,6 @@
 package com.example.alcocalendar.features.session_manage.media.presentation
 
+import android.net.Uri
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -64,7 +65,7 @@ class MediaViewModel @Inject constructor(
                 shouldAdd = false
             )
 
-            is MediaEvent.SaveMedia -> handleSave(mediaItems = event.mediaItems)
+            is MediaEvent.SaveMedia -> handleSave(uris = event.uris)
             is MediaEvent.DeleteMedia -> handleDelete(mediaItem = event.mediaItem)
         }
     }
@@ -88,10 +89,10 @@ class MediaViewModel @Inject constructor(
         }
     }
 
-    private fun handleSave(mediaItems: List<MediaItem>) {
+    private fun handleSave(uris: List<Uri>) {
         viewModelScope.launch(Dispatchers.IO) {
-            mediaItems.map { mediaItem ->
-                async { saveMediaUseCase(mediaItem) }
+            uris.map { externalUri ->
+                async { saveMediaUseCase(externalUri.toString(), _state.value.date) }
             }.awaitAll()
         }
         clearSelection()
