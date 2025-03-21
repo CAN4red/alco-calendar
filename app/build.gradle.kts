@@ -91,6 +91,10 @@ dependencies {
 
     // Material3
     implementation (libs.material3)
+
+    // Coil
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
 }
 
 kapt {
