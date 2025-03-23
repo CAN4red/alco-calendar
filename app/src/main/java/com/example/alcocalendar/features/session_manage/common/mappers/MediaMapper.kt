@@ -8,6 +8,7 @@ import java.time.LocalDate
 object MediaMapper {
 
     fun toDomain(date: LocalDate, file: File, mediaType: MediaType): MediaItem {
+
         return MediaItem(
             date = date,
             name = file.name,

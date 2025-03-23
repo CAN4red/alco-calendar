@@ -14,13 +14,14 @@ class LocalImageDataSource @Inject constructor(
     @ApplicationContext private val context: Context
 ) {
     private val storageDir = context.filesDir
+    private val mediaDir = File(storageDir, "media")
 
     suspend fun saveImage(externalUri: Uri, fileName: String): String {
         val inputStream = context.contentResolver.openInputStream(externalUri)
             ?: throw IOException("Failed to open stream to save image")
 
-        val directory = File(storageDir, "media").apply { mkdir() }
-        val internalFile = File(directory, fileName)
+        mediaDir.mkdirs()
+        val internalFile = File(mediaDir, fileName)
 
         try {
             withContext(Dispatchers.IO) {
@@ -39,14 +40,14 @@ class LocalImageDataSource @Inject constructor(
 
     fun getImages(fileNames: List<String>): List<File> {
         val fileNamesSet = fileNames.toSet()
-        return storageDir.listFiles { file, fileName ->
+        return mediaDir.listFiles { file, fileName ->
             fileName in fileNamesSet
         }?.toList() ?: emptyList()
     }
 
     suspend fun deleteImage(fileName: String): Boolean {
         return withContext(Dispatchers.IO) {
-            val file = File(storageDir, fileName)
+            val file = File(mediaDir, fileName)
             file.delete()
         }
     }

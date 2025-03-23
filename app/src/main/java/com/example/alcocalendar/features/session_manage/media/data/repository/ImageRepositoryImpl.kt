@@ -1,5 +1,8 @@
 package com.example.alcocalendar.features.session_manage.media.data.repository
 
+import android.content.Context
+import android.net.Uri
+import android.provider.OpenableColumns
 import androidx.core.net.toUri
 import com.example.alcocalendar.features.session_manage.common.mappers.MediaMapper
 import com.example.alcocalendar.features.session_manage.media.data.data_source.LocalImageDataSource
@@ -8,20 +11,26 @@ import com.example.alcocalendar.features.session_manage.media.data.local.entity.
 import com.example.alcocalendar.features.session_manage.media.domain.model.MediaItem
 import com.example.alcocalendar.features.session_manage.media.domain.model.MediaType
 import com.example.alcocalendar.features.session_manage.media.domain.repository.ImageRepository
+import dagger.hilt.android.qualifiers.ApplicationContext
 import java.time.LocalDate
 import javax.inject.Inject
 
 class ImageRepositoryImpl @Inject constructor(
     private val localImageDataSource: LocalImageDataSource,
     private val mediaDao: MediaDao,
+    @ApplicationContext private val context: Context
 ) : ImageRepository {
     override suspend fun saveImage(externalPath: String, date: LocalDate) {
+        val externalUri = externalPath.toUri()
+        val fileName =
+            getDisplayNameFromUriAndDate(externalUri, date)?.sanitize() ?: externalPath.sanitize()
+
         val filePath = localImageDataSource.saveImage(
-            externalUri = externalPath.toUri(),
-            fileName = externalPath.toString(),
+            externalUri = externalUri,
+            fileName = fileName,
         )
         val mediaItemEntity = MediaItemEntity(
-            name = externalPath.toString(),
+            name = fileName,
             date = date,
             path = filePath
         )
@@ -37,7 +46,9 @@ class ImageRepositoryImpl @Inject constructor(
         val mediaItemNames =
             mediaDao.getDrinkingSessionWithMediaItems(date).mediaItems.map { it.name }
 
-        return localImageDataSource.getImages(mediaItemNames).map { file ->
+        val imageFiles = localImageDataSource.getImages(mediaItemNames)
+
+        return imageFiles.map { file ->
             MediaMapper.toDomain(
                 date = date,
                 file = file,
@@ -45,4 +56,19 @@ class ImageRepositoryImpl @Inject constructor(
             )
         }
     }
+
+    private fun getDisplayNameFromUriAndDate(uri: Uri, date: LocalDate): String? {
+        return context.contentResolver.query(uri, null, null, null, null)?.use { cursor ->
+            if (cursor.moveToFirst()) {
+                val nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+                if (nameIndex != -1) date.toFileNamePrefix() + cursor.getString(nameIndex) else null
+            } else null
+        }
+    }
+
+    private fun String.sanitize(): String {
+        return this.replace("[^a-zA-Z0-9-_.]".toRegex(), "_")
+    }
+
+    private fun LocalDate.toFileNamePrefix() = "$this-"
 }

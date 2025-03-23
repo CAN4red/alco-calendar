@@ -1,5 +1,6 @@
 package com.example.alcocalendar.features.session_manage.media.di
 
+import android.content.Context
 import com.example.alcocalendar.features.session_manage.media.data.data_source.LocalImageDataSource
 import com.example.alcocalendar.features.session_manage.media.data.local.dao.MediaDao
 import com.example.alcocalendar.features.session_manage.media.data.repository.ImageRepositoryImpl
@@ -7,6 +8,7 @@ import com.example.alcocalendar.features.session_manage.media.domain.repository.
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -17,8 +19,9 @@ object MediaRepositoryModule {
     @Singleton
     fun provideImageRepository(
         localImageDataSource: LocalImageDataSource,
-        mediaDao: MediaDao
+        mediaDao: MediaDao,
+        @ApplicationContext context: Context
     ): ImageRepository {
-        return ImageRepositoryImpl(localImageDataSource, mediaDao)
+        return ImageRepositoryImpl(localImageDataSource, mediaDao, context)
     }
 }
