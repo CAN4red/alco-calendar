@@ -11,6 +11,7 @@ import com.example.alcocalendar.features.session_manage.media.domain.use_case.ge
 import com.example.alcocalendar.features.session_manage.media.domain.use_case.save_media.SaveMediaUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -31,14 +32,16 @@ class MediaViewModel @Inject constructor(
     private val _state = MutableStateFlow(MediaState())
     val state: StateFlow<MediaState> get() = _state
 
+    private var loadDataJob: Job? = null
+
     init {
         loadData(savedStateHandle.getDate())
     }
 
     private fun loadData(date: LocalDate) {
-        val mediaFlow = getMediaUseCase(date)
-        viewModelScope.launch(Dispatchers.IO) {
-            mediaFlow.collect { media ->
+        loadDataJob?.cancel()
+        loadDataJob = viewModelScope.launch(Dispatchers.IO) {
+            getMediaUseCase(date).collect { media ->
                 _state.update { currentState ->
                     currentState.copy(
                         date = date,
@@ -74,7 +77,6 @@ class MediaViewModel @Inject constructor(
                 async { saveMediaUseCase(externalUri.toString(), _state.value.date) }
             }.awaitAll()
         }
-        loadData(_state.value.date)
     }
 
     private fun handleDelete(mediaItem: MediaItem) {

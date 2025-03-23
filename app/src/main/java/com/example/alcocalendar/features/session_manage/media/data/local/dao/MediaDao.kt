@@ -7,6 +7,7 @@ import androidx.room.Query
 import androidx.room.Transaction
 import com.example.alcocalendar.features.session_manage.media.data.local.entity.MediaItemEntity
 import com.example.alcocalendar.features.session_manage.media.data.local.entity.relations.DrinkingSessionWithMediaItems
+import kotlinx.coroutines.flow.Flow
 import java.time.LocalDate
 
 @Dao
@@ -20,5 +21,5 @@ interface MediaDao {
 
     @Transaction
     @Query("SELECT * FROM drinking_session WHERE date = :date")
-    suspend fun getDrinkingSessionWithMediaItems(date: LocalDate): DrinkingSessionWithMediaItems
+    fun getDrinkingSessionWithMediaItems(date: LocalDate): Flow<DrinkingSessionWithMediaItems>
 }

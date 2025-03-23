@@ -12,6 +12,10 @@ import com.example.alcocalendar.features.session_manage.media.domain.model.Media
 import com.example.alcocalendar.features.session_manage.media.domain.model.MediaType
 import com.example.alcocalendar.features.session_manage.media.domain.repository.ImageRepository
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.withContext
 import java.time.LocalDate
 import javax.inject.Inject
 
@@ -42,19 +46,21 @@ class ImageRepositoryImpl @Inject constructor(
         localImageDataSource.deleteImage(fileName)
     }
 
-    override suspend fun getImages(date: LocalDate): List<MediaItem> {
-        val mediaItemNames =
-            mediaDao.getDrinkingSessionWithMediaItems(date).mediaItems.map { it.name }
-
-        val imageFiles = localImageDataSource.getImages(mediaItemNames)
-
-        return imageFiles.map { file ->
-            MediaMapper.toDomain(
-                date = date,
-                file = file,
-                mediaType = MediaType.IMAGE
-            )
-        }
+    override fun getImages(date: LocalDate): Flow<List<MediaItem>> {
+        return mediaDao.getDrinkingSessionWithMediaItems(date)
+            .map { drinkingSession ->
+                val mediaItemNames = drinkingSession.mediaItems.map { it.name }
+                val imageFiles = withContext(Dispatchers.IO) {
+                    localImageDataSource.getImages(mediaItemNames)
+                }
+                imageFiles.map { file ->
+                    MediaMapper.toDomain(
+                        date = date,
+                        file = file,
+                        mediaType = MediaType.IMAGE
+                    )
+                }
+            }
     }
 
     private fun getDisplayNameFromUriAndDate(uri: Uri, date: LocalDate): String? {
