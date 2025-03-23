@@ -55,16 +55,6 @@ class MediaViewModel @Inject constructor(
             is MediaEvent.CollapseMedia -> handleExpansion(shouldExpand = false)
             is MediaEvent.EnterSelectionMode -> handleSelectionMode(shouldEnterSelectionMode = true)
             is MediaEvent.ExitSelectionMode -> handleSelectionMode(shouldEnterSelectionMode = false)
-            is MediaEvent.SelectMedia -> handleSelection(
-                mediaItem = event.mediaItem,
-                shouldAdd = true
-            )
-
-            is MediaEvent.UnselectMedia -> handleSelection(
-                mediaItem = event.mediaItem,
-                shouldAdd = false
-            )
-
             is MediaEvent.SaveMedia -> handleSave(uris = event.uris)
             is MediaEvent.DeleteMedia -> handleDelete(mediaItem = event.mediaItem)
         }
@@ -78,24 +68,12 @@ class MediaViewModel @Inject constructor(
         _state.update { it.copy(isInSelectionMode = shouldEnterSelectionMode) }
     }
 
-    private fun handleSelection(mediaItem: MediaItem, shouldAdd: Boolean) {
-        _state.update { current ->
-            val updatedSelection = if (shouldAdd) {
-                current.selectedMedia + mediaItem
-            } else {
-                current.selectedMedia.filter { it != mediaItem }
-            }
-            current.copy(selectedMedia = updatedSelection)
-        }
-    }
-
     private fun handleSave(uris: List<Uri>) {
         viewModelScope.launch(Dispatchers.IO) {
             uris.map { externalUri ->
                 async { saveMediaUseCase(externalUri.toString(), _state.value.date) }
             }.awaitAll()
         }
-        clearSelection()
         loadData(_state.value.date)
     }
 
@@ -103,9 +81,5 @@ class MediaViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             deleteMediaUseCase(mediaItem.name)
         }
-    }
-
-    private fun clearSelection() {
-        _state.update { it.copy(selectedMedia = emptyList()) }
     }
 }

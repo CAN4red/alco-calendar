@@ -8,8 +8,6 @@ sealed interface MediaEvent {
     data object CollapseMedia : MediaEvent
     data object EnterSelectionMode : MediaEvent
     data object ExitSelectionMode : MediaEvent
-    data class SelectMedia(val mediaItem: MediaItem) : MediaEvent
-    data class UnselectMedia(val mediaItem: MediaItem) : MediaEvent
     data class SaveMedia(val uris: List<Uri>) : MediaEvent
     data class DeleteMedia(val mediaItem: MediaItem) : MediaEvent
 }
