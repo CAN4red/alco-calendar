@@ -7,16 +7,11 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionScope
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
 import com.example.alcocalendar.features.session_manage.media.presentation.MediaEvent
 import com.example.alcocalendar.features.session_manage.media.presentation.MediaState
-import com.example.alcocalendar.features.session_manage.media.presentation.components.MediaPager
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
@@ -47,23 +42,11 @@ fun ExpandedMediaScreen(
         }
     }
 
-    Box(
+    ExpandedMediaScreenContent(
+        state = state,
+        onEvent = onEvent,
+        sharedTransitionScope = sharedTransitionScope,
+        animatedVisibilityScope = animatedVisibilityScope,
         modifier = modifier
-    ) {
-        with(sharedTransitionScope) {
-            MediaPager(
-                state = state,
-                onEvent = onEvent,
-                contentScale = ContentScale.Fit,
-                hasBackground = true,
-                modifier = Modifier
-                    .sharedElement(
-                        rememberSharedContentState(key = "media_pager"),
-                        animatedVisibilityScope = animatedVisibilityScope
-                    )
-                    .fillMaxSize()
-                    .clickable { onEvent(MediaEvent.EnterSelectionMode) }
-            )
-        }
-    }
+    )
 }

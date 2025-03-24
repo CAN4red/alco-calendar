@@ -44,6 +44,7 @@
     <string name="default_note">Add some Notes about this day</string>
     <string name="image_media_item">Image Media Item</string>
     <string name="default_media_item">default_media_item</string>
+    <string name="add_media">Add Media</string>
 
     <plurals name="liters">
         <item quantity="one">liter</item>
