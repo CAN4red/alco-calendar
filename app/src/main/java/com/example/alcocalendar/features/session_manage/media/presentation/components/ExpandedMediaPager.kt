@@ -9,14 +9,13 @@ import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.pager.HorizontalPager
-import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import com.example.alcocalendar.features.session_manage.media.presentation.MediaEvent
 import com.example.alcocalendar.features.session_manage.media.presentation.MediaState
-import com.example.alcocalendar.features.session_manage.media.presentation.MediaUtils.getDefaultMediaItem
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
@@ -27,8 +26,6 @@ fun ExpandedMediaScreen(
     animatedVisibilityScope: AnimatedVisibilityScope,
     modifier: Modifier = Modifier
 ) {
-    val mediaItems = state.mediaItems.ifEmpty { listOf(getDefaultMediaItem(state)) }
-    val pagerState = rememberPagerState { state.mediaItems.size.takeIf { it != 0 } ?: 1 }
     val mediaPickerLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.PickMultipleVisualMedia(),
         onResult = { uris ->
@@ -36,7 +33,6 @@ fun ExpandedMediaScreen(
             onEvent(MediaEvent.ExitSelectionMode)
         }
     )
-
 
     BackHandler {
         onEvent(MediaEvent.CollapseMedia)
@@ -50,20 +46,23 @@ fun ExpandedMediaScreen(
         }
     }
 
-    with(sharedTransitionScope) {
-        Box(
-            modifier = modifier
-                .sharedElement(
-                    rememberSharedContentState(key = "media_pager"),
-                    animatedVisibilityScope = animatedVisibilityScope
-                )
-                .clickable { onEvent(MediaEvent.EnterSelectionMode) }
-        ) {
-            HorizontalPager(state = pagerState) { mediaIndex ->
-                ImageExpandedItem(
-                    mediaItem = mediaItems[mediaIndex]
-                )
-            }
+    Box(
+        modifier = modifier
+    ) {
+        with(sharedTransitionScope) {
+            MediaPager(
+                state = state,
+                onEvent = onEvent,
+                contentScale = ContentScale.Fit,
+                hasBackground = true,
+                modifier = Modifier
+                    .sharedElement(
+                        rememberSharedContentState(key = "media_pager"),
+                        animatedVisibilityScope = animatedVisibilityScope
+                    )
+                    .fillMaxSize()
+                    .clickable { onEvent(MediaEvent.EnterSelectionMode) }
+            )
         }
     }
 }
