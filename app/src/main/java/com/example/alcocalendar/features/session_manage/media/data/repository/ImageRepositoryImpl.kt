@@ -49,7 +49,7 @@ class ImageRepositoryImpl @Inject constructor(
     override fun getImages(date: LocalDate): Flow<List<MediaItem>> {
         return mediaDao.getDrinkingSessionWithMediaItems(date)
             .map { drinkingSession ->
-                val mediaItemNames = drinkingSession.mediaItems.map { it.name }
+                val mediaItemNames = drinkingSession?.mediaItems?.map { it.name } ?: emptyList()
                 val imageFiles = withContext(Dispatchers.IO) {
                     localImageDataSource.getImages(mediaItemNames)
                 }

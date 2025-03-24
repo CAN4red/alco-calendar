@@ -21,5 +21,5 @@ interface MediaDao {
 
     @Transaction
     @Query("SELECT * FROM drinking_session WHERE date = :date")
-    fun getDrinkingSessionWithMediaItems(date: LocalDate): Flow<DrinkingSessionWithMediaItems>
+    fun getDrinkingSessionWithMediaItems(date: LocalDate): Flow<DrinkingSessionWithMediaItems?>
 }
