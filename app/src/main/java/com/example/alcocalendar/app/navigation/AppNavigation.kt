@@ -1,5 +1,9 @@
 package com.example.alcocalendar.app.navigation
 
+import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
+import androidx.compose.animation.core.tween
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -50,6 +54,8 @@ fun AppNavigation(
 
             composable(
                 route = NavRoutes.SESSION_MANAGE,
+                enterTransition = ::slideInToTop,
+                exitTransition = ::slideOutToDown,
             ) {
                 SessionManageScreen()
             }
@@ -64,4 +70,18 @@ inline fun <reified T : ViewModel> NavBackStackEntry.sharedViewModel(navControll
         navController.getBackStackEntry(navGraphRoute)
     }
     return hiltViewModel(parentEntry)
+}
+
+private fun slideInToTop(scope: AnimatedContentTransitionScope<NavBackStackEntry>): EnterTransition {
+    return scope.slideIntoContainer(
+        AnimatedContentTransitionScope.SlideDirection.Up,
+        animationSpec = tween(500)
+    )
+}
+
+private fun slideOutToDown(scope: AnimatedContentTransitionScope<NavBackStackEntry>): ExitTransition {
+    return scope.slideOutOfContainer(
+        AnimatedContentTransitionScope.SlideDirection.Down,
+        animationSpec = tween(500)
+    )
 }
