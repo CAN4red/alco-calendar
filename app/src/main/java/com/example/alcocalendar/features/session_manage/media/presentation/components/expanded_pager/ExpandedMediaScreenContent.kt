@@ -6,6 +6,7 @@ import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -14,7 +15,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import com.example.alcocalendar.features.session_manage.media.presentation.MediaEvent
 import com.example.alcocalendar.features.session_manage.media.presentation.MediaState
+import com.example.alcocalendar.features.session_manage.media.presentation.MediaUtils.getDefaultMediaItem
 import com.example.alcocalendar.features.session_manage.media.presentation.components.MediaPager
+import com.example.alcocalendar.features.session_manage.media.presentation.components.PageIndicator
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
@@ -25,12 +28,19 @@ fun ExpandedMediaScreenContent(
     animatedVisibilityScope: AnimatedVisibilityScope,
     modifier: Modifier = Modifier
 ) {
+    val mediaItems = state.mediaItems.ifEmpty { listOf(getDefaultMediaItem(state)) }
+    val pagerState = rememberPagerState(
+        initialPage = state.selectedPage,
+        pageCount = { mediaItems.size }
+    )
+
     Box(
         modifier = modifier
     ) {
         with(sharedTransitionScope) {
             MediaPager(
-                state = state,
+                mediaItems = mediaItems,
+                pagerState = pagerState,
                 onEvent = onEvent,
                 contentScale = ContentScale.Fit,
                 hasBackground = true,
@@ -47,6 +57,14 @@ fun ExpandedMediaScreenContent(
                 modifier = Modifier
                     .padding(12.dp)
                     .align(Alignment.BottomCenter)
+                    .zIndex(1f)
+            )
+
+            PageIndicator(
+                pagerState = pagerState,
+                modifier = Modifier
+                    .padding(12.dp)
+                    .align(Alignment.TopCenter)
                     .zIndex(1f)
             )
         }

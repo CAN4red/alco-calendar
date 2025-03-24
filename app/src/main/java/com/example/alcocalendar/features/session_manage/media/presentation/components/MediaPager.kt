@@ -2,27 +2,27 @@ package com.example.alcocalendar.features.session_manage.media.presentation.comp
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.alcocalendar.features.session_manage.media.domain.model.MediaItem
+import com.example.alcocalendar.features.session_manage.media.domain.model.MediaType
 import com.example.alcocalendar.features.session_manage.media.presentation.MediaEvent
-import com.example.alcocalendar.features.session_manage.media.presentation.MediaState
-import com.example.alcocalendar.features.session_manage.media.presentation.MediaUtils.getDefaultMediaItem
+import java.time.LocalDate
 
 @Composable
 fun MediaPager(
-    state: MediaState,
+    mediaItems: List<MediaItem>,
     onEvent: (MediaEvent) -> Unit,
+    pagerState: PagerState,
     contentScale: ContentScale,
     modifier: Modifier = Modifier,
     hasBackground: Boolean = false
 ) {
-    val mediaItems = state.mediaItems.ifEmpty { listOf(getDefaultMediaItem(state)) }
-    val pagerState = rememberPagerState(initialPage = state.selectedPage) { mediaItems.size }
-
     LaunchedEffect(pagerState.currentPage) {
         onEvent(MediaEvent.ScrollToPage(pagerState.currentPage))
     }
@@ -44,7 +44,14 @@ fun MediaPager(
 @Composable
 private fun MediaPagerPreview() {
     MediaPager(
-        state = MediaState(),
+        mediaItems = listOf(
+            MediaItem(
+                date = LocalDate.now(),
+                name = "lol",
+                type = MediaType.IMAGE,
+            )
+        ),
+        pagerState = rememberPagerState { 1 },
         contentScale = ContentScale.Fit,
         onEvent = {},
     )
