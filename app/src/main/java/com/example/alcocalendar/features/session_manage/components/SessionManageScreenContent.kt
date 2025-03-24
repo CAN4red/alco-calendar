@@ -6,6 +6,7 @@ import androidx.compose.animation.SharedTransitionLayout
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -37,6 +38,7 @@ fun SessionManageScreenContent(
         notesState = notesState,
         mediaState = mediaState
     )
+    val scrollState = rememberScrollState()
 
     SharedTransitionLayout {
         AnimatedContent(targetState = targetState) { targetState ->
@@ -60,6 +62,7 @@ fun SessionManageScreenContent(
                     )
 
                     is SessionManageTargetState.Default -> SessionManageColumnContent(
+                        scrollState = scrollState,
                         drinkIntakeState = drinkIntakeState,
                         notesState = notesState,
                         mediaState = mediaState,
@@ -72,7 +75,6 @@ fun SessionManageScreenContent(
                     )
                 }
             }
-
         }
     }
 

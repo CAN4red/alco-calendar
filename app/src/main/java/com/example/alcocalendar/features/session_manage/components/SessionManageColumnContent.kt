@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -29,7 +28,7 @@ import com.example.alcocalendar.features.session_manage.notes.presentation.Notes
 import com.example.alcocalendar.features.session_manage.notes.presentation.NotesState
 import com.example.alcocalendar.features.session_manage.notes.presentation.components.NotesField
 
-@OptIn(ExperimentalSharedTransitionApi::class, ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun SessionManageColumnContent(
     scrollState: ScrollState,

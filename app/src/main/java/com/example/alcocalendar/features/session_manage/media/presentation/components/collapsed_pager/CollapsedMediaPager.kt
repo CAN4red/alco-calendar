@@ -69,6 +69,7 @@ fun CollapsedMediaPager(
         PageIndicator(
             pagerState = pagerState,
             modifier = Modifier
+                .padding(12.dp)
                 .align(Alignment.BottomCenter)
                 .zIndex(2f)
         )

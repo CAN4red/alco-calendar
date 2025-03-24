@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
@@ -24,6 +25,7 @@ fun ImageItem(
     Box(modifier = modifier) {
         AsyncImage(
             model = mediaItem.path?.toUri() ?: "", // TODO: add default uri
+            placeholder = painterResource(R.drawable.default_media),
             contentDescription = stringResource(R.string.image_media_item),
             contentScale = contentScale,
             modifier = Modifier
@@ -34,12 +36,11 @@ fun ImageItem(
         if (hasBackground) {
             AsyncImage(
                 model = mediaItem.path?.toUri() ?: "", // TODO: add default uri
-                contentDescription = stringResource(R.string.image_media_item),
+                contentDescription = stringResource(R.string.background_image_media_item),
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .fillMaxSize()
                     .blur(12.dp)
-                    .zIndex(0f)
             )
         }
     }
