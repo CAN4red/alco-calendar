@@ -38,7 +38,7 @@ fun ImageItem(
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .fillMaxSize()
-                    .blur(20.dp)
+                    .blur(12.dp)
                     .zIndex(0f)
             )
         }

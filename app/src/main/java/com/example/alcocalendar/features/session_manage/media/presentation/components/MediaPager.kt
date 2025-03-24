@@ -18,7 +18,6 @@ fun MediaPager(
     onEvent: (MediaEvent) -> Unit,
     contentScale: ContentScale,
     modifier: Modifier = Modifier,
-    imageModifier: Modifier = Modifier,
     hasBackground: Boolean = false
 ) {
     val mediaItems = state.mediaItems.ifEmpty { listOf(getDefaultMediaItem(state)) }
@@ -36,7 +35,7 @@ fun MediaPager(
             mediaItem = mediaItems[mediaIndex],
             contentScale = contentScale,
             hasBackground = hasBackground,
-            modifier = imageModifier.fillMaxSize(),
+            modifier = Modifier.fillMaxSize()
         )
     }
 }
