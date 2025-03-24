@@ -1,5 +1,8 @@
 package com.example.alcocalendar.features.session_manage.media.presentation.components.collapsed_pager
 
+import androidx.compose.animation.AnimatedVisibilityScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -10,28 +13,38 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.zIndex
 import com.example.alcocalendar.features.session_manage.media.presentation.MediaEvent
 import com.example.alcocalendar.features.session_manage.media.presentation.MediaState
 import com.example.alcocalendar.features.session_manage.media.presentation.components.MediaPager
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun CollapsedMediaPager(
     state: MediaState,
     onEvent: (MediaEvent) -> Unit,
+    animatedVisibilityScope: AnimatedVisibilityScope,
+    sharedTransitionScope: SharedTransitionScope,
     modifier: Modifier = Modifier
 ) {
-    Box(modifier = Modifier
-        .aspectRatio(1f)
-        .clickable { onEvent(MediaEvent.ExpandMedia) }
+    Box(
+        modifier = modifier
+            .aspectRatio(1f)
+            .clickable { onEvent(MediaEvent.ExpandMedia) }
     ) {
-        MediaPager(
-            state = state,
-            onEvent = onEvent,
-            contentScale = ContentScale.Crop,
-            modifier = modifier.fillMaxWidth(),
-        )
+        with(sharedTransitionScope) {
+            MediaPager(
+                state = state,
+                onEvent = onEvent,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .sharedElement(
+                        rememberSharedContentState(key = "media_pager"),
+                        animatedVisibilityScope = animatedVisibilityScope
+                    )
+                    .fillMaxWidth(),
+            )
+        }
 
         Box(
             modifier = Modifier
@@ -40,13 +53,4 @@ fun CollapsedMediaPager(
                 .zIndex(1f)
         )
     }
-}
-
-@Preview
-@Composable
-private fun CollapsedMediaPagerPreview() {
-    CollapsedMediaPager(
-        state = MediaState(),
-        onEvent = { },
-    )
 }

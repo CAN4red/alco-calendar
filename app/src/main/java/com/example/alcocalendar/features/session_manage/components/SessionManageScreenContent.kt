@@ -4,7 +4,6 @@ import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionLayout
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
@@ -14,7 +13,6 @@ import androidx.compose.ui.unit.dp
 import com.example.alcocalendar.features.session_manage.common.mappers.SessionManageTargetState
 import com.example.alcocalendar.features.session_manage.common.mappers.rememberSessionManageTargetState
 import com.example.alcocalendar.features.session_manage.drink_intake.presentation.DrinkIntakeEvent
-import com.example.alcocalendar.features.session_manage.drink_intake.presentation.components.date_title.DateTitle
 import com.example.alcocalendar.features.session_manage.drink_intake.presentation.components.dialog.AddIntakeDialog
 import com.example.alcocalendar.features.session_manage.drink_intake.presentation.state.DrinkIntakeState
 import com.example.alcocalendar.features.session_manage.media.presentation.MediaEvent
@@ -40,21 +38,18 @@ fun SessionManageScreenContent(
         mediaState = mediaState
     )
 
-    Column(
-        modifier = modifier.padding(horizontal = 8.dp)
-    ) {
-        DateTitle(state = drinkIntakeState)
-
-        Spacer(Modifier.padding(12.dp))
-
-        SharedTransitionLayout {
-            AnimatedContent(targetState = targetState) { targetState ->
+    SharedTransitionLayout {
+        AnimatedContent(targetState = targetState) { targetState ->
+            Column(
+                modifier = modifier
+            ) {
                 when (targetState) {
                     is SessionManageTargetState.NotesExpanded -> NotesTextFieldScreen(
                         state = notesState,
                         onEvent = onNotesEvent,
                         animatedVisibilityScope = this@AnimatedContent,
                         sharedTransitionScope = this@SharedTransitionLayout,
+                        modifier = Modifier.padding(horizontal = 16.dp)
                     )
 
                     is SessionManageTargetState.MediaExpanded -> ExpandedMediaScreen(
@@ -73,9 +68,11 @@ fun SessionManageScreenContent(
                         onMediaEvent = onMediaEvent,
                         animatedVisibilityScope = this@AnimatedContent,
                         sharedTransitionScope = this@SharedTransitionLayout,
+                        modifier = Modifier.padding(horizontal = 16.dp)
                     )
                 }
             }
+
         }
     }
 
