@@ -3,14 +3,15 @@ package com.example.alcocalendar.features.session_manage.components
 import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionScope
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -28,9 +29,10 @@ import com.example.alcocalendar.features.session_manage.notes.presentation.Notes
 import com.example.alcocalendar.features.session_manage.notes.presentation.NotesState
 import com.example.alcocalendar.features.session_manage.notes.presentation.components.NotesField
 
-@OptIn(ExperimentalSharedTransitionApi::class)
+@OptIn(ExperimentalSharedTransitionApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun SessionManageColumnContent(
+    scrollState: ScrollState,
     drinkIntakeState: DrinkIntakeState,
     notesState: NotesState,
     mediaState: MediaState,
@@ -41,8 +43,15 @@ fun SessionManageColumnContent(
     animatedVisibilityScope: AnimatedVisibilityScope,
     modifier: Modifier = Modifier
 ) {
-    Column {
-        Box {
+    Box {
+        DateTitle(
+            date = drinkIntakeState.date,
+            modifier = Modifier
+                .align(Alignment.TopCenter)
+                .zIndex(1f)
+        )
+
+        Column(modifier = Modifier.verticalScroll(scrollState)) {
             CollapsedMediaPager(
                 state = mediaState,
                 onEvent = onMediaEvent,
@@ -51,45 +60,36 @@ fun SessionManageColumnContent(
                 modifier = Modifier.fillMaxWidth()
             )
 
-            DateTitle(
-                state = drinkIntakeState,
-                modifier = Modifier
-                    .padding(12.dp)
-                    .align(Alignment.TopCenter)
-                    .zIndex(1f)
-            )
-        }
+            Column(
+                modifier = modifier.fillMaxSize()
+            ) {
+                Spacer(Modifier.padding(8.dp))
 
-        Column(
-            modifier = modifier
-                .fillMaxSize()
-                .verticalScroll(rememberScrollState())
-        ) {
-            DrinkListsColumn(
-                state = drinkIntakeState,
-                onEvent = onDrinkIntakeEvent,
-            )
+                DrinkListsColumn(
+                    state = drinkIntakeState,
+                    onEvent = onDrinkIntakeEvent,
+                )
 
-            Spacer(Modifier.padding(8.dp))
+                Spacer(Modifier.padding(8.dp))
 
-            IntakesFlowRow(
-                intakes = drinkIntakeState.intakes,
-                onEvent = onDrinkIntakeEvent,
-                modifier = Modifier.fillMaxWidth()
-            )
+                IntakesFlowRow(
+                    intakes = drinkIntakeState.intakes,
+                    onEvent = onDrinkIntakeEvent,
+                    modifier = Modifier.fillMaxWidth()
+                )
 
-            Spacer(Modifier.padding(16.dp))
+                Spacer(Modifier.padding(16.dp))
 
-            Spacer(Modifier.weight(1f))
+                Spacer(Modifier.weight(1f))
 
-            NotesField(
-                onClick = { onNotesEvent(NotesEvent.ExpandNote) },
-                content = notesState.note.content,
-                animatedVisibilityScope = animatedVisibilityScope,
-                sharedTransitionScope = sharedTransitionScope,
-                modifier = Modifier.fillMaxSize()
-            )
-
+                NotesField(
+                    onClick = { onNotesEvent(NotesEvent.ExpandNote) },
+                    content = notesState.note.content,
+                    animatedVisibilityScope = animatedVisibilityScope,
+                    sharedTransitionScope = sharedTransitionScope,
+                    modifier = Modifier.fillMaxSize()
+                )
+            }
         }
     }
 }

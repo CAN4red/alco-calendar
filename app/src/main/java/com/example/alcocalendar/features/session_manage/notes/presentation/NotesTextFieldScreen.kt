@@ -17,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
+import com.example.alcocalendar.features.session_manage.drink_intake.presentation.components.date_title.DateTitle
 import com.example.alcocalendar.features.session_manage.notes.presentation.components.NotesTextField
 import com.example.alcocalendar.features.session_manage.notes.presentation.components.NotesTitle
 import com.example.alcocalendar.features.session_manage.notes.presentation.components.SaveNoteButton
@@ -34,32 +35,36 @@ fun NotesTextFieldScreen(
         onEvent(NotesEvent.SaveNote)
         onEvent(NotesEvent.CollapseNote)
     }
-    with(sharedTransitionScope) {
-        Column(
-            modifier = modifier
-                .sharedElement(
-                    rememberSharedContentState(key = "text_field"),
-                    animatedVisibilityScope = animatedVisibilityScope
-                )
-                .clip(RoundedCornerShape(topStart = 18.dp, topEnd = 18.dp))
-                .background(MaterialTheme.colorScheme.surface)
-                .fillMaxSize()
-                .padding(horizontal = 22.dp, vertical = 14.dp)
-        ) {
-            NotesTitle()
+    Column {
+        DateTitle(date = state.note.date)
 
-            Box(modifier = Modifier.imePadding()) {
-                NotesTextField(
-                    state = state,
-                    onEvent = onEvent,
-                    textStyle = MaterialTheme.typography.bodySmall
-                        .copy(color = MaterialTheme.colorScheme.onSurface),
-                )
+        with(sharedTransitionScope) {
+            Column(
+                modifier = modifier
+                    .sharedElement(
+                        rememberSharedContentState(key = "text_field"),
+                        animatedVisibilityScope = animatedVisibilityScope
+                    )
+                    .clip(RoundedCornerShape(topStart = 18.dp, topEnd = 18.dp))
+                    .background(MaterialTheme.colorScheme.surface)
+                    .fillMaxSize()
+                    .padding(horizontal = 22.dp, vertical = 14.dp)
+            ) {
+                NotesTitle()
 
-                SaveNoteButton(
-                    onEvent = onEvent,
-                    modifier = Modifier.align(Alignment.BottomEnd)
-                )
+                Box(modifier = Modifier.imePadding()) {
+                    NotesTextField(
+                        state = state,
+                        onEvent = onEvent,
+                        textStyle = MaterialTheme.typography.bodySmall
+                            .copy(color = MaterialTheme.colorScheme.onSurface),
+                    )
+
+                    SaveNoteButton(
+                        onEvent = onEvent,
+                        modifier = Modifier.align(Alignment.BottomEnd)
+                    )
+                }
             }
         }
     }
