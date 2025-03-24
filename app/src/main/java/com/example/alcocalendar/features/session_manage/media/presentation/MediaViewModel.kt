@@ -60,6 +60,7 @@ class MediaViewModel @Inject constructor(
             is MediaEvent.ExitSelectionMode -> handleSelectionMode(shouldEnterSelectionMode = false)
             is MediaEvent.SaveMedia -> handleSave(uris = event.uris)
             is MediaEvent.DeleteMedia -> handleDelete(mediaItem = event.mediaItem)
+            is MediaEvent.ScrollToPage -> handleScrollToPage(pageNo = event.pageNo)
         }
     }
 
@@ -83,5 +84,9 @@ class MediaViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             deleteMediaUseCase(mediaItem.name)
         }
+    }
+
+    private fun handleScrollToPage(pageNo: Int) {
+        _state.update { it.copy(selectedPage = pageNo) }
     }
 }

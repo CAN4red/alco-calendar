@@ -10,4 +10,5 @@ sealed interface MediaEvent {
     data object ExitSelectionMode : MediaEvent
     data class SaveMedia(val uris: List<Uri>) : MediaEvent
     data class DeleteMedia(val mediaItem: MediaItem) : MediaEvent
+    data class ScrollToPage(val pageNo: Int) : MediaEvent
 }

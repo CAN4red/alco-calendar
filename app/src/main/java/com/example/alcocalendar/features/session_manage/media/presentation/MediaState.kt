@@ -8,5 +8,5 @@ data class MediaState(
     val mediaItems: List<MediaItem> = emptyList(),
     val isExpanded: Boolean = false,
     val isInSelectionMode: Boolean = false,
-    val selectedMedia: List<MediaItem> = emptyList()
+    val selectedPage: Int = 0,
 )
