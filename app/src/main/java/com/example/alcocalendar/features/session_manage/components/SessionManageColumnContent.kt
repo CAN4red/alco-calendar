@@ -19,7 +19,7 @@ import com.example.alcocalendar.features.session_manage.drink_intake.presentatio
 import com.example.alcocalendar.features.session_manage.drink_intake.presentation.state.DrinkIntakeState
 import com.example.alcocalendar.features.session_manage.media.presentation.MediaEvent
 import com.example.alcocalendar.features.session_manage.media.presentation.MediaState
-import com.example.alcocalendar.features.session_manage.media.presentation.components.CollapsedMediaPager
+import com.example.alcocalendar.features.session_manage.media.presentation.components.collapsed_pager.CollapsedMediaPager
 import com.example.alcocalendar.features.session_manage.notes.presentation.NotesEvent
 import com.example.alcocalendar.features.session_manage.notes.presentation.NotesState
 import com.example.alcocalendar.features.session_manage.notes.presentation.components.NotesField

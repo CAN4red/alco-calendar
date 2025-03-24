@@ -1,4 +1,4 @@
-package com.example.alcocalendar.features.session_manage.media.presentation.components
+package com.example.alcocalendar.features.session_manage.media.presentation.components.collapsed_pager
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.aspectRatio
@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import com.example.alcocalendar.features.session_manage.media.presentation.MediaEvent
 import com.example.alcocalendar.features.session_manage.media.presentation.MediaState
+import com.example.alcocalendar.features.session_manage.media.presentation.components.MediaPager
 
 @Composable
 fun CollapsedMediaPager(

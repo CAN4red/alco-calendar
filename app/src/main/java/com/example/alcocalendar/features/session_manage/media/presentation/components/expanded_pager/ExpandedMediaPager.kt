@@ -1,4 +1,4 @@
-package com.example.alcocalendar.features.session_manage.media.presentation.components
+package com.example.alcocalendar.features.session_manage.media.presentation.components.expanded_pager
 
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import com.example.alcocalendar.features.session_manage.media.presentation.MediaEvent
 import com.example.alcocalendar.features.session_manage.media.presentation.MediaState
+import com.example.alcocalendar.features.session_manage.media.presentation.components.MediaPager
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
