@@ -17,7 +17,7 @@ import com.example.alcocalendar.features.session_manage.media.presentation.Media
 import com.example.alcocalendar.features.session_manage.media.presentation.MediaState
 import com.example.alcocalendar.features.session_manage.media.presentation.MediaUtils.getDefaultMediaItem
 import com.example.alcocalendar.features.session_manage.media.presentation.components.MediaPager
-import com.example.alcocalendar.features.session_manage.media.presentation.components.PageIndicator
+import com.example.alcocalendar.features.session_manage.media.presentation.components.TopRowExpandedMedia
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
@@ -60,15 +60,12 @@ fun ExpandedMediaScreenContent(
                     .zIndex(1f)
             )
 
-            PageIndicator(
+            TopRowExpandedMedia(
+                mediaState = state,
+                onEvent = onEvent,
                 pagerState = pagerState,
-                modifier = Modifier
-                    .padding(12.dp)
-                    .align(Alignment.TopCenter)
-                    .zIndex(1f)
+                modifier = Modifier.padding(12.dp),
             )
         }
-
-
     }
 }

@@ -80,9 +80,11 @@ class MediaViewModel @Inject constructor(
         }
     }
 
-    private fun handleDelete(mediaItem: MediaItem) {
+    private fun handleDelete(mediaItem: MediaItem?) {
         viewModelScope.launch(Dispatchers.IO) {
-            deleteMediaUseCase(mediaItem.name)
+            mediaItem?.let { item ->
+                deleteMediaUseCase(item.name)
+            }
         }
     }
 

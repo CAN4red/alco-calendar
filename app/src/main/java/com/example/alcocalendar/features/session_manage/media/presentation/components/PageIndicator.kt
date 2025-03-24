@@ -4,10 +4,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.MaterialTheme
@@ -22,12 +20,11 @@ fun PageIndicator(
     pagerState: PagerState,
     modifier: Modifier = Modifier
 ) {
+    if (pagerState.pageCount <= 1) return
+
     Row(
         horizontalArrangement = Arrangement.Center,
         modifier = modifier
-            .wrapContentHeight()
-            .fillMaxWidth()
-            .padding(bottom = 8.dp)
     ) {
         repeat(pagerState.pageCount) { iteration ->
             val color = getIndicatorColor(pagerState, iteration)

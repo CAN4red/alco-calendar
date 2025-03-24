@@ -45,6 +45,9 @@
     <string name="image_media_item">Image Media Item</string>
     <string name="default_media_item">default_media_item</string>
     <string name="add_media">Add Media</string>
+    <string name="background_image_media_item">Background Image Media Item</string>
+    <string name="back_button">Back Button</string>
+    <string name="delete_media_button">Delete Media Button</string>
 
     <plurals name="liters">
         <item quantity="one">liter</item>
