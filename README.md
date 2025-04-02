@@ -19,10 +19,6 @@ A user-friendly application designed to help users manage their alcohol consumpt
     - Follows the MVVM architectural pattern.
     - Utilizes Android Clean Architecture layers.
 
-- **Architecture**:
-    - Follows the MVVM architectural pattern for better separation of concerns.
-    - Utilizes Android Clean Architecture layers to enhance maintainability and testability.
-
 ## Libraries Used
 - **Room:** For sessions data storage.
 - **Dagger Hilt:** For dependency injection.
