@@ -7,7 +7,7 @@ data class CalendarSessionWithIntakes(
     val date: LocalDate,
     val intakes: List<DrinkIntake> = emptyList()
 ) {
-    val isEmpty: Boolean
+    val isNotEmpty: Boolean
         get() = intakes.any { !it.isEmpty }
 
     val alcoUnits: Double
